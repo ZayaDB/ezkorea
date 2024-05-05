@@ -1,0 +1,11 @@
+.theme {
+  display: flex;
+  flex-direction: row;
+  .theme-name {
+    line-height: 40px;
+    cursor: pointer;
+    &:hover{
+      color:gray;
+    }
+  }
+}
