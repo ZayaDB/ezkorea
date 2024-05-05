@@ -1,11 +1,19 @@
-.theme {
+.element-theme {
+  width: 100%;
   display: flex;
   flex-direction: row;
-  .theme-name {
-    line-height: 40px;
-    cursor: pointer;
-    &:hover{
-      color:gray;
+  flex-wrap: wrap;
+  .theme {
+    width: 50%;
+    height: 35px;
+    display: flex;
+    flex-direction: row;
+    .theme-name {
+      line-height: 35px;
+      cursor: pointer;
+      &:hover {
+        color: gray;
+      }
     }
   }
 }

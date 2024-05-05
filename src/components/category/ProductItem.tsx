@@ -2,21 +2,10 @@ import React, { useState } from 'react';
 import useToggle from '../../hooks/useToggle';
 import '../../styles/category/productItemCss.scss';
 import HandleClickHeart from './HandleClickHeart';
-
-interface Product {
-  thumbnail: string;
-  name: string;
-  brand: string;
-  colors: string[];
-  price: string;
-  heart: boolean;
-  discount: number;
-  prevPrice: string;
-  hoverImage: string;
-}
+import { Products } from '../../types/typesProducts';
 
 interface ProductItemProps {
-  prod: Product;
+  prod: Products;
 }
 
 // 상품 카드 컴포넌트
@@ -85,7 +74,7 @@ export default function ProductItem({ prod }: ProductItemProps) {
           flexDirection: 'row',
           justifyContent: 'space-between',
           // lineHeight: '42px',
-          padding:'10px'
+          padding: '10px',
         }}
       >
         {/* 옵션 - 컬러 */}
@@ -94,7 +83,13 @@ export default function ProductItem({ prod }: ProductItemProps) {
             <div
               key={index}
               className='color-circle'
-              style={{ backgroundColor: color }}
+              style={{
+                backgroundColor: color,
+                border:
+                  color === 'white'
+                    ? '0.1px solid rgba(68, 68, 68, 0.239)'
+                    : 'none',
+              }}
             ></div>
           ))}
         </div>

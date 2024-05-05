@@ -1,4 +1,20 @@
-.element-brand{
+.element-brand {
+  width: 100%;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+
+  .brand {
+    width: 50%;
+    height: 35px;
+    display: flex;
+    flex-direction: row;
+    .brand-name {
+      line-height: 35px;
+      cursor: pointer;
+      &:hover {
+        color: gray;
+      }
+    }
+  }
 }

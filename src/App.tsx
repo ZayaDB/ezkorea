@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './styles/theme';
@@ -10,7 +9,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <Routes>
-          <Route path='/shop/category' element={<Category />}></Route>
+          <Route path='/shop' element={<Category />}></Route>
           <Route path='/community/post' element={<CommunityPostPage />}></Route>
         </Routes>
       </BrowserRouter>

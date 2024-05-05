@@ -1,20 +1,25 @@
 $tablet: 768px;
 $mobile: 360px;
 
-.hr {
-  border: 0;
-  height: 2px;
-  background: #373737;
-  margin: 5px;
-  margin-right: 30px;
-}
+$font-size-xxl: 24px;
+$font-size-xl: 22px;
+$font-size-l: 18px;
+$font-size-m: 16px;
+$font-size-s: 14px;
+$font-size-xs: 12px;
+$font-size-xxs: 11px;
+
+$font-weight-bold: 700;
+$font-weight-medium: 500;
+$font-weight-regular: 400;
 
 .side-nav {
   height: 100vh;
-  width: 25%;
+  width: 100%;
   margin-right: 50px;
   .nav-title {
-    font-size: 18px;
+    font-size: $font-size-l;
+    font-weight: $font-weight-bold;
     margin: 5px;
     cursor: pointer;
   }
@@ -46,23 +51,38 @@ $mobile: 360px;
 }
 
 .filter-box {
-  margin-top: 40px;
+  margin-top: 80px;
   width: 100%;
 }
 .filter {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  .nav-filter {
+    font-size: $font-size-l;
+    font-weight: $font-weight-bold;
+  }
 }
+
 .remove-filter {
   font-size: small;
-  line-height: 18px;
-  margin-right:30px;
+  line-height: 30px;
+  margin-right: 30px;
+  cursor: pointer;
+  &:hover {
+    color: gray;
+  }
 }
+
 .filter-title {
   margin: 5px;
-  margin-top: 15px;
+  // margin-top: 30px;
   margin-bottom: 10px;
+}
+.plus {
+  font-size: x-large;
+  line-height: 30px;
+  margin-right: 32px;
 }
 
 .open-box {
