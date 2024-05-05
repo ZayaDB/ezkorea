@@ -21,7 +21,6 @@ const ContentArea = styled('div')(({ theme }) => ({
     fontSize: theme.typography.h3.fontSize, // 더 큰 화면에 맞춘 폰트 사이즈
   },
   [theme.breakpoints.up('xl')]: {
-    padding: '0 360px', // 1920px 화면에서의 패딩
     fontSize: theme.typography.h2.fontSize, // 가장 큰 화면에 맞춘 폰트 사이즈
   },
 }));
