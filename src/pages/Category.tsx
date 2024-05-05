@@ -5,6 +5,8 @@ import SideNav from '../components/category/SideNav';
 import '../styles/category/categoryCss.scss';
 import { getData } from '../utils/getData';
 import ContentArea from '../styles/ContentArea';
+import { Box } from '@mui/material';
+import Header from '../components/common/Header';
 
 const Category: React.FC = () => {
   const [products, setProducts] = useState<Products[]>([]);
@@ -17,19 +19,22 @@ const Category: React.FC = () => {
         console.error('Error fetching category data:', error);
       }
     };
-
     fetchData();
   }, []);
 
   return (
-    <div className='categoryPage'>
-      <ContentArea>
-        <div className='category-content'>
+    <Box className='category-page'>
+      <Header sections={[{ title: '', url: '#' }]} title={'dururu'} />
+      <Box className='category-content'>
+        <Box className='sideNavigation'>
           <SideNav />
+        </Box>
+
+        <Box className='containerProducts'>
           <ProductList prodData={products} />
-        </div>
-      </ContentArea>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 

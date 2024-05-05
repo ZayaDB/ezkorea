@@ -15,3 +15,12 @@ export interface Products {
   views: number;
   commentCount: number;
 }
+
+export interface CategoryData {
+  name: string;
+  subCategories: string[];
+}
+
+export interface CategoryMapping {
+  [key: string]: string;
+}
