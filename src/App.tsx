@@ -1,12 +1,13 @@
 import React from 'react';
-import Button from '@mui/material/Button';
+import './App.css';
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
 
 function App() {
   return (
-    <div className="App">
-      <Button variant="contained" color="primary">
-        Hello, MUI!
-      </Button>
+    <div className='App'>
+      {/* <Login /> */}
+      <SignUp />
     </div>
   );
 }
