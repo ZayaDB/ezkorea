@@ -1,14 +1,18 @@
 import React from 'react';
-import './App.css';
-import Login from './pages/Login';
-import SignUp from './pages/SignUp';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './styles/theme';
+import CommunityPostPage from './pages/CommunityPostPage';
 
 function App() {
   return (
-    <div className='App'>
-      {/* <Login /> */}
-      <SignUp />
-    </div>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/community/post' element={<CommunityPostPage />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
