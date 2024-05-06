@@ -95,6 +95,7 @@ export default function Header(props: HeaderProps) {
                 },
               }}
               size='small'
+              disableRipple
             >
               쇼핑
             </Button>
@@ -108,6 +109,7 @@ export default function Header(props: HeaderProps) {
                 },
               }}
               size='small'
+              disableRipple
             >
               커뮤니티
             </Button>
@@ -145,11 +147,11 @@ export default function Header(props: HeaderProps) {
               open={open}
               onClose={handleClose}
               TransitionComponent={Fade}
-              PaperProps={{
-                style: {
-                  marginLeft: '-20px',
-                },
-              }}
+              // PaperProps={{
+              //   style: {
+              //     boxShadow: '0',
+              //   },
+              // }}
             >
               <MenuItem
                 onClick={handleClose}
