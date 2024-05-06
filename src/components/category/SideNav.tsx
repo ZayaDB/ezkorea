@@ -15,6 +15,9 @@ interface FilterVisibility {
   color: boolean;
   theme: boolean;
 }
+interface SideNavProps {
+  onSelectCategory: (categoryName: string) => void;
+}
 
 const categoryMapping: CategoryMapping = {
   가구: 'furniture',
@@ -23,43 +26,43 @@ const categoryMapping: CategoryMapping = {
   '데코/식물': 'deco-plant',
 };
 
-const categoryData: CategoryData[] = [
-  {
-    name: '가구',
-    subCategories: [
-      'ALL',
-      '책상',
-      '의자',
-      '모니터암/받침대',
-      '거치대',
-      '서랍장',
-      '선반',
-    ],
-  },
-  {
-    name: '전자기기',
-    subCategories: ['ALL', '키보드', '마우스', '스피커', '멀티탭', '충전기'],
-  },
-  {
-    name: '조명/인테리어',
-    subCategories: [
-      'ALL',
-      '조명',
-      '오브제',
-      '시계',
-      '캘린더',
-      '트레이',
-      '타공판',
-      '데스크매트',
-    ],
-  },
-  {
-    name: '데코/식물',
-    subCategories: ['ALL', '디퓨저', '캔들', '인센스', '식물'],
-  },
-];
+const SideNav: React.FC<SideNavProps> = ({ onSelectCategory }) => {
+  const categoryData: CategoryData[] = [
+    {
+      name: '가구',
+      subCategories: [
+        'ALL',
+        '책상',
+        '의자',
+        '모니터암/받침대',
+        '거치대',
+        '서랍장',
+        '선반',
+      ],
+    },
+    {
+      name: '전자기기',
+      subCategories: ['ALL', '키보드', '마우스', '스피커', '멀티탭', '충전기'],
+    },
+    {
+      name: '조명/인테리어',
+      subCategories: [
+        'ALL',
+        '조명',
+        '오브제',
+        '시계',
+        '캘린더',
+        '트레이',
+        '타공판',
+        '데스크매트',
+      ],
+    },
+    {
+      name: '데코/식물',
+      subCategories: ['ALL', '디퓨저', '캔들', '인센스', '식물'],
+    },
+  ];
 
-export default function SideNav() {
   const [filterVisibility, setFilterVisibility] = useState<FilterVisibility>({
     brand: false,
     price: false,
@@ -77,10 +80,13 @@ export default function SideNav() {
   };
 
   const handleCategoryClick = (categoryName: string) => {
-    if (openCategory === categoryName) {
-      setOpenCategory(''); // 같은 카테고리를 클릭하면 닫기
-    } else {
-      setOpenCategory(categoryName); // 다른 카테고리를 클릭하면 열기
+    onSelectCategory(categoryName); // 부모 컴포넌트로 선택한 카테고리 전달
+    const selectedCategory = categoryData.find(
+      category => category.name === categoryName
+    );
+    if (selectedCategory) {
+      console.log('Selected Category:', selectedCategory);
+      setOpenCategory(categoryName);
     }
   };
 
@@ -92,9 +98,10 @@ export default function SideNav() {
       theme: false,
     });
   };
+
   const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
-    fontSize:'14px',
-    borderRadius:'5px',
+    fontSize: '14px',
+    borderRadius: '5px',
     color: theme.palette.getContrastText(grey[900]),
     backgroundColor: grey[900],
     '&:hover': {
@@ -115,17 +122,17 @@ export default function SideNav() {
             tabIndex={0}
           >
             <Box className='nav-title'>{category.name}</Box>
-            <hr
-              style={{
-                border: 0,
-                height: '2px',
-                backgroundColor: '#272727',
-                marginRight: '30px',
-              }}
-            />
           </Box>
           {openCategory === category.name && (
             <Box className={`${categoryMapping[category.name]}-box`}>
+              <hr
+                style={{
+                  border: 0,
+                  height: '2px',
+                  backgroundColor: '#272727',
+                  marginRight: '30px',
+                }}
+              />
               {category.subCategories.map((subCategory, idx) => (
                 <Box
                   className={'sub'}
@@ -195,4 +202,5 @@ export default function SideNav() {
       </Box>
     </Box>
   );
-}
+};
+export default SideNav;

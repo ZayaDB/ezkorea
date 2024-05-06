@@ -1,76 +1,101 @@
-import '../../styles/category/productWrapCss.scss';
+import React, { useState } from 'react';
+import {
+  Box,
+  Chip,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+} from '@mui/material';
+import Pagination from '@mui/material/Pagination';
+
 import { Products } from '../../types/typesProducts';
 import ProductItem from './ProductItem';
-import * as React from 'react';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import Pagination from '@mui/material/Pagination';
-import { Box } from '@mui/material';
+import '../../styles/category/productWrapCss.scss';
 
 interface ProductListProps {
-  prodData: Products[]; 
+  selectedCategory: string;
+  prodData: Products[];
 }
 
-const ProductList: React.FC<ProductListProps> = ({ prodData }) => {
-  const [sort, setSort] = React.useState('인기순');
+const ProductList: React.FC<ProductListProps> = ({
+  selectedCategory,
+  prodData,
+}) => {
 
-  const handleChange = (event: SelectChangeEvent) => {
+  const [sort, setSort] = useState<string>('인기순');
+  const [selectedSubCategory, setSelectedSubCategory] = useState<string>('ALL');
+
+  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setSort(event.target.value as string);
   };
+
+  const handleDelete = () => {
+    console.info('You clicked the delete icon.');
+    // 필터링 데이터 삭제 로직
+  };
+
+  const subCategories = prodData
+    .filter(product => product.category1 === selectedCategory)
+    .map(product => product.category2);
 
   return (
     <Box className='prod-container'>
       <Box className='prod-selec-value'>
-        {/* 카테고리 1번, 2번 */}
+        {/* 카테고리 선택 */}
         <Box className='select-categories'>
-          <Box>category1 〉 </Box>
-          <Box> category 2 </Box>
+          <Box>{selectedCategory}</Box>
+          {/* 하위 카테고리 선택 */}
+          <Box>
+            {subCategories.map(subCategory => (
+              <Box key={subCategory}>{subCategory}</Box>
+            ))}
+          </Box>
         </Box>
-
-        {/* 필터링데이터 */}
+        {/* 필터링 데이터 */}
         <Box className='select-filtering-values'>
           <Box className='filtering-box'>
-            <Box className='select-filtered-data'>
-              {/* 선택한 필터링 데이터들이 추가되지만 이미 존재하는 데이터는 추가되지않음 */}
-              <Box className='filtering-name'> 책상 </Box>
-              <Box className='remove-filter'>x</Box>
-            </Box>
+            {/* 선택한 필터링 데이터 */}
+            <Chip
+              label='선택한 값'
+              onDelete={handleDelete}
+              sx={{ height: 50, paddingLeft: '10px', paddingRight: '10px' }}
+            />
           </Box>
           {/* 정렬기준 */}
           <Box className='sort-box'>
-            <FormControl sx={{ m: 1, minWidth: 80 }}>
-              <InputLabel id='demo-simple-select-autowidth-label'>
-                보기
-              </InputLabel>
-              <Select
-                labelId='demo-simple-select-autowidth-label'
-                id='demo-simple-select-autowidth'
-                value={sort}
-                onChange={handleChange}
-                autoWidth
-                label='Age'
-              >
-                <MenuItem value=''>
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={1}>인기순</MenuItem>
-                <MenuItem value={2}>리뷰많은순</MenuItem>
-                <MenuItem value={3}>낮은가격순</MenuItem>
-                <MenuItem value={4}>높은가격순</MenuItem>
-                <MenuItem value={5}>할인율높은순</MenuItem>
+            <FormControl sx={{ m: 1, minWidth: 120, maxWidth: 200 }}>
+              <InputLabel id='sort-label'>보기</InputLabel>
+              <Select labelId='sort-label' id='sort-select' value={sort}>
+                {/* 정렬 옵션 */}
+                <MenuItem value='인기순'>인기순</MenuItem>
+                <MenuItem value='리뷰많은순'>리뷰많은순</MenuItem>
+                <MenuItem value='낮은가격순'>낮은가격순</MenuItem>
+                <MenuItem value='높은가격순'>높은가격순</MenuItem>
+                <MenuItem value='할인율높은순'>할인율높은순</MenuItem>
               </Select>
             </FormControl>
           </Box>
         </Box>
       </Box>
+      {/* 상품 목록 */}
       <Box className='prod-wrapper'>
-        {prodData &&
-          prodData.map(prod => (
-            <ProductItem key={prod.productId} prod={prod} />
+        {prodData
+          .filter(product => product.category1 === selectedCategory)
+          .filter(
+            product =>
+              selectedSubCategory === 'ALL' ||
+              product.category2 === selectedSubCategory
+          )
+          .map(prod => (
+            <ProductItem
+              key={prod.productId}
+              prod={prod}
+              // 선택한 카테고리에 따라 굵은 스타일 적용
+            />
           ))}
       </Box>
+      {/* 페이지네이션 */}
       <Pagination count={10} />
     </Box>
   );
