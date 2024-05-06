@@ -15,6 +15,9 @@ import Cart1 from '../../assets/images/cart2.png';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Fade from '@mui/material/Fade';
+import Badge from '@mui/material/Badge';
+import InputBase from '@mui/material/InputBase';
+import Paper from '@mui/material/Paper';
 
 interface HeaderProps {
   sections: ReadonlyArray<{
@@ -115,7 +118,41 @@ export default function Header(props: HeaderProps) {
             </Button>
           </Typography>
           <Box>
-            <IconButton
+            <IconButton disableRipple>
+              <Paper
+                component='form'
+                sx={{
+                  p: '2px 4px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  width: 180,
+                  height: 28,
+                  boxShadow: '0',
+                  border: '1px solid #e5e5e5',
+                }}
+              >
+                <InputBase
+                  sx={{
+                    ml: 1,
+                    flex: 1,
+                  }}
+                  // placeholder='Search Google Maps'
+                />
+                <IconButton
+                  type='button'
+                  sx={{ p: '3px' }}
+                  aria-label='search'
+                  disableRipple
+                >
+                  <SearchIcon sx={{ fontSize: '22px' }} />
+                </IconButton>
+              </Paper>
+            </IconButton>
+
+            {/* <Button disableRipple>
+              <SearchIcon />
+          </Button> */}
+            {/* <IconButton
               sx={{
                 '&.MuiButtonBase-root:hover': {
                   bgcolor: 'transparent',
@@ -123,7 +160,7 @@ export default function Header(props: HeaderProps) {
               }}
             >
               <SearchIcon />
-            </IconButton>
+            </IconButton> */}
             <IconButton
               id='fade-button'
               aria-controls={open ? 'fade-menu' : undefined}
@@ -147,11 +184,11 @@ export default function Header(props: HeaderProps) {
               open={open}
               onClose={handleClose}
               TransitionComponent={Fade}
-              // PaperProps={{
-              //   style: {
-              //     boxShadow: '0',
-              //   },
-              // }}
+              PaperProps={{
+                style: {
+                  marginLeft: '-24px',
+                },
+              }}
             >
               <MenuItem
                 onClick={handleClose}
@@ -178,7 +215,6 @@ export default function Header(props: HeaderProps) {
                 로그아웃
               </MenuItem>
             </Menu>
-
             <IconButton
               sx={{
                 '&.MuiButtonBase-root:hover': {
@@ -192,19 +228,31 @@ export default function Header(props: HeaderProps) {
                 style={{ width: '20px', padding: 2 }}
               />
             </IconButton>
-            <IconButton
+            <Badge
+              badgeContent={5}
+              color='secondary'
               sx={{
-                '&.MuiButtonBase-root:hover': {
-                  bgcolor: 'transparent',
+                '& .MuiBadge-badge': {
+                  fontSize: 9,
+                  height: 15,
+                  minWidth: 10,
+                  right: 8,
+                  top: 11,
+                  padding: '0 4px',
+                  border: '2px solid white',
                 },
               }}
             >
-              <img
-                src={Cart1}
-                alt='Logo'
-                style={{ width: '24px', padding: 2 }}
-              />
-            </IconButton>
+              <IconButton
+                sx={{
+                  '&.MuiButtonBase-root:hover': {
+                    bgcolor: 'transparent',
+                  },
+                }}
+              >
+                <img src={Cart1} alt='Logo' style={{ width: '24px' }} />
+              </IconButton>
+            </Badge>
             {/* <img
                 src={Notification2}
                 alt='Logo'
@@ -220,7 +268,7 @@ export default function Header(props: HeaderProps) {
             display: 'flex',
             justifyContent: 'space-around',
             flex: '1',
-            ml: '25%',
+            ml: '22.25%',
           }}
         >
           {sections.map(section => (
