@@ -147,7 +147,7 @@ export default function Header(props: HeaderProps) {
               TransitionComponent={Fade}
               PaperProps={{
                 style: {
-                  marginLeft: '-20px',
+                  marginLeft: '-23px',
                 },
               }}
             >
