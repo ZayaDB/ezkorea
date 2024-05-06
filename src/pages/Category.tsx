@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Products, CategoryData } from '../types/typesProducts';
+import {
+  Products,
+  CategoryData,
+  ProductListProps,
+} from '../types/typesProducts';
 import ProductList from '../components/category/ProductList';
 import SideNav from '../components/category/SideNav';
 import { Box } from '@mui/material';
 import { getData } from '../utils/getData';
 import '../styles/category/categoryCss.scss';
-interface ProductListProps {
-  categoryData: CategoryData[];
-  selectedCategory: string;
-  prodData: Products[];
-}
 
 const categoryData: CategoryData[] = [
   {
@@ -47,15 +46,16 @@ const categoryData: CategoryData[] = [
   },
 ];
 
-const Category: React.FC<ProductListProps> = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string>(''); // 선택한 카테고리 상태
+const Category: React.FC<ProductListProps> = ({ prodData }) => {
+  const [selectedCategory, setSelectedCategory] = useState<string>('가구');
+  const [selectedSubCategory, setSelectedSubCategory] = useState<string>('ALL');
+
   const [products, setProducts] = useState<Products[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data: Products[] = await getData('/data/prodData.json');
-
         setProducts(data);
       } catch (error) {
         console.error('Error fetching category data:', error);
@@ -63,24 +63,27 @@ const Category: React.FC<ProductListProps> = () => {
     };
 
     fetchData();
-  }, []); // 빈 배열을 전달하여 컴포넌트가 마운트될 때 한 번만 실행
-
-  const handleCategorySelect = (categoryName: string) => {
-    setSelectedCategory(categoryName);
-  };
+  }, []); // Empty array to run once on component mount
 
   return (
     <Box className='category-page'>
       <Box className='category-content'>
         <Box className='sideNavigation'>
-          <SideNav onSelectCategory={handleCategorySelect} />
+          {/* Pass onSelectCategory and onSelectSubCategory to SideNav */}
+          <SideNav
+            onSelectCategory={setSelectedCategory}
+            onSelectSubCategory={(subCategory: string) => {
+              // Handle subcategory selection here
+              console.log('Selected subcategory:', subCategory);
+            }}
+          />
         </Box>
-
         <Box className='containerProducts'>
           <ProductList
             categoryData={categoryData}
             prodData={products}
             selectedCategory={selectedCategory}
+            selectedSubCategory={selectedSubCategory} // selectedSubCategory를 추가하여 전달
           />
         </Box>
       </Box>

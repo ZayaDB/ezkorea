@@ -184,11 +184,11 @@ export default function Header(props: HeaderProps) {
               open={open}
               onClose={handleClose}
               TransitionComponent={Fade}
-              PaperProps={{
-                style: {
-                  marginLeft: '-23px',
-                },
-              }}
+              // PaperProps={{
+              //   style: {
+              //     boxShadow: '0',
+              //   },
+              // }}
             >
               <MenuItem
                 onClick={handleClose}

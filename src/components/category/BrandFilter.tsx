@@ -25,7 +25,7 @@ export default function BrandFilter() {
 
     setCheckedBrands(newCheckedBrands);
     console.log(
-      `Checkbox for brand '${brand}' toggled. Checked brands:`,
+      `${brand}`,
       newCheckedBrands
     );
   };

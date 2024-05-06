@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import useToggle from '../../hooks/useToggle';
 import '../../styles/category/productItemCss.scss';
 import HandleClickHeart from './HandleClickHeart';
@@ -42,34 +43,39 @@ export default function ProductItem({ prod }: ProductItemProps) {
       role='button'
       onClick={() => handleProdItemClick(prod.productId)}
     >
-      {/* 상품이미지 */}
-      <div
-        className='prod-img'
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <img src={hovered ? prod.hoverImage : prod.thumbnail} alt={prod.name} />
-      </div>
-      <div className='prod-info'>
-        {/* 브랜드명 */}
-        <div className='prod-brand'>{prod.brand}</div>
-        {/* 상품명 */}
-        <div className='prod-name'>{prod.name}</div>
-        {/* 할인율 */}
-        {prod.discount !== 0 ? (
-          <div className='prod-discount'>{prod.discount}%</div>
-        ) : (
-          <div style={{ color: 'white' }}>;;;</div>
-        )}
-        {/* 원가 */}
-        {prod.discount !== 0 ? (
-          <div className='prod-prevPrice'>{prod.prevPrice}</div>
-        ) : (
-          <div style={{ color: 'white' }}>;;;</div>
-        )}
-        {/* 할인가 */}
-        <div className='prod-price'>{prod.price}</div>
-      </div>
+      <Link to={`/productDetail?productId=${prod.productId}`} className='link-to-detail'>
+        {/* 상품이미지 */}
+        <div
+          className='prod-img'
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <img
+            src={hovered ? prod.hoverImage : prod.thumbnail}
+            alt={prod.name}
+          />
+        </div>
+        <div className='prod-info'>
+          {/* 브랜드명 */}
+          <div className='prod-brand'>{prod.brand}</div>
+          {/* 상품명 */}
+          <div className='prod-name'>{prod.name}</div>
+          {/* 할인율 */}
+          {prod.discount !== 0 ? (
+            <div className='prod-discount'>{prod.discount}%</div>
+          ) : (
+            <div style={{ color: 'white' }}>;;;</div>
+          )}
+          {/* 원가 */}
+          {prod.discount !== 0 ? (
+            <div className='prod-prevPrice'>{prod.prevPrice}</div>
+          ) : (
+            <div style={{ color: 'white' }}>;;;</div>
+          )}
+          {/* 할인가 */}
+          <div className='prod-price'>{prod.price}</div>
+        </div>
+      </Link>
       <div
         style={{
           display: 'flex',

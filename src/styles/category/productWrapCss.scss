@@ -47,10 +47,11 @@ $font-weight-regular: 400;
 }
 
 .select-categories {
+  width: 92%;
   display: flex;
   margin-top: 10px;
   margin-bottom: 5px;
-  padding:12px;
+  padding: 12px;
   border: 1px solid gray;
   border-radius: 3px;
   .category-1 {
@@ -60,6 +61,12 @@ $font-weight-regular: 400;
     display: flex;
     margin-left: 30px;
     font-size: $font-size-s;
+    cursor: pointer;
+    .el-cate2 {
+      &:hover {
+        color: #5ff531;
+      }
+    }
   }
 }
 .select-filtering-values {
