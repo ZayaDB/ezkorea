@@ -4,9 +4,7 @@ import ProductList from '../components/category/ProductList';
 import SideNav from '../components/category/SideNav';
 import '../styles/category/categoryCss.scss';
 import { getData } from '../utils/getData';
-import ContentArea from '../styles/ContentArea';
 import { Box } from '@mui/material';
-import Header from '../components/common/Header';
 
 const Category: React.FC = () => {
   const [products, setProducts] = useState<Products[]>([]);
@@ -21,17 +19,24 @@ const Category: React.FC = () => {
     };
     fetchData();
   }, []);
+  const [selectedCategory, setSelectedCategory] = useState<string>(''); // 선택한 카테고리 상태
+
+  const handleCategorySelect = (categoryName: string) => {
+    setSelectedCategory(categoryName);
+  };
 
   return (
     <Box className='category-page'>
-      <Header sections={[{ title: '', url: '#' }]} title={'dururu'} />
       <Box className='category-content'>
         <Box className='sideNavigation'>
-          <SideNav />
+          <SideNav onSelectCategory={handleCategorySelect} />
         </Box>
 
         <Box className='containerProducts'>
-          <ProductList prodData={products} />
+          <ProductList
+            prodData={products}
+            selectedCategory={selectedCategory}
+          />
         </Box>
       </Box>
     </Box>
