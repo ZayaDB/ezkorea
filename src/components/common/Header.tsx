@@ -15,6 +15,7 @@ import Cart1 from '../../assets/images/cart2.png';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Fade from '@mui/material/Fade';
+import Badge from '@mui/material/Badge';
 
 interface HeaderProps {
   sections: ReadonlyArray<{
@@ -192,19 +193,25 @@ export default function Header(props: HeaderProps) {
                 style={{ width: '20px', padding: 2 }}
               />
             </IconButton>
-            <IconButton
+            <Badge
+              badgeContent={5}
+              color='secondary'
               sx={{
-                '&.MuiButtonBase-root:hover': {
-                  bgcolor: 'transparent',
-                },
+                width: '32px',
+                height: '15px',
+                '& .MuiBadge-badge': { fontSize: 9, height: 15, minWidth: 10 },
               }}
             >
-              <img
-                src={Cart1}
-                alt='Logo'
-                style={{ width: '24px', padding: 2 }}
-              />
-            </IconButton>
+              <IconButton
+                sx={{
+                  '&.MuiButtonBase-root:hover': {
+                    bgcolor: 'transparent',
+                  },
+                }}
+              >
+                <img src={Cart1} alt='Logo' style={{ width: '24px' }} />
+              </IconButton>
+            </Badge>
             {/* <img
                 src={Notification2}
                 alt='Logo'
