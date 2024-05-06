@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { Box } from '@mui/system';
-import { CategoryData, CategoryMapping } from '../../types/typesProducts';
+import {
+  CategoryData,
+  CategoryMapping,
+  FilterVisibility,
+  SideNavProps,
+} from '../../types/typesProducts';
 import '../../styles/category/sideNavCss.scss';
 import BrandFilter from './BrandFilter';
 import PriceFilter from './PriceFilter';
@@ -9,15 +14,6 @@ import ThemeFilter from './ThemeFilter';
 import { grey } from '@mui/material/colors';
 import { styled } from '@mui/material/styles';
 import Button, { ButtonProps } from '@mui/material/Button';
-interface FilterVisibility {
-  brand: boolean;
-  price: boolean;
-  color: boolean;
-  theme: boolean;
-}
-interface SideNavProps {
-  onSelectCategory: (categoryName: string) => void;
-}
 
 const categoryMapping: CategoryMapping = {
   가구: 'furniture',
@@ -26,42 +22,44 @@ const categoryMapping: CategoryMapping = {
   '데코/식물': 'deco-plant',
 };
 
-const SideNav: React.FC<SideNavProps> = ({ onSelectCategory }) => {
-  const categoryData: CategoryData[] = [
-    {
-      name: '가구',
-      subCategories: [
-        'ALL',
-        '책상',
-        '의자',
-        '모니터암/받침대',
-        '거치대',
-        '서랍장',
-        '선반',
-      ],
-    },
-    {
-      name: '전자기기',
-      subCategories: ['ALL', '키보드', '마우스', '스피커', '멀티탭', '충전기'],
-    },
-    {
-      name: '조명/인테리어',
-      subCategories: [
-        'ALL',
-        '조명',
-        '오브제',
-        '시계',
-        '캘린더',
-        '트레이',
-        '타공판',
-        '데스크매트',
-      ],
-    },
-    {
-      name: '데코/식물',
-      subCategories: ['ALL', '디퓨저', '캔들', '인센스', '식물'],
-    },
-  ];
+const categoryData: CategoryData[] = [
+  {
+    name: '가구',
+    subCategories: [
+      'ALL',
+      '책상',
+      '의자',
+      '모니터암/받침대',
+      '거치대',
+      '서랍장',
+      '선반',
+    ],
+  },
+  {
+    name: '전자기기',
+    subCategories: ['ALL', '키보드', '마우스', '스피커', '멀티탭', '충전기'],
+  },
+  {
+    name: '조명/인테리어',
+    subCategories: [
+      'ALL',
+      '조명',
+      '오브제',
+      '시계',
+      '캘린더',
+      '트레이',
+      '타공판',
+      '데스크매트',
+    ],
+  },
+  {
+    name: '데코/식물',
+    subCategories: ['ALL', '디퓨저', '캔들', '인센스', '식물'],
+  },
+];
+
+const SideNav: React.FC<SideNavProps> = ({onSelectCategory}) => {
+  const [selectedCategory, setSelectedCategory] = useState<string>('가구');
 
   const [filterVisibility, setFilterVisibility] = useState<FilterVisibility>({
     brand: false,
@@ -70,8 +68,13 @@ const SideNav: React.FC<SideNavProps> = ({ onSelectCategory }) => {
     theme: false,
   });
 
-  const [openCategory, setOpenCategory] = useState<string>('가구');
+  //category 클릭하면 props에 저장, setting(카테고리에 맞는 상품 렌더링)
+  const handleCategoryClick = (categoryName: string) => {
+    onSelectCategory(categoryName); // 부모 컴포넌트로 선택한 카테고리 전달
+    setSelectedCategory(categoryName);
+  };
 
+  //filter nav 열리고 닫히는 부분
   const toggleFilterVisibility = (filterName: keyof FilterVisibility) => {
     setFilterVisibility(prevVisibility => ({
       ...prevVisibility,
@@ -79,17 +82,7 @@ const SideNav: React.FC<SideNavProps> = ({ onSelectCategory }) => {
     }));
   };
 
-  const handleCategoryClick = (categoryName: string) => {
-    onSelectCategory(categoryName); // 부모 컴포넌트로 선택한 카테고리 전달
-    const selectedCategory = categoryData.find(
-      category => category.name === categoryName
-    );
-    if (selectedCategory) {
-      console.log('Selected Category:', selectedCategory);
-      setOpenCategory(categoryName);
-    }
-  };
-
+  //filter 초기화
   const resetFilters = () => {
     setFilterVisibility({
       brand: false,
@@ -123,7 +116,7 @@ const SideNav: React.FC<SideNavProps> = ({ onSelectCategory }) => {
           >
             <Box className='nav-title'>{category.name}</Box>
           </Box>
-          {openCategory === category.name && (
+          {selectedCategory === category.name && (
             <Box className={`${categoryMapping[category.name]}-box`}>
               <hr
                 style={{
@@ -131,11 +124,12 @@ const SideNav: React.FC<SideNavProps> = ({ onSelectCategory }) => {
                   height: '2px',
                   backgroundColor: '#272727',
                   marginRight: '30px',
+                  marginBottom: '18px',
                 }}
               />
               {category.subCategories.map((subCategory, idx) => (
                 <Box
-                  className={'sub'}
+                  className={`sub ${subCategory === 'ALL' ? 'bold' : ''}`}
                   key={idx}
                   onClick={() => console.log(subCategory)}
                   role='button'
@@ -198,9 +192,15 @@ const SideNav: React.FC<SideNavProps> = ({ onSelectCategory }) => {
             ] && filter.component}
           </Box>
         ))}
-        <ColorButton variant='contained'>검색</ColorButton>
+        <ColorButton
+          variant='contained'
+          sx={{ marginTop: '20px', marginBottom: '20px' }}
+        >
+          검색
+        </ColorButton>
       </Box>
     </Box>
   );
 };
+
 export default SideNav;
