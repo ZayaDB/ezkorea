@@ -184,11 +184,11 @@ export default function Header(props: HeaderProps) {
               open={open}
               onClose={handleClose}
               TransitionComponent={Fade}
-              // PaperProps={{
-              //   style: {
-              //     boxShadow: '0',
-              //   },
-              // }}
+              PaperProps={{
+                style: {
+                  marginLeft: '-24px',
+                },
+              }}
             >
               <MenuItem
                 onClick={handleClose}
@@ -215,7 +215,6 @@ export default function Header(props: HeaderProps) {
                 로그아웃
               </MenuItem>
             </Menu>
-
             <IconButton
               sx={{
                 '&.MuiButtonBase-root:hover': {
@@ -269,7 +268,7 @@ export default function Header(props: HeaderProps) {
             display: 'flex',
             justifyContent: 'space-around',
             flex: '1',
-            ml: '25%',
+            ml: '22.25%',
           }}
         >
           {sections.map(section => (
