@@ -122,27 +122,20 @@ export default function Header(props: HeaderProps) {
             >
               <SearchIcon />
             </IconButton>
-            <Button
+            <IconButton
               id='fade-button'
               aria-controls={open ? 'fade-menu' : undefined}
               aria-haspopup='true'
               aria-expanded={open ? 'true' : undefined}
               onClick={handleClick}
+              sx={{
+                '&.MuiButtonBase-root:hover': {
+                  bgcolor: 'transparent',
+                },
+              }}
             >
-              <IconButton
-                sx={{
-                  '&.MuiButtonBase-root:hover': {
-                    bgcolor: 'transparent',
-                  },
-                }}
-              >
-                <img
-                  src={LoginIcon}
-                  alt='Logo'
-                  style={{ width: '28px', padding: 2 }}
-                />
-              </IconButton>
-            </Button>
+              <img src={LoginIcon} alt='Logo' style={{ width: '28px' }} />
+            </IconButton>
             <Menu
               id='fade-menu'
               MenuListProps={{
@@ -152,11 +145,11 @@ export default function Header(props: HeaderProps) {
               open={open}
               onClose={handleClose}
               TransitionComponent={Fade}
-              // PaperProps={{
-              //   style: {
-              //     boxShadow: '0',
-              //   },
-              // }}
+              PaperProps={{
+                style: {
+                  marginLeft: '-20px',
+                },
+              }}
             >
               <MenuItem
                 onClick={handleClose}
