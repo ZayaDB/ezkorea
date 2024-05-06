@@ -1,21 +1,24 @@
-$dark-mode: black;
-$light-mode: white;
-
-* {
-  font-family: 'Pretendard-Regular';
-  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
-    format('woff');
-  // font-weight: 100;
-}
-
-.categoryPage {
-  background-color: $light-mode;
-  width: 100vw;
-  height: 100vh;
-}
 .category-content {
   display: flex;
   flex-direction: row;
-  width: 1200px;
+  width: 100%; /* 부모 요소인 category-content의 너비를 100%로 설정 */
+  max-width: 1200px; /* 최대 너비 설정 */
   margin: auto;
+}
+
+.sideNavigation {
+  width: 25%;
+}
+
+.containerProducts {
+  width: 75%;
+}
+
+@media (max-width: 768px) {
+  .sideNavigation {
+    display: none;
+  }
+  .containerProducts {
+    width: 100%;
+  }
 }

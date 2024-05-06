@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
-import Checkbox from '@mui/material/Checkbox';
+import { useState } from 'react';
 import '../../styles/category/themeFilter.scss';
+import Checkbox from '@mui/material/Checkbox';
+import { Box, styled } from '@mui/system';
 
-import { styled } from '@mui/system';
-
-
-const ThemeFilter = () => {
-  const themes: string[] = ['gaming', 'simple', 'modern', 'wood', 'lovely'];
+export default function ThemeFilter() {
+  const themes: string[] = ['gaming', 'simple', 'unique', 'antique'];
 
   const [checkedThemes, setCheckedThemes] = useState<string[]>([]);
 
@@ -30,33 +28,34 @@ const ThemeFilter = () => {
       color: 'black', // 체크된 상태에서의 아이콘 컬러 지정
     },
   });
-  
+
   return (
-    <div className='element-theme'>
+    <Box className="element-theme">
       {themes.map((theme) => (
-        <div key={theme} className='theme' >
+        <Box key={theme} className="theme">
           <BlackCheckbox
             checked={checkedThemes.includes(theme)}
             onChange={() => handleLabelClick(theme)}
             inputProps={{ 'aria-label': `${theme} checkbox` }}
-          />
-          <div
-            className='theme-name'
-            onClick={() => handleLabelClick(theme)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                handleLabelClick(theme);
-              }
+            sx={{
+              padding: '2px',
+              '& .MuiSvgIcon-root': {
+                width: '0.9em',
+                height: '0.7em',
+              },
             }}
-            role='button'
+          />
+          <Box
+            className="theme-name"
+            onClick={() => handleLabelClick(theme)}
+            role="button"
             tabIndex={0}
+            sx={{ marginLeft: '2px', cursor: 'pointer' }}
           >
             {theme}
-          </div>
-        </div>
+          </Box>
+        </Box>
       ))}
-    </div>
+    </Box>
   );
-};
-
-export default ThemeFilter;
+}
