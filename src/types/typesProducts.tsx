@@ -24,3 +24,20 @@ export interface CategoryData {
 export interface CategoryMapping {
   [key: string]: string;
 }
+
+export interface FilterVisibility {
+  brand: boolean;
+  price: boolean;
+  color: boolean;
+  theme: boolean;
+}
+
+export interface SideNavProps {
+  onSelectCategory: (categoryName: string) => void;
+}
+
+export interface ProductListProps {
+  categoryData: CategoryData[];
+  selectedCategory: string;
+  prodData: Products[];
+}
