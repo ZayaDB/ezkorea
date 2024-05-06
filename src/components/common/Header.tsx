@@ -197,9 +197,15 @@ export default function Header(props: HeaderProps) {
               badgeContent={5}
               color='secondary'
               sx={{
-                width: '32px',
-                height: '15px',
-                '& .MuiBadge-badge': { fontSize: 9, height: 15, minWidth: 10 },
+                '& .MuiBadge-badge': {
+                  fontSize: 9,
+                  height: 15,
+                  minWidth: 10,
+                  right: 8,
+                  top: 11,
+                  padding: '0 4px',
+                  border: '2px solid white',
+                },
               }}
             >
               <IconButton
