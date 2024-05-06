@@ -16,6 +16,8 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Fade from '@mui/material/Fade';
 import Badge from '@mui/material/Badge';
+import InputBase from '@mui/material/InputBase';
+import Paper from '@mui/material/Paper';
 
 interface HeaderProps {
   sections: ReadonlyArray<{
@@ -116,7 +118,41 @@ export default function Header(props: HeaderProps) {
             </Button>
           </Typography>
           <Box>
-            <IconButton
+            <IconButton disableRipple>
+              <Paper
+                component='form'
+                sx={{
+                  p: '2px 4px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  width: 180,
+                  height: 28,
+                  boxShadow: '0',
+                  border: '1px solid #e5e5e5',
+                }}
+              >
+                <InputBase
+                  sx={{
+                    ml: 1,
+                    flex: 1,
+                  }}
+                  // placeholder='Search Google Maps'
+                />
+                <IconButton
+                  type='button'
+                  sx={{ p: '3px' }}
+                  aria-label='search'
+                  disableRipple
+                >
+                  <SearchIcon sx={{ fontSize: '22px' }} />
+                </IconButton>
+              </Paper>
+            </IconButton>
+
+            {/* <Button disableRipple>
+              <SearchIcon />
+          </Button> */}
+            {/* <IconButton
               sx={{
                 '&.MuiButtonBase-root:hover': {
                   bgcolor: 'transparent',
@@ -124,7 +160,7 @@ export default function Header(props: HeaderProps) {
               }}
             >
               <SearchIcon />
-            </IconButton>
+            </IconButton> */}
             <IconButton
               id='fade-button'
               aria-controls={open ? 'fade-menu' : undefined}
