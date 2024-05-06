@@ -6,6 +6,7 @@ import CommunityPostPage from './pages/CommunityPostPage';
 import Category from './pages/Category';
 
 function App() {
+
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>

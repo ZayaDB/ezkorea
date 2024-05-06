@@ -4,7 +4,7 @@ import ProductList from '../components/category/ProductList';
 import SideNav from '../components/category/SideNav';
 import '../styles/category/categoryCss.scss';
 import { getData } from '../utils/getData';
-import ContentArea from '../styles/ContentArea';
+// import ContentArea from '../styles/ContentArea';
 
 const Category: React.FC = () => {
   const [products, setProducts] = useState<Products[]>([]);
@@ -23,12 +23,12 @@ const Category: React.FC = () => {
 
   return (
     <div className='categoryPage'>
-      <ContentArea>
+      {/* <ContentArea> */}
         <div className='category-content'>
           <SideNav />
           <ProductList prodData={products} />
         </div>
-      </ContentArea>
+      {/* </ContentArea> */}
     </div>
   );
 };
