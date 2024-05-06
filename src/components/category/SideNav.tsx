@@ -16,8 +16,8 @@ import { styled } from '@mui/material/styles';
 import Button, { ButtonProps } from '@mui/material/Button';
 
 const categoryMapping: CategoryMapping = {
-  '가구': 'furniture',
-  '전자기기': 'electronics',
+  가구: 'furniture',
+  전자기기: 'electronics',
   '조명/인테리어': 'lighting-interior',
   '데코/식물': 'deco-plant',
 };
@@ -60,6 +60,7 @@ const categoryData: CategoryData[] = [
 
 const SideNav: React.FC<SideNavProps> = ({ onSelectCategory }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('가구');
+  // const [selectedSubCategory] , setSelectedSubCategory] = useState<string>('ALL');
 
   const [filterVisibility, setFilterVisibility] = useState<FilterVisibility>({
     brand: false,
@@ -70,6 +71,7 @@ const SideNav: React.FC<SideNavProps> = ({ onSelectCategory }) => {
 
   const handleCategoryClick = (categoryName: string) => {
     onSelectCategory(categoryName); // 선택한 카테고리를 부모 컴포넌트로 전달
+    // onSelectSubCategory(subCategoryName);
     setSelectedCategory(categoryName);
   };
 

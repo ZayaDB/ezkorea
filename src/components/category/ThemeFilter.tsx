@@ -19,7 +19,7 @@ export default function ThemeFilter() {
     }
 
     setCheckedThemes(newCheckedThemes);
-    console.log(`Checkbox for theme '${theme}' toggled. Checked themes:`, newCheckedThemes);
+    console.log(`${theme}`, newCheckedThemes);
   };
 
   const BlackCheckbox = styled(Checkbox)({

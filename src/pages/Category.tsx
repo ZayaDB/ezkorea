@@ -47,7 +47,9 @@ const categoryData: CategoryData[] = [
 ];
 
 const Category: React.FC<ProductListProps> = ({ prodData }) => {
-  const [selectedCategory, setSelectedCategory] = useState<string>('가구'); // 디폴트 카테고리 설정
+  const [selectedCategory, setSelectedCategory] = useState<string>('가구');
+  const [selectedSubCategory, setSelectedSubCategory] = useState<string>('ALL');
+
   const [products, setProducts] = useState<Products[]>([]);
 
   useEffect(() => {
@@ -61,19 +63,27 @@ const Category: React.FC<ProductListProps> = ({ prodData }) => {
     };
 
     fetchData();
-  }, []); // 빈 배열을 전달하여 컴포넌트가 마운트될 때 한 번만 실행
+  }, []); // Empty array to run once on component mount
 
   return (
     <Box className='category-page'>
       <Box className='category-content'>
         <Box className='sideNavigation'>
-          <SideNav onSelectCategory={setSelectedCategory} />
+          {/* Pass onSelectCategory and onSelectSubCategory to SideNav */}
+          <SideNav
+            onSelectCategory={setSelectedCategory}
+            onSelectSubCategory={(subCategory: string) => {
+              // Handle subcategory selection here
+              console.log('Selected subcategory:', subCategory);
+            }}
+          />
         </Box>
         <Box className='containerProducts'>
           <ProductList
             categoryData={categoryData}
             prodData={products}
             selectedCategory={selectedCategory}
+            selectedSubCategory={selectedSubCategory} // selectedSubCategory를 추가하여 전달
           />
         </Box>
       </Box>

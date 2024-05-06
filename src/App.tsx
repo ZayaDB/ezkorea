@@ -25,7 +25,8 @@ function App() {
   const [products, setProducts] = useState<Products[]>([]);
   const [categoryData, setCategoryData] = useState<CategoryData[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
-  
+  const [selectedSubCategory, setSelectedSubCategory] = useState<string>('');
+
   return (
     <ThemeProvider theme={theme}>
       <Header title='Drururu' sections={sections} />
@@ -38,6 +39,7 @@ function App() {
                 categoryData={categoryData}
                 selectedCategory={selectedCategory}
                 prodData={products}
+                selectedSubCategory={selectedSubCategory}
               />
             }
           />

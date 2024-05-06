@@ -22,6 +22,8 @@ const ProductList: React.FC<ProductListProps> = ({
   prodData,
   categoryData,
 }) => {
+  console.log('props로 받아온 subcategory', selectedCategory);
+
   const [sort, setSort] = useState<string>('인기순');
   const [selectedSubCategory, setSelectedSubCategory] = useState<string>('ALL');
 
