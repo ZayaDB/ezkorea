@@ -15,3 +15,31 @@ export interface Products {
   views: number;
   commentCount: number;
 }
+
+export interface CategoryData {
+  name: string;
+  subCategories: string[];
+}
+
+export interface CategoryMapping {
+  [key: string]: string;
+}
+
+export interface FilterVisibility {
+  brand: boolean;
+  price: boolean;
+  color: boolean;
+  theme: boolean;
+}
+
+export interface SideNavProps {
+  onSelectCategory: (categoryName: string) => void;
+  onSelectSubCategory: (subCategoryName: string) => void; // Define onSelectSubCategory function
+}
+
+export interface ProductListProps {
+  categoryData: CategoryData[];
+  selectedCategory: string;
+  prodData: Products[];
+  selectedSubCategory: string; // selectedSubCategory를 추가
+}

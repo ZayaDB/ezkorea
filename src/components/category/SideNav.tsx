@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
+import { Box } from '@mui/system';
+import {
+  CategoryMapping,
+  FilterVisibility,
+  SideNavProps,
+  CategoryData,
+} from '../../types/typesProducts';
 import '../../styles/category/sideNavCss.scss';
 import BrandFilter from './BrandFilter';
-import ColorFilter from './ColorFilter';
 import PriceFilter from './PriceFilter';
+import ColorFilter from './ColorFilter';
 import ThemeFilter from './ThemeFilter';
-
-interface CategoryMapping {
-  [key: string]: string;
-}
+import { grey } from '@mui/material/colors';
+import { styled } from '@mui/material/styles';
+import Button, { ButtonProps } from '@mui/material/Button';
 
 const categoryMapping: CategoryMapping = {
   가구: 'furniture',
@@ -15,11 +21,6 @@ const categoryMapping: CategoryMapping = {
   '조명/인테리어': 'lighting-interior',
   '데코/식물': 'deco-plant',
 };
-
-interface CategoryData {
-  name: string;
-  subCategories: string[];
-}
 
 const categoryData: CategoryData[] = [
   {
@@ -57,88 +58,147 @@ const categoryData: CategoryData[] = [
   },
 ];
 
-const SideNav: React.FC = () => {
-  const [openCategory, setOpenCategory] = useState<string>('가구');
-  const [selectedSubCategory, setSelectedSubCategory] = useState<string>('');
+const SideNav: React.FC<SideNavProps> = ({ onSelectCategory }) => {
+  const [selectedCategory, setSelectedCategory] = useState<string>('가구');
+  // const [selectedSubCategory] , setSelectedSubCategory] = useState<string>('ALL');
 
-  const categoryClick = (categoryName: string) => {
-    console.log(`카테고리1번 : ${categoryName}`);
+  const [filterVisibility, setFilterVisibility] = useState<FilterVisibility>({
+    brand: false,
+    price: false,
+    color: false,
+    theme: false,
+  });
 
-    setOpenCategory(prev => (prev === categoryName ? '' : categoryName));
-    setSelectedSubCategory(''); // 카테고리를 클릭할 때 서브 카테고리 선택 상태 초기화
+  const handleCategoryClick = (categoryName: string) => {
+    onSelectCategory(categoryName); // 선택한 카테고리를 부모 컴포넌트로 전달
+    // onSelectSubCategory(subCategoryName);
+    setSelectedCategory(categoryName);
   };
 
-  const subCategoryClick = (subCategoryName: string) => {
-    if (subCategoryName !== selectedSubCategory) {
-      console.log(`카테고리2번 : ${subCategoryName}`);
-      setSelectedSubCategory(subCategoryName);
-    }
+  const toggleFilterVisibility = (filterName: keyof FilterVisibility) => {
+    setFilterVisibility(prevVisibility => ({
+      ...prevVisibility,
+      [filterName]: !prevVisibility[filterName],
+    }));
   };
+
+  const resetFilters = () => {
+    setFilterVisibility({
+      brand: false,
+      price: false,
+      color: false,
+      theme: false,
+    });
+  };
+
+  const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
+    fontSize: '14px',
+    borderRadius: '5px',
+    color: theme.palette.getContrastText(grey[900]),
+    backgroundColor: grey[900],
+    '&:hover': {
+      color: '#00ff00',
+      backgroundColor: grey[900],
+    },
+    marginLeft: '70%',
+  }));
 
   return (
-    <div className='side-nav'>
+    <Box className='side-nav'>
       {categoryData.map((category, index) => (
-        <div key={index}>
-          <div
+        <Box key={index}>
+          <Box
             className={`nav ${categoryMapping[category.name]}`}
-            onClick={() => categoryClick(category.name)}
-            onKeyDown={e => {
-              if (e.key === 'Enter') {
-                categoryClick(category.name);
-              }
-            }}
+            onClick={() => handleCategoryClick(category.name)}
             role='button'
             tabIndex={0}
           >
-            <div className='nav-title'>{category.name}</div>
-            <hr className='hr' />
-          </div>
-          {openCategory === category.name && (
-            <div className={`${categoryMapping[category.name]}-box`}>
+            <Box className='nav-title'>{category.name}</Box>
+          </Box>
+          {selectedCategory === category.name && (
+            <Box className={`${categoryMapping[category.name]}-box`}>
+              <hr
+                style={{
+                  border: 0,
+                  height: '2px',
+                  backgroundColor: '#272727',
+                  marginRight: '30px',
+                  marginBottom: '18px',
+                }}
+              />
               {category.subCategories.map((subCategory, idx) => (
-                <div
-                  className={'sub'}
-                  key={idx}
-                  onClick={() => subCategoryClick(subCategory)}
-                  onKeyDown={e => {
-                    if (e.key === 'Enter') {
-                      subCategoryClick(subCategory);
-                    }
-                  }}
+                <Box
+                  key={subCategory} // key에 숫자가 아닌 문자열을 사용
+                  className={`sub ${subCategory === 'ALL' ? 'bold' : ''}`}
+                  onClick={() => onSelectCategory(subCategory)}
                   role='button'
                   tabIndex={0}
                 >
                   {subCategory}
-                </div>
+                </Box>
               ))}
-            </div>
+            </Box>
           )}
-        </div>
+        </Box>
       ))}
-      <div className={'filter-box'}>
-        <div className='nav-title filter'>
-          <div>필터 </div>
-          <div className='remove-filter' > 초기화 </div>
-        </div>
-        <hr className='hr' />
-        {/* <div className='brand-box'>
-          <div className='filter-title'>브랜드</div>
-          <BrandFilter />
-        </div> */}
-        <div className='price-box '>
-          <div className='filter-title'>가격</div>
-          <PriceFilter />
-        </div>
-        <div className='color-box'>
-          <div className='filter-title'>색상</div>
-          <ColorFilter />
-        </div>
-      </div>
-      <div className='theme-box'>
-        <div className='filter-title'>테마</div>
-        <ThemeFilter />
-      </div>
-    </div>
+      <Box className={'filter-box'}>
+        <Box style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Box className='nav-title'>필터</Box>
+          <Box className='remove-filter' onClick={resetFilters}>
+            초기화
+          </Box>
+        </Box>
+        <hr
+          style={{
+            border: 0,
+            height: '2px',
+            backgroundColor: '#272727',
+            marginRight: '30px',
+          }}
+        />
+        {[
+          { name: '브랜드', component: <BrandFilter /> },
+          { name: '가격', component: <PriceFilter /> },
+          { name: '색상', component: <ColorFilter /> },
+          { name: '테마', component: <ThemeFilter /> },
+        ].map((filter, index) => (
+          <Box key={index} className={`${filter.name.toLowerCase()}-box`}>
+            <Box
+              style={{
+                marginTop: '20px',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                cursor: 'pointer',
+              }}
+              onClick={() =>
+                toggleFilterVisibility(
+                  filter.name.toLowerCase() as keyof FilterVisibility
+                )
+              }
+            >
+              <Box className='filter-title'>{filter.name}</Box>
+              <Box className='plus'>
+                {filterVisibility[
+                  filter.name.toLowerCase() as keyof FilterVisibility
+                ]
+                  ? '-'
+                  : '+'}
+              </Box>
+            </Box>
+            {filterVisibility[
+              filter.name.toLowerCase() as keyof FilterVisibility
+            ] && filter.component}
+          </Box>
+        ))}
+        <ColorButton
+          variant='contained'
+          sx={{ marginTop: '20px', marginBottom: '20px' }}
+        >
+          검색
+        </ColorButton>
+      </Box>
+    </Box>
   );
 };
 
