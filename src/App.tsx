@@ -4,6 +4,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import theme from './styles/theme';
 import CommunityPostPage from './pages/CommunityPostPage';
 import Category from './pages/Category';
+import ProductDetail from './pages/ProductDetail';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/shop/category' element={<Category />}></Route>
+          <Route path='/shop/detail' element={<ProductDetail />}></Route>
           <Route path='/community/post' element={<CommunityPostPage />}></Route>
         </Routes>
       </BrowserRouter>
