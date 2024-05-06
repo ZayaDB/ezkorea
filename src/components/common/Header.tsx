@@ -5,9 +5,16 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import LoginIcon from '../../assets/images/icon-login.png';
+import Notification1 from '../../assets/images/notification1.png';
+// import Cart from '../../assets/images/cart.png';
+import Cart1 from '../../assets/images/cart2.png';
+// import Notification2 from '../../assets/images/notification2.png';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Fade from '@mui/material/Fade';
 
 interface HeaderProps {
   sections: ReadonlyArray<{
@@ -35,8 +42,22 @@ const theme = createTheme({
   },
 });
 
+// const StyledButton = styled(Button)`
+//   &:hover {
+//     background-color: transparent;
+//   }
+// `;
+
 export default function Header(props: HeaderProps) {
   const { sections, title } = props;
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -47,8 +68,8 @@ export default function Header(props: HeaderProps) {
             borderColor: 'divider',
             display: 'flex',
             justifyContent: 'space-around',
-            p: 1,
-            m: 1,
+            pb: '2px',
+            m: 0.5,
             bgcolor: 'background.paper',
             borderRadius: 1,
           }}
@@ -60,36 +81,140 @@ export default function Header(props: HeaderProps) {
             //   align="center"
             noWrap
             //   sx={{ flex: 1 }}
+            style={{ position: 'sticky', top: '0' }}
           >
             {title}
-            <Button sx={{ ml: '40px', fontSize: '18px' }} size='small'>
+            <Button
+              sx={{
+                ml: '34px',
+                fontSize: '16px',
+                fontWeight: '600',
+                ':hover': {
+                  bgcolor: 'transparent', // theme.palette.primary.main
+                  color: '#5FF531',
+                },
+              }}
+              size='small'
+            >
               쇼핑
             </Button>
-            <Button sx={{ fontSize: '18px' }} size='small'>
+            <Button
+              sx={{
+                fontSize: '16px',
+                fontWeight: '600',
+                ':hover': {
+                  bgcolor: 'transparent', // theme.palette.primary.main
+                  color: '#5FF531',
+                },
+              }}
+              size='small'
+            >
               커뮤니티
             </Button>
           </Typography>
           <Box>
-            <IconButton>
+            <IconButton
+              sx={{
+                '&.MuiButtonBase-root:hover': {
+                  bgcolor: 'transparent',
+                },
+              }}
+            >
               <SearchIcon />
             </IconButton>
-            <IconButton>
+            <Button
+              id='fade-button'
+              aria-controls={open ? 'fade-menu' : undefined}
+              aria-haspopup='true'
+              aria-expanded={open ? 'true' : undefined}
+              onClick={handleClick}
+            >
+              <IconButton
+                sx={{
+                  '&.MuiButtonBase-root:hover': {
+                    bgcolor: 'transparent',
+                  },
+                }}
+              >
+                <img
+                  src={LoginIcon}
+                  alt='Logo'
+                  style={{ width: '28px', padding: 2 }}
+                />
+              </IconButton>
+            </Button>
+            <Menu
+              id='fade-menu'
+              MenuListProps={{
+                'aria-labelledby': 'fade-button',
+              }}
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              TransitionComponent={Fade}
+              // PaperProps={{
+              //   style: {
+              //     boxShadow: '0',
+              //   },
+              // }}
+            >
+              <MenuItem
+                onClick={handleClose}
+                sx={{ fontSize: '14px', fontWeight: '300' }}
+              >
+                마이페이지
+              </MenuItem>
+              <MenuItem
+                onClick={handleClose}
+                sx={{ fontSize: '14px', fontWeight: '300' }}
+              >
+                찜한 상품
+              </MenuItem>
+              <MenuItem
+                onClick={handleClose}
+                sx={{ fontSize: '14px', fontWeight: '300' }}
+              >
+                저장한 글
+              </MenuItem>
+              <MenuItem
+                onClick={handleClose}
+                sx={{ fontSize: '14px', fontWeight: '300' }}
+              >
+                로그아웃
+              </MenuItem>
+            </Menu>
+
+            <IconButton
+              sx={{
+                '&.MuiButtonBase-root:hover': {
+                  bgcolor: 'transparent',
+                },
+              }}
+            >
               <img
-                src={LoginIcon}
+                src={Notification1}
                 alt='Logo'
-                style={{ width: '28px', padding: 3 }}
-              />
-              <img
-                src={LoginIcon}
-                alt='Logo'
-                style={{ width: '28px', padding: 3 }}
-              />
-              <img
-                src={LoginIcon}
-                alt='Logo'
-                style={{ width: '28px', padding: 3 }}
+                style={{ width: '20px', padding: 2 }}
               />
             </IconButton>
+            <IconButton
+              sx={{
+                '&.MuiButtonBase-root:hover': {
+                  bgcolor: 'transparent',
+                },
+              }}
+            >
+              <img
+                src={Cart1}
+                alt='Logo'
+                style={{ width: '24px', padding: 2 }}
+              />
+            </IconButton>
+            {/* <img
+                src={Notification2}
+                alt='Logo'
+                style={{ width: '31px', padding: 3 }}
+              /> */}
           </Box>
         </Toolbar>
         <Toolbar
@@ -100,7 +225,7 @@ export default function Header(props: HeaderProps) {
             display: 'flex',
             justifyContent: 'space-around',
             flex: '1',
-            ml: '25.5%',
+            ml: '25%',
           }}
         >
           {sections.map(section => (
@@ -110,7 +235,8 @@ export default function Header(props: HeaderProps) {
               key={section.title}
               variant='body2'
               href={section.url}
-              sx={{ p: 1, flexShrink: 0 }}
+              sx={{ flexShrink: 0, border: 0 }}
+              style={{ textDecoration: 'none' }}
             >
               {section.title}
             </Link>
