@@ -34,10 +34,12 @@ export interface FilterVisibility {
 
 export interface SideNavProps {
   onSelectCategory: (categoryName: string) => void;
+  onSelectSubCategory: (subCategoryName: string) => void; // Define onSelectSubCategory function
 }
 
 export interface ProductListProps {
   categoryData: CategoryData[];
   selectedCategory: string;
   prodData: Products[];
+  selectedSubCategory: string; // selectedSubCategory를 추가
 }
