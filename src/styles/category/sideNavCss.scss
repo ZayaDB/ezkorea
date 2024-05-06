@@ -18,7 +18,7 @@ $font-weight-regular: 400;
   width: 100%;
   margin-right: 50px;
   .nav-title {
-    font-size: $font-size-l;
+    font-size: 20px;
     font-weight: $font-weight-bold;
     margin: 5px;
     cursor: pointer;
@@ -28,14 +28,17 @@ $font-weight-regular: 400;
   .electronics-box,
   .lighting-interior-box,
   .deco-plant-box {
-    font-size: 14px;
+    font-size: $font-size-m;
     margin: 5px;
     .sub {
-      margin-bottom: 5px;
+      margin-bottom: 14px;
       cursor: pointer;
       &:hover {
         color: gray;
       }
+    }
+    .bold {
+      font-weight: bold;
     }
     margin-bottom: 20px;
   }

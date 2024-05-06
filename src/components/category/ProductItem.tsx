@@ -3,6 +3,7 @@ import useToggle from '../../hooks/useToggle';
 import '../../styles/category/productItemCss.scss';
 import HandleClickHeart from './HandleClickHeart';
 import { Products } from '../../types/typesProducts';
+import { Box } from '@mui/material';
 
 interface ProductItemProps {
   prod: Products;
@@ -17,11 +18,14 @@ export default function ProductItem({ prod }: ProductItemProps) {
     setIsLiked(prevIsLiked => !prevIsLiked);
   };
 
-  // 버튼 클릭 이벤트 핸들러
-  const handleButtonClick = (): void => {
-    toggleHeart(); // 하트 토글
-    // 좋아요가 설정되었을 때 마이페이지 찜한리스트 컴포넌트에 나타나야 함
+  // 상품 아이템 클릭 이벤트 핸들러
+  const handleProdItemClick = (productId: number): void => {
+    console.log('Clicked product ID:', productId);
+    // 클릭한 상품의 productId로 상품 객체 찾기
+    const clickedProduct = prod; // 이미 prod 객체가 해당 상품을 나타냄
+    console.log('Clicked product details:', clickedProduct);
   };
+
   const [hovered, setHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -33,14 +37,17 @@ export default function ProductItem({ prod }: ProductItemProps) {
   };
 
   return (
-    <div className='prod-item'>
+    <Box
+      className='prod-item'
+      role='button'
+      onClick={() => handleProdItemClick(prod.productId)}
+    >
       {/* 상품이미지 */}
       <div
         className='prod-img'
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        {/* <img src={prod.thumbnail} alt={prod.name} /> */}
         <img src={hovered ? prod.hoverImage : prod.thumbnail} alt={prod.name} />
       </div>
       <div className='prod-info'>
@@ -48,23 +55,18 @@ export default function ProductItem({ prod }: ProductItemProps) {
         <div className='prod-brand'>{prod.brand}</div>
         {/* 상품명 */}
         <div className='prod-name'>{prod.name}</div>
-
         {/* 할인율 */}
         {prod.discount !== 0 ? (
           <div className='prod-discount'>{prod.discount}%</div>
         ) : (
           <div style={{ color: 'white' }}>;;;</div>
         )}
-
         {/* 원가 */}
         {prod.discount !== 0 ? (
           <div className='prod-prevPrice'>{prod.prevPrice}</div>
         ) : (
           <div style={{ color: 'white' }}>;;;</div>
         )}
-
-        {/* 할인가 및 찜하기 */}
-
         {/* 할인가 */}
         <div className='prod-price'>{prod.price}</div>
       </div>
@@ -73,7 +75,6 @@ export default function ProductItem({ prod }: ProductItemProps) {
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'space-between',
-          // lineHeight: '42px',
           padding: '10px',
         }}
       >
@@ -102,6 +103,6 @@ export default function ProductItem({ prod }: ProductItemProps) {
           />
         </div>
       </div>
-    </div>
+    </Box>
   );
 }
