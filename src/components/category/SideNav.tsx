@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Box } from '@mui/system';
 import {
-  CategoryData,
   CategoryMapping,
   FilterVisibility,
   SideNavProps,
+  CategoryData,
 } from '../../types/typesProducts';
 import '../../styles/category/sideNavCss.scss';
 import BrandFilter from './BrandFilter';
@@ -16,8 +16,8 @@ import { styled } from '@mui/material/styles';
 import Button, { ButtonProps } from '@mui/material/Button';
 
 const categoryMapping: CategoryMapping = {
-  가구: 'furniture',
-  전자기기: 'electronics',
+  '가구': 'furniture',
+  '전자기기': 'electronics',
   '조명/인테리어': 'lighting-interior',
   '데코/식물': 'deco-plant',
 };
@@ -58,7 +58,7 @@ const categoryData: CategoryData[] = [
   },
 ];
 
-const SideNav: React.FC<SideNavProps> = ({onSelectCategory}) => {
+const SideNav: React.FC<SideNavProps> = ({ onSelectCategory }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('가구');
 
   const [filterVisibility, setFilterVisibility] = useState<FilterVisibility>({
@@ -68,13 +68,11 @@ const SideNav: React.FC<SideNavProps> = ({onSelectCategory}) => {
     theme: false,
   });
 
-  //category 클릭하면 props에 저장, setting(카테고리에 맞는 상품 렌더링)
   const handleCategoryClick = (categoryName: string) => {
-    onSelectCategory(categoryName); // 부모 컴포넌트로 선택한 카테고리 전달
+    onSelectCategory(categoryName); // 선택한 카테고리를 부모 컴포넌트로 전달
     setSelectedCategory(categoryName);
   };
 
-  //filter nav 열리고 닫히는 부분
   const toggleFilterVisibility = (filterName: keyof FilterVisibility) => {
     setFilterVisibility(prevVisibility => ({
       ...prevVisibility,
@@ -82,7 +80,6 @@ const SideNav: React.FC<SideNavProps> = ({onSelectCategory}) => {
     }));
   };
 
-  //filter 초기화
   const resetFilters = () => {
     setFilterVisibility({
       brand: false,
@@ -129,9 +126,9 @@ const SideNav: React.FC<SideNavProps> = ({onSelectCategory}) => {
               />
               {category.subCategories.map((subCategory, idx) => (
                 <Box
+                  key={subCategory} // key에 숫자가 아닌 문자열을 사용
                   className={`sub ${subCategory === 'ALL' ? 'bold' : ''}`}
-                  key={idx}
-                  onClick={() => console.log(subCategory)}
+                  onClick={() => onSelectCategory(subCategory)}
                   role='button'
                   tabIndex={0}
                 >

@@ -9,8 +9,11 @@ import {
 } from '@mui/material';
 import Pagination from '@mui/material/Pagination';
 import ClearIcon from '@mui/icons-material/Clear';
-
-import { Products, CategoryData, ProductListProps } from '../../types/typesProducts';
+import {
+  Products,
+  CategoryData,
+  ProductListProps,
+} from '../../types/typesProducts';
 import ProductItem from './ProductItem';
 import '../../styles/category/productWrapCss.scss';
 
@@ -23,15 +26,15 @@ const ProductList: React.FC<ProductListProps> = ({
   const [selectedSubCategory, setSelectedSubCategory] = useState<string>('ALL');
 
   // 선택된 카테고리의 인덱스를 찾기
-  const selectedCategoryIndex = categoryData.findIndex(category => category.name === selectedCategory);
+  const selectedCategoryIndex = categoryData.findIndex(
+    category => category.name === selectedCategory
+  );
 
   // 선택된 카테고리의 subCategories 가져오기
-  const subCategories = selectedCategoryIndex !== -1 ? categoryData[selectedCategoryIndex].subCategories : [];
-
-  // 초기 렌더링 시 '가구' 카테고리와 'ALL' 서브카테고리로 설정
-  useEffect(() => {
-    setSelectedSubCategory('ALL');
-  }, [selectedCategory]); // selectedCategory가 변경될 때마다 실행
+  const subCategories =
+    selectedCategoryIndex !== -1
+      ? categoryData[selectedCategoryIndex].subCategories
+      : [];
 
   const handleDelete = () => {
     console.info('You clicked the delete icon.');
@@ -47,7 +50,16 @@ const ProductList: React.FC<ProductListProps> = ({
           {/* 하위 카테고리 선택 */}
           <Box className='category-2'>
             {subCategories.map(subCategory => (
-              <Box key={subCategory} style={{ marginRight: '25px' }}>
+              <Box
+                className='el-cate2'
+                key={subCategory}
+                style={{
+                  marginRight: '25px',
+                  fontWeight:
+                    selectedSubCategory === subCategory ? 'bold' : 'normal',
+                }}
+                onClick={() => setSelectedSubCategory(subCategory)}
+              >
                 {subCategory}
               </Box>
             ))}
@@ -94,17 +106,14 @@ const ProductList: React.FC<ProductListProps> = ({
       {/* 상품 목록 */}
       <Box className='prod-wrapper'>
         {prodData
-          .filter(product => product.category1 === selectedCategory)
           .filter(
             product =>
-              selectedSubCategory === 'ALL' || product.category2 === selectedSubCategory
+              product.category1 === selectedCategory &&
+              (selectedSubCategory === 'ALL' ||
+                product.category2 === selectedSubCategory)
           )
           .map(prod => (
-            <ProductItem
-              key={prod.productId}
-              prod={prod}
-              // 선택한 카테고리에 따라 굵은 스타일 적용
-            />
+            <ProductItem key={prod.productId} prod={prod} />
           ))}
       </Box>
       {/* 페이지네이션 */}
