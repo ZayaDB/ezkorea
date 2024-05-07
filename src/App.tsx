@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './styles/theme';
+import Home from './pages/Home';
 import {
   Products,
   CategoryData,
@@ -32,6 +33,7 @@ function App() {
       <Header title='Drururu' sections={sections} />
       <BrowserRouter>
         <Routes>
+          <Route path='/' element={<Home />} />
           <Route
             path='/shop'
             element={
