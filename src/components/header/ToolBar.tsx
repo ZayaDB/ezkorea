@@ -8,7 +8,9 @@ const ToolBar: React.FC = () => {
 
   return (
     <Toolbar variant='dense'>
-      <CustomLink to='/'>쇼핑홈</CustomLink>
+      <CustomLink to='/'>
+        <a style={{ fontWeight: '500' }}>쇼핑홈</a>
+      </CustomLink>
       <div
         style={{ position: 'relative', display: 'inline-block' }}
         onMouseEnter={() => setIsShoppingHovered(true)}
