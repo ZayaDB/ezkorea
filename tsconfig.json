@@ -20,5 +20,6 @@
     "strictNullChecks": true,
     "typeRoots": ["src/types"]
   },
-  "include": ["src"]
+  "include": ["src"],
+  "typeRoots": ["src/types"]
 }

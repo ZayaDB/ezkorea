@@ -16,6 +16,7 @@ import BestProduct from './components/category/BestProduct';
 import SaleProduct from './components/category/SaleProduct';
 import Category from './pages/Category';
 import Community from './pages/Community';
+import ProductDetail from './pages/ProductDetail';
 
 function App() {
   const sections = [
@@ -48,6 +49,7 @@ function App() {
               />
             }
           />
+          <Route path='/shop/detail' element={<ProductDetail />} />
           {/* <Route
             path='/shop/best'
             element={<BestProduct prodData={products} />}
