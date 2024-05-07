@@ -12,9 +12,8 @@ export default function ProductDetail() {
       <ContentArea>
         <div className='detailPage'>
           <div className='detailMain'>
+            <ProductCarousel />
             <div className='contents'>
-              {/* <ProductInfo /> */}
-              <ProductCarousel />
               <ProductTabs />
               <SimilarProducts />
             </div>

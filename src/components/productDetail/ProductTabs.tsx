@@ -2,6 +2,8 @@ import { useRef } from 'react';
 import '../../styles/productDetail/productDetail.scss';
 import Review from './Review';
 import Inquire from './Inquire';
+import ProductInfo from './ProductInfo';
+import ProductsStyling from './ProductStyling';
 
 // import React, { useRef, useState } from 'react';
 
@@ -47,29 +49,15 @@ export default function ProductTabs() {
           문의하기
         </div>
       </nav>
-
-      <div
-        ref={content1Ref}
-        style={{ height: '500px', border: '3px solid salmon' }}
-      >
-        상품정보
+      {/* style={{ border: '3px solid salmon' }} */}
+      <div ref={content1Ref}>
+        <ProductsStyling />
       </div>
-      <div
-        ref={content2Ref}
-        style={{ height: '80vh', border: '3px solid pink' }}
-      >
+      <div ref={content2Ref}>
         <Review />
       </div>
-      <div
-        ref={content3Ref}
-        style={{ height: '500px', border: '3px solid green' }}
-      >
-        배송/환불
-      </div>
-      <div
-        ref={content4Ref}
-        style={{ height: '500px', border: '3px solid lightgray' }}
-      >
+      <div ref={content3Ref}>배송/환불</div>
+      <div ref={content4Ref}>
         <Inquire />
       </div>
     </div>

@@ -11,7 +11,9 @@ import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import TextField from '@mui/material/TextField';
-import { createTheme, makeStyles } from '@mui/material';
+import Container from '@mui/material/Container';
+
+// import { createTheme, makeStyles } from '@mui/material';
 
 // 테마
 
@@ -21,7 +23,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: 500,
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -110,7 +112,7 @@ export default function Review() {
             <div className='starTotal'>
               <Box
                 sx={{
-                  width: 200,
+                  width: 120,
                   display: 'flex',
                   alignItems: 'center',
                 }}
@@ -121,9 +123,9 @@ export default function Review() {
             </div>
             <div className='rating'>평점</div>
           </div>
-        </div>
-        <div id='writeReview'>
-          <Button onClick={handleOpen}>리뷰쓰기</Button>
+          <div id='writeReview'>
+            <Button onClick={handleOpen}>리뷰쓰기</Button>
+          </div>
         </div>
         <div>
           <Modal
@@ -196,25 +198,117 @@ export default function Review() {
       </div>
       <div className='reviewContents'>
         <div className='reviewItem'>
-          <div className='userPhoto'></div>
-          <div className='userName'>두루루</div>
-          <div className='writingdate'>24.05.06</div>
-          <div className='reviewrating'>
-            <Stack spacing={1}>
-              <Rating
-                name='size-small'
-                defaultValue={2}
-                size='small'
-                readOnly
-              />
-            </Stack>
+          <div className='reviewUser'>
+            <div className='userPhoto'></div>
+            <div className='userName'>두루루</div>
+            <div className='writingdate'>24.05.06</div>
+            <div className='reviewrating'>
+              <Stack spacing={1}>
+                <Rating
+                  name='size-small'
+                  defaultValue={2}
+                  size='small'
+                  readOnly
+                />
+              </Stack>
+            </div>
+          </div>
+          <div className='reviewWB'>
+            <div className='reviewPhoto'></div>
+            <div className='reviewComments'>
+              신혼부부,취미 방을 어떻게 가꿀가 생각하다 책상은 필수템이라.. 가로
+              사이즈를 조절할 수 있는 책상을 찾다가 구매 하게 되었습니다
+              군더더기 없는 심플한 디자인이 너무 마음에 들었습니다 실제로
+              받았을때 더 만족했습니다 모던한 디자인에 각 모서리 부분에 라운드
+              곡선이 고급스러운 느낌을 더 해주는것 같았어요
+            </div>
           </div>
         </div>
-        <div className='reviewPhoto'></div>
-        <div className='reviewcomments'>후기후기후기후기후기후기</div>
+        <div className='reviewItem'>
+          <div className='reviewUser'>
+            <div className='userPhoto'></div>
+            <div className='userName'>두루루</div>
+            <div className='writingdate'>24.05.06</div>
+            <div className='reviewrating'>
+              <Stack spacing={1}>
+                <Rating
+                  name='size-small'
+                  defaultValue={2}
+                  size='small'
+                  readOnly
+                />
+              </Stack>
+            </div>
+          </div>
+          <div className='reviewWB'>
+            <div className='reviewPhoto'></div>
+            <div className='reviewComments'>
+              신혼부부,취미 방을 어떻게 가꿀가 생각하다 책상은 필수템이라.. 가로
+              사이즈를 조절할 수 있는 책상을 찾다가 구매 하게 되었습니다
+              군더더기 없는 심플한 디자인이 너무 마음에 들었습니다 실제로
+              받았을때 더 만족했습니다 모던한 디자인에 각 모서리 부분에 라운드
+              곡선이 고급스러운 느낌을 더 해주는것 같았어요
+            </div>
+          </div>
+        </div>
+        <div className='reviewItem'>
+          <div className='reviewUser'>
+            <div className='userPhoto'></div>
+            <div className='userName'>두루루</div>
+            <div className='writingdate'>24.05.06</div>
+            <div className='reviewrating'>
+              <Stack spacing={1}>
+                <Rating
+                  name='size-small'
+                  defaultValue={2}
+                  size='small'
+                  readOnly
+                />
+              </Stack>
+            </div>
+          </div>
+          <div className='reviewWB'>
+            <div className='reviewPhoto'></div>
+            <div className='reviewComments'>
+              신혼부부,취미 방을 어떻게 가꿀가 생각하다 책상은 필수템이라.. 가로
+              사이즈를 조절할 수 있는 책상을 찾다가 구매 하게 되었습니다
+              군더더기 없는 심플한 디자인이 너무 마음에 들었습니다 실제로
+              받았을때 더 만족했습니다 모던한 디자인에 각 모서리 부분에 라운드
+              곡선이 고급스러운 느낌을 더 해주는것 같았어요
+            </div>
+          </div>
+        </div>
+        <div className='reviewItem'>
+          <div className='reviewUser'>
+            <div className='userPhoto'></div>
+            <div className='userName'>두루루</div>
+            <div className='writingdate'>24.05.06</div>
+            <div className='reviewrating'>
+              <Stack spacing={1}>
+                <Rating
+                  name='size-small'
+                  defaultValue={2}
+                  size='small'
+                  readOnly
+                />
+              </Stack>
+            </div>
+          </div>
+          <div className='reviewWB'>
+            <div className='reviewPhoto'></div>
+            <div className='reviewComments'>
+              신혼부부,취미 방을 어떻게 가꿀가 생각하다 책상은 필수템이라.. 가로
+              사이즈를 조절할 수 있는 책상을 찾다가 구매 하게 되었습니다
+              군더더기 없는 심플한 디자인이 너무 마음에 들었습니다 실제로
+              받았을때 더 만족했습니다 모던한 디자인에 각 모서리 부분에 라운드
+              곡선이 고급스러운 느낌을 더 해주는것 같았어요
+            </div>
+          </div>
+        </div>
       </div>
-
-      <Pagination count={10} sx={{ width: 1000 }} />
+      <Container maxWidth='sm'>
+        <Pagination count={10} sx={{ width: 1000 }} />
+      </Container>
     </div>
   );
 }

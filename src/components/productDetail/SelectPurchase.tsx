@@ -77,7 +77,7 @@ export default function SelectPurchase() {
           </FormControl>
         </Box>
         <div id='selectedPurchase'>
-          <div className='selectedColor'>화이트</div>
+          <div className='selectedColor'>White</div>
           <div id='countZone'>
             <div className='selectedCount'></div>
             <div className='sellingPrice'>190,000원</div>

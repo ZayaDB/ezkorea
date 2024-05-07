@@ -15,13 +15,15 @@ import Checkbox from '@mui/material/Checkbox';
 import Typography from '@mui/material/Typography';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import Container from '@mui/material/Container';
+import Pagination from '@mui/material/Pagination';
 // Modal
 const style = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: 500,
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -59,8 +61,8 @@ export default function Inquire() {
     <div>
       <div id='inquireTop'>
         <div id='inquireSubTop'>
-          <div>문의</div>
-          <div>문의 수</div>
+          <div className='inquiryTitle'>문의</div>
+          <div className='inquiryTotal'>문의 수</div>
         </div>
         <div>
           <Button onClick={handleOpen}>문의하기</Button>
@@ -95,7 +97,7 @@ export default function Inquire() {
               <div>
                 <div className='inquiryTitle'>상품 및 옵션</div>
                 <Box sx={{ maxWidth: 479 }}>
-                  <FormControl fullWidth>
+                  <FormControl sx={{ width: 400 }}>
                     <InputLabel id='demo-simple-select-label'>color</InputLabel>
                     <Select
                       labelId='demo-simple-select-label'
@@ -133,7 +135,9 @@ export default function Inquire() {
                 </div>
               </div>
             </Typography>
-            <Button onClick={snackClick}>문의하기</Button>
+            <Container>
+              <Button onClick={snackClick}>문의하기</Button>
+            </Container>
           </Box>
         </Modal>
       </div>
@@ -149,10 +153,95 @@ export default function Inquire() {
           </Alert>
         </Snackbar>
       </div>
-
-      <div>
-        <div>Q</div>
+      <div id='writingInquiry'>
+        <div className='inquiryItem'>
+          <div>
+            <span>배송 | </span>
+            <span>답변완료</span>
+            <div className='writingInfo'>
+              <div className='type'>Q</div>
+              <div className='writingUser'>작성자</div>
+              <div className='writingDate'>2024.5.8</div>
+            </div>
+            <div className='reviewedContent'>
+              5월 8일에 주문했는데 언제 발송될까요?
+            </div>
+          </div>
+          <div>
+            <div className='writingInfo'>
+              <div className='type'>A</div>
+              <div className='writingUser'>209애비뉴</div>
+              <div className='writingDate'>2024.5.8</div>
+            </div>
+            <div className='reviewedContent'>
+              안녕하세요. 고객님. 가구의 본질에 집중하는 209 애비뉴 입니다.
+              이번주 금~토요일 배송 예정입니다. 주문일 기준 1~3일 내
+              출고되어(주말 및 공휴일 불가) - 수도권은 영업일 기준 약 3~10일, -
+              경기외곽 및 지방은 영업일 기준 약 5~15일 소요됩니다. *별도 지정일
+              배송은 불가한 점 양해 부탁드립니다* *별도 예약 배송 불가합니다*
+            </div>
+          </div>
+        </div>
+        <div className='inquiryItem'>
+          <div>
+            <span>배송 | </span>
+            <span>답변완료</span>
+            <div className='writingInfo'>
+              <div className='type'>Q</div>
+              <div className='writingUser'>작성자</div>
+              <div className='writingDate'>2024.5.8</div>
+            </div>
+            <div className='reviewedContent'>
+              5월 8일에 주문했는데 언제 발송될까요?
+            </div>
+          </div>
+          <div>
+            <div className='writingInfo'>
+              <div className='type'>A</div>
+              <div className='writingUser'>209애비뉴</div>
+              <div className='writingDate'>2024.5.8</div>
+            </div>
+            <div className='reviewedContent'>
+              안녕하세요. 고객님. 가구의 본질에 집중하는 209 애비뉴 입니다.
+              이번주 금~토요일 배송 예정입니다. 주문일 기준 1~3일 내
+              출고되어(주말 및 공휴일 불가) - 수도권은 영업일 기준 약 3~10일, -
+              경기외곽 및 지방은 영업일 기준 약 5~15일 소요됩니다. *별도 지정일
+              배송은 불가한 점 양해 부탁드립니다* *별도 예약 배송 불가합니다*
+            </div>
+          </div>
+        </div>
+        <div className='inquiryItem'>
+          <div>
+            <span>배송 | </span>
+            <span>답변완료</span>
+            <div className='writingInfo'>
+              <div className='type'>Q</div>
+              <div className='writingUser'>작성자</div>
+              <div className='writingDate'>2024.5.8</div>
+            </div>
+            <div className='reviewedContent'>
+              5월 8일에 주문했는데 언제 발송될까요?
+            </div>
+          </div>
+          <div>
+            <div className='writingInfo'>
+              <div className='type'>A</div>
+              <div className='writingUser'>209애비뉴</div>
+              <div className='writingDate'>2024.5.8</div>
+            </div>
+            <div className='reviewedContent'>
+              안녕하세요. 고객님. 가구의 본질에 집중하는 209 애비뉴 입니다.
+              이번주 금~토요일 배송 예정입니다. 주문일 기준 1~3일 내
+              출고되어(주말 및 공휴일 불가) - 수도권은 영업일 기준 약 3~10일, -
+              경기외곽 및 지방은 영업일 기준 약 5~15일 소요됩니다. *별도 지정일
+              배송은 불가한 점 양해 부탁드립니다* *별도 예약 배송 불가합니다*
+            </div>
+          </div>
+        </div>
       </div>
+      <Container maxWidth='sm'>
+        <Pagination count={10} sx={{ width: 1000 }} />
+      </Container>
     </div>
   );
 }

@@ -50,7 +50,7 @@ $border: 1px solid lightgray;
 }
 .detailSide {
   width: 30%;
-  height: 100vh;
+  height: calc(100vh - 200px);
   background-color: white;
   border: $border;
   @include column();
@@ -58,7 +58,7 @@ $border: 1px solid lightgray;
 }
 // 캐러셀
 .slidercontents1 {
-  height: 480px;
+  height: calc(100vh - 200px);
   background-image: url(https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/168144627162089910.jpg?gif=1&w=640&h=640&c=c&webp=1);
   background-repeat: no-repeat;
   background-position: center;
@@ -67,7 +67,7 @@ $border: 1px solid lightgray;
   align-items: center;
 }
 .slidercontents2 {
-  height: 480px;
+  height: calc(100vh - 200px);
   background-image: url(https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/images/168136011470619125.jpg?gif=1&w=640&h=640&c=c&webp=1);
   background-repeat: no-repeat;
   background-position: center;
@@ -76,7 +76,7 @@ $border: 1px solid lightgray;
   align-items: center;
 }
 .slidercontents3 {
-  height: 480px;
+  height: calc(100vh - 200px);
   background-image: url(https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/images/164440734553062054.jpg?gif=1&w=640&h=640&c=c&webp=1);
   background-repeat: no-repeat;
   background-position: center;
@@ -88,6 +88,39 @@ $border: 1px solid lightgray;
 .wrapText {
   margin-left: 12%;
 }
+// StylingInfo
+#stylingTop {
+  @include row();
+  justify-content: space-between;
+  font-size: $font-size-l;
+  font-weight: $font-weight-bold;
+  padding: 8px;
+}
+#stlyingSub {
+  @include row();
+}
+#stylingTitle {
+  margin-right: 8px;
+}
+#stylingBox {
+  @include row();
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.stylingItem {
+  width: 290px;
+  height: 290px;
+  background-image: url(https://image.ohou.se/i/video-service-prd-s3-bucket-thumbnail/651ca73023d57f18887e5017/651ca73023d57f18887e5017.0000001.jpg?gif=1&w=360&webp=1);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  @include row();
+  justify-content: center;
+  margin: 4px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 // SelectPurchase
 #selectPurchase {
   @include column();
@@ -209,10 +242,10 @@ $border: 1px solid lightgray;
 #purchaseZone {
   border-top: $border;
   padding: 8px;
-}
-.purChaseTotal {
   font-size: $font-size-l;
+  font-weight: $font-weight-bold;
 }
+
 // 버튼
 #buttons {
   width: 100%;
@@ -232,12 +265,14 @@ $border: 1px solid lightgray;
   display: flex;
 }
 .purchaseBtn {
-  width: 75%;
+  width: calc(100% - 50px);
   height: 50px;
   border: $border;
   justify-content: center;
   align-items: center;
   display: flex;
+  font-size: $font-size-l;
+  font-weight: $font-weight-bold;
 }
 
 .cartBtn:hover {
@@ -251,6 +286,7 @@ $border: 1px solid lightgray;
 // ProductTabs
 #navZone {
   position: relative;
+  margin-top: 8px;
 }
 #detailNav {
   width: 100%;
@@ -258,8 +294,13 @@ $border: 1px solid lightgray;
   justify-content: center;
 }
 #detailNav div {
+  font-size: $font-size-l;
+  font-weight: $font-weight-bold;
   margin: 8px;
   cursor: pointer;
+}
+#detailNav div:hover {
+  color: $hover-color;
 }
 // #id {
 //   display: flex;
@@ -289,13 +330,16 @@ $border: 1px solid lightgray;
   width: 100%;
 }
 #reviewTop {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  // border: 1px solid black;
 }
 
 #reviewBox {
-  display: flex;
+  @include row();
+  justify-content: space-between;
   margin: 0 8px;
 }
 #reviewBox div {
@@ -307,30 +351,50 @@ $border: 1px solid lightgray;
 }
 
 #ratingBox {
-  display: flex;
+  @include row();
+  justify-content: baseline;
+}
+.starTotal {
+  margin-right: 4px;
 }
 #writeReview {
-  // @include body1-bold;
   cursor: pointer;
+}
+.selected {
+  color: $hover-color;
 }
 
 #reviewSorting {
   display: flex;
-  border-top: 1px solid gray;
-  border-bottom: 1px solid gray;
+  border-top: $border;
+  border-bottom: $border;
 }
 #reviewSorting div {
   margin: 8px;
   cursor: pointer;
+  font-size: $font-size-m;
+  font-weight: $font-weight-bold;
 }
-
+#reviewName,
+.reviewTotal {
+  margin: 10px 0;
+  font-size: $font-size-l;
+  font-weight: $font-weight-bold;
+}
 .reviewItem {
-  display: flex;
-  align-items: center;
-  margin: 5px 0;
+  margin-bottom: 12px;
 }
-.reviewItem div {
+.reviewUser {
+  @include row();
+  margin: 8px 0;
+}
+.reviewUser div {
   margin: 0 5px;
+}
+.reviewWB {
+  width: 100%;
+  display: flex;
+  justify-content: baseline;
 }
 .userPhoto {
   width: 2rem;
@@ -338,19 +402,27 @@ $border: 1px solid lightgray;
   background-color: gray;
   border-radius: 1rem;
 }
+.writingdate {
+  font-size: $font-size-s;
+}
 .reviewPhoto {
   width: 10vw;
   height: 10vw;
-  background-color: gray;
-  border-radius: 1rem;
-}
-// ProductInfo
-.volini1 {
-  width: 1200px;
-  background-image: url('../../assets/productDetail/volini/voliniinfo1.jpg');
-  background-size: contain;
+  background-image: url(https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/165519133254213206.jpeg?w=720);
   background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  @include row();
+  justify-content: center;
+  margin-right: 8px;
+  border-radius: 5px;
 }
+.reviewComments {
+  width: calc(100% - 10vw);
+  font-size: $font-size-m;
+}
+
+// ProductInfo
 
 // Inquire
 #inquireTop {
@@ -360,17 +432,43 @@ $border: 1px solid lightgray;
 }
 
 #inquireSubTop {
-  display: flex;
-  border: 1px solid black;
+  @include row();
 }
 #inquireSubTop div {
   margin: 0 5px;
 }
-
-.inquiryTitle {
-  margin: 10px 0;
+#writingInquiry span {
+  font-size: $font-size-s;
 }
-
+.inquiryTitle,
+.inquiryTotal {
+  margin: 10px 0;
+  font-size: $font-size-l;
+  font-weight: $font-weight-bold;
+}
+.writingInfo {
+  @include row();
+}
+.type {
+  font-size: $font-size-m;
+  font-weight: $font-weight-bold;
+}
+.writingUser,
+.writingDate {
+  margin-left: 8px;
+  font-size: $font-size-m;
+}
+.writingDate {
+  color: gray;
+  font-size: $font-size-s;
+}
+.inquiryItem {
+  margin-bottom: 8px;
+}
+.reviewedContent {
+  margin-left: 16px;
+  font-size: $font-size-m;
+}
 // file
 .fileBtn {
   width: 250px;
