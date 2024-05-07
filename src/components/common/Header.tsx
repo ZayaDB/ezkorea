@@ -102,29 +102,29 @@ export default function Header(props: HeaderProps) {
             {title}
             {isMobile ? null : (
               <NavLink
-              to='/'
-              style={{ textDecoration: 'none', color: 'unset' }}
-            >
-              <Button
-                sx={{
-                  ml: '34px',
-                  fontSize: '17px',
-                  fontWeight: '600',
-                  ':hover': {
-                    bgcolor: 'transparent',
-                    color: '#5FF531',
-                  },
-                }}
-                size='small'
-                disableRipple
+                to='/'
+                style={{ textDecoration: 'none', color: 'unset' }}
               >
-                쇼핑
-              </Button>
+                <Button
+                  sx={{
+                    ml: '34px',
+                    fontSize: '17px',
+                    fontWeight: '600',
+                    ':hover': {
+                      bgcolor: 'transparent',
+                      color: '#5FF531',
+                    },
+                  }}
+                  size='small'
+                  disableRipple
+                >
+                  쇼핑
+                </Button>
               </NavLink>
             )}
             {isMobile ? null : (
               <NavLink
-                to='/'
+                to='/community'
                 style={{ textDecoration: 'none', color: 'unset' }}
               >
                 <Button

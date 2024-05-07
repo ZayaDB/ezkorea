@@ -10,6 +10,7 @@ import {
   ProductListProps,
 } from './types/typesProducts';
 import CommunityPostPage from './pages/CommunityPostPage';
+import Community from './pages/Community';
 import Login from './pages/Login';
 import Header from './components/common/Header';
 import BestProduct from './components/category/BestProduct';
@@ -55,6 +56,10 @@ function App() {
             path='/shop/sale'
             element={<SaleProduct prodData={products} />}
           /> */}
+
+          {/* community */}
+          <Route path='/community' element={<Community />} />
+
           <Route path='/login' element={<Login />} />
           <Route path='/community/post' element={<CommunityPostPage />} />
         </Routes>
