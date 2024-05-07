@@ -1,4 +1,4 @@
-// import React from 'react';
+import React from 'react';
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
@@ -33,9 +33,28 @@ function App() {
       <Header title='Drururu' sections={sections} />
       <BrowserRouter>
         <Routes>
-          <Route path='/shop/category' element={<Category />}></Route>
-          <Route path='/shop/detail' element={<ProductDetail />}></Route>
-          <Route path='/community/post' element={<CommunityPostPage />}></Route>
+          <Route
+            path='/shop'
+            element={
+              <Category
+                categoryData={categoryData}
+                selectedCategory={selectedCategory}
+                prodData={products}
+                selectedSubCategory={selectedSubCategory}
+              />
+            }
+          />
+          {/* <Route
+path='/shop/best'
+element={<BestProduct prodData={products} />}
+/>
+<Route
+path='/shop/sale'
+element={<SaleProduct prodData={products} />}
+/> */}
+          <Route path='/shop/detail' element={<ProductDetail />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/community/post' element={<CommunityPostPage />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

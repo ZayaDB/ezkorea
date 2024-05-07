@@ -32,8 +32,8 @@ export default function ProductTabs() {
     content4Ref.current?.scrollIntoView({ behavior: 'smooth' });
   };
   return (
-    <div>
-      <nav>
+    <div id='navZone'>
+      <nav id='detailNav'>
         <div onClick={onContent1Click} role='none'>
           상품정보
         </div>

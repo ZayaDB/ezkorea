@@ -1,5 +1,46 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
+
+// color
 $hover-color: #5ff531;
+
+// font
+$font-size-xxl: 24px;
+$font-size-xl: 22px;
+$font-size-l: 18px;
+$font-size-m: 16px;
+$font-size-s: 14px;
+$font-size-xs: 12px;
+$font-size-xxs: 11px;
+
+$font-weight-bold: 700;
+$font-weight-medium: 500;
+$font-weight-regular: 400;
+
+// custom
+// flex-direction: colummn
+@mixin column {
+  display: flex;
+  flex-direction: column;
+}
+// flex-direction: colummn,center
+@mixin columnCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+// flex-direction: row
+@mixin row {
+  display: flex;
+  align-items: center;
+}
+
+// border
+$border: 1px solid lightgray;
+
 // 전체 페이지
+* {
+  font-family: 'Pretendard Variable';
+}
 .detailPage {
   display: flex;
   width: 100%;
@@ -9,30 +50,163 @@ $hover-color: #5ff531;
 }
 .detailSide {
   width: 30%;
+  height: 100vh;
+  background-color: white;
+  border: $border;
+  @include column();
+  justify-content: space-between;
 }
 
 // SelectPurchase
 #selectPurchase {
+  @include column();
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid black;
 }
 
-@mixin button {
+// 구매 상품 정보
+#purchaseInfo {
+  @include column();
+  justify-content: space-evenly;
+  height: 30vh;
+}
+#brandShare {
+  @include row();
+  justify-content: space-between;
+  padding: 0 8px;
+}
+.productBrand {
+  font-size: $font-size-m;
+}
+#shIcon {
+  display: flex;
+  justify-content: baseline;
+}
+.heartIcon,
+.shareIcon {
+  cursor: pointer;
+  padding: 0 4px;
+  margin: 0;
+}
+#heartZone {
+  @include columnCenter();
+}
+.heartTotal {
+  font-size: $font-size-xxs;
+  margin: 0;
+}
+.productName {
+  font-size: $font-size-l;
+  padding: 0 8px;
+  margin-top: 20px;
+}
+
+// 구매 상품 가격
+#priceZone {
+  padding: 0 8px;
+}
+#productPS {
+  height: 10vh;
+  @include columnCenter();
+}
+.sellingPrice {
+  font-size: $font-size-m;
+  color: gray;
+  text-decoration: line-through;
+}
+#sale {
+  display: flex;
+}
+.discountRate,
+.discountedPrice {
+  font-size: $font-size-l;
+  font-weight: $font-weight-bold;
+}
+.discountRate {
+  color: gray;
+}
+
+// 혜택 & 배송
+#savingDelivery {
+  height: 15vh;
+  @include column();
+  justify-content: space-evenly;
+  border-top: $border;
+  margin: auto 0;
+}
+.subtitle {
+  font-size: $font-size-s;
+  padding: 0 8px;
+}
+
+.saving,
+#deliveryZone {
+  @include row();
+  font-size: $font-size-s;
+}
+#savingPoint,
+.deliveryPrice {
+  font-weight: $font-weight-bold;
+}
+.deliveryDetailInfo {
+  border: $border;
+  background-color: rgb(240, 239, 239);
+  padding: 8px 0;
+  margin-top: 4px;
+  font-size: $font-size-s;
+  text-align: center;
+}
+// 구매
+#selectProduct {
+  height: 20vh;
+  border-top: $border;
+  padding-top: 12px;
+  @include column();
+}
+#selectedPurchase,
+#purchaseZone {
+  @include row();
+  justify-content: space-between;
+  padding: 0 8px;
+}
+#countZone {
+  @include row();
+}
+
+#selectedPurchase {
+  margin: 8px;
+}
+#purchaseZone {
+  border-top: $border;
+  padding: 8px;
+}
+.purChaseTotal {
+  font-size: $font-size-l;
+}
+// 버튼
+#buttons {
   width: 100%;
-  height: 4rem;
-  // margin-top: 30px;
-  border: 1px solid lightgray;
-  border-radius: 5px;
+  height: 50px;
+  @include row();
+  justify-content: space-between;
+  padding-bottom: 12px;
+  margin-top: 12px;
 }
 
 .cartBtn {
-  @include button;
-  margin-right: 20px;
+  width: 50px;
+  height: 50px;
+  border: $border;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 .purchaseBtn {
-  @include button;
+  width: 75%;
+  height: 50px;
+  border: $border;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 
 .cartBtn:hover {
@@ -44,13 +218,17 @@ $hover-color: #5ff531;
 
 // Contents
 // ProductTabs
-nav {
+#navZone {
+  position: relative;
+}
+#detailNav {
   width: 100%;
   display: flex;
   justify-content: center;
-  background-color: wheat;
+  position: fixed;
+  top: 20px;
 }
-nav div {
+#detailNav div {
   margin: 8px;
   cursor: pointer;
 }

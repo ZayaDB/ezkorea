@@ -11,8 +11,9 @@ import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import TextField from '@mui/material/TextField';
+import { createTheme, makeStyles } from '@mui/material';
 
-// rating
+// 테마
 
 // Modal
 const style = {
@@ -212,9 +213,8 @@ export default function Review() {
         <div className='reviewPhoto'></div>
         <div className='reviewcomments'>후기후기후기후기후기후기</div>
       </div>
-      <Stack spacing={2}>
-        <Pagination count={10} />
-      </Stack>
+
+      <Pagination count={10} sx={{ width: 1000 }} />
     </div>
   );
 }
