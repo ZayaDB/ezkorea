@@ -59,7 +59,6 @@ function App() {
 
           {/* community */}
           <Route path='/community' element={<Community />} />
-
           <Route path='/login' element={<Login />} />
           <Route path='/community/post' element={<CommunityPostPage />} />
         </Routes>

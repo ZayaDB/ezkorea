@@ -16,14 +16,20 @@ export interface Products {
   commentCount: number;
 }
 
+export interface SubCategory {
+  name: string;
+  imagePath: string;
+}
+
 export interface CategoryData {
   name: string;
-  subCategories: string[];
+  subCategories: SubCategory[];
 }
 
 export interface CategoryMapping {
   [key: string]: string;
 }
+
 
 export interface FilterVisibility {
   brand: boolean;

@@ -1,15 +1,22 @@
-import { Products } from '../types/typesProducts';
+import { Products, CategoryData } from '../types/typesProducts';
 
-export const getData = async (url: string): Promise<Products[]> => {
+export const getData = async (
+  url: string
+): Promise<{ products: Products[]; categoryData: CategoryData[] }> => {
   try {
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
-    const data: Products[] = await response.json();
-    return data;
+    const data = await response.json();
+
+    // 데이터를 products와 categoryData로 분리
+    const products = data.filter((item: any) => 'productId' in item);
+    const categoryData = data.filter((item: any) => 'subCategories' in item);
+
+    return { products, categoryData };
   } catch (error) {
     console.error('Error fetching data:', error);
-    return []; // 에러 발생 시 빈 배열을 반환하거나 적절한 에러 처리를 수행할 수 있습니다.
+    throw error; // 에러 발생 시 예외 처리
   }
 };
