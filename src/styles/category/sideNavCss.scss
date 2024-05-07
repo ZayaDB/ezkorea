@@ -17,6 +17,7 @@ $font-weight-regular: 400;
   height: 100vh;
   width: 100%;
   margin-right: 50px;
+
   .nav-title {
     font-size: 20px;
     font-weight: $font-weight-bold;
@@ -95,6 +96,82 @@ $font-weight-regular: 400;
 
 @media (max-width: $tablet) {
   .side-nav {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    .nav-box {
+      // text-align: center;
+      width: 25%;
+      .nav {
+        display: flex;
+        flex-direction: row;
+        .nav-title {
+          font-size: $font-size-l;
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+
+  .furniture-box,
+  .electronics-box,
+  .lighting-interior-box,
+  .deco-plant-box {
     display: none;
+    width: 100%;
+  }
+
+  .filter-box {
+    display: none;
+  }
+}
+
+@media (max-width: 430px) {
+  .side-nav {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    .nav-box {
+      // text-align: center;
+      width: 25%;
+      .nav {
+        display: flex;
+        flex-direction: row;
+        .nav-title {
+          font-size: $font-size-m;
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+}
+
+
+@media (max-width: 380px) {
+  .side-nav {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    .nav-box {
+      // text-align: center;
+      width: 25%;
+      .nav {
+        display: flex;
+        flex-direction: row;
+        .nav-title {
+          font-size: $font-size-s;
+          margin: 0 auto;
+        }
+      }
+    }
   }
 }

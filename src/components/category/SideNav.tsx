@@ -106,7 +106,7 @@ const SideNav: React.FC<SideNavProps> = ({ onSelectCategory }) => {
   return (
     <Box className='side-nav'>
       {categoryData.map((category, index) => (
-        <Box key={index}>
+        <Box key={index} className={'nav-box'}>
           <Box
             className={`nav ${categoryMapping[category.name]}`}
             onClick={() => handleCategoryClick(category.name)}

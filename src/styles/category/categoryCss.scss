@@ -1,8 +1,27 @@
+$tablet: 768px;
+$mobile: 360px;
+
+$font-size-xxl: 24px;
+$font-size-xl: 22px;
+$font-size-l: 18px;
+$font-size-m: 16px;
+$font-size-s: 14px;
+$font-size-xs: 12px;
+$font-size-xxs: 11px;
+
+$font-weight-bold: 700;
+$font-weight-medium: 500;
+$font-weight-regular: 400;
+
+* {
+  scroll-behavior: smooth;
+}
 .category-content {
+  padding-top: 170px;
   display: flex;
   flex-direction: row;
-  width: 100%; /* 부모 요소인 category-content의 너비를 100%로 설정 */
-  max-width: 1200px; /* 최대 너비 설정 */
+  width: 100%;
+  max-width: 1200px;
   margin: auto;
 }
 
@@ -14,11 +33,18 @@
   width: 75%;
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tablet) {
+  .category-content {
+    display: flex;
+    flex-direction: column;
+  }
   .sideNavigation {
-    display: none;
+    // display: none;
+    height: 30%;
+    width: 100%;
   }
   .containerProducts {
+    height: 70%;
     width: 100%;
   }
 }
