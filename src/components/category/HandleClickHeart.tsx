@@ -14,12 +14,29 @@ interface HandleClickHeartProps {
   isLiked: boolean;
   onLikeToggle: () => void;
 }
+
 const BlackCheckbox = styled(Checkbox)({
-  color: 'black', // 체크박스 아이콘 컬러 지정
+  color: 'black',
   '&.Mui-checked': {
-    color: 'black', // 체크된 상태에서의 아이콘 컬러 지정
+    color: 'black',
   },
 });
+
+const StyledCheckbox = styled(BlackCheckbox)(({ theme }) => ({
+  '& .MuiSvgIcon-root': {
+    width: '1.2em',
+   
+  },
+  [theme.breakpoints.down('sm')]: {
+    padding:0,
+    margin:0,
+    '& .MuiSvgIcon-root': {
+      width: '0.6em',
+     
+    },
+  },
+}));
+
 const ThinHeartBorder = styled(FavoriteBorder)({
   // fontSize: 'inherit', // 아이콘 크기를 상속받아 설정
   strokeWidth: '0.00001px', // 테두리 두께 조정
@@ -60,7 +77,7 @@ export default function HandleClickHeart({
 
   return (
     <React.Fragment>
-      <BlackCheckbox
+      <StyledCheckbox
         {...label}
         icon={<ThinHeartBorder />}
         checkedIcon={<Favorite />}
@@ -176,7 +193,6 @@ const SnackbarContent = styled('div')(
   background-color: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
   border-radius: 5px;
   border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[500]};
-
   padding: 0.75rem;
   color: ${theme.palette.mode === 'dark' ? grey[50] : grey[900]};
   font-family: 'IBM Plex Sans', sans-serif;
@@ -207,7 +223,6 @@ const SnackbarContent = styled('div')(
     flex-shrink: 0;
     padding: 2px;
     border-radius: 4px;
-
     &:hover {
       background: ${theme.palette.mode === 'dark' ? grey[800] : grey[50]};
     }

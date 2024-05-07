@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './styles/theme';
+import Home from './pages/Home';
 import {
   Products,
   CategoryData,
@@ -23,6 +24,7 @@ function App() {
     { title: '베스트', url: '/shop/best' },
     { title: '세일', url: '/shop/sale' },
   ];
+
   const [products, setProducts] = useState<Products[]>([]);
   const [categoryData, setCategoryData] = useState<CategoryData[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
@@ -30,9 +32,11 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Header title='Drururu' sections={sections} />
       <BrowserRouter>
+        <Header title='Drururu' sections={sections} />
+
         <Routes>
+          <Route path='/' element={<Home />} />
           <Route
             path='/shop'
             element={
