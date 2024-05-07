@@ -102,20 +102,21 @@ export default function Header(props: HeaderProps) {
             >
               쇼핑
             </Button>
-            <Button
-              sx={{
-                fontSize: '16px',
-                fontWeight: '600',
-                ':hover': {
-                  bgcolor: 'transparent', // theme.palette.primary.main
-                  color: '#5FF531',
-                },
-              }}
-              size='small'
-              disableRipple
-            >
-              커뮤니티
-            </Button>
+            <Link href='/community' style={{ textDecoration: 'none' }}>
+              <Typography
+                variant='button'
+                sx={{
+                  fontSize: '16px',
+                  fontWeight: '600',
+                  ':hover': {
+                    bgcolor: 'transparent',
+                    color: '#5FF531',
+                  },
+                }}
+              >
+                커뮤니티
+              </Typography>
+            </Link>
           </Typography>
           <Box>
             <IconButton disableRipple>
