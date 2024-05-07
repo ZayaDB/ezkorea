@@ -43,7 +43,10 @@ export default function ProductItem({ prod }: ProductItemProps) {
       role='button'
       onClick={() => handleProdItemClick(prod.productId)}
     >
-      <Link to={`/productDetail?productId=${prod.productId}`} className='link-to-detail'>
+      <Link
+        to={`/productDetail?productId=${prod.productId}`}
+        className='link-to-detail'
+      >
         {/* 상품이미지 */}
         <div
           className='prod-img'
@@ -76,14 +79,7 @@ export default function ProductItem({ prod }: ProductItemProps) {
           <div className='prod-price'>{prod.price}</div>
         </div>
       </Link>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          padding: '10px',
-        }}
-      >
+      <div className='color-heart-box'>
         {/* 옵션 - 컬러 */}
         <div className='color-wrapper'>
           {prod.colors.map((color, index) => (

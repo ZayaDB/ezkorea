@@ -80,6 +80,7 @@ const ProductList: React.FC<ProductListProps> = ({
                 paddingLeft: '2px',
                 paddingRight: '3px',
                 borderRadius: 2.8,
+              
               }}
               deleteIcon={<ClearIcon style={{ fontSize: 16 }} />} // 삭제 아이콘의 크기 조정
             />
