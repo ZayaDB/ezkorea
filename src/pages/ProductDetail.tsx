@@ -4,6 +4,7 @@ import '../styles/productDetail/productDetail.scss';
 import SelectPurchase from '../components/productDetail/SelectPurchase';
 import ProductTabs from '../components/productDetail/ProductTabs';
 import SimilarProducts from '../components/productDetail/SimilarProducts';
+import ProductCarousel from '../components/productDetail/ProductCarousel';
 
 export default function ProductDetail() {
   return (
@@ -13,6 +14,7 @@ export default function ProductDetail() {
           <div className='detailMain'>
             <div className='contents'>
               {/* <ProductInfo /> */}
+              <ProductCarousel />
               <ProductTabs />
               <SimilarProducts />
             </div>

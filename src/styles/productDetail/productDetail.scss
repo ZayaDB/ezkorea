@@ -56,7 +56,38 @@ $border: 1px solid lightgray;
   @include column();
   justify-content: space-between;
 }
+// 캐러셀
+.slidercontents1 {
+  height: 480px;
+  background-image: url(https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/168144627162089910.jpg?gif=1&w=640&h=640&c=c&webp=1);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+}
+.slidercontents2 {
+  height: 480px;
+  background-image: url(https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/images/168136011470619125.jpg?gif=1&w=640&h=640&c=c&webp=1);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+}
+.slidercontents3 {
+  height: 480px;
+  background-image: url(https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/images/164440734553062054.jpg?gif=1&w=640&h=640&c=c&webp=1);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+}
 
+.wrapText {
+  margin-left: 12%;
+}
 // SelectPurchase
 #selectPurchase {
   @include column();
@@ -225,8 +256,6 @@ $border: 1px solid lightgray;
   width: 100%;
   display: flex;
   justify-content: center;
-  position: fixed;
-  top: 20px;
 }
 #detailNav div {
   margin: 8px;

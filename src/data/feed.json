@@ -1,0 +1,874 @@
+[
+  {
+    "feedId": 1,
+    "accountName": "desk_master",
+    "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+    "images": [
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/projects/168856428667281853.png?w=720"
+    ],
+    "title": "다기능 게이밍 셋업",
+
+    "description": "저희 집 거실 모습이에요! 거실은 저의 업무 공간 겸, 식사 공간 겸, 간단하게 커피도 마실 수 있는 공간으로 만들자! 라고 생각했어요. 컨셉은 제가 애정하는 미드센츄리 모던, 블랙&화이트로 잡았어요. 제가 그 동안 갖고 싶었던 가구들도 이번에 들였는데요. 그 중에 만족도가 정말 높은 TOP3는 \n1. 레어로우 벽선반 \n2. 아르떼미데 톨로메오 메가 \n3. 삼성 더 세리프 TV (50) \n 요로케 꼽아볼 수 있어요!",
+    "selectedProducts": [
+      {
+        "productId": 1,
+        "productName": "철제 국민 서랍장",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/159428315561880259.jpg?w=100",
+        "price": "150000"
+      },
+      {
+        "productId": 2,
+        "productName": "ali 스탠드 조명",
+        "thumbnail": "https://prs.ohou.se/apne2/any/uploads/productions/v1-236523699888128.jpg?w=100",
+        "price": "23000"
+      }
+    ],
+    "concepts": ["gaming", "simple"],
+    "colors": ["black"],
+    "views": 5250,
+    "likes": 742,
+    "commentCount": 2,
+    "comments": [
+      {
+        "id": "c1",
+        "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+        "accountName": "tech_lover",
+        "content": "조명이 너무 멋집니다! 공구 있나요?",
+        "creationDate": "2022-01-15"
+      },
+      {
+        "id": "c2",
+        "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+        "accountName": "gamer_rush",
+        "content": "셋업에 사용한 모니터 거치대는 어디 제품인가요?",
+        "creationDate": "2022-01-16",
+        "replies": [
+          {
+            "id": "c3",
+            "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+            "accountName": "desk_master",
+            "content": "이 거치대는 Adjustable Pro에서 구매했습니다. 매우 튼튼하고 조절이 자유로워 추천드립니다.",
+            "creationDate": "2022-01-17"
+          }
+        ]
+      }
+    ],
+    "creationDate": "2022-01-14"
+  },
+  {
+    "feedId": 2,
+    "accountName": "creative_mind",
+    "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+    "images": [
+      "https://bucketplace-v2-development.s3.amazonaws.com/profileImageUrl/171253915990660377.jpeg",
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/project/170662302514829712.JPG?w=720"
+    ],
+    "title": "심플 모던 오피스 셋업",
+    "description": "작은 책상에 아이맥을 올려 작업하는게 어려워서 큰 책상을 추가로 두었어요!\n가구 배치만 효율적으로 하면, 더 알차게 공간을 구성할 수 있다는 것을 경험하면서 점점 맥시멀이 되고 있답니다..ㅎㅎㅎㅎㅎ\n \n \n 작은 가구가 좋은 또 다른 이유는! 가구 배치 변경에 제약이 별로 없다는 것이에요. 1년 동안, 책상이 벌써 동서남북으로 돌아버렸다죠~ \n 창문 쪽에도 책상을 배치해서 소품들로 기분 전환을 하기도 했어요. ",
+    "selectedProducts": [],
+    "concepts": ["simple"],
+    "colors": ["white"],
+    "views": 4987,
+    "likes": 524,
+    "commentCount": 0,
+    "comments": [],
+    "creationDate": "2022-02-20"
+  },
+  {
+    "feedId": 3,
+    "accountName": "design_enthusiast",
+    "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+    "images": [
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/project/171254527839226047.jpg?w=720",
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/project/171256603854309605.jpg?w=720"
+    ],
+    "title": "예술가를 위한 창의적 셋업",
+    "description": "저희 집에서 가장 많이 물어보시는 가구 중 하나가 바로 이 책상인데요, 상판과 다리를 각각 따로 구매해서 조합해 주었어요.\n다리가 조립형으로 나온 제품은 아니라서 상판 고정 없이 얹어두고 사용 중인데요,\n벽에 붙여두지 않으면 아무래도 불안정한 편이긴 합니다.\n철제 다리 사이에 의자를 넣어둘 공간을 확보하려면 적어도 상판 가로 사이즈는 1200 이상을 추천드릴게요.\n저는 1400*600 사이즈로 구매했는데 아주 여유로운 크기였어요.\n책상을 배치하고 나니 위 벽이 허전해 보여서 데코룸의 스트링 선반을 구매해서 달아주었어요.\n꼭꼬핀 2개로 고정했는데 제한 하중이 4kg이라 선반 1개를 빼고도 불안해서 가벼운 물품들만 올려두고 사용 중이랍니다. 다행히 아직까지는 잘 버텨주고 있네요!",
+    "selectedProducts": [
+      {
+        "productId": 3,
+        "productName": "UltraWide 책상",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/1575523989_117116_1.jpg?w=100",
+        "price": "300000"
+      },
+      {
+        "productId": 4,
+        "productName": "인체공학 의자",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/165156770747472479.jpg?w=100",
+        "price": "450000"
+      }
+    ],
+    "concepts": ["simple", "antique"],
+    "colors": ["wood", "white"],
+    "views": 4790,
+    "likes": 839,
+    "commentCount": 1,
+    "comments": [
+      {
+        "id": "c4",
+        "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+        "accountName": "i_love_me",
+        "content": "키보드 조명이 너무 멋집니다! 소프트웨어 지원이 있나요?",
+        "creationDate": "2022-01-15"
+      }
+    ],
+    "creationDate": "2022-02-20"
+  },
+  {
+    "feedId": 4,
+    "accountName": "setup_lover",
+    "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+    "images": [
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/168164950371720285.jpeg?w=720",
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/168164951087339833.jpeg?w=720",
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/168164950853505057.jpeg?w=720"
+    ],
+    "title": "컴팩트한 홈 오피스 셋업",
+    "description": "공간 절약을 위한 작고 실용적인 홈 오피스 셋업입니다.",
+    "selectedProducts": [
+      {
+        "productId": 5,
+        "productName": "컴팩트 조명",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/163788842247379788.jpg?w=100",
+        "price": "120000"
+      },
+      {
+        "productId": 6,
+        "productName": "로지텍 무선 블루투스 키보드",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/163109433375113133.jpg?w=100",
+        "price": "50000"
+      }
+    ],
+    "concepts": ["simple", "unique"],
+    "colors": ["white", "pink"],
+    "views": 4500,
+    "likes": 300,
+    "commentCount": 2,
+    "comments": [
+      {
+        "id": "c5",
+        "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+        "accountName": "user123",
+        "content": "이 셋업이 너무 깔끔하네요! 어떤 디스플레이를 사용하셨나요?",
+        "creationDate": "2022-03-10",
+        "replies": [
+          {
+            "id": "c6",
+            "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+            "accountName": "setup_lover",
+            "content": "사용한 디스플레이는 LG 27인치 모니터입니다. 가격대비 괜찮은 제품이에요!",
+            "creationDate": "2022-03-11"
+          }
+        ]
+      },
+      {
+        "id": "c7",
+        "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+        "accountName": "guest456",
+        "content": "이 의자는 어떤 제품인가요? 편안해 보이네요!",
+        "creationDate": "2022-03-12"
+      }
+    ],
+    "creationDate": "2022-03-09"
+  },
+  {
+    "feedId": 5,
+    "accountName": "workspace_artist",
+    "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+    "images": [
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/project/170775106566426238.jpg?w=720"
+    ],
+    "title": "창의적 아틀리에 셋업",
+    "description": "창의적인 작업을 위한 아틀리에 스타일의 셋업입니다.",
+    "selectedProducts": [
+      {
+        "productId": 7,
+        "productName": "철제 북엔드",
+        "thumbnail": "https://prs.ohou.se/apne2/any/uploads/productions/v1-210476800454656.jpg?w=100",
+        "price": "250000"
+      }
+    ],
+    "concepts": ["unique"],
+    "colors": ["pink"],
+    "views": 4000,
+    "likes": 400,
+    "commentCount": 0,
+    "comments": [],
+    "creationDate": "2022-04-05"
+  },
+  {
+    "feedId": 6,
+    "accountName": "setup_enthusiast",
+    "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+    "images": [
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/project/170014422992785004.jpg?w=720",
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/project/170013040636967458.jpg?w=720",
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/project/170013040636967458.jpg?w=720"
+    ],
+    "title": "현대적인 홈 오피스 셋업",
+    "description": "현대적이고 실용적인 홈 오피스 셋업입니다.",
+    "selectedProducts": [
+      {
+        "productId": 8,
+        "productName": "아날로그 감성 스피커",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/158036536685086418.jpg?w=100",
+        "price": "200000"
+      },
+      {
+        "productId": 9,
+        "productName": "게이밍 컴퓨터 책상",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/167056750981066356.jpg?w=100",
+        "price": "80000"
+      }
+    ],
+    "concepts": ["gaming"],
+    "colors": ["black", "pink"],
+    "views": 3800,
+    "likes": 350,
+    "commentCount": 1,
+    "comments": [
+      {
+        "id": "c8",
+        "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+        "accountName": "user456",
+        "content": "이 셋업이 정말 멋져 보입니다! 어떤 책상을 사용하셨나요?",
+        "creationDate": "2022-04-20",
+        "replies": [
+          {
+            "id": "c9",
+            "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+            "accountName": "setup_enthusiast",
+            "content": "사용한 책상은 IKEA에서 구매했습니다. 공간 활용에 최적화된 제품이에요!",
+            "creationDate": "2022-04-21"
+          }
+        ]
+      }
+    ],
+    "creationDate": "2022-04-19"
+  },
+  {
+    "feedId": 7,
+    "accountName": "workspace_artist2",
+    "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+    "images": [
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/169355433782558497.jpeg?w=720",
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/169355433769090130.jpeg?w=720",
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/169355433795104073.jpeg?w=720",
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/169355433789068129.jpeg?w=720"
+    ],
+    "title": "아날로그 감성의 작업 공간",
+    "description": "아날로그 감성을 살려 디자인된 작업 공간입니다.",
+    "selectedProducts": [
+      {
+        "productId": 10,
+        "productName": "2way 무선 블루투스 키보드",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/168836656649395182.jpg?w=100",
+        "price": "50000"
+      }
+    ],
+    "concepts": ["unique", "antique"],
+    "colors": ["wood"],
+    "views": 3200,
+    "likes": 400,
+    "commentCount": 0,
+    "comments": [],
+    "creationDate": "2022-05-10"
+  },
+  {
+    "feedId": 8,
+    "accountName": "office_designer",
+    "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+    "images": [
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/161311357069176332.jpg?w=720",
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/161311355863006543.jpg?w=720",
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/161311356349907783.jpg?w=720",
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/161311357967186998.jpg?w=720"
+    ],
+    "title": "모던 오피스 셋업",
+    "description": "현대적이고 세련된 오피스 셋업으로 업무 효율을 극대화하세요.",
+    "selectedProducts": [
+      {
+        "productId": 11,
+        "productName": "심플한 우드 책상",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/167698491389388694.png?w=100",
+        "price": "150000"
+      },
+      {
+        "productId": 12,
+        "productName": "phixa 감성 스택드 조명",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/166354975954105941.png?w=100",
+        "price": "400000"
+      }
+    ],
+    "concepts": ["simple"],
+    "colors": ["wood", "black"],
+    "views": 3150,
+    "likes": 500,
+    "commentCount": 0,
+    "comments": [],
+    "creationDate": "2022-05-25"
+  },
+  {
+    "feedId": 9,
+    "accountName": "workspace_lover",
+    "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+    "images": [
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/166786339186491529.jpeg?w=720",
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/171396975602655113.jpeg?w=180&h=180&c=c",
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/171334468406896105.jpeg?w=180&h=180&c=c"
+    ],
+    "title": "나만의 작업 공간",
+    "description": "개성있는 작업 공간을 만들어보세요.",
+    "selectedProducts": [
+      {
+        "productId": 13,
+        "productName": "삼성 스마트 모니터",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/166323283545069692.jpg?w=100",
+        "price": "120000"
+      },
+      {
+        "productId": 14,
+        "productName": "우드 책상 의자 세트",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/164482396033670485.jpg?w=100",
+        "price": "420000"
+      },
+      {
+        "productId": 15,
+        "productName": "로지텍 무선 블루투스 마우스",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/169320971484978589.jpg?w=100",
+        "price": "38000"
+      }
+    ],
+    "concepts": ["simple", "antique"],
+    "colors": ["wood", "white"],
+    "views": 3001,
+    "likes": 400,
+    "commentCount": 1,
+    "comments": [
+      {
+        "id": "c10",
+        "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+        "accountName": "user789",
+        "content": "이 작업 공간이 정말 멋져보여요! 어떤 컴퓨터를 사용하셨나요?",
+        "creationDate": "2022-06-10",
+        "replies": [
+          {
+            "id": "c11",
+            "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+            "accountName": "workspace_lover",
+            "content": "사용한 컴퓨터는 ASUS ROG Strix입니다. 게이밍과 업무에 모두 적합한 제품이에요.",
+            "creationDate": "2022-06-11"
+          }
+        ]
+      }
+    ],
+    "creationDate": "2022-06-09"
+  },
+  {
+    "feedId": 10,
+    "accountName": "design_guru",
+    "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+    "images": [
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/1615626208_CvF6Ff7.jpeg?w=720"
+    ],
+    "title": "트렌디한 디자인 셋업",
+    "description": "새로운 트렌드를 반영한 디자인 셋업입니다.",
+    "selectedProducts": [
+      {
+        "productId": 16,
+        "productName": "PC방 게이밍 의자",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/167529520708087566.jpg?w=100",
+        "price": "80000"
+      },
+      {
+        "productId": 17,
+        "productName": "듀얼 와이드 모니터 받침대",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/160748255462986200.jpg?w=100",
+        "price": "30000"
+      }
+    ],
+    "concepts": ["gaming", "unique"],
+    "colors": ["pink", "black"],
+    "views": 2800,
+    "likes": 600,
+    "commentCount": 1,
+    "comments": [
+      {
+        "id": "c12",
+        "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+        "accountName": "user101112",
+        "content": "이 셋업의 조명이 정말 멋져 보입니다! 어디에서 구매하셨나요?",
+        "creationDate": "2022-06-25",
+        "replies": [
+          {
+            "id": "c13",
+            "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+            "accountName": "design_guru",
+            "content": "사용한 조명은 Amazon에서 구매했습니다. 다양한 디자인과 컬러가 있어서 추천해요!",
+            "creationDate": "2022-06-26"
+          }
+        ]
+      }
+    ],
+    "creationDate": "2022-06-24"
+  },
+  {
+    "feedId": 11,
+    "accountName": "tech_enthusiast",
+    "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+    "images": [
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/167161831986566092.jpg?w=720",
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/167161832158827541.jpg?w=720"
+    ],
+    "title": "편안한 작업 환경",
+    "description": "편안한 느낌을 주는 작업 환경으로 업무를 즐겁게 해보세요.",
+    "selectedProducts": [
+      {
+        "productId": 18,
+        "productName": "레트로 감성 블루투스 키보드",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/168914715287221481.JPG?w=100",
+        "price": "250000"
+      }
+    ],
+    "concepts": ["antique"],
+    "colors": ["wood"],
+    "views": 2300,
+    "likes": 550,
+    "commentCount": 0,
+    "comments": [],
+    "creationDate": "2022-07-10"
+  },
+  {
+    "feedId": 12,
+    "accountName": "workspace_artist",
+    "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+    "images": [
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/projects/164753983453489666.jpg?w=720"
+    ],
+    "title": "창의적인 작업 환경",
+    "description": "창의적인 분위기를 조성하는 작업 환경으로 아이디어를 발전시켜보세요.",
+    "selectedProducts": [
+      {
+        "productId": 19,
+        "productName": "V2 리니어 KR 유선 키보드",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/165890214763507382.jpg?w=100",
+        "price": "500000"
+      },
+      {
+        "productId": 20,
+        "productName": "레이저 바실리스크 게이밍 버티컬 마우스",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/162763683448503397.jpg?w=100",
+        "price": "600000"
+      }
+    ],
+    "concepts": ["gaming", "unique"],
+    "colors": ["black", "pink"],
+    "views": 2200,
+    "likes": 700,
+    "commentCount": 2,
+    "comments": [
+      {
+        "id": "c14",
+        "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+        "accountName": "user131415",
+        "content": "이 작업 공간의 색상이 정말 매력적입니다! 어떤 조명을 사용하셨나요?",
+        "creationDate": "2022-07-25",
+        "replies": [
+          {
+            "id": "c15",
+            "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+            "accountName": "workspace_artist",
+            "content": "사용한 조명은 Philips Hue Smart Lighting입니다. 스마트폰으로 조절 가능한 기능이 있어서 편리해요.",
+            "creationDate": "2022-07-26"
+          }
+        ]
+      },
+      {
+        "id": "c16",
+        "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+        "accountName": "user161718",
+        "content": "이 공간의 색상이 정말 고요하고 아름다운 느낌을 줍니다! 어떤 컴퓨터를 사용하셨나요?",
+        "creationDate": "2022-07-27"
+      }
+    ],
+    "creationDate": "2022-07-24"
+  },
+  {
+    "feedId": 13,
+    "accountName": "design_inspired",
+    "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+    "images": [
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/165558229727975390.jpeg?w=720"
+    ],
+    "title": "디자인에 영감을 주는 공간",
+    "description": "창의적인 작업을 위한 디자인에 영감을 주는 작업 공간입니다.",
+    "selectedProducts": [
+      {
+        "productId": 21,
+        "productName": "미드센추리 감성 의자",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/164818138250096209.jpg?w=100",
+        "price": "800000"
+      }
+    ],
+    "concepts": ["antique"],
+    "colors": ["wood", "black"],
+    "views": 2020,
+    "likes": 65,
+    "commentCount": 1,
+    "comments": [
+      {
+        "id": "c17",
+        "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+        "accountName": "user192021",
+        "content": "이 작업 공간은 정말 예술적입니다! 작업에 어떤 프로그램을 주로 사용하시나요?",
+        "creationDate": "2022-08-10",
+        "replies": [
+          {
+            "id": "c18",
+            "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+            "accountName": "design_inspired",
+            "content": "주로 Adobe Creative Suite를 사용합니다. 다양한 디자인 작업에 적합한 프로그램입니다.",
+            "creationDate": "2022-08-11"
+          }
+        ]
+      }
+    ],
+    "creationDate": "2022-08-09"
+  },
+
+  {
+    "feedId": 14,
+    "accountName": "tech_enthusiast",
+    "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+    "images": [
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/projects/166069978804152112.jpg?w=720",
+      "https://bucketplace-v2-development.s3.amazonaws.com/uploads/users/profile_images/166064368946210828.jpeg"
+    ],
+    "title": "테크니컬한 작업 환경",
+    "description": "최신 기술을 활용한 테크니컬한 작업 환경으로 미래를 준비하세요.",
+    "selectedProducts": [
+      {
+        "productId": 22,
+        "productName": "와이드 화이트 책상",
+        "thumbnail": "https://prs.ohou.se/apne2/any/uploads/productions/v1-202617681231872.jpg?w=100",
+        "price": "200000"
+      },
+      {
+        "productId": 23,
+        "productName": "포스트모던 모브제 컬러 데스크 모빌",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/164255625683943980.png?w=100",
+        "price": "80000"
+      }
+    ],
+    "concepts": ["simple"],
+    "colors": ["white"],
+    "views": 1800,
+    "likes": 85,
+    "commentCount": 2,
+    "comments": [
+      {
+        "id": "c19",
+        "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+        "accountName": "user222324",
+        "content": "이 작업 환경은 정말 고급스럽고 멋집니다! 어떤 컴퓨터 모델을 사용하시나요?",
+        "creationDate": "2022-08-20",
+        "replies": [
+          {
+            "id": "c20",
+            "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+            "accountName": "tech_enthusiast",
+            "content": "제 컴퓨터 모델은 Dell XPS 15입니다. 뛰어난 성능과 슬림한 디자인을 갖추고 있습니다.",
+            "creationDate": "2022-08-21"
+          }
+        ]
+      },
+      {
+        "id": "c21",
+        "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+        "accountName": "user252627",
+        "content": "이 작업 환경의 조명이 정말 훌륭해 보입니다! 어떤 무선 키보드를 추천하시나요?",
+        "creationDate": "2022-08-22"
+      }
+    ],
+    "creationDate": "2022-08-19"
+  },
+  {
+    "feedId": 15,
+    "accountName": "office_ninja",
+    "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+    "images": [
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/projects/165603616721482108.jpg?w=720",
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/projects/165624788004782680.jpg?w=1700&h=582&c=c"
+    ],
+    "title": "처음부터 혁신적인 오피스 환경",
+    "description": "첨단 기술과 혁신적인 디자인으로 나만의 오피스를 만들어 보세요.",
+    "selectedProducts": [
+      {
+        "productId": 24,
+        "productName": "화이트 회전 의자",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/165353207054221201.jpg?w=100",
+        "price": "1000000"
+      }
+    ],
+    "concepts": ["simple"],
+    "colors": ["white"],
+    "views": 1200,
+    "likes": 90,
+    "commentCount": 2,
+    "comments": [
+      {
+        "id": "c22",
+        "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+        "accountName": "user282930",
+        "content": "이 오피스 환경은 정말 미래적이고 세련되어 보입니다! 어떤 스탠딩 데스크를 사용하시나요?",
+        "creationDate": "2022-08-30",
+        "replies": [
+          {
+            "id": "c23",
+            "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+            "accountName": "office_ninja",
+            "content": "저는 Uplift V2 스탠딩 데스크를 사용하고 있습니다. 편안한 작업 환경을 위해 추천합니다.",
+            "creationDate": "2022-08-31"
+          }
+        ]
+      },
+      {
+        "id": "c24",
+        "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+        "accountName": "user313233",
+        "content": "이 오피스 환경은 정말 멋지네요! 어떤 의자를 사용하시나요?",
+        "creationDate": "2022-09-01"
+      }
+    ],
+    "creationDate": "2022-08-29"
+  },
+  {
+    "feedId": 16,
+    "accountName": "creative_designer",
+    "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+    "images": [
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/projects/165728550215099588.jpg?w=720",
+      "https://image.ohou.se/image/resize/bucketplace-v2-development/uploads-users-profile_images-166900673524818168.jpeg/1440/none"
+    ],
+    "title": "창의적 디자인 작업 공간",
+    "description": "창의적인 디자인 작업을 위한 편안하고 아늑한 공간입니다.",
+    "selectedProducts": [
+      {
+        "productId": 25,
+        "productName": "yellow 스탠딩 조명",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/158710992464690998.jpg?w=100",
+        "price": "500000"
+      },
+      {
+        "productId": 26,
+        "productName": "4컬러 우드 의자",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/1550726178_118397_1.jpg?w=100",
+        "price": "2500000"
+      }
+    ],
+    "concepts": ["unique", "antique"],
+    "colors": ["wood", "white", "pink"],
+    "views": 1500,
+    "likes": 78,
+    "commentCount": 1,
+    "comments": [
+      {
+        "id": "c25",
+        "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+        "accountName": "user343536",
+        "content": "이 작업 공간은 정말 멋져 보입니다! 어떤 소프트웨어를 사용하시나요?",
+        "creationDate": "2022-09-10",
+        "replies": [
+          {
+            "id": "c26",
+            "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+            "accountName": "creative_designer",
+            "content": "저는 Adobe Creative Suite를 사용하고 있습니다. 다양한 디자인 작업을 위한 편리한 도구입니다.",
+            "creationDate": "2022-09-11"
+          }
+        ]
+      }
+    ],
+    "creationDate": "2022-09-09"
+  },
+  {
+    "feedId": 17,
+    "accountName": "office_guru",
+    "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+    "images": [
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/1612314994_cSiuH.jpeg?w=720",
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/1612314989_13ybMoU.jpeg?w=720",
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/1612314984_GJzLWV.jpeg?w=720"
+    ],
+    "title": "혁신적인 오피스 인테리어",
+    "description": "최신 트렌드를 반영한 혁신적인 오피스 공간으로 직원들의 생산성을 높여보세요.",
+    "selectedProducts": [
+      {
+        "productId": 27,
+        "productName": "wood and white 회전 의자",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/162748750075449137.jpeg?w=100",
+        "price": "120000"
+      }
+    ],
+    "concepts": ["antique"],
+    "colors": ["white", "wood"],
+    "views": 1342,
+    "likes": 34,
+    "commentCount": 0,
+    "comments": [],
+    "creationDate": "2022-09-15"
+  },
+  {
+    "feedId": 18,
+    "accountName": "tech_enthusiast",
+    "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+    "images": [
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/project/170470018785934687.jpg?w=720",
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/project/170470036877295114.jpg?w=1440"
+    ],
+    "title": "편안하고 코지한 데스트",
+    "description": "고품질의 가구로 구성된 현대적인 작업 공간입니다.",
+    "selectedProducts": [
+      {
+        "productId": 28,
+        "productName": "쿠션 의자",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/openapi/471941/1685947886834.jpg?w=100",
+        "price": "70000"
+      }
+    ],
+    "concepts": ["antique", "unique"],
+    "colors": ["black", "wood"],
+    "views": 1100,
+    "likes": 20,
+    "commentCount": 2,
+    "comments": [
+      {
+        "id": "c27",
+        "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+        "accountName": "user_techfan",
+        "content": "이 테크 기어들은 어디에서 구입하셨나요? 정말 멋져 보입니다!",
+        "creationDate": "2022-09-20",
+        "replies": [
+          {
+            "id": "c28",
+            "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+            "accountName": "tech_enthusiast",
+            "content": "이 기어들은 Amazon에서 구입할 수 있습니다. 다양한 옵션과 빠른 배송이 장점입니다.",
+            "creationDate": "2022-09-21"
+          }
+        ]
+      },
+      {
+        "id": "c29",
+        "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+        "accountName": "user_gadgetlover",
+        "content": "이 작업 공간에 사용된 무선 충전 패드는 어떤 특징이 있나요?",
+        "creationDate": "2022-09-22"
+      }
+    ],
+    "creationDate": "2022-09-18"
+  },
+  {
+    "feedId": 19,
+    "accountName": "minimalist_lover",
+    "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+    "images": [
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/168178200400672584.jpeg?w=720",
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/168178200770238718.jpeg?w=720"
+    ],
+    "title": "미니멀한 작업 공간",
+    "description": "단순하면서도 기능적인 미니멀한 작업 공간으로 집중력을 높여보세요.",
+    "selectedProducts": [
+      {
+        "productId": 29,
+        "productName": "MacBook air M1 맥북 에어",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/162823515343229561.jpg?w=100",
+        "price": "200000"
+      }
+    ],
+    "concepts": ["simple"],
+    "colors": ["white", "black"],
+    "views": 700,
+    "likes": 20,
+    "commentCount": 1,
+    "comments": [
+      {
+        "id": "c30",
+        "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+        "accountName": "user_minimalistfan",
+        "content": "이 작업 공간은 정말 깔끔하고 멋져 보입니다! 어떤 의자를 사용하셨나요?",
+        "creationDate": "2022-09-25",
+        "replies": [
+          {
+            "id": "c31",
+            "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+            "accountName": "minimalist_lover",
+            "content": "제 의자는 Herman Miller의 에어론 의자를 사용하고 있습니다. 편안하고 내구성이 좋아요.",
+            "creationDate": "2022-09-26"
+          }
+        ]
+      }
+    ],
+    "creationDate": "2022-09-24"
+  },
+  {
+    "feedId": 20,
+    "accountName": "workspace_artist",
+    "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+    "images": [
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/167350639256013260.png?w=720",
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/167350638354768227.png?w=720",
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/167350640297375926.png?w=720"
+    ],
+    "title": "초깔끔 아틀리에",
+    "description": "예술 작업을 위한 단조로운 아틀리에 공간입니다.",
+    "selectedProducts": [
+      {
+        "productId": 30,
+        "productName": "제로데스크 에보 컴퓨터 책상",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/168144627162089910.jpg?w=100",
+        "price": "20000"
+      }
+    ],
+    "concepts": ["unique", "simple"],
+    "colors": ["white"],
+    "views": 612,
+    "likes": 10,
+    "commentCount": 2,
+    "comments": [
+      {
+        "id": "c32",
+        "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+        "accountName": "user_artistfan",
+        "content": "이 아틀리에는 정말 아름답고 창의적입니다! 어떤 재료를 사용하셨나요?",
+        "creationDate": "2022-10-01",
+        "replies": [
+          {
+            "id": "c33",
+            "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+            "accountName": "workspace_artist",
+            "content": "저는 Winsor & Newton의 아크릴 페인트를 사용하고 있습니다. 다양한 컬러와 질감이 매력적입니다.",
+            "creationDate": "2022-10-02"
+          }
+        ]
+      },
+      {
+        "id": "c34",
+        "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+        "accountName": "user_artlover",
+        "content": "아트워크들이 정말 멋지네요! 어떤 작업 공간 조명을 사용하셨나요?",
+        "creationDate": "2022-10-03",
+        "replies": [
+          {
+            "id": "c35",
+            "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+            "accountName": "workspace_artist",
+            "content": "조명은 Philips Hue 스마트 조명을 사용하고 있습니다. 다양한 색상과 밝기 조절이 가능합니다.",
+            "creationDate": "2022-10-04"
+          }
+        ]
+      }
+    ],
+    "creationDate": "2022-09-30"
+  }
+]

@@ -1,14 +1,16 @@
-import React from 'react';
+// import React from 'react';
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './styles/theme';
+import Home from './pages/Home';
 import {
   Products,
   CategoryData,
   ProductListProps,
 } from './types/typesProducts';
 import CommunityPostPage from './pages/CommunityPostPage';
+import Community from './pages/Community';
 import Login from './pages/Login';
 import Header from './components/common/Header';
 import BestProduct from './components/category/BestProduct';
@@ -23,6 +25,7 @@ function App() {
     { title: '베스트', url: '/shop/best' },
     { title: '세일', url: '/shop/sale' },
   ];
+
   const [products, setProducts] = useState<Products[]>([]);
   const [categoryData, setCategoryData] = useState<CategoryData[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
@@ -30,9 +33,11 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Header title='Drururu' sections={sections} />
       <BrowserRouter>
+        <Header title='Drururu' sections={sections} />
+
         <Routes>
+          <Route path='/' element={<Home />} />
           <Route
             path='/shop'
             element={
@@ -45,14 +50,18 @@ function App() {
             }
           />
           {/* <Route
-path='/shop/best'
-element={<BestProduct prodData={products} />}
-/>
-<Route
-path='/shop/sale'
-element={<SaleProduct prodData={products} />}
-/> */}
+            path='/shop/best'
+            element={<BestProduct prodData={products} />}
+          />
+          <Route
+            path='/shop/sale'
+            element={<SaleProduct prodData={products} />}
+          /> */}
+
+          {/* community */}
+          <Route path='/community' element={<Community />} />
           <Route path='/shop/detail' element={<ProductDetail />} />
+
           <Route path='/login' element={<Login />} />
           <Route path='/community/post' element={<CommunityPostPage />} />
         </Routes>
