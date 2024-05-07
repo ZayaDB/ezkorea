@@ -6,7 +6,7 @@ import {
 } from '../types/typesProducts';
 import ProductList from '../components/category/ProductList';
 import SideNav from '../components/category/SideNav';
-import { Box } from '@mui/material';
+// import { Box } from '@mui/material';
 import { getData } from '../utils/getData';
 import '../styles/category/categoryCss.scss';
 
@@ -66,9 +66,9 @@ const Category: React.FC<ProductListProps> = ({ prodData }) => {
   }, []); // Empty array to run once on component mount
 
   return (
-    <Box className='category-page'>
-      <Box className='category-content'>
-        <Box className='sideNavigation'>
+    <div className='category-page'>
+      <div className='category-content'>
+        <div className='sideNavigation'>
           {/* Pass onSelectCategory and onSelectSubCategory to SideNav */}
           <SideNav
             onSelectCategory={setSelectedCategory}
@@ -77,17 +77,17 @@ const Category: React.FC<ProductListProps> = ({ prodData }) => {
               console.log('Selected subcategory:', subCategory);
             }}
           />
-        </Box>
-        <Box className='containerProducts'>
+        </div>
+        <div className='containerProducts'>
           <ProductList
             categoryData={categoryData}
             prodData={products}
             selectedCategory={selectedCategory}
             selectedSubCategory={selectedSubCategory} // selectedSubCategory를 추가하여 전달
           />
-        </Box>
-      </Box>
-    </Box>
+        </div>
+      </div>
+    </div>
   );
 };
 

@@ -23,7 +23,7 @@ function App() {
     { title: '베스트', url: '/shop/best' },
     { title: '세일', url: '/shop/sale' },
   ];
-  
+
   const [products, setProducts] = useState<Products[]>([]);
   const [categoryData, setCategoryData] = useState<CategoryData[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
@@ -32,7 +32,8 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-      <Header title='Drururu' sections={sections} />
+        <Header title='Drururu' sections={sections} />
+
         <Routes>
           <Route path='/' element={<Home />} />
           <Route
