@@ -49,6 +49,7 @@ export default function Header(props: HeaderProps) {
   return (
     <ThemeProvider theme={theme}>
       <React.Fragment>
+        {/* 헤더 상단 툴바 & 커스텀 */}
         <Toolbar
           sx={{
             borderBottom: 1,
@@ -64,6 +65,8 @@ export default function Header(props: HeaderProps) {
             zIndex: 'appBar',
           }}
         >
+          {/* 알림(종) icon */}
+          {/* mobile(width:600px 이하)부터 생김 */}
           {isMobile && (
             <IconButton
               sx={{
@@ -80,6 +83,8 @@ export default function Header(props: HeaderProps) {
             </IconButton>
           )}
 
+          {/* 쇼핑 타이틀 버튼 & 이동 */}
+          {/* mobile(width:600px 이하)에서 사라짐 */}
           <Typography component='h2' variant='h5' color='inherit'>
             {title}
             {isMobile ? null : (
@@ -104,6 +109,9 @@ export default function Header(props: HeaderProps) {
                 </Button>
               </NavLink>
             )}
+
+            {/* 커뮤니티 타이틀 버튼 & 이동 */}
+            {/* mobile(width:600px 이하)에서 사라짐 */}
             {isMobile ? null : (
               <NavLink
                 to='/community'
@@ -127,6 +135,9 @@ export default function Header(props: HeaderProps) {
             )}
           </Typography>
           <Box>
+
+            {/* 검색창(input) */}
+            {/* mobile(width:600px 이하)에서 사라짐 */}
             {isMobile ? null : (
               <IconButton disableRipple>
                 <Paper
@@ -159,6 +170,9 @@ export default function Header(props: HeaderProps) {
                 </Paper>
               </IconButton>
             )}
+
+            {/* 사람(로그인) icon dropdown */}
+            {/* mobile(width:600px 이하)에서 사라짐 */}
             {isMobile ? null : (
               <IconButtonWithMenu
                 icon={
@@ -167,6 +181,9 @@ export default function Header(props: HeaderProps) {
                 menuItems={['마이페이지', '찜한 상품', '저장한 글', '로그아웃']}
               />
             )}
+
+            {/* search(돋보기) icon */}
+            {/* mobile(width:600px 이하)부터 생김 */}
             {isMobile && (
               <IconButton
                 type='button'
@@ -177,6 +194,9 @@ export default function Header(props: HeaderProps) {
                 <img src={Search} alt='Logo' style={{ width: '36px' }} />
               </IconButton>
             )}
+
+            {/* 알림(종) icon */}
+            {/* mobile(width:600px 이하)에서 사라짐 */}
             {isMobile ? null : (
               <IconButton
                 sx={{
@@ -199,6 +219,9 @@ export default function Header(props: HeaderProps) {
             </BadgeComponent>
           </Box>
         </Toolbar>
+
+        {/* 헤더 하위 카테고리: 쇼핑홈, 카테고리, 베스트, 세일  */}
+        {/* mobile(width:600px 이하)에서 사라짐 */}
         {isMobile ? null : (
           <Toolbar
             variant='dense'
