@@ -1,8 +1,8 @@
 import * as React from 'react';
+import { NavLink } from 'react-router-dom';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import SearchIcon from '@mui/icons-material/Search';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -17,6 +17,8 @@ import Badge from '@mui/material/Badge';
 import InputBase from '@mui/material/InputBase';
 import Paper from '@mui/material/Paper';
 import { useMediaQuery } from '@mui/material';
+import Search from '../../assets/images/magnifying.png';
+
 interface HeaderProps {
   sections: ReadonlyArray<{
     title: string;
@@ -66,11 +68,11 @@ export default function Header(props: HeaderProps) {
             display: 'flex',
             justifyContent: 'space-around',
             flexDirection: 'row',
+            top: 0,
             width: '100dvw',
-            position: 'fixed',
+            position: 'sticky',
             bgcolor: 'background.paper',
             zIndex: 'appBar',
-            // borderRadius: 1,
           }}
         >
           {isMobile && (
@@ -93,19 +95,23 @@ export default function Header(props: HeaderProps) {
             component='h2'
             variant='h5'
             color='inherit'
-            align='center'
-            noWrap
-            style={{ position: 'sticky', top: '0' }}
+            // align='center'
+            // noWrap
+            // style={{ position: 'sticky', top: '0' }}
           >
             {title}
             {isMobile ? null : (
+              <NavLink
+              to='/'
+              style={{ textDecoration: 'none', color: 'unset' }}
+            >
               <Button
                 sx={{
                   ml: '34px',
-                  fontSize: '16px',
+                  fontSize: '17px',
                   fontWeight: '600',
                   ':hover': {
-                    bgcolor: 'transparent', // theme.palette.primary.main
+                    bgcolor: 'transparent',
                     color: '#5FF531',
                   },
                 }}
@@ -114,22 +120,28 @@ export default function Header(props: HeaderProps) {
               >
                 쇼핑
               </Button>
+              </NavLink>
             )}
             {isMobile ? null : (
-              <Button
-                sx={{
-                  fontSize: '16px',
-                  fontWeight: '600',
-                  ':hover': {
-                    bgcolor: 'transparent', // theme.palette.primary.main
-                    color: '#5FF531',
-                  },
-                }}
-                size='small'
-                disableRipple
+              <NavLink
+                to='/'
+                style={{ textDecoration: 'none', color: 'unset' }}
               >
-                커뮤니티
-              </Button>
+                <Button
+                  sx={{
+                    fontSize: '17px',
+                    fontWeight: '600',
+                    ':hover': {
+                      bgcolor: 'transparent',
+                      color: '#5FF531',
+                    },
+                  }}
+                  size='small'
+                  disableRipple
+                >
+                  커뮤니티
+                </Button>
+              </NavLink>
             )}
           </Typography>
           <Box>
@@ -138,11 +150,11 @@ export default function Header(props: HeaderProps) {
                 <Paper
                   component='form'
                   sx={{
-                    p: '2px 4px',
+                    p: '2px 0px',
                     display: 'flex',
                     alignItems: 'center',
                     width: 180,
-                    height: 28,
+                    height: 30,
                     boxShadow: '0',
                     border: '1px solid #e5e5e5',
                   }}
@@ -160,7 +172,7 @@ export default function Header(props: HeaderProps) {
                     aria-label='search'
                     disableRipple
                   >
-                    <SearchIcon sx={{ fontSize: '22px' }} />
+                    <img src={Search} alt='Logo' style={{ width: '30px' }} />
                   </IconButton>
                 </Paper>
               </IconButton>
@@ -226,11 +238,11 @@ export default function Header(props: HeaderProps) {
             {isMobile && (
               <IconButton
                 type='button'
-                sx={{ p: '3px' }}
+                sx={{ p: '2px' }}
                 aria-label='search'
                 disableRipple
               >
-                <SearchIcon sx={{ fontSize: '22px' }} />
+                <img src={Search} alt='Logo' style={{ width: '36px' }} />
               </IconButton>
             )}
             {isMobile ? null : (
@@ -277,17 +289,21 @@ export default function Header(props: HeaderProps) {
         </Toolbar>
         {isMobile ? null : (
           <Toolbar
-            component='nav'
             variant='dense'
             sx={{
-              display: 'flex',
-              justifyContent: 'space-evenly',
-              position: 'fixed',
-              mt: '64px',
-              background: 'white',
               width: '100dvw',
-              zIndex: 'appBar',
+              position: 'sticky',
+              mt: '-3px',
+              mb: '20px',
+              borderRadius: 1,
+              borderBottom: 1,
+              borderColor: 'divider',
+              fontSize: '16px',
             }}
+            style={{
+              paddingLeft: '25.4%',
+            }}
+            // }}
           >
             {sections.map(section => (
               <Link
@@ -299,8 +315,7 @@ export default function Header(props: HeaderProps) {
                 sx={{
                   flexShrink: 0,
                   border: 0,
-                  pl: '70px',
-                  // ml: '60px',
+                  mr: 5,
                 }}
                 style={{ textDecoration: 'none' }}
               >
