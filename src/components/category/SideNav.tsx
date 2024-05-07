@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box } from '@mui/system';
 import {
   CategoryMapping,
   FilterVisibility,
   SideNavProps,
   CategoryData,
+  SubCategory, // SubCategory 타입 추가
 } from '../../types/typesProducts';
 import '../../styles/category/sideNavCss.scss';
 import BrandFilter from './BrandFilter';
@@ -14,6 +15,7 @@ import ThemeFilter from './ThemeFilter';
 import { grey } from '@mui/material/colors';
 import { styled } from '@mui/material/styles';
 import Button, { ButtonProps } from '@mui/material/Button';
+import { getData } from '../../utils/getData';
 
 const categoryMapping: CategoryMapping = {
   가구: 'furniture',
@@ -22,46 +24,27 @@ const categoryMapping: CategoryMapping = {
   '데코/식물': 'deco-plant',
 };
 
-const categoryData: CategoryData[] = [
-  {
-    name: '가구',
-    subCategories: [
-      'ALL',
-      '책상',
-      '의자',
-      '모니터암/받침대',
-      '거치대',
-      '서랍장',
-      '선반',
-    ],
-  },
-  {
-    name: '전자기기',
-    subCategories: ['ALL', '키보드', '마우스', '스피커', '멀티탭', '충전기'],
-  },
-  {
-    name: '조명/인테리어',
-    subCategories: [
-      'ALL',
-      '조명',
-      '오브제',
-      '시계',
-      '캘린더',
-      '트레이',
-      '타공판',
-      '데스크매트',
-    ],
-  },
-  {
-    name: '데코/식물',
-    subCategories: ['ALL', '디퓨저', '캔들', '인센스', '식물'],
-  },
-];
-
 const SideNav: React.FC<SideNavProps> = ({ onSelectCategory }) => {
-  const [selectedCategory, setSelectedCategory] = useState<string>('가구');
-  // const [selectedSubCategory] , setSelectedSubCategory] = useState<string>('ALL');
+  const [categoryData, setCategoryData] = useState<CategoryData[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { categoryData: categoriesData } = await getData(
+          '/data/categoryData.json'
+        );
+        console.log('Fetched category data:', categoriesData);
+        // products와 categoryData 설정
+        // setProducts(productsData);
+        setCategoryData(categoriesData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
 
+    fetchData();
+  }, []); // 컴포넌트 마운트 시 한 번만 실행
+
+  const [selectedCategory, setSelectedCategory] = useState<string>('가구');
   const [filterVisibility, setFilterVisibility] = useState<FilterVisibility>({
     brand: false,
     price: false,
@@ -71,7 +54,6 @@ const SideNav: React.FC<SideNavProps> = ({ onSelectCategory }) => {
 
   const handleCategoryClick = (categoryName: string) => {
     onSelectCategory(categoryName); // 선택한 카테고리를 부모 컴포넌트로 전달
-    // onSelectSubCategory(subCategoryName);
     setSelectedCategory(categoryName);
   };
 
@@ -105,8 +87,8 @@ const SideNav: React.FC<SideNavProps> = ({ onSelectCategory }) => {
 
   return (
     <Box className='side-nav'>
-      {categoryData.map((category, index) => (
-        <Box key={index} className={'nav-box'}>
+      {categoryData.map(category => (
+        <Box key={category.name} className={'nav-box'}>
           <Box
             className={`nav ${categoryMapping[category.name]}`}
             onClick={() => handleCategoryClick(category.name)}
@@ -126,15 +108,15 @@ const SideNav: React.FC<SideNavProps> = ({ onSelectCategory }) => {
                   marginBottom: '18px',
                 }}
               />
-              {category.subCategories.map((subCategory, idx) => (
+              {category.subCategories.map(subCategory => (
                 <Box
-                  key={subCategory} // key에 숫자가 아닌 문자열을 사용
-                  className={`sub ${subCategory === 'ALL' ? 'bold' : ''}`}
-                  onClick={() => onSelectCategory(subCategory)}
+                  key={subCategory.name} // key에는 subCategory.name을 사용
+                  className={`sub ${subCategory.name === 'ALL' ? 'bold' : ''}`}
+                  onClick={() => onSelectCategory(subCategory.name)}
                   role='button'
                   tabIndex={0}
                 >
-                  {subCategory}
+                  {subCategory.name}
                 </Box>
               ))}
             </Box>

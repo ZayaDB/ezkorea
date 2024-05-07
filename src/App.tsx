@@ -10,12 +10,12 @@ import {
   ProductListProps,
 } from './types/typesProducts';
 import CommunityPostPage from './pages/CommunityPostPage';
-import Community from './pages/Community';
 import Login from './pages/Login';
-import Header from './components/common/Header';
+import Header from './components/header/Header';
 import BestProduct from './components/category/BestProduct';
 import SaleProduct from './components/category/SaleProduct';
 import Category from './pages/Category';
+import Community from './pages/Community';
 import ProductDetail from './pages/ProductDetail';
 
 function App() {
@@ -49,6 +49,7 @@ function App() {
               />
             }
           />
+          <Route path='/shop/detail' element={<ProductDetail />} />
           {/* <Route
             path='/shop/best'
             element={<BestProduct prodData={products} />}
@@ -57,11 +58,8 @@ function App() {
             path='/shop/sale'
             element={<SaleProduct prodData={products} />}
           /> */}
-
           {/* community */}
           <Route path='/community' element={<Community />} />
-          <Route path='/shop/detail' element={<ProductDetail />} />
-
           <Route path='/login' element={<Login />} />
           <Route path='/community/post' element={<CommunityPostPage />} />
         </Routes>

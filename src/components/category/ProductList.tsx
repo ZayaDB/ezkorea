@@ -16,16 +16,18 @@ import {
 } from '../../types/typesProducts';
 import ProductItem from './ProductItem';
 import '../../styles/category/productWrapCss.scss';
+import { useMediaQuery } from '@mui/material';
 
 const ProductList: React.FC<ProductListProps> = ({
   selectedCategory,
   prodData,
   categoryData,
 }) => {
-  console.log('props로 받아온 subcategory', selectedCategory);
+  console.log('선택한카테고리 ', categoryData, ':', selectedCategory);
 
   const [sort, setSort] = useState<string>('인기순');
   const [selectedSubCategory, setSelectedSubCategory] = useState<string>('ALL');
+  const isMobile = useMediaQuery('(max-width:768px)');
 
   // 선택된 카테고리의 인덱스를 찾기
   const selectedCategoryIndex = categoryData.findIndex(
@@ -54,15 +56,32 @@ const ProductList: React.FC<ProductListProps> = ({
             {subCategories.map(subCategory => (
               <Box
                 className='el-cate2'
-                key={subCategory}
+                key={subCategory.name}
                 style={{
                   marginRight: '25px',
                   fontWeight:
-                    selectedSubCategory === subCategory ? 'bold' : 'normal',
+                    selectedSubCategory === subCategory.name
+                      ? 'bold'
+                      : 'normal',
                 }}
-                onClick={() => setSelectedSubCategory(subCategory)}
+                onClick={() => setSelectedSubCategory(subCategory.name)}
               >
-                {subCategory}
+                {isMobile ? (
+                  <Box className='icon-nav'>
+                    <img
+                      src={subCategory.imagePath}
+                      alt={subCategory.name}
+                      style={{
+                        width: '64px',
+                        height: '64px',
+                        objectFit: 'cover',
+                      }}
+                    />
+                    <span>{subCategory.name}</span>
+                  </Box>
+                ) : (
+                  subCategory.name
+                )}
               </Box>
             ))}
           </Box>
@@ -75,25 +94,38 @@ const ProductList: React.FC<ProductListProps> = ({
               label='선택한 값'
               onDelete={handleDelete}
               style={{
-                fontSize: '14px',
-                height: 37,
-                paddingLeft: '2px',
-                paddingRight: '3px',
+                fontSize: isMobile ? '9px' : '14px',
+                width: isMobile ? '75px' : '100px',
+                height: isMobile ? '30px' : '37px',
+                paddingLeft: isMobile ? '1px' : '2px',
+                paddingRight: isMobile ? '2px' : '3px',
+                paddingTop: isMobile ? '2px' : '4px',
                 borderRadius: 2.8,
-              
               }}
               deleteIcon={<ClearIcon style={{ fontSize: 16 }} />} // 삭제 아이콘의 크기 조정
             />
           </Box>
           {/* 정렬기준 */}
           <Box className='sort-box'>
-            <FormControl sx={{ m: 1, minWidth: 120, maxWidth: 200 }}>
+            <FormControl
+              sx={{
+                m: 1,
+                minWidth: isMobile ? 40 : 120,
+                maxWidth: isMobile ? 80 : 200,
+                paddingTop: isMobile ? 0.76 : 0,
+              }}
+            >
               <Select
                 labelId='sort-label'
                 id='sort-select'
                 value={sort}
                 onChange={event => setSort(event.target.value as string)}
-                sx={{ height: '42px', fontSize: '14px' }}
+                // sx={{ height: '42px', fontSize: '14px',}}
+                sx={{
+                  height: isMobile ? '32px' : '42px', // 모바일 화면일 때 작은 높이
+                  fontSize: isMobile ? '12px' : '14px',
+                  // 모바일 화면일 때 작은 글꼴 크기
+                }}
               >
                 {/* 정렬 옵션 */}
                 <MenuItem value='인기순'>인기순</MenuItem>

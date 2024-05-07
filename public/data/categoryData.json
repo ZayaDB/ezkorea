@@ -1,0 +1,69 @@
+[
+  {
+    "name": "가구",
+    "subCategories": [
+      {
+        "name": "ALL",
+        "imagePath": "https://i.ibb.co/1RgtW5T/pngwing-com-12.png"
+      },
+      {
+        "name": "책상",
+        "imagePath": "https://i.ibb.co/1RgtW5T/pngwing-com-12.png"
+      },
+      {
+        "name": "의자",
+        "imagePath": "https://i.ibb.co/vVjKQKk/pngwing-com-13.png"
+      },
+      {
+        "name": "모니터암/받침대",
+        "imagePath": "https://i.ibb.co/vVjKQKk/pngwing-com-13.png"
+      },
+      {
+        "name": "거치대",
+        "imagePath": "https://i.ibb.co/vVjKQKk/pngwing-com-13.png"
+      },
+      {
+        "name": "서랍장",
+        "imagePath": "https://i.ibb.co/vVjKQKk/pngwing-com-13.png"
+      },
+      {
+        "name": "선반",
+        "imagePath": "https://i.ibb.co/vVjKQKk/pngwing-com-13.png"
+      }
+    ]
+  },
+  {
+    "name": "전자기기",
+    "subCategories": [
+      { "name": "ALL", "imagePath": "/images/devices_all.jpg" },
+      { "name": "키보드", "imagePath": "/images/keyboard.jpg" },
+      { "name": "마우스", "imagePath": "/images/mouse.jpg" },
+      { "name": "스피커", "imagePath": "/images/speaker.jpg" },
+      { "name": "멀티탭", "imagePath": "/images/multi_tap.jpg" },
+      { "name": "충전기", "imagePath": "/images/charger.jpg" }
+    ]
+  },
+  {
+    "name": "조명/인테리어",
+    "subCategories": [
+      { "name": "ALL", "imagePath": "/images/lighting_all.jpg" },
+      { "name": "조명", "imagePath": "/images/light.jpg" },
+      { "name": "오브제", "imagePath": "/images/objects.jpg" },
+      { "name": "시계", "imagePath": "/images/clock.jpg" },
+      { "name": "캘린더", "imagePath": "/images/calendar.jpg" },
+      { "name": "트레이", "imagePath": "/images/tray.jpg" },
+      { "name": "타공판", "imagePath": "/images/perforated_panel.jpg" },
+      { "name": "데스크매트", "imagePath": "/images/desk_mat.jpg" }
+    ]
+  },
+  {
+    "name": "데코/식물",
+    "subCategories": [
+      { "name": "ALL", "imagePath": "/images/decor_plants_all.jpg" },
+      { "name": "디퓨저", "imagePath": "/images/diffuser.jpg" },
+      { "name": "캔들", "imagePath": "/images/candle.jpg" },
+      { "name": "인센스", "imagePath": "/images/incense.jpg" },
+      { "name": "식물", "imagePath": "/images/plant.jpg" }
+    ]
+  }
+]

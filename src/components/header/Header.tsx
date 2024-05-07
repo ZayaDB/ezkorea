@@ -4,20 +4,18 @@ import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import LoginIcon from '../../assets/images/icon-login.png';
 import Notification1 from '../../assets/images/notification1.png';
 import Cart1 from '../../assets/images/cart2.png';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import Fade from '@mui/material/Fade';
-import Badge from '@mui/material/Badge';
 import InputBase from '@mui/material/InputBase';
 import Paper from '@mui/material/Paper';
 import { useMediaQuery } from '@mui/material';
 import Search from '../../assets/images/magnifying.png';
+import ToolBar from './ToolBar';
+import IconButtonWithMenu from './IconButtonWithMenu';
+import BadgeComponent from './BadgeComponent';
 
 interface HeaderProps {
   sections: ReadonlyArray<{
@@ -46,20 +44,12 @@ const theme = createTheme({
 
 export default function Header(props: HeaderProps) {
   const isMobile = useMediaQuery('(max-width:600px)');
-  const { sections, title } = props;
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  // const classes = useStyles();
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const { title } = props;
 
   return (
     <ThemeProvider theme={theme}>
       <React.Fragment>
+        {/* 헤더 상단 툴바 & 커스텀 */}
         <Toolbar
           sx={{
             borderBottom: 1,
@@ -75,6 +65,8 @@ export default function Header(props: HeaderProps) {
             zIndex: 'appBar',
           }}
         >
+          {/* 알림(종) icon */}
+          {/* mobile(width:600px 이하)부터 생김 */}
           {isMobile && (
             <IconButton
               sx={{
@@ -91,14 +83,9 @@ export default function Header(props: HeaderProps) {
             </IconButton>
           )}
 
-          <Typography
-            component='h2'
-            variant='h5'
-            color='inherit'
-            // align='center'
-            // noWrap
-            // style={{ position: 'sticky', top: '0' }}
-          >
+          {/* 쇼핑 타이틀 버튼 & 이동 */}
+          {/* mobile(width:600px 이하)에서 사라짐 */}
+          <Typography component='h2' variant='h5' color='inherit'>
             {title}
             {isMobile ? null : (
               <NavLink
@@ -122,6 +109,9 @@ export default function Header(props: HeaderProps) {
                 </Button>
               </NavLink>
             )}
+
+            {/* 커뮤니티 타이틀 버튼 & 이동 */}
+            {/* mobile(width:600px 이하)에서 사라짐 */}
             {isMobile ? null : (
               <NavLink
                 to='/community'
@@ -145,6 +135,9 @@ export default function Header(props: HeaderProps) {
             )}
           </Typography>
           <Box>
+
+            {/* 검색창(input) */}
+            {/* mobile(width:600px 이하)에서 사라짐 */}
             {isMobile ? null : (
               <IconButton disableRipple>
                 <Paper
@@ -177,64 +170,20 @@ export default function Header(props: HeaderProps) {
                 </Paper>
               </IconButton>
             )}
+
+            {/* 사람(로그인) icon dropdown */}
+            {/* mobile(width:600px 이하)에서 사라짐 */}
             {isMobile ? null : (
-              <IconButton
-                id='fade-button'
-                aria-controls={open ? 'fade-menu' : undefined}
-                aria-haspopup='true'
-                aria-expanded={open ? 'true' : undefined}
-                onClick={handleClick}
-                sx={{
-                  '&.MuiButtonBase-root:hover': {
-                    bgcolor: 'transparent',
-                  },
-                }}
-              >
-                <img src={LoginIcon} alt='Logo' style={{ width: '28px' }} />
-              </IconButton>
+              <IconButtonWithMenu
+                icon={
+                  <img src={LoginIcon} alt='Login' style={{ width: '28px' }} />
+                }
+                menuItems={['마이페이지', '찜한 상품', '저장한 글', '로그아웃']}
+              />
             )}
-            {isMobile ? null : (
-              <Menu
-                id='fade-menu'
-                MenuListProps={{
-                  'aria-labelledby': 'fade-button',
-                }}
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                TransitionComponent={Fade}
-                PaperProps={{
-                  style: {
-                    marginLeft: '-24px',
-                  },
-                }}
-              >
-                <MenuItem
-                  onClick={handleClose}
-                  sx={{ fontSize: '14px', fontWeight: '300' }}
-                >
-                  마이페이지
-                </MenuItem>
-                <MenuItem
-                  onClick={handleClose}
-                  sx={{ fontSize: '14px', fontWeight: '300' }}
-                >
-                  찜한 상품
-                </MenuItem>
-                <MenuItem
-                  onClick={handleClose}
-                  sx={{ fontSize: '14px', fontWeight: '300' }}
-                >
-                  저장한 글
-                </MenuItem>
-                <MenuItem
-                  onClick={handleClose}
-                  sx={{ fontSize: '14px', fontWeight: '300' }}
-                >
-                  로그아웃
-                </MenuItem>
-              </Menu>
-            )}
+
+            {/* search(돋보기) icon */}
+            {/* mobile(width:600px 이하)부터 생김 */}
             {isMobile && (
               <IconButton
                 type='button'
@@ -245,6 +194,9 @@ export default function Header(props: HeaderProps) {
                 <img src={Search} alt='Logo' style={{ width: '36px' }} />
               </IconButton>
             )}
+
+            {/* 알림(종) icon */}
+            {/* mobile(width:600px 이하)에서 사라짐 */}
             {isMobile ? null : (
               <IconButton
                 sx={{
@@ -260,33 +212,16 @@ export default function Header(props: HeaderProps) {
                 />
               </IconButton>
             )}
-            <Badge
-              badgeContent={5}
-              color='secondary'
-              sx={{
-                '& .MuiBadge-badge': {
-                  fontSize: 9,
-                  height: 15,
-                  minWidth: 10,
-                  right: 8,
-                  top: 11,
-                  padding: '0 4px',
-                  border: '2px solid white',
-                },
-              }}
-            >
-              <IconButton
-                sx={{
-                  '&.MuiButtonBase-root:hover': {
-                    bgcolor: 'transparent',
-                  },
-                }}
-              >
-                <img src={Cart1} alt='Logo' style={{ width: '24px' }} />
-              </IconButton>
-            </Badge>
+
+            {/* cart 아이콘 */}
+            <BadgeComponent badgeContent={5}>
+              <img src={Cart1} alt='Cart' style={{ width: '24px' }} />
+            </BadgeComponent>
           </Box>
         </Toolbar>
+
+        {/* 헤더 하위 카테고리: 쇼핑홈, 카테고리, 베스트, 세일  */}
+        {/* mobile(width:600px 이하)에서 사라짐 */}
         {isMobile ? null : (
           <Toolbar
             variant='dense'
@@ -301,27 +236,10 @@ export default function Header(props: HeaderProps) {
               fontSize: '16px',
             }}
             style={{
-              paddingLeft: '25.4%',
+              paddingLeft: '23.7%',
             }}
-            // }}
           >
-            {sections.map(section => (
-              <Link
-                color='inherit'
-                noWrap
-                key={section.title}
-                variant='body2'
-                href={section.url}
-                sx={{
-                  flexShrink: 0,
-                  border: 0,
-                  mr: 5,
-                }}
-                style={{ textDecoration: 'none' }}
-              >
-                {section.title}
-              </Link>
-            ))}
+            <ToolBar />
           </Toolbar>
         )}
       </React.Fragment>
