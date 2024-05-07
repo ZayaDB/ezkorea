@@ -30,8 +30,8 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Header title='Drururu' sections={sections} />
       <BrowserRouter>
+      <Header title='Drururu' sections={sections} />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route
