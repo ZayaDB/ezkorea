@@ -4,16 +4,14 @@
 .order-container {
   display: flex;
   flex-direction: column; /* 기본적으로 세로 방향으로 배치되도록 설정 */
-  width: 100%;
 }
 
 @media screen and (min-width: 768px) {
   .order-container {
     flex-direction: row; /* 화면이 768px 이상이면 가로 방향으로 변경 */
-    position: fixed;
-    width: 100%;
   }
   .order-content {
+    width: 100%;
   }
 }
 
