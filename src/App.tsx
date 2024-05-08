@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
@@ -34,11 +36,11 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-        <Header title="Drururu" sections={sections} />
+        <Header title='Drururu' sections={sections} />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path='/' element={<Home />} />
           <Route
-            path="/shop"
+            path='/shop'
             element={
               <Category
                 categoryData={categoryData}
@@ -48,7 +50,7 @@ function App() {
               />
             }
           />
-          <Route path="/shop/detail" element={<ProductDetail />} />
+          <Route path='/shop/detail' element={<ProductDetail />} />
           {/* <Route
             path='/shop/best'
             element={<BestProduct prodData={products} />}
@@ -58,10 +60,10 @@ function App() {
             element={<SaleProduct prodData={products} />}
           /> */}
           {/* community */}
-          <Route path="/community" element={<Community />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/community/post" element={<CommunityPostPage />} />
-          <Route path="/order" element={<OrderPage />} />
+          <Route path='/community' element={<Community />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/community/post' element={<CommunityPostPage />} />
+          <Route path='/order' element={<OrderPage />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
