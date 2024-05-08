@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import ContentArea from '../styles/ContentArea';
+import theme from '../styles/theme';
 import {
   Box,
   Typography,
@@ -10,6 +11,9 @@ import {
   DialogContentText,
   DialogTitle,
   Button,
+  TextField,
+  ListItem,
+  List,
 } from '@mui/material';
 
 import SubTitle from '../components/community/post/SubTitle';
@@ -208,22 +212,27 @@ function CommunityPostPage() {
           </Box>
           <SubTitle text='글 제목'></SubTitle>
 
-          <input
+          <TextField
             type='text'
-            placeholder='Title'
+            placeholder='20자 이내로 입력해주세요.'
             {...register('title', {
               required: '제목을 입력해주세요.',
               maxLength: {
                 value: 20,
-                message: '20자 이내로 입력해주세요',
+                message: '20자 이내로 입력해주세요.',
               },
             })}
+            inputProps={{
+              maxLength: 20,
+            }}
+            variant='outlined'
+            error={!!errors.title}
+            helperText={errors.title ? errors.title.message : ''}
           />
-          {errors.title && <p>{errors.title.message}</p>}
           <SubTitle text='설명'></SubTitle>
 
-          <textarea
-            placeholder='Description'
+          <TextField
+            placeholder='책상 인테리어를 자랑해주세요.'
             {...register('description', {
               required: '설명을 입력해주세요.',
               maxLength: {
@@ -231,38 +240,56 @@ function CommunityPostPage() {
                 message: '설명은 2000자 이내로 입력해주세요.',
               },
             })}
+            multiline
+            rows={4}
+            error={!!errors.description}
+            helperText={errors.description ? errors.description.message : ''}
+            fullWidth
+            variant='outlined'
+            inputProps={{ maxLength: 2000 }}
           />
-          {errors.description && <p>{errors.description.message}</p>}
+
           <SubTitle text='제품 선택'></SubTitle>
 
-          <div>
-            <input
+          <Box>
+            <TextField
               type='text'
               value={productName}
               onChange={e => setProductName(e.target.value)}
               onKeyDown={handleKeyPress}
+              variant='outlined'
+              placeholder='제품명을 입력해주세요.'
             />
-            <button type='button' onClick={addProduct}>
+            <Button
+              type='button'
+              onClick={addProduct}
+              sx={{
+                color: theme.palette.common.black,
+                backgroundColor: theme.palette.primary.main,
+                ':hover': { backgroundColor: theme.palette.primary.main },
+              }}
+            >
               등록
-            </button>
-            <ul>
+            </Button>
+            <List>
               {products.map((product, index) => (
-                <li key={index}>
+                <ListItem key={index}>
                   {product}
-                  <button
+                  <Button
                     type='button'
                     onClick={() =>
                       setProducts(currentProducts =>
                         currentProducts.filter((_, i) => i !== index)
                       )
                     }
+                    color='primary'
                   >
                     X
-                  </button>
-                </li>
+                  </Button>
+                </ListItem>
               ))}
-            </ul>
-          </div>
+            </List>
+          </Box>
 
           <div>
             <SubTitle text='컨셉 선택'></SubTitle>
