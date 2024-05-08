@@ -33,9 +33,6 @@ export default function DeliveryInfo() {
           type='radio'
           name='method'
           id='new'
-          type='radio'
-          name='method'
-          id='new'
           onClick={() => {
             setSelected(false);
           }}
@@ -49,8 +46,10 @@ export default function DeliveryInfo() {
 
 function DeliveryInfoContent() {
   /* address 불러오기 */
-  const address = useSelector(state => (state as any).address);
-  const zonecode = useSelector(state => (state as any).zonecode);
+  const address = useSelector(state => (state as any).address.fullAddress);
+  const zonecode = useSelector(state => (state as any).address.zonecode);
+
+  console.log(address, zonecode);
 
   const [firstNum, setFirstNum] = useState<string>('010');
 
@@ -66,29 +65,29 @@ function DeliveryInfoContent() {
       <TextField fullWidth placeholder='나머지주소' />
 
       <div className='orderer-num-container'>
-      <div className='orderer-num-container'>
-        <FormControl fullWidth={true}>
-          <Select
-            value={firstNum}
-            defaultValue={firstNum}
-            onChange={handleChange}
-            autoWidth
-          >
-            <MenuItem value={'010'}>010</MenuItem>
-            <MenuItem value={'011'}>011</MenuItem>
-            <MenuItem value={'016'}>016</MenuItem>
-            <MenuItem value={'017'}>017</MenuItem>
-          </Select>
-        </FormControl>
-        <span>-</span>
-        <TextField className='num' fullWidth />
-        <TextField className='num' fullWidth />
-        <span>-</span>
-        <TextField className='num' fullWidth />
-        <TextField className='num' fullWidth />
+        <div className='orderer-num-container'>
+          <FormControl fullWidth={true}>
+            <Select
+              value={firstNum}
+              defaultValue={firstNum}
+              onChange={handleChange}
+              autoWidth
+            >
+              <MenuItem value={'010'}>010</MenuItem>
+              <MenuItem value={'011'}>011</MenuItem>
+              <MenuItem value={'016'}>016</MenuItem>
+              <MenuItem value={'017'}>017</MenuItem>
+            </Select>
+          </FormControl>
+          <span>-</span>
+          <TextField className='num' fullWidth />
+          <TextField className='num' fullWidth />
+          <span>-</span>
+          <TextField className='num' fullWidth />
+          <TextField className='num' fullWidth />
+        </div>
+        <TextField fullWidth placeholder='배송 메시지' />
       </div>
-      <TextField fullWidth placeholder='배송 메시지' />
-      <TextField fullWidth placeholder='배송 메시지' />
     </>
   );
 }

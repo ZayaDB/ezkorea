@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { Dispatch, useEffect } from 'react';
 /* kakao-address */
 import { Box, Modal } from '@mui/material';
 import { useState } from 'react';
 import DaumPostcode from 'react-daum-postcode';
+
 import { useDispatch } from 'react-redux';
-import { updateAddress } from '../../redux/modules/address';
+import { AddressActionTypes } from '../../redux/types/addressActionTypes';
+import { updateAddressInfo } from '../../redux/actions/addressActions';
 
 const style = {
   position: 'absolute' as const,
@@ -60,7 +62,10 @@ function ModalContent({ handleClose }: { handleClose: () => void }) {
     console.log(fullAddress); /* 주소 */
     console.log(data.zonecode); /* 우편번호 */
 
-    dispatch(updateAddress(fullAddress, data.zonecode));
+    if (data !== undefined) {
+      dispatch(updateAddressInfo({ fullAddress, zonecode: data.zonecode }));
+      console.log('dispatch');
+    }
 
     handleClose();
   };
