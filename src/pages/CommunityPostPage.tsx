@@ -1,7 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import ContentArea from '../styles/ContentArea';
-import { Box, Typography } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Button,
+} from '@mui/material';
 
 import SubTitle from '../components/community/post/SubTitle';
 
@@ -31,6 +40,8 @@ function CommunityPostPage() {
   const [productName, setProductName] = useState('');
   const [selectedConcepts, setSelectedConcepts] = useState<string[]>([]);
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
+  const [open, setOpen] = useState(false);
+  const [formData, setFormData] = useState<IFormInput | null>(null);
 
   useEffect(() => {
     if (selectedConcepts.length > 0) {
@@ -40,6 +51,9 @@ function CommunityPostPage() {
       clearErrors('submissionColors');
     }
   }, [selectedConcepts, selectedColors, clearErrors]);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const onSubmit: SubmitHandler<IFormInput> = (data, event?) => {
     console.log('handleSubmit 함수가 호출되었습니다.');
@@ -72,10 +86,19 @@ function CommunityPostPage() {
         message: '하나 이상의 컬러를 선택해주세요.',
       });
     }
-    if (selectedConcepts.length && selectedColors.length) {
+    if (selectedConcepts.length && selectedColors.length && files.length) {
       console.log('Form submitted:', completeData);
+      setFormData(completeData); // Form 데이터 저장
+      handleOpen(); // 모달 열기
+
       // 여기에 서버 전송 로직 추가
     }
+  };
+
+  const confirmSubmit = () => {
+    console.log('Confirmed submission:', formData);
+    handleClose(); // 모달 닫기
+    // 여기에 실제 데이터 제출 로직을 추가할 수 있습니다.
   };
 
   // 파일 선택 핸들러
@@ -213,7 +236,6 @@ function CommunityPostPage() {
           <SubTitle text='제품 선택'></SubTitle>
 
           <div>
-            Enter Product Name:
             <input
               type='text'
               value={productName}
@@ -221,7 +243,7 @@ function CommunityPostPage() {
               onKeyDown={handleKeyPress}
             />
             <button type='button' onClick={addProduct}>
-              Add Product
+              등록
             </button>
             <ul>
               {products.map((product, index) => (
@@ -279,8 +301,32 @@ function CommunityPostPage() {
             )}
           </div>
         </Box>
-        <button type='submit'>Upload</button>
+        <button type='submit'>등록</button>
       </form>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>{'아래 내용으로 피드를 등록하시겠습니까?'}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            제목: {formData?.title}
+            <br />
+            설명: {formData?.description}
+            <br />
+            컨셉:
+            {formData && formData.concepts.length > 1
+              ? formData?.concepts.join(', ')
+              : formData?.concepts[0]}
+            <br />
+            컬러:
+            {formData && formData.colors.length > 1
+              ? formData?.colors.join(', ')
+              : formData?.colors[0]}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>취소</Button>
+          <Button onClick={confirmSubmit}>등록하기</Button>
+        </DialogActions>
+      </Dialog>
     </ContentArea>
   );
 }
