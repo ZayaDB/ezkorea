@@ -11,13 +11,13 @@ import Postcode from './Postcode';
 export default function DeliveryInfo() {
   const [selected, setSelected] = useState<boolean>(true);
   return (
-    <div className="order-recipitent-info">
-      <Head text="배송 정보" />
+    <div className='order-recipitent-info'>
+      <Head text='배송 정보' />
       <label>
         <input
-          type="radio"
-          name="method"
-          id="default"
+          type='radio'
+          name='method'
+          id='default'
           defaultChecked={true}
           onClick={() => {
             setSelected(true);
@@ -27,9 +27,9 @@ export default function DeliveryInfo() {
       </label>
       <label>
         <input
-          type="radio"
-          name="method"
-          id="new"
+          type='radio'
+          name='method'
+          id='new'
           onClick={() => {
             setSelected(false);
           }}
@@ -49,13 +49,13 @@ function DeliveryInfoContent({ selected }: { selected: boolean }) {
   };
   return (
     <>
-      <TextField fullWidth placeholder="받으시는 분" />
-      <TextField placeholder="우편번호" />
+      <TextField fullWidth placeholder='받으시는 분' />
+      <TextField placeholder='우편번호' />
       <Postcode />
-      <TextField fullWidth placeholder="기본주소" />
-      <TextField fullWidth placeholder="나머지주소" />
+      <TextField fullWidth placeholder='기본주소' />
+      <TextField fullWidth placeholder='나머지주소' />
 
-      <div className="orderer-num-container">
+      <div className='orderer-num-container'>
         <FormControl fullWidth={true}>
           <Select
             value={firstNum}
@@ -70,11 +70,11 @@ function DeliveryInfoContent({ selected }: { selected: boolean }) {
           </Select>
         </FormControl>
         <span>-</span>
-        <TextField className="num" fullWidth />
+        <TextField className='num' fullWidth />
         <span>-</span>
-        <TextField className="num" fullWidth />
+        <TextField className='num' fullWidth />
       </div>
-      <TextField fullWidth placeholder="배송 메시지" />
+      <TextField fullWidth placeholder='배송 메시지' />
     </>
   );
 }

@@ -25,8 +25,8 @@ export default function Postcode() {
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
       >
         <Box sx={style}>
           <ModalContent handleClose={handleClose} />
@@ -58,7 +58,7 @@ function ModalContent({ handleClose }: { handleClose: () => void }) {
 
   return (
     <>
-      <button type="button" onClick={handleClose} className="postCode_btn">
+      <button type='button' onClick={handleClose} className='postCode_btn'>
         닫기
       </button>
       <DaumPostcode autoClose onComplete={handlePostCode} />
