@@ -7,6 +7,7 @@ export default function ProductCarousel() {
       <Carousel>
         <Carousel.Item>
           <div className='slidercontents1'></div>
+          {/* <img className='d-block w-100' /> */}
         </Carousel.Item>
         <Carousel.Item>
           <div className='slidercontents2'></div>
