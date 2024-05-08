@@ -8,16 +8,21 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import ShareIcon from '@mui/icons-material/Share';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import { lightGreen } from '@mui/material/colors';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import { useState } from 'react';
 
-// import { createTheme } from '@mui/material/styles';
-// import { purple } from '@mui/material/colors';
+// import { createTheme, styled } from '@mui/material/styles';
 
 export default function SelectPurchase() {
+  // 선택 인풋바
   const [color, setColor] = React.useState('');
   const handleChange = (event: SelectChangeEvent) => {
     setColor(event.target.value as string);
   };
+
+  // count 버튼
+  const [count, setCount] = useState(0);
 
   return (
     <div id='selectBox'>
@@ -80,7 +85,27 @@ export default function SelectPurchase() {
           <div id='selectedPurchase'>
             <div className='selectedColor'>White</div>
             <div id='countZone'>
-              <div className='selectedCount'></div>
+              <div className='selectedCount'>
+                <ButtonGroup
+                  size='small'
+                  variant='contained'
+                  aria-label='Basic button group'
+                >
+                  <Button onClick={() => setCount(count + 1)} color='secondary'>
+                    +
+                  </Button>
+                  <Button color='secondary' aria-readonly>
+                    {count}
+                  </Button>
+                  <Button
+                    onClick={() => setCount(count - 1)}
+                    disabled={count < 1}
+                    color='secondary'
+                  >
+                    -
+                  </Button>
+                </ButtonGroup>
+              </div>
               <div className='sellingPrice'>190,000원</div>
               <div className='selectedClose'>X</div>
             </div>

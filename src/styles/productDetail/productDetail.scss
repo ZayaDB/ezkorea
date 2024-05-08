@@ -46,30 +46,36 @@ $border: 1px solid lightgray;
   justify-content: baseline;
   width: 1200px;
   padding-top: 8px;
-  border: 1px solid black;
+  // border: 1px solid black;
   margin: 0 auto;
 }
 .detailMain {
   width: 90vh;
-  margin: 0;
+  padding: 0;
+  margin-right: 8px;
 }
 .detailSide {
-  width: calc(1200px - 90vh);
-  height: calc(100vh - 100px);
-  background-color: white;
+  width: calc(1200px - (90vh + 8px));
+  height: calc(100vh - 200px);
   @include column();
 }
 
 // 사이드
 #selectBox {
   position: relative;
-  width: calc(1200px - 90vh);
+  width: calc(1200px - (90vh + 8px));
+  height: calc(100vh - 200px);
 }
 #selectPurchase {
   @include column();
-  width: calc(1200px - 90vh);
+  width: calc(1200px - (90vh + 8px));
+  height: calc(100vh - 200px);
   position: fixed;
+  // background-color: white;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  padding: 8px;
 }
+
 // 구매 상품 정보
 #purchaseInfo {
   @include column();
@@ -177,6 +183,9 @@ $border: 1px solid lightgray;
 }
 #countZone {
   @include row();
+}
+#countZone div {
+  margin: 4px;
 }
 
 #selectedPurchase {
