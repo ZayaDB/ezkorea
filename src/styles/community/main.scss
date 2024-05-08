@@ -1,0 +1,71 @@
+.color-filter button,
+.style-filter button {
+  margin: 4px;
+  flex: 1;
+}
+
+.style-filter {
+  padding-left: 30px;
+}
+
+.filter-title {
+  margin: 0;
+  padding: 0;
+}
+
+.wrap {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  flex-direction: column;
+}
+
+.feed {
+  display: flex;
+  justify-content: center;
+}
+
+.button-wrap {
+  padding-left: 40px; /* 왼쪽 패딩 제거 */
+  max-width: 1200px;
+}
+
+.line {
+  width: 100%;
+  max-width: 1160px;
+  border-bottom: 2px solid #000;
+  margin: 20px auto;
+}
+
+.feed-content {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  margin-bottom: 1px;
+  outline: 1px solid #999;
+  overflow: hidden;
+  width: 250px;
+  height: 250px;
+  justify-content: center;
+  transition: border-color 0.5s ease;
+}
+
+.feed-content:hover {
+  outline: 3px solid #5ff531;
+}
+
+.feed-content:hover img {
+  animation: zoomIn 0.5s ease-in-out forwards; /* 호버시 이미지 확대 애니메이션 적용 */
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
