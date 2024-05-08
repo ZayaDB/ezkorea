@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
@@ -19,7 +18,6 @@ import Community from './pages/Community';
 import ProductDetail from './pages/ProductDetail';
 import OrderPage from './pages/OrderPage';
 
-
 function App() {
   const sections = [
     { title: '쇼핑홈', url: '/' },
@@ -36,10 +34,8 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-
         <Header title='Drururu' sections={sections} />
-
-    
+        <Routes>
           <Route path='/' element={<Home />} />
           <Route
             path='/shop'
@@ -65,8 +61,7 @@ function App() {
           <Route path='/community' element={<Community />} />
           <Route path='/login' element={<Login />} />
           <Route path='/community/post' element={<CommunityPostPage />} />
-           <Route path="/order" element={<OrderPage />} />
-
+          <Route path='/order' element={<OrderPage />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
