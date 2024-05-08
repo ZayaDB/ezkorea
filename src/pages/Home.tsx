@@ -1,6 +1,6 @@
 import Carousel from 'react-bootstrap/Carousel';
-import mainSlide from '../assets/images/main_slide1.png';
-import mainSlide2 from '../assets/images/main_slide7.png';
+import mainSlide from '../assets/images/main_slide8.webp';
+import mainSlide2 from '../assets/images/main_slide11_1.webp';
 import mainSlide3 from '../assets/images/main_slide3.jpg';
 
 export default function Home() {
@@ -40,7 +40,7 @@ export default function Home() {
               </button>
               <p
                 style={{
-                  color: 'white',
+                  color: '#000000',
                   textAlign: 'left',
                   fontSize: '42px',
                   lineHeight: '44px',
@@ -53,7 +53,7 @@ export default function Home() {
               <p
                 style={{
                   fontSize: '18px',
-                  color: '#f1f1f1',
+                  color: '#000000',
                   fontWeight: '400',
                 }}
               >

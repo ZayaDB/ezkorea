@@ -43,7 +43,7 @@ const theme = createTheme({
 });
 
 export default function Header(props: HeaderProps) {
-  const isMobile = useMediaQuery('(max-width:600px)');
+  const isMobile = useMediaQuery('(max-width:619px)');
   const { title } = props;
 
   return (
@@ -135,7 +135,6 @@ export default function Header(props: HeaderProps) {
             )}
           </Typography>
           <Box>
-
             {/* 검색창(input) */}
             {/* mobile(width:600px 이하)에서 사라짐 */}
             {isMobile ? null : (
