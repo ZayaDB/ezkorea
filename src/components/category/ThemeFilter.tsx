@@ -4,7 +4,7 @@ import Checkbox from '@mui/material/Checkbox';
 import { Box, styled } from '@mui/system';
 
 export default function ThemeFilter() {
-  const themes: string[] = ['gaming', 'simple', 'unique', 'antique'];
+  const themes: string[] = ['gaming', 'simple', 'unique', 'antique','kitsch'];
 
   const [checkedThemes, setCheckedThemes] = useState<string[]>([]);
 

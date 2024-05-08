@@ -3,38 +3,38 @@ import {
   Box,
   Chip,
   FormControl,
-  InputLabel,
   MenuItem,
   Select,
+  Button,
+  Modal,
+  Typography,
 } from '@mui/material';
 import Pagination from '@mui/material/Pagination';
 import ClearIcon from '@mui/icons-material/Clear';
-import {
-  Products,
-  CategoryData,
-  ProductListProps,
-} from '../../types/typesProducts';
+import { ProductListProps } from '../../types/typesProducts';
 import ProductItem from './ProductItem';
 import '../../styles/category/productWrapCss.scss';
 import { useMediaQuery } from '@mui/material';
+import FilterCompo from './FilterCompo';
 
 const ProductList: React.FC<ProductListProps> = ({
   selectedCategory,
   prodData,
   categoryData,
 }) => {
-  console.log('선택한카테고리 ', categoryData, ':', selectedCategory);
-
   const [sort, setSort] = useState<string>('인기순');
   const [selectedSubCategory, setSelectedSubCategory] = useState<string>('ALL');
   const isMobile = useMediaQuery('(max-width:768px)');
+  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
 
-  // 선택된 카테고리의 인덱스를 찾기
   const selectedCategoryIndex = categoryData.findIndex(
     category => category.name === selectedCategory
   );
 
-  // 선택된 카테고리의 subCategories 가져오기
+  useEffect(() => {
+    console.log('aa ', isMobile);
+  }, [isMobile]);
+
   const subCategories =
     selectedCategoryIndex !== -1
       ? categoryData[selectedCategoryIndex].subCategories
@@ -45,13 +45,21 @@ const ProductList: React.FC<ProductListProps> = ({
     // 필터링 데이터 삭제 로직
   };
 
+  const handleFilterButtonClick = () => {
+    console.log(isMobile);
+    setIsFilterModalOpen(true); // 모달 열기
+  };
+
+  const handleFilterModalClose = () => {
+    setIsFilterModalOpen(false); // 모달 닫기
+  };
+
   return (
     <Box className='prod-container'>
+      {/* 카테고리 선택 */}
       <Box className='prod-selec-value'>
-        {/* 카테고리 선택 */}
         <Box className='select-categories'>
           <Box className='category-1'>{selectedCategory}</Box>
-          {/* 하위 카테고리 선택 */}
           <Box className='category-2'>
             {subCategories.map(subCategory => (
               <Box
@@ -86,10 +94,47 @@ const ProductList: React.FC<ProductListProps> = ({
             ))}
           </Box>
         </Box>
-        {/* 필터링 데이터 */}
+
+        {/* 모바일 환경에서 필터링 버튼 */}
+        {isMobile && (
+          <Button
+            onClick={handleFilterButtonClick}
+            style={{ marginRight: '10px' }}
+          >
+            필터링
+          </Button>
+        )}
+        {/* 모달 */}
+        <Modal
+          open={isFilterModalOpen} // 모바일 환경에서만 모달 열림
+          onClose={handleFilterModalClose}
+          aria-labelledby='parent-modal-title'
+          aria-describedby='parent-modal-description'
+        >
+          <Box
+            sx={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: 400,
+              height: 500,
+              bgcolor: 'background.paper',
+              border: '2px solid #000',
+              boxShadow: 24,
+              p: 4,
+            }}
+          >
+            {/* <FilterCompo /> */}
+            {/* 모바일 환경에서만 FilterCompo 렌더링 */}
+            <FilterCompo />
+      
+          </Box>
+        </Modal>
+
+        {/* 선택한 필터링 데이터 */}
         <Box className='select-filtering-values'>
           <Box className='filtering-box'>
-            {/* 선택한 필터링 데이터 */}
             <Chip
               label='선택한 값'
               onDelete={handleDelete}
@@ -102,7 +147,7 @@ const ProductList: React.FC<ProductListProps> = ({
                 paddingTop: isMobile ? '2px' : '4px',
                 borderRadius: 2.8,
               }}
-              deleteIcon={<ClearIcon style={{ fontSize: 16 }} />} // 삭제 아이콘의 크기 조정
+              deleteIcon={<ClearIcon style={{ fontSize: 16 }} />}
             />
           </Box>
           {/* 정렬기준 */}
@@ -120,14 +165,11 @@ const ProductList: React.FC<ProductListProps> = ({
                 id='sort-select'
                 value={sort}
                 onChange={event => setSort(event.target.value as string)}
-                // sx={{ height: '42px', fontSize: '14px',}}
                 sx={{
-                  height: isMobile ? '32px' : '42px', // 모바일 화면일 때 작은 높이
+                  height: isMobile ? '32px' : '42px',
                   fontSize: isMobile ? '12px' : '14px',
-                  // 모바일 화면일 때 작은 글꼴 크기
                 }}
               >
-                {/* 정렬 옵션 */}
                 <MenuItem value='인기순'>인기순</MenuItem>
                 <MenuItem value='리뷰많은순'>리뷰많은순</MenuItem>
                 <MenuItem value='낮은가격순'>낮은가격순</MenuItem>
@@ -138,6 +180,7 @@ const ProductList: React.FC<ProductListProps> = ({
           </Box>
         </Box>
       </Box>
+
       {/* 상품 목록 */}
       <Box className='prod-wrapper'>
         {prodData
@@ -151,6 +194,7 @@ const ProductList: React.FC<ProductListProps> = ({
             <ProductItem key={prod.productId} prod={prod} />
           ))}
       </Box>
+
       {/* 페이지네이션 */}
       <Pagination count={10} />
     </Box>
