@@ -2,9 +2,22 @@
 
 /* order-container */
 .order-container {
+  display: flex;
+  flex-direction: column; /* 기본적으로 세로 방향으로 배치되도록 설정 */
+}
+
+@media screen and (min-width: 768px) {
+  .order-container {
+    flex-direction: row; /* 화면이 768px 이상이면 가로 방향으로 변경 */
+    position: fixed;
+  }
+  .order-content {
+  }
+}
+
+.order-content {
   box-sizing: border-box;
   @include body1;
-  padding-top: 150px; /* header 부분 수정 필요 */
 }
 
 /* 각 컴포넌트 head 부분 */
@@ -26,14 +39,15 @@
   display: flex;
   justify-content: center;
 
-  .num {
-    width: 30%;
-  }
-
   span {
     width: 5%;
     display: flex;
     justify-content: center;
     align-items: center;
   }
+}
+
+/* common */
+.caption {
+  margin-bottom: 15px;
 }
