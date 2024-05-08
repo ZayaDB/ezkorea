@@ -25,14 +25,19 @@ const BlackCheckbox = styled(Checkbox)({
 const StyledCheckbox = styled(BlackCheckbox)(({ theme }) => ({
   '& .MuiSvgIcon-root': {
     width: '1.2em',
-   
+  },
+  [theme.breakpoints.down('md')]: {
+    padding: 2,
+    marginBottom: 5,
+    '& .MuiSvgIcon-root': {
+      width: '0.9em',
+    },
   },
   [theme.breakpoints.down('sm')]: {
-    padding:0,
-    margin:0,
+    padding: 2,
+    margin: 0,
     '& .MuiSvgIcon-root': {
       width: '0.6em',
-     
     },
   },
 }));
