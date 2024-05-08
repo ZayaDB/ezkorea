@@ -1,0 +1,70 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
+
+$font-size-xxl: 24px;
+$font-size-xl: 22px;
+$font-size-l: 18px;
+$font-size-m: 16px;
+$font-size-s: 14px;
+$font-size-xs: 12px;
+$font-size-xxs: 11px;
+
+$font-weight-bold: 700;
+$font-weight-medium: 500;
+$font-weight-regular: 400;
+
+$font-family: 'Pretendard Variable';
+
+@mixin heading1 {
+  font-size: $font-size-xxl;
+  font-family: 'Pretendard Variable';
+  font-weight: 400;
+}
+
+@mixin heading2 {
+  font-size: $font-size-xl;
+  font-family: 'Pretendard Variable';
+  font-weight: 400;
+}
+
+@mixin heading3 {
+  font-size: $font-size-l;
+  font-family: 'Pretendard Variable';
+  font-weight: 400;
+}
+
+@mixin body1-bold {
+  font-size: $font-size-l;
+  font-family: 'Pretendard Variable';
+  font-weight: 700;
+}
+
+@mixin body1-bold {
+  font-size: $font-size-m;
+  font-family: 'Pretendard Variable';
+  font-weight: 700;
+}
+@mixin body1 {
+  font-size: $font-size-m;
+  font-family: 'Pretendard Variable';
+  font-weight: 400;
+}
+@mixin body2-bold {
+  font-size: $font-size-s;
+  font-family: 'Pretendard Variable';
+  font-weight: 700;
+}
+@mixin body2 {
+  font-size: $font-size-s;
+  font-family: 'Pretendard Variable';
+  font-weight: 400;
+}
+@mixin detail-bold {
+  font-size: $font-size-xs;
+  font-family: 'Pretendard Variable';
+  font-weight: 700;
+}
+@mixin detail {
+  font-size: $font-size-xs;
+  font-family: 'Pretendard Variable';
+  font-weight: 400;
+}
