@@ -3,6 +3,8 @@ import React from 'react';
 import { Box, Modal } from '@mui/material';
 import { useState } from 'react';
 import DaumPostcode from 'react-daum-postcode';
+import { useDispatch } from 'react-redux';
+import { updateAddress } from '../../redux/modules/address';
 
 const style = {
   position: 'absolute' as const,
@@ -38,6 +40,8 @@ export default function Postcode() {
 }
 
 function ModalContent({ handleClose }: { handleClose: () => void }) {
+  const dispatch = useDispatch();
+
   const handlePostCode = (data: any) => {
     let fullAddress = data.address;
     let extraAddress = '';
@@ -55,6 +59,10 @@ function ModalContent({ handleClose }: { handleClose: () => void }) {
     // console.log(data); /* 모든 데이터 */
     console.log(fullAddress); /* 주소 */
     console.log(data.zonecode); /* 우편번호 */
+
+    dispatch(updateAddress(fullAddress, data.zonecode));
+
+    handleClose();
   };
 
   return (
