@@ -33,6 +33,9 @@ export default function DeliveryInfo() {
           type='radio'
           name='method'
           id='new'
+          type='radio'
+          name='method'
+          id='new'
           onClick={() => {
             setSelected(false);
           }}
@@ -63,6 +66,7 @@ function DeliveryInfoContent() {
       <TextField fullWidth placeholder='나머지주소' />
 
       <div className='orderer-num-container'>
+      <div className='orderer-num-container'>
         <FormControl fullWidth={true}>
           <Select
             value={firstNum}
@@ -78,9 +82,12 @@ function DeliveryInfoContent() {
         </FormControl>
         <span>-</span>
         <TextField className='num' fullWidth />
+        <TextField className='num' fullWidth />
         <span>-</span>
         <TextField className='num' fullWidth />
+        <TextField className='num' fullWidth />
       </div>
+      <TextField fullWidth placeholder='배송 메시지' />
       <TextField fullWidth placeholder='배송 메시지' />
     </>
   );

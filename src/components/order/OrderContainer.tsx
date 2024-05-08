@@ -5,7 +5,7 @@ import { useState } from 'react';
 import DeliveryInfo from './DeliveryInfo';
 import Head from './Head';
 import PaymentMethod from './PaymentMethod';
-import { Container } from '@mui/material';
+import ApplyDiscount from './ApplyDiscount';
 
 /* 주문자 정보 
   - 회원가입할 때 입력한 정보 가져오기
