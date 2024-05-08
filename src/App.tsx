@@ -1,4 +1,3 @@
-// import React from 'react';
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
@@ -17,6 +16,7 @@ import SaleProduct from './components/category/SaleProduct';
 import Category from './pages/Category';
 import Community from './pages/Community';
 import ProductDetail from './pages/ProductDetail';
+import OrderPage from './pages/OrderPage';
 
 function App() {
   const sections = [
@@ -35,7 +35,6 @@ function App() {
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <Header title='Drururu' sections={sections} />
-
         <Routes>
           <Route path='/' element={<Home />} />
           <Route
@@ -62,6 +61,7 @@ function App() {
           <Route path='/community' element={<Community />} />
           <Route path='/login' element={<Login />} />
           <Route path='/community/post' element={<CommunityPostPage />} />
+          <Route path='/order' element={<OrderPage />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
