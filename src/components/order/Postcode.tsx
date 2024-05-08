@@ -1,7 +1,12 @@
+import React, { Dispatch, useEffect } from 'react';
 /* kakao-address */
 import { Box, Modal } from '@mui/material';
 import { useState } from 'react';
 import DaumPostcode from 'react-daum-postcode';
+
+import { useDispatch } from 'react-redux';
+import { AddressActionTypes } from '../../redux/types/addressActionTypes';
+import { updateAddressInfo } from '../../redux/actions/addressActions';
 
 const style = {
   position: 'absolute' as const,
@@ -25,8 +30,8 @@ export default function Postcode() {
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
       >
         <Box sx={style}>
           <ModalContent handleClose={handleClose} />
@@ -37,6 +42,8 @@ export default function Postcode() {
 }
 
 function ModalContent({ handleClose }: { handleClose: () => void }) {
+  const dispatch = useDispatch();
+
   const handlePostCode = (data: any) => {
     let fullAddress = data.address;
     let extraAddress = '';
@@ -54,11 +61,18 @@ function ModalContent({ handleClose }: { handleClose: () => void }) {
     // console.log(data); /* 모든 데이터 */
     console.log(fullAddress); /* 주소 */
     console.log(data.zonecode); /* 우편번호 */
+
+    if (data !== undefined) {
+      dispatch(updateAddressInfo({ fullAddress, zonecode: data.zonecode }));
+      console.log('dispatch');
+    }
+
+    handleClose();
   };
 
   return (
     <>
-      <button type="button" onClick={handleClose} className="postCode_btn">
+      <button type='button' onClick={handleClose} className='postCode_btn'>
         닫기
       </button>
       <DaumPostcode autoClose onComplete={handlePostCode} />
