@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import ContentArea from '../styles/ContentArea';
 import { Box, Typography } from '@mui/material';
@@ -32,6 +32,15 @@ function CommunityPostPage() {
   const [selectedConcepts, setSelectedConcepts] = useState<string[]>([]);
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
 
+  useEffect(() => {
+    if (selectedConcepts.length > 0) {
+      clearErrors('submissionConcepts');
+    }
+    if (selectedColors.length > 0) {
+      clearErrors('submissionColors');
+    }
+  }, [selectedConcepts, selectedColors, clearErrors]);
+
   const onSubmit: SubmitHandler<IFormInput> = (data, event?) => {
     console.log('handleSubmit 함수가 호출되었습니다.');
     console.log(data);
@@ -44,24 +53,29 @@ function CommunityPostPage() {
     };
 
     console.log('Complete submission data:', completeData);
-
-    if (!selectedConcepts.length || !selectedColors.length) {
-      if (!selectedConcepts.length) {
-        setError('submissionConcepts', {
-          type: 'manual',
-          message: '하나 이상의 컨셉을 선택해주세요.',
-        });
-      }
-      if (!selectedColors.length) {
-        setError('submissionColors', {
-          type: 'manual',
-          message: '하나 이상의 컬러를 선택해주세요.',
-        });
-      }
-      return;
+    if (!files.length) {
+      setError('files', {
+        type: 'manual',
+        message: '1개 이상 4개 이하의 사진을 업로드해주세요.',
+      });
     }
 
-    clearErrors();
+    if (!selectedConcepts.length) {
+      setError('submissionConcepts', {
+        type: 'manual',
+        message: '하나 이상의 컨셉을 선택해주세요.',
+      });
+    }
+    if (!selectedColors.length) {
+      setError('submissionColors', {
+        type: 'manual',
+        message: '하나 이상의 컬러를 선택해주세요.',
+      });
+    }
+    if (selectedConcepts.length && selectedColors.length) {
+      console.log('Form submitted:', completeData);
+      // 여기에 서버 전송 로직 추가
+    }
   };
 
   // 파일 선택 핸들러
