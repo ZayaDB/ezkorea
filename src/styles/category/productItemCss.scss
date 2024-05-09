@@ -43,8 +43,8 @@ $font-weight-regular: 400;
     height: 200px;
 
     .prod-img {
-      height: 60%;
       width: 100%;
+      height: 259px; // 이미지의 높이를 고정값으로 설정
       overflow: hidden;
 
       img {
@@ -62,14 +62,23 @@ $font-weight-regular: 400;
 
       .prod-brand {
         font-size: $font-size-xs;
-        height: 10%;
+        height: 20px; // 브랜드명 최대 높이 설정
         margin-bottom: 3px;
         margin-top: 2px;
+        white-space: nowrap; // 넘칠 경우 줄 바꿈 방지
+        overflow: hidden;
+        text-overflow: ellipsis; // 넘칠 경우 ...으로 표시
       }
+
       .prod-name {
         font-size: $font-size-s;
         margin-bottom: 10px;
+        line-height: 20px; // 상품명 최대 높이 설정
+        white-space: nowrap; // 넘칠 경우 줄 바꿈 방지
+        overflow: hidden;
+        text-overflow: ellipsis; // 넘칠 경우 ...으로 표시
       }
+
       .prod-discount {
         font-size: 15px;
         color: rgb(113, 223, 66);
@@ -110,7 +119,26 @@ $font-weight-regular: 400;
     }
   }
 }
-
+@media (max-width: 950px) {
+  .prod-item {
+    .link-to-detail {
+      .prod-img {
+        width: 100%;
+        height: 250px;
+      }
+    }
+  }
+}
+@media (max-width: 850px) {
+  .prod-item {
+    .link-to-detail {
+      .prod-img {
+        width: 100%;
+        height: 220px;
+      }
+    }
+  }
+}
 // 반응형 미디어 쿼리
 @media (max-width: 768px) {
   .prod-item {
@@ -121,9 +149,8 @@ $font-weight-regular: 400;
 
     .link-to-detail {
       .prod-img {
-        height: 40%;
         width: 100%;
-        overflow: hidden;
+        height: 300px;
       }
     }
     .color-heart-box {
@@ -170,7 +197,7 @@ $font-weight-regular: 400;
 }
 
 // 반응형 미디어 쿼리
-@media (max-width: 360px) {
+@media (max-width: 460px) {
   .prod-item {
     width: calc(50% - 20px);
     height: calc(100% - 10px);
@@ -179,9 +206,7 @@ $font-weight-regular: 400;
 
     .link-to-detail {
       .prod-img {
-        height: 40%;
-        width: 100%;
-        overflow: hidden;
+        height:220px;
       }
       .prod-info {
         @for $i from 1 through 6 {
@@ -224,12 +249,12 @@ $font-weight-regular: 400;
     .color-heart-box {
       padding-left: 10px;
       padding-bottom: 2px;
-      padding-top:0;
+      padding-top: 0;
       .color-wrapper {
         display: flex;
         flex-direction: row;
         padding-top: 9px;
-  
+
         @for $i from 1 through 6 {
           .color-circle:nth-child(#{$i}) {
             border-radius: 100%;

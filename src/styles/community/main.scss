@@ -4,6 +4,13 @@
   flex: 1;
 }
 
+.filter-container {
+  display: flex;
+  max-width: 1200px;
+  width: 100%;
+  justify-content: baseline;
+}
+
 .style-filter {
   padding-left: 30px;
 }
@@ -18,6 +25,7 @@
   max-width: 1200px;
   display: flex;
   position: relative;
+  top: 50px;
   left: 50%;
   transform: translateX(-50%);
   flex-direction: column;
@@ -25,47 +33,85 @@
 
 .feed {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
+  width: 100%;
+  max-width: 1200px;
+  padding-bottom: 20px;
+}
+/* 마지막 아이템의 패딩 제거 */
+.feed > *:last-child {
+  margin: 0 10px;
+  padding-bottom: 0;
 }
 
 .button-wrap {
-  padding-left: 40px; /* 왼쪽 패딩 제거 */
   max-width: 1200px;
+  padding: 0;
 }
 
 .line {
   width: 100%;
-  max-width: 1160px;
+  max-width: 1200px;
   border-bottom: 2px solid #000;
   margin: 20px auto;
 }
 
-.feed-content {
+.feed-container {
+  position: relative;
+
   display: flex;
   flex-direction: column;
   border-radius: 8px;
   margin-bottom: 1px;
-  outline: 1px solid #999;
   overflow: hidden;
-  width: 250px;
-  height: 250px;
+  width: 280px;
+  height: 100%;
   justify-content: center;
   transition: border-color 0.5s ease;
+  cursor: pointer;
+  // outline: 1px solid #999;
 }
 
-.feed-content:hover {
+.feed-container:hover {
   outline: 3px solid #5ff531;
 }
 
-.feed-content:hover img {
-  animation: zoomIn 0.5s ease-in-out forwards; /* 호버시 이미지 확대 애니메이션 적용 */
+.feed-img {
+  transition: transform 0.3s ease-in-out; /* 이미지 확대 애니메이션 적용 */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-@keyframes zoomIn {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.1);
-  }
+.feed-container:hover .feed-img {
+  transform: scale(1.1); /* 호버시 이미지 확대 */
+}
+
+.feed-img:not(:hover) {
+  transform: scale(1); /* 호버 해제시 이미지 축소 */
+}
+
+.feed-box {
+  height: 280px;
+  overflow: hidden;
+}
+
+.info-box {
+  position: absolute; /* 절대적 위치 지정 */
+  bottom: 0; /* 아래로부터의 위치 */
+  left: 0; /* 왼쪽으로부터의 위치 */
+  right: 0; /* 오른쪽으로부터의 위치 */
+  padding: 4px 8px;
+  background-color: rgba(255, 255, 255, 1); /* 배경색 및 투명도 설정 */
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  color: w;
+}
+
+.profile-img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-right: 8px;
 }
