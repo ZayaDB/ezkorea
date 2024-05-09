@@ -25,8 +25,8 @@ export default function Postcode() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   return (
-    <div>
-      <button onClick={handleOpen}>주소록</button>
+    <>
+      <button onClick={handleOpen}>우편번호 검색</button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -37,7 +37,7 @@ export default function Postcode() {
           <ModalContent handleClose={handleClose} />
         </Box>
       </Modal>
-    </div>
+    </>
   );
 }
 
