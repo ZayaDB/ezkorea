@@ -28,7 +28,7 @@ export default function DeliveryInfo() {
         />
         주문자 정보와 동일
       </label>
-      <label>
+      <label className='caption'>
         <input
           type='radio'
           name='method'
@@ -57,7 +57,7 @@ function DeliveryInfoContent() {
     setFirstNum(event.target.value);
   };
   return (
-    <>
+    <div className='deliveryinfo-container'>
       <TextField fullWidth placeholder='받으시는 분' />
       <TextField placeholder='우편번호' value={zonecode} />
       <Postcode />
@@ -65,29 +65,25 @@ function DeliveryInfoContent() {
       <TextField fullWidth placeholder='나머지주소' />
 
       <div className='orderer-num-container'>
-        <div className='orderer-num-container'>
-          <FormControl fullWidth={true}>
-            <Select
-              value={firstNum}
-              defaultValue={firstNum}
-              onChange={handleChange}
-              autoWidth
-            >
-              <MenuItem value={'010'}>010</MenuItem>
-              <MenuItem value={'011'}>011</MenuItem>
-              <MenuItem value={'016'}>016</MenuItem>
-              <MenuItem value={'017'}>017</MenuItem>
-            </Select>
-          </FormControl>
-          <span>-</span>
-          <TextField className='num' fullWidth />
-          <TextField className='num' fullWidth />
-          <span>-</span>
-          <TextField className='num' fullWidth />
-          <TextField className='num' fullWidth />
-        </div>
-        <TextField fullWidth placeholder='배송 메시지' />
+        <FormControl fullWidth={true}>
+          <Select
+            value={firstNum}
+            defaultValue={firstNum}
+            onChange={handleChange}
+            autoWidth
+          >
+            <MenuItem value={'010'}>010</MenuItem>
+            <MenuItem value={'011'}>011</MenuItem>
+            <MenuItem value={'016'}>016</MenuItem>
+            <MenuItem value={'017'}>017</MenuItem>
+          </Select>
+        </FormControl>
+        <span>-</span>
+        <TextField className='num' fullWidth />
+        <span>-</span>
+        <TextField className='num' fullWidth />
       </div>
-    </>
+      <TextField fullWidth placeholder='배송 메시지' />
+    </div>
   );
 }
