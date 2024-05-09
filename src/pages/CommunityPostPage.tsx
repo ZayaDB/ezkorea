@@ -15,7 +15,6 @@ import {
   ListItem,
   List,
 } from '@mui/material';
-import FeedTest from '../components/community/main/FeedTest';
 
 import SubTitle from '../components/community/post/SubTitle';
 
@@ -60,7 +59,7 @@ function CommunityPostPage() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const onSubmit: SubmitHandler<IFormInput> = (data, event?) => {
+  const onSubmit: SubmitHandler<IFormInput> = data => {
     console.log('handleSubmit 함수가 호출되었습니다.');
     console.log(data);
     const completeData = {
@@ -152,15 +151,20 @@ function CommunityPostPage() {
     }
   };
 
-  const handleCheckboxChange = (
-    type: 'concepts' | 'colors',
-    value: string,
-    checked: boolean
+  //체크박스 대신 버튼 토글로 변경
+  const toggleSelection = (
+    item: string,
+    list: string[],
+    setList: React.Dispatch<React.SetStateAction<string[]>>
   ) => {
-    const setter =
-      type === 'concepts' ? setSelectedConcepts : setSelectedColors;
-    setter(prev =>
-      checked ? [...prev, value] : prev.filter(item => item !== value)
+    const currentIndex = list.indexOf(item);
+    const newChecked = [...list];
+    currentIndex === -1
+      ? newChecked.push(item)
+      : newChecked.splice(currentIndex, 1);
+    setList(newChecked);
+    clearErrors(
+      list === selectedConcepts ? 'submissionConcepts' : 'submissionColors'
     );
   };
 
@@ -209,7 +213,11 @@ function CommunityPostPage() {
                 </div>
               );
             })}
-            {errors.files && <p>{errors.files.message}</p>}
+            {errors.files && (
+              <Typography margin='0px' padding='0px' color='error'>
+                {errors.files.message}
+              </Typography>
+            )}
           </Box>
           <SubTitle text='글 제목'></SubTitle>
 
@@ -229,6 +237,9 @@ function CommunityPostPage() {
             variant='outlined'
             error={!!errors.title}
             helperText={errors.title ? errors.title.message : ''}
+            FormHelperTextProps={{
+              sx: { marginLeft: 0, marginRight: 0 }, // 마진 왼쪽과 오른쪽을 0으로 설정
+            }}
           />
           <SubTitle text='설명'></SubTitle>
 
@@ -242,12 +253,15 @@ function CommunityPostPage() {
               },
             })}
             multiline
-            rows={4}
+            rows={8}
             error={!!errors.description}
             helperText={errors.description ? errors.description.message : ''}
             fullWidth
             variant='outlined'
             inputProps={{ maxLength: 2000 }}
+            FormHelperTextProps={{
+              sx: { marginLeft: 0, marginRight: 0 }, // 마진 왼쪽과 오른쪽을 0으로 설정
+            }}
           />
 
           <SubTitle text='제품 선택'></SubTitle>
@@ -292,9 +306,8 @@ function CommunityPostPage() {
             </List>
           </Box>
 
-          <div>
-            <SubTitle text='컨셉 선택'></SubTitle>
-            {['antique', 'gaming', 'simple', 'unique'].map(concept => (
+          <SubTitle text='컨셉 선택'></SubTitle>
+          {/* {['antique', 'gaming', 'simple', 'unique'].map(concept => (
               <label key={concept}>
                 <input
                   type='checkbox'
@@ -308,10 +321,83 @@ function CommunityPostPage() {
             ))}
             {errors.submissionConcepts && (
               <p>{errors.submissionConcepts.message}</p>
+            )} */}
+          <Box>
+            {['antique', 'gaming', 'simple', 'unique'].map(concept => (
+              <Button
+                key={concept}
+                onClick={() =>
+                  toggleSelection(
+                    concept,
+                    selectedConcepts,
+                    setSelectedConcepts
+                  )
+                }
+                variant='outlined'
+                sx={{
+                  my: 1,
+                  color: 'black',
+                  bgcolor: selectedConcepts.includes(concept)
+                    ? 'primary.main'
+                    : 'inherit',
+                  ':hover': {
+                    backgroundColor: selectedConcepts.includes(concept)
+                      ? 'primary.main'
+                      : 'inherit',
+                  },
+                }}
+              >
+                {concept}
+              </Button>
+            ))}
+            {errors.submissionConcepts && (
+              <Typography color='error'>
+                {errors.submissionConcepts.message}
+              </Typography>
             )}
-          </div>
-          <div>
-            <SubTitle text='컬러 선택'></SubTitle>
+          </Box>
+          <Box>
+            <SubTitle text='컬러 선택' />
+            {['black', 'white', 'wood', 'pink'].map(color => (
+              <Button
+                key={color}
+                variant='outlined'
+                onClick={() =>
+                  toggleSelection(color, selectedColors, setSelectedColors)
+                }
+                sx={{
+                  my: 1,
+                  color: 'black',
+                  bgcolor: selectedColors.includes(color)
+                    ? 'primary.main'
+                    : 'inherit',
+                  ':hover': {
+                    backgroundColor: selectedColors.includes(color)
+                      ? 'primary.main'
+                      : 'inherit',
+                  },
+                }}
+              >
+                <Box
+                  sx={{
+                    width: 24,
+                    height: 24,
+                    borderRadius: '50%',
+                    border: color === 'white' ? 'solid 1px black' : 'none',
+                    bgcolor: color === 'wood' ? '#9A6322' : color,
+                    mr: 1,
+                  }}
+                />
+                {color}
+              </Button>
+            ))}
+            {errors.submissionColors && (
+              <Typography color='error'>
+                {errors.submissionColors.message}
+              </Typography>
+            )}
+          </Box>
+          {/* <SubTitle text='컬러 선택'></SubTitle>
             {['black', 'white', 'wood', 'pink'].map(color => (
               <label key={color}>
                 <input
@@ -327,9 +413,21 @@ function CommunityPostPage() {
             {errors.submissionColors && (
               <p>{errors.submissionColors.message}</p>
             )}
-          </div>
+          </div> */}
         </Box>
-        <button type='submit'>등록</button>
+        <Button type='button'>취소하기</Button>
+        <Button
+          sx={{
+            backgroundColor: theme.palette.primary.main,
+            color: theme.palette.common.black,
+            ':hover': {
+              backgroundColor: theme.palette.primary.main,
+            },
+          }}
+          type='submit'
+        >
+          등록하기
+        </Button>
       </form>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>{'아래 내용으로 피드를 등록하시겠습니까?'}</DialogTitle>
