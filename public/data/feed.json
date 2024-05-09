@@ -693,15 +693,15 @@
   },
   {
     "feedId": 17,
-    "accountName": "office_guru",
+    "accountName": "gr1zbot",
     "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
     "images": [
-      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/1612314994_cSiuH.jpeg?w=720",
-      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/1612314989_13ybMoU.jpeg?w=720",
-      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/1612314984_GJzLWV.jpeg?w=720"
+      "https://img2.quasarzone.com/editor/2020/06/29/8c3dc90ce21648c282311bc6416aa21d.jpg",
+      "https://img2.quasarzone.com/editor/2020/06/29/934410c926dc8ff316806f4641c7b32e.jpg",
+      "https://img2.quasarzone.com/editor/2020/07/05/9e7121e61dcdfaf20c01385d7f92d67b.jpg"
     ],
-    "title": "혁신적인 오피스 인테리어",
-    "description": "최신 트렌드를 반영한 혁신적인 오피스 공간으로 직원들의 생산성을 높여보세요.",
+    "title": "데스크테리어와 소품들",
+    "description": "안녕하세요, 데스크테리어가 취미라 그동안 찍어두었던 사진들 올려봅니다.",
     "selectedProducts": [
       {
         "productId": 27,
@@ -711,7 +711,7 @@
       }
     ],
     "concepts": ["antique"],
-    "colors": ["white", "wood"],
+    "colors": ["black", "wood"],
     "views": 1342,
     "likes": 34,
     "commentCount": 0,

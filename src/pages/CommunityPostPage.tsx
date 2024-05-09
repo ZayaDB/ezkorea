@@ -15,7 +15,6 @@ import {
   ListItem,
   List,
 } from '@mui/material';
-import FeedTest from '../components/community/main/FeedTest';
 
 import SubTitle from '../components/community/post/SubTitle';
 
