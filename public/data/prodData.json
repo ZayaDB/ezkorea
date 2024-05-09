@@ -294,7 +294,7 @@
     "productId": 18,
     "name": "엔보우 블루투스 휴대용 무선키보드 3채널 멀티페어링 N패드 라이트",
     "brand": "엔보우",
-    "colors": ["white", "mint", "pink", "blue", "black"],
+    "colors": ["white", "skyblue", "pink", "blue", "black"],
     "concepts": ["simple"],
     "price": "14,900",
     "discount": 40,
@@ -346,7 +346,7 @@
     "productId": 21,
     "name": "Vita Mind Lighting 단 스탠드 조명",
     "brand": "폴크",
-    "colors": ["pink","green"],
+    "colors": ["pink", "green"],
     "concepts": ["kitsch"],
     "price": "58,650",
     "discount": 15,
@@ -477,7 +477,8 @@
     "hoverImage": "https://img.29cm.co.kr/next-product/2023/08/01/a1fe8d9959f641d8bf91fec88e904ebb_20230801105548.jpg?width=700",
     "views": 4000,
     "commentCount": 460
-  },  {
+  },
+  {
     "productId": 29,
     "name": "레트로2 미니 블루투스 텐키리스 키보드 B307",
     "brand": "엑토",
@@ -493,7 +494,8 @@
     "hoverImage": "https://img.29cm.co.kr/next-product/2023/08/01/a1fe8d9959f641d8bf91fec88e904ebb_20230801105548.jpg?width=700",
     "views": 4000,
     "commentCount": 460
-  },  {
+  },
+  {
     "productId": 30,
     "name": "레트로2 미니 블루투스 텐키리스 키보드 B307",
     "brand": "엑토",
@@ -509,7 +511,8 @@
     "hoverImage": "https://img.29cm.co.kr/next-product/2023/08/01/a1fe8d9959f641d8bf91fec88e904ebb_20230801105548.jpg?width=700",
     "views": 4000,
     "commentCount": 460
-  }, {
+  },
+  {
     "productId": 31,
     "name": "",
     "brand": "폴크",
@@ -525,11 +528,12 @@
     "hoverImage": "https://img.29cm.co.kr/next-product/2024/02/28/306a8167151149cab344b956bafef344_20240228155754.jpg?width=700",
     "views": 150,
     "commentCount": 200
-  }, {
+  },
+  {
     "productId": 32,
     "name": "",
     "brand": "폴크",
-    "colors": ["pink,green"],
+    "colors": ["pink", "green"],
     "concepts": ["kitsch"],
     "price": "58,650",
     "discount": 15,
