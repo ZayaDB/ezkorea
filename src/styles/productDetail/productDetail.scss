@@ -72,7 +72,8 @@ $border: 1px solid lightgray;
   height: calc(100vh - 200px);
   position: fixed;
   // background-color: white;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  border: $border;
   padding: 8px;
 }
 
@@ -80,7 +81,7 @@ $border: 1px solid lightgray;
 #purchaseInfo {
   @include column();
   justify-content: space-evenly;
-  height: 20vh;
+  height: 30vh;
 }
 #brandShare {
   @include row();
@@ -140,7 +141,7 @@ $border: 1px solid lightgray;
 
 // 혜택 & 배송
 #savingDelivery {
-  height: 15vh;
+  height: 20vh;
   @include column();
   justify-content: space-evenly;
   border-top: $border;
@@ -150,7 +151,9 @@ $border: 1px solid lightgray;
   font-size: $font-size-s;
   padding: 0 8px;
 }
-
+.delivery {
+  @include columnCenter();
+}
 .saving,
 #deliveryZone {
   @include row();
@@ -175,11 +178,16 @@ $border: 1px solid lightgray;
   padding-top: 12px;
   @include column();
 }
-#selectedPurchase,
-#purchaseZone {
+#selectProduct button {
+  all: unset;
+}
+#selectedPurchase {
+  @include column();
+  margin: 8px;
+}
+#optionBox {
   @include row();
   justify-content: space-between;
-  padding: 0 8px;
 }
 #countZone {
   @include row();
@@ -187,16 +195,27 @@ $border: 1px solid lightgray;
 #countZone div {
   margin: 4px;
 }
-
-#selectedPurchase {
-  margin: 8px;
+.selectedClose {
+  cursor: pointer;
+  color: gray;
+  font-weight: $font-weight-bold;
+}
+.selectedClose:hover {
+  color: black;
+  font-weight: $font-weight-bold;
 }
 #purchaseZone {
+  height: 5vh;
+  @include row();
+  justify-content: space-between;
+  padding: 0 8px;
   border-top: $border;
-  padding: 8px;
   font-size: $font-size-l;
   font-weight: $font-weight-bold;
 }
+// #selectedPurchase {
+//   display: none;
+// }
 
 // 버튼
 #buttons {
