@@ -10,19 +10,70 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 // import { createTheme, styled } from '@mui/material/styles';
+// import SaleProduct from './../category/SaleProduct';
+// const cancelRef = useRef(null);
+const [currentPage, setCurrentPage] = useState(1);
+const onPageChange = (e: React.ChangeEvent<unknown>, page: number) => {
+  setCurrentPage(page);
+};
 
 export default function SelectPurchase() {
-  // 선택 인풋바
+  // count 버튼
+  const [count, setCount] = React.useState(1);
+  // 드롭다운
   const [color, setColor] = React.useState('');
   const handleChange = (event: SelectChangeEvent) => {
     setColor(event.target.value as string);
   };
+  // 드롭다운 선택하면 요소 보이게
+  const [options, setOptions] = useState<JSX.Element[]>([]);
+  const [selectedColors, setSelectedColors] = useState<string[]>([]);
 
-  // count 버튼
-  const [count, setCount] = useState(0);
+  const handleAddOption = (color: string) => {
+    // 이미 선택된 색상인지 확인
+    if (!selectedColors.includes(color)) {
+      setSelectedColors([...selectedColors, color]);
+      setOptions(prevOptions => [...prevOptions, generateOption(color)]);
+    }
+  };
+
+  const generateOption = (color: string) => {
+    return (
+      <div key={color}>
+        <div id='optionBox'>
+          <div className='selectedColor'>{color}</div>
+          <div id='countZone'>
+            <div className='selectedCount'>
+              <ButtonGroup
+                size='small'
+                variant='contained'
+                aria-label='Basic button group'
+              >
+                <Button onClick={() => setCount(count + 1)} color='secondary'>
+                  +
+                </Button>
+                <Button color='secondary' aria-readonly>
+                  {0}
+                </Button>
+                <Button
+                  onClick={() => setCount(count - 1)}
+                  disabled={count < 1}
+                  color='secondary'
+                >
+                  -
+                </Button>
+              </ButtonGroup>
+            </div>
+            <div className='sellingPrice'>190,000원</div>
+            <div className='selectedClose'>X</div>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div id='selectBox'>
@@ -77,39 +128,26 @@ export default function SelectPurchase() {
                 label='color*'
                 onChange={handleChange}
               >
-                <MenuItem value={10}>White</MenuItem>
-                <MenuItem value={20}>Black</MenuItem>
+                <MenuItem value={'White'}>
+                  {/* White div 클릭 시, 선택 옵션을 추가함 */}
+                  <button onClick={() => handleAddOption('white')}>
+                    White
+                  </button>
+                </MenuItem>
+
+                <MenuItem value={'Black'}>
+                  {/* 다른 색상을 추가할 경우 */}
+                  <button onClick={() => handleAddOption('black')}>
+                    black
+                  </button>
+                </MenuItem>
               </Select>
             </FormControl>
           </Box>
-          <div id='selectedPurchase'>
-            <div className='selectedColor'>White</div>
-            <div id='countZone'>
-              <div className='selectedCount'>
-                <ButtonGroup
-                  size='small'
-                  variant='contained'
-                  aria-label='Basic button group'
-                >
-                  <Button onClick={() => setCount(count + 1)} color='secondary'>
-                    +
-                  </Button>
-                  <Button color='secondary' aria-readonly>
-                    {count}
-                  </Button>
-                  <Button
-                    onClick={() => setCount(count - 1)}
-                    disabled={count < 1}
-                    color='secondary'
-                  >
-                    -
-                  </Button>
-                </ButtonGroup>
-              </div>
-              <div className='sellingPrice'>190,000원</div>
-              <div className='selectedClose'>X</div>
-            </div>
-          </div>
+        </div>
+        <div id='selectedPurchase'>
+          {/* 추가된 선택 옵션들을 렌더링함 */}
+          {options}
         </div>
         <div id='purchaseZone'>
           <div className='PurchaseTitle'>주문금액</div>
