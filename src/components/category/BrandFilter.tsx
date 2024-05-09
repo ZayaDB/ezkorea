@@ -1,17 +1,24 @@
-import { useState } from 'react';
-import '../../styles/category/brandFilter.scss';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Checkbox from '@mui/material/Checkbox';
 import { Box, styled } from '@mui/system';
+import { RootState } from '../../redux/config';
+import { setBrands } from '../../redux/slices/categorySlice';
+import '../../styles/category/sideFilter.scss';
 
 export default function BrandFilter() {
-  const brands: string[] = [
-    'ikea',
-    'logitec',
-    'samsung',
-    '동서가구',
-    '삼익가구',
-  ];
+  const dispatch = useDispatch();
+
+  const selectedCategory = useSelector(
+    (state: RootState) => state.category.selectedCategory
+  );
+  const products = useSelector((state: RootState) => state.category.products);
+
   const [checkedBrands, setCheckedBrands] = useState<string[]>([]);
+
+  useEffect(() => {
+    setCheckedBrands([]); // 선택된 카테고리가 변경될 때 브랜드 목록 초기화
+  }, [selectedCategory]);
 
   const handleLabelClick = (brand: string) => {
     const newCheckedBrands = [...checkedBrands];
@@ -24,22 +31,27 @@ export default function BrandFilter() {
     }
 
     setCheckedBrands(newCheckedBrands);
-    console.log(
-      `${brand}`,
-      newCheckedBrands
-    );
+    dispatch(setBrands(newCheckedBrands));
   };
 
   const BlackCheckbox = styled(Checkbox)({
-    color: 'black', // 체크박스 아이콘 컬러 지정
+    color: 'black',
     '&.Mui-checked': {
-      color: 'black', // 체크된 상태에서의 아이콘 컬러 지정
+      color: 'black',
     },
   });
 
+  const getBrandsByCategory = (category: string): string[] => {
+    // 선택된 카테고리에 해당하는 제품 브랜드 목록 필터링
+    const filteredBrands = products
+      .filter(product => product.category1 === category)
+      .map(product => product.brand);
+    return Array.from(new Set(filteredBrands)); // 중복 제거 후 배열로 반환
+  };
+
   return (
     <Box className='element-brand'>
-      {brands.map(brand => (
+      {getBrandsByCategory(selectedCategory).map(brand => (
         <Box key={brand} className='brand'>
           <BlackCheckbox
             checked={checkedBrands.includes(brand)}

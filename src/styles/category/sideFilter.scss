@@ -1,0 +1,100 @@
+$tablet: 768px;
+$mobile: 360px;
+
+$font-size-xxl: 24px;
+$font-size-xl: 22px;
+$font-size-l: 18px;
+$font-size-m: 16px;
+$font-size-s: 14px;
+$font-size-xs: 12px;
+$font-size-xxs: 11px;
+
+$font-weight-bold: 700;
+$font-weight-medium: 500;
+$font-weight-regular: 400;
+
+.remove-filter {
+  padding-top:5px;
+}
+.element-brand {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  .brand {
+    width: 50%;
+    height: 35px;
+    display: flex;
+    flex-direction: row;
+    .brand-name {
+      line-height: 35px;
+      cursor: pointer;
+      white-space: nowrap; // 넘칠 경우 줄 바꿈 방지
+      overflow: hidden;
+      text-overflow: ellipsis; // 넘칠 경우 ...으로 표시
+      &:hover {
+        color: gray;
+      }
+    }
+  }
+}
+
+.color-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  height: 200px;
+  overflow-y: auto; /* 세로 스크롤만 적용 */
+}
+
+.element-color {
+  width: 40%;
+  display: flex;
+  flex-direction: row;
+  margin: 5px;
+  cursor: pointer;
+
+  &:hover {
+    color: gray;
+  }
+}
+
+.circle-color {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+
+  // 하얀색일 때만 테두리 스타일 적용
+  &.white {
+    background-color: white;
+    border: 0.3px solid rgb(218, 216, 216);
+  }
+}
+
+.color-text {
+  font-size: $font-size-s;
+  line-height: 25px;
+}
+
+.element-theme {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  .theme {
+    width: 50%;
+    height: 35px;
+    display: flex;
+    flex-direction: row;
+    .theme-name {
+      line-height: 35px;
+      cursor: pointer;
+      &:hover {
+        color: gray;
+      }
+    }
+  }
+}
