@@ -4,6 +4,7 @@ import useSort from '../../hooks/useSort';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/config';
 
+
 export default function BestProduct() {
   const products = useSelector((state: RootState) => state.category.products);
 
@@ -15,7 +16,7 @@ export default function BestProduct() {
     <Box className='prod-wrapper'>
       {/* 정렬된 상품 목록을 map을 사용하여 각 상품 아이템을 렌더링 */}
       {sortedProducts.map(prod => (
-        <ProductItem key={prod.productId} prod={prod} />
+        <ProductItem key={prod.productId} prod={prod}/>
       ))}
     </Box>
   );

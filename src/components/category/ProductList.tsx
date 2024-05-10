@@ -21,32 +21,34 @@ import {
   removeSelectedFilter,
 } from '../../redux/slices/categorySlice';
 import useSort from '../../hooks/useSort';
-import  {SortOption}  from '../../types/typesProducts';
+import { SortOption } from '../../types/typesProducts';
 
 const ProductList: React.FC = () => {
   const selectedBrands = useSelector(
     (state: RootState) => state.category.brands
-  );
-  // const selectedPrices = useSelector(
-  //   (state: RootState) => state.category.prices
-  // );
+  ); // 선택한브랜드
+  const selectedPrices = useSelector(
+    (state: RootState) => state.category.prices
+  ); //선택한 가격
   const selectedColors = useSelector(
     (state: RootState) => state.category.colors
-  );
+  ); //선택한 컬러
   const selectedThemes = useSelector(
     (state: RootState) => state.category.themes
-  );
+  ); // 선택한 테마
   const categoryData = useSelector(
     (state: RootState) => state.category.categoryData
-  );
+  ); // 카테고리 데이터
   const prodData = useSelector((state: RootState) => state.category.products);
-  const dispatch = useDispatch();
+  // 상품데이터
   const selectedCategory = useSelector(
     (state: RootState) => state.category.selectedCategory
-  );
+  ); // 내가 선택한 카테고리
   const selectedSubCategory = useSelector(
     (state: RootState) => state.category.selectedSubCategory
-  );
+  ); // 내가 선택한 서브 카테고리
+
+  const dispatch = useDispatch();
   const isMobile = useMediaQuery('(max-width:768px)');
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   const [sort, setSort] = useState<string>('인기순');
@@ -61,28 +63,43 @@ const ProductList: React.FC = () => {
   const handleFilterModalClose = () => {
     setIsFilterModalOpen(false);
   };
-
   // 칩 렌더링 함수
   const renderChips = (chipType: string, values: (string | number)[]) => {
-    return values.map((value, index) => (
-      <Chip
-        key={`${chipType}-${index}`}
-        label={typeof value === 'number' ? value.toString() : value}
-        onDelete={() => handleDelete(chipType, value)}
-        style={{
-          fontSize: isMobile ? '11px' : '14px',
-          width: isMobile ? '75px' : '100px',
-          height: isMobile ? '30px' : '37px',
-          paddingLeft: isMobile ? '1px' : '2px',
-          paddingRight: isMobile ? '2px' : '3px',
-          paddingTop: isMobile ? '2px' : '4px',
-          borderRadius: 2.8,
-          margin: '4px', // 각 칩 사이의 간격 조정
-          lineHeight: '14px',
-        }}
-        deleteIcon={<ClearIcon style={{ fontSize: 16 }} />}
-      />
-    ));
+    return (
+      <Box className='filter-chip-bar'>
+        {values.map((value, index) => {
+          const formattedLabel =
+            typeof value === 'number' ? formatPrice(value) : String(value);
+
+          return (
+            <Chip
+              key={`${chipType}-${index}`}
+              label={formattedLabel}
+              onDelete={() => handleDelete(chipType, value)}
+              style={{
+                fontSize: isMobile ? '11px' : '14px',
+                width: isMobile ? '75px' : '100px',
+                height: isMobile ? '30px' : '37px',
+                paddingLeft: isMobile ? '1px' : '2px',
+                paddingRight: isMobile ? '2px' : '3px',
+                paddingTop: isMobile ? '2px' : '4px',
+                borderRadius: 2.8,
+                margin: '4px', // 각 칩 사이의 간격 조정
+                lineHeight: '14px',
+                zIndex: 0,
+              }}
+              deleteIcon={<ClearIcon style={{ fontSize: 16 }} />}
+            />
+          );
+        })}
+      </Box>
+    );
+  };
+
+  // 가격 포맷팅 함수 (1000 단위 콤마 추가)
+  const formatPrice = (price: number): string => {
+    const formatted = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return `~${formatted}`; // price값 이하
   };
 
   // 서브 카테고리 클릭 핸들러
@@ -91,9 +108,11 @@ const ProductList: React.FC = () => {
   };
 
   // 삭제 핸들러
-  const handleDelete = (chipType: string, chipValue: string | number) => {
+  const handleDelete = (
+    chipType: string | number,
+    chipValue: string | number
+  ) => {
     console.info(`Deleting ${chipType} - ${chipValue}`);
-    // 해당 칩 값에 대한 삭제 로직을 여기에 구현
     // Redux 스토어에서 선택한 필터 제거
     switch (chipType) {
       case '브랜드':
@@ -120,6 +139,28 @@ const ProductList: React.FC = () => {
         break;
     }
   };
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 12;
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    page: number
+  ) => {
+    setCurrentPage(page);
+  };
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const filteredProducts = sortedProducts.filter(
+    product =>
+      product.category1 === selectedCategory &&
+      (selectedSubCategory === 'ALL' ||
+        product.category2 === selectedSubCategory)
+  );
+  const currentItems = filteredProducts.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
 
   return (
     <Box className='prod-container'>
@@ -193,7 +234,6 @@ const ProductList: React.FC = () => {
               p: 4,
             }}
           >
-            {/* <FilterCompo /> */}
             {/* 모바일 환경에서만 FilterCompo 렌더링 */}
             <FilterCompo />
           </Box>
@@ -205,8 +245,29 @@ const ProductList: React.FC = () => {
           {renderChips('브랜드', selectedBrands)}
           {/* 색상 필터링 */}
           {renderChips('색상', selectedColors)}
+          {/* 가격 필터링 */}
+          {renderChips('가격', selectedPrices)}
           {/* 테마 필터링 */}
           {renderChips('테마', selectedThemes)}
+          {/*             
+            <Chip
+              key={`${chipType}-${index}`}
+              label={formattedLabel}
+              onDelete={() => handleDelete(chipType, value)}
+              style={{
+                fontSize: isMobile ? '11px' : '14px',
+                width: isMobile ? '75px' : '100px',
+                height: isMobile ? '30px' : '37px',
+                paddingLeft: isMobile ? '1px' : '2px',
+                paddingRight: isMobile ? '2px' : '3px',
+                paddingTop: isMobile ? '2px' : '4px',
+                borderRadius: 2.8,
+                margin: '4px', // 각 칩 사이의 간격 조정
+                lineHeight: '14px',
+                zIndex: 0,
+              }}
+              deleteIcon={<ClearIcon style={{ fontSize: 16 }} />}
+            /> */}
 
           {/* 정렬기준 */}
           <Box className='sort-box'>
@@ -226,6 +287,7 @@ const ProductList: React.FC = () => {
                 sx={{
                   height: isMobile ? '32px' : '42px',
                   fontSize: isMobile ? '12px' : '14px',
+                  zIndex: 0,
                 }}
               >
                 <MenuItem value='인기순'>인기순</MenuItem>
@@ -240,21 +302,44 @@ const ProductList: React.FC = () => {
       </Box>
 
       {/* 상품 목록 */}
-      <Box className='prod-wrapper'>
-        {sortedProducts
-          .filter(
-            product =>
-              product.category1 === selectedCategory &&
-              (selectedSubCategory === 'ALL' ||
-                product.category2 === selectedSubCategory)
-          )
-          .map(prod => (
-            <ProductItem key={prod.productId} prod={prod} />
-          ))}
-      </Box>
-
-      {/* 페이지네이션 */}
-      <Pagination count={10} />
+      {isMobile == false ? (
+        <Box style={{ display: 'flex', flexDirection: 'column' }}>
+          <Box className='prod-wrapper'>
+            {currentItems
+              .filter(
+                product =>
+                  product.category1 === selectedCategory &&
+                  (selectedSubCategory === 'ALL' ||
+                    product.category2 === selectedSubCategory)
+              )
+              .map(prod => (
+                <ProductItem key={prod.productId} prod={prod} />
+              ))}
+          </Box>
+          <Box style={{ margin: 'auto' }}>
+            <Pagination
+              count={Math.ceil(filteredProducts.length / itemsPerPage)} // Total number of pages
+              page={currentPage}
+              onChange={handlePageChange}
+            />
+          </Box>
+        </Box>
+      ) : (
+        <Box style={{ display: 'flex', flexDirection: 'column' }}>
+          <Box className='prod-wrapper'>
+            {sortedProducts
+              .filter(
+                product =>
+                  product.category1 === selectedCategory &&
+                  (selectedSubCategory === 'ALL' ||
+                    product.category2 === selectedSubCategory)
+              )
+              .map(prod => (
+                <ProductItem key={prod.productId} prod={prod} />
+              ))}
+          </Box>
+        </Box>
+      )}
     </Box>
   );
 };

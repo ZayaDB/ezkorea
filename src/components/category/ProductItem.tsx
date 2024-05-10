@@ -1,18 +1,20 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-// import useToggle from '../../hooks/useToggle';
 import '../../styles/category/productItem.scss';
 import HandleClickHeart from './HandleClickHeart';
-import { Products } from '../../types/typesProducts';
 import { Box } from '@mui/material';
+import { Products } from '../../types/typesProducts';
 
 interface ProductItemProps {
   prod: Products;
 }
 
+// 1000단위 콤마를 추가하는 함수
+const addCommaNumber = (num: number): string => {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
 // 상품 카드 컴포넌트
 export default function ProductItem({ prod }: ProductItemProps) {
-  // const [isHeart, toggleHeart] = useToggle(prod.heart);
   const [isLiked, setIsLiked] = useState<boolean>(prod.heart);
 
   const handleLikeToggle = () => {
@@ -71,12 +73,12 @@ export default function ProductItem({ prod }: ProductItemProps) {
           )}
           {/* 원가 */}
           {prod.discount !== 0 ? (
-            <div className='prod-prevPrice'>{prod.prevPrice}</div>
+            <div className='prod-prevPrice'>{addCommaNumber(prod.prevPrice)}</div>
           ) : (
             <div style={{ color: 'white' }}>;;;</div>
           )}
           {/* 할인가 */}
-          <div className='prod-price'>{prod.price}</div>
+          <div className='prod-price'>{addCommaNumber(prod.price)}원</div>
         </div>
       </Link>
       <div className='color-heart-box'>
