@@ -16,6 +16,7 @@ import Search from '../../assets/images/magnifying.png';
 import ToolBar from './ToolBar';
 import IconButtonWithMenu from './IconButtonWithMenu';
 import BadgeComponent from './BadgeComponent';
+import '../../styles/home/header.scss';
 
 interface HeaderProps {
   sections: ReadonlyArray<{
