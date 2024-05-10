@@ -14,6 +14,9 @@ const StyleFilter: React.FC<StyleFilterProps> = ({
 }) => {
   const styleVariants = ['Gaming', 'Simple', 'Antique', 'Unique'];
 
+  // 'style' 변수를 사용하여 콘솔에 로그 출력
+  console.log(styleVariants);
+
   return (
     <div className='style-filter'>
       <p className='filter-title'>Concept</p>
