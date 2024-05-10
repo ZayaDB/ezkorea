@@ -1,6 +1,6 @@
 import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Card, CardMedia, CardContent, Typography } from '@mui/material';
+import { Card, CardMedia, Typography } from '@mui/material';
 import Review1 from '../../assets/images/review_white.webp';
 import Review2 from '../../assets/images/review_white2.webp';
 import Review3 from '../../assets/images/review_white3.webp';
@@ -34,7 +34,7 @@ export default function LeviewCarousel() {
   ];
 
   return (
-    <div style={{ width: '100vw' }}>
+    <div style={{ width: 'auto' }}>
       <div className='TitleArea'>
         <Typography sx={{ fontSize: '28px', fontWeight: '600' }}>
           취향으로 채우는 책상

@@ -26,6 +26,7 @@ const CustomLink: React.FC<CustomLinkProps> = ({
         flexShrink: 0,
         border: 0,
         mr: 5,
+        width: 'auto',
         textDecoration: 'none',
         ':hover': {
           color: hoverColor || '#5FF531',

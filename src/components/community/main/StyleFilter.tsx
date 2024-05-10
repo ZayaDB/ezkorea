@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // StyleFilter.tsx
 import React from 'react';
 import { Button } from '@mui/material';
@@ -12,10 +13,7 @@ const StyleFilter: React.FC<StyleFilterProps> = ({
   styleIndexes,
   styleButtonClick,
 }) => {
-  const styleVariants = ['Gaming', 'Simple', 'Antique', 'Unique'];
-
-  // 'style' 변수를 사용하여 콘솔에 로그 출력
-  console.log(styleVariants);
+  const styleVariants = ['gaming', 'simple', 'antique', 'unique'];
 
   return (
     <div className='style-filter'>
@@ -23,12 +21,8 @@ const StyleFilter: React.FC<StyleFilterProps> = ({
       {styleVariants.map((style, index) => (
         <Button
           key={index}
-          variant={
-            styleIndexes.includes(style.toLowerCase())
-              ? 'contained'
-              : 'outlined'
-          } // 소문자로 변환하여 비교
-          onClick={() => styleButtonClick(style.toLowerCase())} // 소문자로 전달
+          variant={styleIndexes.includes(style) ? 'contained' : 'outlined'} // 소문자로 변환하여 비교
+          onClick={() => styleButtonClick(style)}
         >
           {style}
         </Button>

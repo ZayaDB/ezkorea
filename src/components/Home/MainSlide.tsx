@@ -1,13 +1,13 @@
 import Carousel from 'react-bootstrap/Carousel';
-import mainSlide from '../../assets/images/main_slide8.webp';
+// import mainSlide from '../../assets/images/main_slide8.webp';
 import mainSlide2 from '../../assets/images/main_slide13.webp';
-import mainSlide3 from '../../assets/images/main_slide3.jpg';
+// import mainSlide3 from '../../assets/images/main_slide3.jpg';
 import '../../styles/home/carousel.scss';
 
 export default function MainSlide() {
   return (
     <>
-      <div style={{ width: '100vw', margin: 0, padding: 0 }}>
+      <div style={{ width: 'auto', margin: 0, padding: 0 }}>
         <Carousel>
           <Carousel.Item>
             <img className='d-block w-100' src={mainSlide2} alt='First slide' />
