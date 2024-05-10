@@ -3,7 +3,7 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
-import StarIcon from '@mui/icons-material/Star';
+
 import { ChangeEvent, useRef, useState } from 'react';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
@@ -11,15 +11,20 @@ import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import TextField from '@mui/material/TextField';
-import Container from '@mui/material/Container';
 
 // import { createTheme, makeStyles } from '@mui/material';
 // const [currentPage, setCurrentPage] = useState(1);
 // const onPageChange = (e: React.ChangeEvent<unknown>, page: number) => {
 //   setCurrentPage(page);
 // };
+interface ProductDetail {
+  children: React.ReactNode;
+  page: number;
+  index: number;
+}
+
 // Pagination
-const OpenPage = (props: any) => {
+const OpenPage = (props: ProductDetail) => {
   const { children, page, index } = props;
   return (
     <div hidden={page !== index}>

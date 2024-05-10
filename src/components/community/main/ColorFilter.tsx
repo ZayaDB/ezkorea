@@ -14,6 +14,8 @@ const ColorFilter: React.FC<ColorFilterProps> = ({
 }) => {
   const colors = ['White', 'Black', 'Pink', 'Wood'];
 
+  console.log(colors);
+
   return (
     <div className='color-filter'>
       <p className='filter-title'>Color</p>

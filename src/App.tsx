@@ -1,15 +1,9 @@
 import React from 'react';
-
-import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './styles/theme';
 import Home from './pages/Home';
-import {
-  Products,
-  CategoryData,
-  ProductListProps,
-} from './types/typesProducts';
+import {} from './types/typesProducts';
 import CommunityPostPage from './pages/CommunityPostPage';
 import Login from './pages/Login';
 import Header from './components/header/Header';
@@ -32,7 +26,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-        <Header title='Drururu' sections={sections} />
+        <Header title='Dururu' sections={sections} />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/shop' element={<Category />} />

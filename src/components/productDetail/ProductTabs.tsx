@@ -1,8 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import '../../styles/productDetail/productDetail.scss';
 import Review from './Review';
 import Inquire from './Inquire';
-import ProductInfo from './ProductInfo';
 import ProductsStyling from './ProductStyling';
 import { useLocation } from 'react-router-dom';
 
@@ -16,7 +15,7 @@ import { useLocation } from 'react-router-dom';
 // const inquire = useRef();
 // const similar = useRef();
 
-export function ScrollToTop(props: any) {
+export function ScrollToTop(props: ProductDetail) {
   const { pathname } = useLocation();
 
   useEffect(() => {

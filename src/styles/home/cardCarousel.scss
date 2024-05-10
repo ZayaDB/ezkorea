@@ -1,0 +1,55 @@
+// .swiper-slide {
+//   display: flex;
+//   justify-content: center;
+//   // padding: 0;
+//   background-color: red;
+// }
+
+.TitleArea {
+  padding-top: 66px;
+  padding-bottom: 24px;
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+}
+
+// .swiper-container {
+//   display: flex;
+//   justify-content: center;
+// }
+
+// 반응형
+@media screen and (min-width: 640px) {
+  .swiper-container {
+    width: 640px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .swiper-container {
+    width: 500px;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .swiper-container {
+    width: 900px;
+  }
+}
+
+@media screen and (min-width: 1010px) {
+  .swiper-container {
+    width: 900px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .swiper-container {
+    width: 1024px;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .swiper-container {
+    width: 1300px;
+  }
+}
