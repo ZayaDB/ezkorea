@@ -562,5 +562,38 @@
     "hoverImage": "https://img.29cm.co.kr/item/202403/11eedaaf4ba54bd882f2f106ee989998.jpg?width=700",
     "views": 150,
     "commentCount": 200
+  },
+  {
+    "productId": 35,
+    "name": "",
+    "brand": "",
+    "colors": ["green"],
+    "concepts": ["simple"],
+    "price": "59,800",
+    "discount": 20,
+    "prevPrice": "75,000",
+    "category1": "조명/인테리어",
+    "category2": "조명",
+    "heart": false,
+    "thumbnail": "https://img.29cm.co.kr/item/202403/11eedaaf4a8eabb682f2f9ee044f6a0b.jpg?width=700",
+    "hoverImage": "https://img.29cm.co.kr/item/202403/11eedaaf4ba54bd882f2f106ee989998.jpg?width=700",
+    "views": 150,
+    "commentCount": 200
+  },  {
+    "productId": 36,
+    "name": "원목 플랜테리어 LED 식물 무드등",
+    "brand": "모던포인트",
+    "colors": ["green"],
+    "concepts": ["simple"],
+    "price": "59,800",
+    "discount": 20,
+    "prevPrice": "75,000",
+    "category1": "조명/인테리어",
+    "category2": "조명",
+    "heart": false,
+    "thumbnail": "https://img.29cm.co.kr/item/202403/11eedaaf4a8eabb682f2f9ee044f6a0b.jpg?width=700",
+    "hoverImage": "https://img.29cm.co.kr/item/202403/11eedaaf4ba54bd882f2f106ee989998.jpg?width=700",
+    "views": 150,
+    "commentCount": 200
   }
 ]

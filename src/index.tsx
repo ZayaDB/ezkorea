@@ -1,14 +1,11 @@
 
 //index.tsx
-
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { Provider } from 'react-redux';
 import rootReducer from './redux/config/index';
-import { createStore } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
 
 const store = configureStore({reducer:rootReducer});
