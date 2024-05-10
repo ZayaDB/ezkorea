@@ -1,8 +1,8 @@
+
 import { useEffect, useRef, useState } from 'react';
 import '../../styles/productDetail/productDetail.scss';
 import Review from './Review';
 import Inquire from './Inquire';
-import ProductInfo from './ProductInfo';
 import ProductsStyling from './ProductStyling';
 import { useLocation } from 'react-router-dom';
 
