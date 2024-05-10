@@ -16,9 +16,13 @@ import { useState } from 'react';
 // import SaleProduct from './../category/SaleProduct';
 // const cancelRef = useRef(null);
 
-const generateOption = (color: string) => {
-  // count 버튼
+interface OptionProps {
+  color: string;
+}
+
+const Option = ({ color }: OptionProps) => {
   const [count, setCount] = useState(0);
+
   return (
     <div key={color}>
       <div id='optionBox'>
@@ -54,23 +58,39 @@ const generateOption = (color: string) => {
 };
 
 export default function SelectPurchase() {
-  // 드롭다운
+  // // 드롭다운
+  // const [color, setColor] = useState('');
+  // const handleChange = (event: SelectChangeEvent) => {
+  //   setColor(event.target.value as string);
+  // };
+  // // 드롭다운 선택하면 요소 보이게
+  // const [options, setOptions] = useState<JSX.Element[]>([]);
+  // const [selectedColors, setSelectedColors] = useState<string[]>([]);
+
+  // const handleAddOption = (color: string) => {
+  //   // 이미 선택된 색상인지 확인
+  //   if (!selectedColors.includes(color)) {
+  //     setSelectedColors([...selectedColors, color]);
+  //     setOptions(prevOptions => [...prevOptions, generateOption(color)]);
+  //   }
+  // };
   const [color, setColor] = useState('');
-  const handleChange = (event: SelectChangeEvent) => {
-    setColor(event.target.value as string);
-  };
-  // 드롭다운 선택하면 요소 보이게
   const [options, setOptions] = useState<JSX.Element[]>([]);
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
 
   const handleAddOption = (color: string) => {
-    // 이미 선택된 색상인지 확인
     if (!selectedColors.includes(color)) {
       setSelectedColors([...selectedColors, color]);
-      setOptions(prevOptions => [...prevOptions, generateOption(color)]);
+      setOptions(prevOptions => [
+        ...prevOptions,
+        <Option key={color} color={color} />,
+      ]);
     }
   };
 
+  const handleChange = (event: SelectChangeEvent<string>) => {
+    setColor(event.target.value as string);
+  };
   return (
     <div id='selectBox'>
       <div id='selectPurchase'>
@@ -126,14 +146,20 @@ export default function SelectPurchase() {
               >
                 <MenuItem value={'White'}>
                   {/* White div 클릭 시, 선택 옵션을 추가함 */}
-                  <button onClick={() => handleAddOption('white')}>
+                  <button
+                    className='options'
+                    onClick={() => handleAddOption('white')}
+                  >
                     White
                   </button>
                 </MenuItem>
 
                 <MenuItem value={'Black'}>
                   {/* 다른 색상을 추가할 경우 */}
-                  <button onClick={() => handleAddOption('black')}>
+                  <button
+                    className='options'
+                    onClick={() => handleAddOption('black')}
+                  >
                     black
                   </button>
                 </MenuItem>
