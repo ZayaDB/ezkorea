@@ -1,15 +1,9 @@
 import React from 'react';
 
-import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './styles/theme';
 import Home from './pages/Home';
-import {
-  Products,
-  CategoryData,
-  ProductListProps,
-} from './types/typesProducts';
 import CommunityPostPage from './pages/CommunityPostPage';
 import Login from './pages/Login';
 import Header from './components/header/Header';
@@ -20,6 +14,7 @@ import Community from './pages/Community';
 import ProductDetail from './pages/ProductDetail';
 import OrderPage from './pages/OrderPage';
 import MyPage from './pages/MyPage';
+import CommunityPostCustomPage from './pages/CommunityPostCustomPage';
 
 function App() {
   const sections = [
@@ -41,7 +36,7 @@ function App() {
           <Route path='/shop/detail' element={<ProductDetail />} />
           <Route path='/community' element={<Community />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/community/post' element={<CommunityPostPage />} />
+          <Route path='/community/post' element={<CommunityPostCustomPage />} />
           <Route path='/order' element={<OrderPage />} />
           <Route path='/my' element={<MyPage />} />
         </Routes>
