@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import '../../styles/home/mdspick.scss';
-import { Card, CardMedia, CardContent, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import '../../styles/home/cardCarousel.scss';
 
 import newItem from '../../assets/images/new_item.jpeg';
