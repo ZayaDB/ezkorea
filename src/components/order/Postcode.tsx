@@ -1,12 +1,11 @@
-import React, { Dispatch, useEffect } from 'react';
 /* kakao-address */
 import { Box, Modal } from '@mui/material';
 import { useState } from 'react';
 import DaumPostcode from 'react-daum-postcode';
 
 import { useDispatch } from 'react-redux';
-import { AddressActionTypes } from '../../redux/types/addressActionTypes';
-import { updateAddressInfo } from '../../redux/actions/addressActions';
+
+import { updateAddressInfo } from '../../redux/slices/addressSlice';
 
 const style = {
   position: 'absolute' as const,
@@ -25,8 +24,8 @@ export default function Postcode() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   return (
-    <div>
-      <button onClick={handleOpen}>주소록</button>
+    <>
+      <button onClick={handleOpen}>우편번호 검색</button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -37,7 +36,7 @@ export default function Postcode() {
           <ModalContent handleClose={handleClose} />
         </Box>
       </Modal>
-    </div>
+    </>
   );
 }
 
@@ -45,6 +44,8 @@ function ModalContent({ handleClose }: { handleClose: () => void }) {
   const dispatch = useDispatch();
 
   const handlePostCode = (data: any) => {
+    console.log('------data', data);
+
     let fullAddress = data.address;
     let extraAddress = '';
 
