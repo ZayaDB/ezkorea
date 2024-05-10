@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import useToggle from '../../hooks/useToggle';
-import '../../styles/category/productItemCss.scss';
+import '../../styles/category/productItem.scss';
 import HandleClickHeart from './HandleClickHeart';
 import { Products } from '../../types/typesProducts';
 import { Box } from '@mui/material';

@@ -1,12 +1,14 @@
 import { useState } from 'react';
-import '../../styles/category/themeFilter.scss';
-import Checkbox from '@mui/material/Checkbox';
 import { Box, styled } from '@mui/system';
-
+import Checkbox from '@mui/material/Checkbox';
+import { useDispatch } from 'react-redux';
+import { setThemes } from '../../redux/slices/categorySlice'; // Redux 액션 import
+import '../../styles/category/sideFilter.scss';
 export default function ThemeFilter() {
-  const themes: string[] = ['gaming', 'simple', 'unique', 'antique','kitsch'];
+  const themes: string[] = ['gaming', 'simple', 'unique', 'antique', 'kitsch'];
 
   const [checkedThemes, setCheckedThemes] = useState<string[]>([]);
+  const dispatch = useDispatch(); // useDispatch hook을 사용하여 dispatch 함수 가져오기
 
   const handleLabelClick = (theme: string) => {
     const newCheckedThemes = [...checkedThemes];
@@ -19,20 +21,20 @@ export default function ThemeFilter() {
     }
 
     setCheckedThemes(newCheckedThemes);
-    console.log(`${theme}`, newCheckedThemes);
+    dispatch(setThemes(newCheckedThemes)); // 선택된 테마를 Redux 스토어에 저장
   };
 
   const BlackCheckbox = styled(Checkbox)({
-    color: 'black', // 체크박스 아이콘 컬러 지정
+    color: 'black',
     '&.Mui-checked': {
-      color: 'black', // 체크된 상태에서의 아이콘 컬러 지정
+      color: 'black',
     },
   });
 
   return (
-    <Box className="element-theme">
-      {themes.map((theme) => (
-        <Box key={theme} className="theme">
+    <Box className='element-theme'>
+      {themes.map(theme => (
+        <Box key={theme} className='theme'>
           <BlackCheckbox
             checked={checkedThemes.includes(theme)}
             onChange={() => handleLabelClick(theme)}
@@ -46,9 +48,9 @@ export default function ThemeFilter() {
             }}
           />
           <Box
-            className="theme-name"
+            className='theme-name'
             onClick={() => handleLabelClick(theme)}
-            role="button"
+            role='button'
             tabIndex={0}
             sx={{ marginLeft: '2px', cursor: 'pointer' }}
           >

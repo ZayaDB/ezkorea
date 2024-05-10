@@ -14,6 +14,7 @@ export interface Products {
   hoverImage: string;
   views: number;
   commentCount: number;
+  theme: string;
 }
 
 export interface SubCategory {
@@ -23,13 +24,13 @@ export interface SubCategory {
 
 export interface CategoryData {
   name: string;
+  imagePath: string; // 카테고리 이미지 경로 추가
   subCategories: SubCategory[];
 }
 
 export interface CategoryMapping {
   [key: string]: string;
 }
-
 
 export interface FilterVisibility {
   brand: boolean;
@@ -40,7 +41,9 @@ export interface FilterVisibility {
 
 export interface SideNavProps {
   onSelectCategory: (categoryName: string) => void;
-  onSelectSubCategory: (subCategoryName: string) => void; // Define onSelectSubCategory function
+  onSelectSubCategory: (subCategoryName: string) => void;
+  categoryData: CategoryData[];
+  prodData: Products[];
 }
 
 export interface ProductListProps {
@@ -49,3 +52,11 @@ export interface ProductListProps {
   prodData: Products[];
   selectedSubCategory: string; // selectedSubCategory를 추가
 }
+export interface Filters {
+  brand: boolean;
+  price: boolean;
+  color: boolean;
+  theme: boolean;
+}
+
+export type SortOption = '인기순' | '리뷰많은순' | '낮은가격순' | '높은가격순' | '할인율높은순';
