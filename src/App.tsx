@@ -19,6 +19,7 @@ import Category from './pages/Category';
 import Community from './pages/Community';
 import ProductDetail from './pages/ProductDetail';
 import OrderPage from './pages/OrderPage';
+import MyPage from './pages/MyPage';
 
 function App() {
   const sections = [
@@ -28,42 +29,21 @@ function App() {
     { title: '세일', url: '/shop/sale' },
   ];
 
-  const [products, setProducts] = useState<Products[]>([]);
-  const [categoryData, setCategoryData] = useState<CategoryData[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string>('');
-  const [selectedSubCategory, setSelectedSubCategory] = useState<string>('');
-
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <Header title='Drururu' sections={sections} />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route
-            path='/shop'
-            element={
-              <Category
-                categoryData={categoryData}
-                selectedCategory={selectedCategory}
-                prodData={products}
-                selectedSubCategory={selectedSubCategory}
-              />
-            }
-          />
+          <Route path='/shop' element={<Category />} />
+          <Route path='/shop/best' element={<BestProduct />} />
+          <Route path='/shop/sale' element={<SaleProduct />} />
           <Route path='/shop/detail' element={<ProductDetail />} />
-          {/* <Route
-            path='/shop/best'
-            element={<BestProduct prodData={products} />}
-          />
-          <Route
-            path='/shop/sale'
-            element={<SaleProduct prodData={products} />}
-          /> */}
-          {/* community */}
           <Route path='/community' element={<Community />} />
           <Route path='/login' element={<Login />} />
           <Route path='/community/post' element={<CommunityPostPage />} />
           <Route path='/order' element={<OrderPage />} />
+          <Route path='/my' element={<MyPage />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
