@@ -1,5 +1,4 @@
-
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import '../../styles/productDetail/productDetail.scss';
 import Review from './Review';
 import Inquire from './Inquire';
