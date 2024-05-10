@@ -3,7 +3,14 @@ import { useSelector } from 'react-redux';
 
 import { useState } from 'react';
 import Head from './Head';
-import { Box, FormControl, MenuItem, Modal, TextField } from '@mui/material';
+import {
+  Box,
+  Button,
+  FormControl,
+  MenuItem,
+  Modal,
+  TextField,
+} from '@mui/material';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import CloseButton from 'react-bootstrap/CloseButton';
 import Postcode from './Postcode';
@@ -19,30 +26,34 @@ export default function DeliveryInfo() {
   return (
     <div className='order-recipitent-info'>
       <Head text='배송 정보' />
-      <label>
-        <input
-          type='radio'
-          name='method'
-          id='default'
-          defaultChecked={true}
-          onClick={() => {
-            // setSelected(true);
-          }}
-        />
-        주문자 정보와 동일
-      </label>
-      <label className='caption'>
-        <input
-          type='radio'
-          name='method'
-          id='new'
-          onClick={() => {
-            // setSelected(false);
-          }}
-        />
-        새로운 배송지
-      </label>
-      <AddressBook />
+      <div className='order-recipitent-info-top'>
+        <div>
+          <label>
+            <input
+              type='radio'
+              name='method'
+              id='default'
+              defaultChecked={true}
+              onClick={() => {
+                // setSelected(true);
+              }}
+            />
+            주문자 정보와 동일
+          </label>
+          <label>
+            <input
+              type='radio'
+              name='method'
+              id='new'
+              onClick={() => {
+                // setSelected(false);
+              }}
+            />
+            새로운 배송지
+          </label>
+        </div>
+        <AddressBook />
+      </div>
       <DeliveryInfoContent />
     </div>
   );
@@ -62,13 +73,21 @@ function DeliveryInfoContent() {
   };
   return (
     <div className='deliveryinfo-container'>
-      <TextField fullWidth placeholder='받으시는 분' />
-      <TextField placeholder='우편번호' value={zonecode} disabled />
-      <Postcode />
-      <TextField fullWidth placeholder='기본주소' value={address} disabled />
-      <TextField fullWidth placeholder='나머지주소' />
+      <TextField fullWidth placeholder='받으시는 분' className='text-field' />
+      <div className='text-field postcode'>
+        <TextField placeholder='우편번호' value={zonecode} disabled />
+        <Postcode />
+      </div>
+      <TextField
+        fullWidth
+        placeholder='기본주소'
+        value={address}
+        disabled
+        className='text-field'
+      />
+      <TextField fullWidth placeholder='나머지주소' className='text-field' />
 
-      <div className='orderer-num-container'>
+      <div className='orderer-num-container text-field'>
         <FormControl fullWidth={true}>
           <Select
             value={firstNum}
@@ -124,7 +143,14 @@ function AddressBook() {
 
   return (
     <>
-      <button onClick={handleOpen}>주소록</button>
+      <Button
+        onClick={handleOpen}
+        variant='contained'
+        size='medium'
+        color='secondary'
+      >
+        주소록
+      </Button>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
           <CloseButton onClick={handleClose} />

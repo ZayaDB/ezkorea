@@ -12,7 +12,7 @@ const OrderContent = styled('div')(({ theme }) => ({
     padding: '0px', // 360px 화면에서의 패딩
     width: '100%',
   },
-  [theme.breakpoints.up('md')]: {
+  [theme.breakpoints.up(900)]: {
     padding: '0px', // 768px 화면에서의 패딩
     width: '65%',
   },

@@ -1,5 +1,5 @@
 /* kakao-address */
-import { Box, Modal } from '@mui/material';
+import { Box, Button, Modal } from '@mui/material';
 import { useState } from 'react';
 import DaumPostcode from 'react-daum-postcode';
 
@@ -25,7 +25,14 @@ export default function Postcode() {
   const handleClose = () => setOpen(false);
   return (
     <>
-      <button onClick={handleOpen}>우편번호 검색</button>
+      <Button
+        onClick={handleOpen}
+        variant='contained'
+        size='medium'
+        color='secondary'
+      >
+        우편번호 검색
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
