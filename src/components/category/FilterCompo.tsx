@@ -16,6 +16,7 @@ import { Products, Filters } from '../../types/typesProducts';
 
 export default function FilterCompo() {
   const [filteredProducts, setFilteredProducts] = useState<Products[]>([]);
+  
   const selectedBrands = useSelector(
     (state: RootState) => state.category.brands
   );
