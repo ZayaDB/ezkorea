@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './styles/theme';
 import Home from './pages/Home';
+
 import CommunityPostPage from './pages/CommunityPostPage';
 import Login from './pages/Login';
 import Header from './components/header/Header';

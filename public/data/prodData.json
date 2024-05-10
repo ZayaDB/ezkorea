@@ -548,7 +548,7 @@
   },
   {
     "productId": 34,
-    "name": "원목 플랜테리어 LED 식물 무드등",
+    "name": "",
     "brand": "모던포인트",
     "colors": ["green"],
     "concepts": ["simple"],
@@ -581,8 +581,8 @@
     "commentCount": 200
   },  {
     "productId": 36,
-    "name": "원목 플랜테리어 LED 식물 무드등",
-    "brand": "모던포인트",
+    "name": "",
+    "brand": "",
     "colors": ["green"],
     "concepts": ["simple"],
     "price": "59,800",

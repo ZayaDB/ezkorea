@@ -7,7 +7,7 @@ import SideNav from '../components/category/SideNav';
 import '../styles/category/category.scss';
 
 import { setCategoryData, setProducts } from '../redux/slices/categorySlice';
-import BestProduct from '../components/category/BestProduct';
+// import BestProduct from '../components/category/BestProduct';
 
 export default function Category() {
   const dispatch = useDispatch();

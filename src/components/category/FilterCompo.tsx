@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Box } from '@mui/system';
 import { Button } from '@mui/material';
 import '../../styles/category/sideFilter.scss';
@@ -12,11 +12,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../redux/config';
 import { clearFilters } from '../../redux/slices/categorySlice';
 
-import { Products, Filters } from '../../types/typesProducts';
+import { Filters } from '../../types/typesProducts';
 
 export default function FilterCompo() {
-  const [filteredProducts, setFilteredProducts] = useState<Products[]>([]);
-  
+  // const [filteredProducts, setFilteredProducts] = useState<Products[]>([]);
   const selectedBrands = useSelector(
     (state: RootState) => state.category.brands
   );
@@ -165,7 +164,7 @@ export default function FilterCompo() {
           backgroundColor: 'black',
           color: 'white',
           '&:hover': {
-            backgroundColor:'black',
+            backgroundColor: 'black',
             color: '#5FF531',
           },
         }}
