@@ -1,187 +1,106 @@
-import React, { useState, useEffect } from 'react';
-import { Box } from '@mui/system';
-import {
-  CategoryMapping,
-  FilterVisibility,
-  SideNavProps,
-  CategoryData,
-  SubCategory, // SubCategory 타입 추가
-} from '../../types/typesProducts';
-import '../../styles/category/sideNavCss.scss';
-import BrandFilter from './BrandFilter';
-import PriceFilter from './PriceFilter';
-import ColorFilter from './ColorFilter';
-import ThemeFilter from './ThemeFilter';
-import { grey } from '@mui/material/colors';
-import { styled } from '@mui/material/styles';
-import Button, { ButtonProps } from '@mui/material/Button';
-import { getData } from '../../utils/getData';
+// SideNav.tsx
 
-const categoryMapping: CategoryMapping = {
+import { useEffect, useState } from 'react';
+import { Box } from '@mui/system';
+import { CategoryData } from '../../types/typesProducts';
+import '../../styles/category/sideNav.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/config';
+import {
+  setSelectedCategory,
+  setSelectedSubCategory,
+} from '../../redux/slices/categorySlice';
+import { useMediaQuery } from '@mui/material';
+import FilterComponent from './FilterCompo';
+
+const categoryMapping: { [key: string]: string } = {
   가구: 'furniture',
   전자기기: 'electronics',
   '조명/인테리어': 'lighting-interior',
   '데코/식물': 'deco-plant',
 };
 
-const SideNav: React.FC<SideNavProps> = ({ onSelectCategory }) => {
-  const [categoryData, setCategoryData] = useState<CategoryData[]>([]);
+export default function SideNav() {
+  const [activeCategory, setActiveCategory] = useState<string>('가구');
+  const dispatch = useDispatch();
+  const isMobile = useMediaQuery('(max-width:768px)');
+
+  const categoryData = useSelector(
+    (state: RootState) => state.category.categoryData
+  );
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { categoryData: categoriesData } = await getData(
-          '/data/categoryData.json'
-        );
-        console.log('Fetched category data:', categoriesData);
-        // products와 categoryData 설정
-        // setProducts(productsData);
-        setCategoryData(categoriesData);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, []); // 컴포넌트 마운트 시 한 번만 실행
-
-  const [selectedCategory, setSelectedCategory] = useState<string>('가구');
-  const [filterVisibility, setFilterVisibility] = useState<FilterVisibility>({
-    brand: false,
-    price: false,
-    color: false,
-    theme: false,
-  });
+    // 페이지 로드시 초기값 설정
+    dispatch(setSelectedCategory('가구'));
+    dispatch(setSelectedSubCategory('ALL'));
+  }, [dispatch]);
 
   const handleCategoryClick = (categoryName: string) => {
-    onSelectCategory(categoryName); // 선택한 카테고리를 부모 컴포넌트로 전달
-    setSelectedCategory(categoryName);
+    if (activeCategory === categoryName) {
+      // 이미 열린 카테고리 항목들이면
+      setActiveCategory('');
+    } else {
+      // 새로운 카테고리 클릭하면 활성화상태 업데이트
+      setActiveCategory(categoryName);
+      dispatch(setSelectedCategory(categoryName));
+      dispatch(setSelectedSubCategory('ALL'));
+    }
   };
 
-  const toggleFilterVisibility = (filterName: keyof FilterVisibility) => {
-    setFilterVisibility(prevVisibility => ({
-      ...prevVisibility,
-      [filterName]: !prevVisibility[filterName],
-    }));
+  const handleSubCategoryClick = (
+    categoryName: string,
+    subCategoryName: string
+  ) => {
+    dispatch(setSelectedCategory(categoryName));
+    dispatch(setSelectedSubCategory(subCategoryName));
   };
-
-  const resetFilters = () => {
-    setFilterVisibility({
-      brand: false,
-      price: false,
-      color: false,
-      theme: false,
-    });
-  };
-
-  const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
-    fontSize: '14px',
-    borderRadius: '5px',
-    color: theme.palette.getContrastText(grey[900]),
-    backgroundColor: grey[900],
-    '&:hover': {
-      color: '#00ff00',
-      backgroundColor: grey[900],
-    },
-    marginLeft: '70%',
-  }));
 
   return (
     <Box className='side-nav'>
-      {categoryData.map(category => (
-        <Box key={category.name} className={'nav-box'}>
+      {categoryData.map((category: CategoryData) => (
+        <Box key={category.name} className='nav-box'>
           <Box
-            className={`nav ${categoryMapping[category.name]}`}
+            className={`nav ${categoryMapping[category.name]} ${
+              activeCategory === category.name ? 'active' : ''
+            }`}
             onClick={() => handleCategoryClick(category.name)}
             role='button'
             tabIndex={0}
           >
             <Box className='nav-title'>{category.name}</Box>
           </Box>
-          {selectedCategory === category.name && (
-            <Box className={`${categoryMapping[category.name]}-box`}>
-              <hr
-                style={{
-                  border: 0,
-                  height: '2px',
-                  backgroundColor: '#272727',
-                  marginRight: '30px',
-                  marginBottom: '18px',
-                }}
-              />
-              {category.subCategories.map(subCategory => (
-                <Box
-                  key={subCategory.name} // key에는 subCategory.name을 사용
-                  className={`sub ${subCategory.name === 'ALL' ? 'bold' : ''}`}
-                  onClick={() => onSelectCategory(subCategory.name)}
-                  role='button'
-                  tabIndex={0}
-                >
-                  {subCategory.name}
-                </Box>
-              ))}
-            </Box>
-          )}
+          {activeCategory === category.name &&
+            category.subCategories.length > 0 && (
+              <Box className={`${categoryMapping[category.name]}-box`}>
+                <hr
+                  style={{
+                    border: 0,
+                    height: '2px',
+                    backgroundColor: '#272727',
+                    marginRight: '30px',
+                    marginBottom: '18px',
+                  }}
+                />
+                {category.subCategories.map(subCategory => (
+                  <Box
+                    key={subCategory.name}
+                    className={`sub ${
+                      subCategory.name === 'ALL' ? 'bold' : ''
+                    }`}
+                    onClick={() =>
+                      handleSubCategoryClick(category.name, subCategory.name)
+                    }
+                    role='button'
+                    tabIndex={0}
+                  >
+                    {subCategory.name}
+                  </Box>
+                ))}
+              </Box>
+            )}
         </Box>
       ))}
-      <Box className={'filter-box'}>
-        <Box style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Box className='nav-title'>필터</Box>
-          <Box className='remove-filter' onClick={resetFilters}>
-            초기화
-          </Box>
-        </Box>
-        <hr
-          style={{
-            border: 0,
-            height: '2px',
-            backgroundColor: '#272727',
-            marginRight: '30px',
-          }}
-        />
-        {[
-          { name: '브랜드', component: <BrandFilter /> },
-          { name: '가격', component: <PriceFilter /> },
-          { name: '색상', component: <ColorFilter /> },
-          { name: '테마', component: <ThemeFilter /> },
-        ].map((filter, index) => (
-          <Box key={index} className={`${filter.name.toLowerCase()}-box`}>
-            <Box
-              style={{
-                marginTop: '20px',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                cursor: 'pointer',
-              }}
-              onClick={() =>
-                toggleFilterVisibility(
-                  filter.name.toLowerCase() as keyof FilterVisibility
-                )
-              }
-            >
-              <Box className='filter-title'>{filter.name}</Box>
-              <Box className='plus'>
-                {filterVisibility[
-                  filter.name.toLowerCase() as keyof FilterVisibility
-                ]
-                  ? '-'
-                  : '+'}
-              </Box>
-            </Box>
-            {filterVisibility[
-              filter.name.toLowerCase() as keyof FilterVisibility
-            ] && filter.component}
-          </Box>
-        ))}
-        <ColorButton
-          variant='contained'
-          sx={{ marginTop: '20px', marginBottom: '20px' }}
-        >
-          검색
-        </ColorButton>
-      </Box>
+      {!isMobile && <FilterComponent />}
     </Box>
   );
-};
-
-export default SideNav;
+}

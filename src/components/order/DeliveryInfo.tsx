@@ -7,13 +7,14 @@ import { Box, FormControl, MenuItem, Modal, TextField } from '@mui/material';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import CloseButton from 'react-bootstrap/CloseButton';
 import Postcode from './Postcode';
+import { RootState } from '../../redux/config';
 
 /* 수령자 정보 
   - 1. 주문자 정보와 동일 : 정보 가져오기(CustomerInformation에서 내려받기)
   - 2. 새로운 배송지 : 배송지 정보 새로 넣기
 */
 export default function DeliveryInfo() {
-  const [selected, setSelected] = useState<boolean>(true);
+  // const [selected, setSelected] = useState<boolean>(true);
   return (
     <div className='order-recipitent-info'>
       <Head text='배송 정보' />
@@ -24,7 +25,7 @@ export default function DeliveryInfo() {
           id='default'
           defaultChecked={true}
           onClick={() => {
-            setSelected(true);
+            // setSelected(true);
           }}
         />
         주문자 정보와 동일
@@ -35,7 +36,7 @@ export default function DeliveryInfo() {
           name='method'
           id='new'
           onClick={() => {
-            setSelected(false);
+            // setSelected(false);
           }}
         />
         새로운 배송지
@@ -48,8 +49,8 @@ export default function DeliveryInfo() {
 
 function DeliveryInfoContent() {
   /* address 불러오기 */
-  const address = useSelector(state => (state as any).address.fullAddress);
-  const zonecode = useSelector(state => (state as any).address.zonecode);
+  const address = useSelector((state: RootState) => state.address.fullAddress);
+  const zonecode = useSelector((state: RootState) => state.address.zonecode);
 
   console.log(address, zonecode);
 
