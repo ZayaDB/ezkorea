@@ -16,6 +16,7 @@ import Search from '../../assets/images/magnifying.png';
 import ToolBar from './ToolBar';
 import IconButtonWithMenu from './IconButtonWithMenu';
 import BadgeComponent from './BadgeComponent';
+import '../../styles/home/header.scss';
 
 interface HeaderProps {
   sections: ReadonlyArray<{
@@ -43,7 +44,7 @@ const theme = createTheme({
 });
 
 export default function Header(props: HeaderProps) {
-  const isMobile = useMediaQuery('(max-width:600px)');
+  const isMobile = useMediaQuery('(max-width:619px)');
   const { title } = props;
 
   return (
@@ -135,7 +136,6 @@ export default function Header(props: HeaderProps) {
             )}
           </Typography>
           <Box>
-
             {/* 검색창(input) */}
             {/* mobile(width:600px 이하)에서 사라짐 */}
             {isMobile ? null : (

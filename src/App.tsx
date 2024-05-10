@@ -32,7 +32,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-        <Header title='Drururu' sections={sections} />
+        <Header title='Dururu' sections={sections} />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/shop' element={<Category />} />
