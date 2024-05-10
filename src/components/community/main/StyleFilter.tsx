@@ -5,7 +5,6 @@ import './../../../styles/community/main.scss';
 
 interface StyleFilterProps {
   styleIndexes: string[];
-  // eslint-disable-next-line no-unused-vars
   styleButtonClick: (style: string) => void;
 }
 
