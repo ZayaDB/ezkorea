@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Transition } from 'react-transition-group';
 import { styled } from '@mui/system';
-import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
+// import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 import CloseIcon from '@mui/icons-material/Close';
 import { Snackbar } from '@mui/base/Snackbar';
 import { SnackbarCloseReason } from '@mui/base/useSnackbar';
@@ -92,7 +92,7 @@ export default function HandleClickHeart({
       <StyledSnackbar
         autoHideDuration={5000}
         open={open}
-        onClose={handleClose}
+        // onClose={handleClose}
         exited={exited}
       >
         <Transition
@@ -146,39 +146,39 @@ const grey = {
   900: '#1C2025',
 };
 
-const TriggerButton = styled('button')(
-  ({ theme }) => `
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-weight: 600;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  padding: 8px 16px;
-  border-radius: 8px;
-  color: white;
-  transition: all 150ms ease;
-  cursor: pointer;
-  background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
-  border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
-  color: ${theme.palette.mode === 'dark' ? grey[200] : grey[900]};
-  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+// const TriggerButton = styled('button')(
+//   ({ theme }) => `
+//   font-family: 'IBM Plex Sans', sans-serif;
+//   font-weight: 600;
+//   font-size: 0.875rem;
+//   line-height: 1.5;
+//   padding: 8px 16px;
+//   border-radius: 8px;
+//   color: white;
+//   transition: all 150ms ease;
+//   cursor: pointer;
+//   background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
+//   border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
+//   color: ${theme.palette.mode === 'dark' ? grey[200] : grey[900]};
+//   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
 
-  &:hover {
-    background: ${theme.palette.mode === 'dark' ? grey[800] : grey[50]};
-    border-color: ${theme.palette.mode === 'dark' ? grey[600] : grey[300]};
-  }
+//   &:hover {
+//     background: ${theme.palette.mode === 'dark' ? grey[800] : grey[50]};
+//     border-color: ${theme.palette.mode === 'dark' ? grey[600] : grey[300]};
+//   }
 
-  &:active {
-    background: ${theme.palette.mode === 'dark' ? grey[700] : grey[100]};
-  }
+//   &:active {
+//     background: ${theme.palette.mode === 'dark' ? grey[700] : grey[100]};
+//   }
 
-  &:focus-visible {
-    box-shadow: 0 0 0 4px ${
-      theme.palette.mode === 'dark' ? grey[300] : grey[200]
-    };
-    outline: none;
-  }
-  `
-);
+//   &:focus-visible {
+//     box-shadow: 0 0 0 4px ${
+//       theme.palette.mode === 'dark' ? grey[300] : grey[200]
+//     };
+//     outline: none;
+//   }
+//   `
+// );
 
 const StyledSnackbar = styled(Snackbar)`
   position: fixed;

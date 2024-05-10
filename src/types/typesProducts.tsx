@@ -40,8 +40,8 @@ export interface FilterVisibility {
 }
 
 export interface SideNavProps {
-  onSelectCategory: (categoryName: string) => void;
-  onSelectSubCategory: (subCategoryName: string) => void;
+  // onSelectCategory: (categoryName: string) => void;
+  // onSelectSubCategory: (subCategoryName: string) => void;
   categoryData: CategoryData[];
   prodData: Products[];
 }
