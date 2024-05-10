@@ -16,6 +16,7 @@ import StyleFilter from './../components/community/main/StyleFilter';
 import SkeletonFeed from './../components/community/main/SkeletonFeed'; // 추가된 부분
 import './../styles/community/main.scss';
 import { FeedData } from './../types/communityTypes';
+import { Link } from 'react-router-dom';
 
 const Community = () => {
   const [likedItems, setLikedItems] = useState<number[]>([]);
@@ -28,7 +29,7 @@ const Community = () => {
   const [selectedStyleIndexes, setSelectedStyleIndexes] = useState<string[]>(
     []
   );
-  const [sort, setSort] = useState<string>('인기순');
+  const [sort, setSort] = useState<string>('조회수순');
 
   const fetchDataWithFilters = useCallback(async () => {
     setIsLoading(true);
@@ -117,132 +118,138 @@ const Community = () => {
   }, []);
 
   return (
-    <>
-      <Box className='wrap'>
-        <Grid container className='button-wrap'>
-          <div className='filter-container'>
-            <ColorFilter
-              colorIndexes={selectedColorIndexes}
-              colorButtonClick={handleColorButtonClick}
-            />
-            <StyleFilter
-              styleIndexes={selectedStyleIndexes}
-              styleButtonClick={handleStyleButtonClick}
-            />
-            <Button onClick={handleResetFilters}>필터 초기화</Button>
-            <Box className='sort-box'>
-              <FormControl sx={{ m: 1, minWidth: 120 }}>
-                <Select
-                  labelId='sort-label'
-                  id='sort-select'
-                  value={sort}
-                  onChange={event => setSort(event.target.value as string)}
-                >
-                  <MenuItem value='인기순'>인기순</MenuItem>
-                  <MenuItem value='조회수순'>조회수순</MenuItem>
-                  <MenuItem value='댓글순'>댓글순</MenuItem>
-                  <MenuItem value='최신순'>최신순</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-          </div>
-        </Grid>
-        <div className='line'></div>
-        <Grid container>
-          {isLoading ? (
-            [1, 2, 3, 4].map((_, index) => (
-              <Grid item xs={6} md={3} key={index} className='feed'>
-                <SkeletonFeed />
-              </Grid>
-            ))
-          ) : isError ? (
-            <div>Error occurred.</div>
-          ) : (
-            filterData.map(item => (
-              <Grid item xs={6} md={3} key={item.feedId} className='feed'>
-                <Box className='feed-container'>
-                  <Box className='feed-box'>
+    <Box className='wrap'>
+      <Grid container className='button-wrap'>
+        <div className='filter-container'>
+          <ColorFilter
+            colorIndexes={selectedColorIndexes}
+            colorButtonClick={handleColorButtonClick}
+          />
+          <StyleFilter
+            styleIndexes={selectedStyleIndexes}
+            styleButtonClick={handleStyleButtonClick}
+          />
+          <Button onClick={handleResetFilters}>필터 초기화</Button>
+          <Button>
+            <Link
+              to='/community/post'
+              style={{ textDecoration: 'none', color: 'unset' }}
+            >
+              글 쓰기
+            </Link>
+          </Button>
+          <Box className='sort-box'>
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
+              <Select
+                labelId='sort-label'
+                id='sort-select'
+                value={sort}
+                onChange={event => setSort(event.target.value as string)}
+              >
+                <MenuItem value='조회수순'>조회수 순</MenuItem>
+                <MenuItem value='좋아요순'>좋아요 순</MenuItem>
+                <MenuItem value='댓글순'>댓글 순</MenuItem>
+                <MenuItem value='최신순'>최신 순</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+        </div>
+      </Grid>
+      <div className='line'></div>
+      <Grid container>
+        {isLoading ? (
+          [1, 2, 3, 4].map((_, index) => (
+            <Grid item xs={6} md={3} key={index} className='feed'>
+              <SkeletonFeed />
+            </Grid>
+          ))
+        ) : isError ? (
+          <div>Error occurred.</div>
+        ) : (
+          filterData.map(item => (
+            <Grid item xs={6} md={3} key={item.feedId} className='feed'>
+              <Box className='feed-container'>
+                <Box className='feed-box'>
+                  <img
+                    className='feed-img'
+                    src={item.images[0]}
+                    alt={item.title}
+                  />
+                </Box>
+                <Box className='info-box'>
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
                     <img
-                      className='feed-img'
-                      src={item.images[0]}
-                      alt={item.title}
+                      className='profile-img'
+                      src={item.profileImage}
+                      alt={item.accountName}
                     />
-                  </Box>
-                  <Box className='info-box'>
-                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                      <img
-                        className='profile-img'
-                        src={item.profileImage}
-                        alt={item.accountName}
-                      />
-                      <Typography
-                        variant='body2'
-                        noWrap
-                        title={item.accountName}
-                        style={{
-                          cursor: 'Default',
-                          maxWidth: '100px',
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis',
-                        }}
-                      >
-                        {item.accountName}
-                      </Typography>
-                    </Box>
-                    <div
+                    <Typography
+                      variant='body2'
+                      noWrap
+                      title={item.accountName}
                       style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        marginLeft: 'auto',
+                        cursor: 'Default',
+                        maxWidth: '100px',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
                       }}
                     >
-                      <IconButton
-                        sx={{
-                          color: likedItems.includes(item.feedId)
-                            ? 'error.main'
-                            : 'action.active',
-                          margin: 0,
-                          padding: 0,
-                        }}
-                        onClick={() => handleLike(item.feedId)}
-                      >
-                        {likedItems.includes(item.feedId) ? (
-                          <Favorite sx={{ color: 'red', fontSize: '20px' }} />
-                        ) : (
-                          <FavoriteBorder sx={{ fontSize: '20px' }} />
-                        )}
-                      </IconButton>
-                      <Typography
-                        variant='caption'
-                        ml={0.5}
-                        style={{ cursor: 'Default' }}
-                      >
-                        {item.likes}
-                      </Typography>
-                      <Divider
-                        sx={{ mx: 0.5, height: 10 }}
-                        orientation='vertical'
-                      />
-                      <Visibility
-                        sx={{ color: 'text.secondary', fontSize: '20px' }}
-                      />
-                      <Typography
-                        variant='caption'
-                        ml={0.5}
-                        color='text.secondary'
-                        style={{ cursor: 'Default' }}
-                      >
-                        {item.views}
-                      </Typography>
-                    </div>
+                      {item.accountName}
+                    </Typography>
                   </Box>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      marginLeft: 'auto',
+                    }}
+                  >
+                    <IconButton
+                      sx={{
+                        color: likedItems.includes(item.feedId)
+                          ? 'error.main'
+                          : 'action.active',
+                        margin: 0,
+                        padding: 0,
+                      }}
+                      onClick={() => handleLike(item.feedId)}
+                    >
+                      {likedItems.includes(item.feedId) ? (
+                        <Favorite sx={{ color: 'red', fontSize: '20px' }} />
+                      ) : (
+                        <FavoriteBorder sx={{ fontSize: '20px' }} />
+                      )}
+                    </IconButton>
+                    <Typography
+                      variant='caption'
+                      ml={0.5}
+                      style={{ cursor: 'Default' }}
+                    >
+                      {item.likes}
+                    </Typography>
+                    <Divider
+                      sx={{ mx: 0.5, height: 10 }}
+                      orientation='vertical'
+                    />
+                    <Visibility
+                      sx={{ color: 'text.secondary', fontSize: '20px' }}
+                    />
+                    <Typography
+                      variant='caption'
+                      ml={0.5}
+                      color='text.secondary'
+                      style={{ cursor: 'Default' }}
+                    >
+                      {item.views}
+                    </Typography>
+                  </div>
                 </Box>
-              </Grid>
-            ))
-          )}
-        </Grid>
-      </Box>
-    </>
+              </Box>
+            </Grid>
+          ))
+        )}
+      </Grid>
+    </Box>
   );
 };
 
