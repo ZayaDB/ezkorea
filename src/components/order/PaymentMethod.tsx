@@ -198,40 +198,40 @@ function Item(props: any) {
 }
 
 /* 카드 결제 */
-function CardContent() {
-  return (
-    <div className='account-contianer'>
-      <div className='account-content-container first'>
-        <img src={sh_card_src} alt='card img' className='card_img' />
-        <div>
-          <div>카카오뱅크</div>
-          <div>3333*******</div>
-        </div>
-      </div>
-      <div className='account-content-container'>
-        <img src={kb_card_src} alt='card img' className='card_img' />
-        <div>
-          <div>카카오뱅크</div>
-          <div>3333*******</div>
-        </div>
-      </div>
-      <div className='account-content-container'>
-        <img src={ss_card_src} alt='card img' className='card_img' />
-        <div>
-          <div>카카오뱅크</div>
-          <div>3333*******</div>
-        </div>
-      </div>
-      <div className='account-content-container'>
-        <img src={kakao_card_src} alt='card img' className='card_img' />
-        <div>
-          <div>카카오뱅크</div>
-          <div>3333*******</div>
-        </div>
-      </div>
-    </div>
-  );
-}
+// function CardContent() {
+//   return (
+//     <div className='account-contianer'>
+//       <div className='account-content-container first'>
+//         <img src={sh_card_src} alt='card img' className='card_img' />
+//         <div>
+//           <div>카카오뱅크</div>
+//           <div>3333*******</div>
+//         </div>
+//       </div>
+//       <div className='account-content-container'>
+//         <img src={kb_card_src} alt='card img' className='card_img' />
+//         <div>
+//           <div>카카오뱅크</div>
+//           <div>3333*******</div>
+//         </div>
+//       </div>
+//       <div className='account-content-container'>
+//         <img src={ss_card_src} alt='card img' className='card_img' />
+//         <div>
+//           <div>카카오뱅크</div>
+//           <div>3333*******</div>
+//         </div>
+//       </div>
+//       <div className='account-content-container'>
+//         <img src={kakao_card_src} alt='card img' className='card_img' />
+//         <div>
+//           <div>카카오뱅크</div>
+//           <div>3333*******</div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
 
 function GeneralContent() {
   return <div></div>;
