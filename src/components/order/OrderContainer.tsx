@@ -13,7 +13,7 @@ import ApplyDiscount from './ApplyDiscount';
 */
 function CustomerInformation() {
   const [ordererName] = useState<string>('');
-  const [ordererPhoneNum] = useState<number>();
+  // const [ordererPhoneNum] = useState<number>();
 
   return (
     <div className='order-customer-info'>
