@@ -7,7 +7,7 @@ import '../../styles/home/carousel.scss';
 export default function MainSlide() {
   return (
     <>
-      <div style={{ width: '100vw', margin: 0, padding: 0 }}>
+      <div style={{ width: 'auto', margin: 0, padding: 0 }}>
         <Carousel>
           <Carousel.Item>
             <img className='d-block w-100' src={mainSlide2} alt='First slide' />

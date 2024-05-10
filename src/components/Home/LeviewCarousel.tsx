@@ -41,7 +41,7 @@ export default function LeviewCarousel() {
   ];
 
   return (
-    <div style={{ width: '100vw' }}>
+    <div>
       <div className='TitleArea'>
         <Typography sx={{ fontSize: '28px', fontWeight: '600' }}>
           REVIEW
