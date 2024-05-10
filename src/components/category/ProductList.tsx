@@ -27,9 +27,9 @@ const ProductList: React.FC = () => {
   const selectedBrands = useSelector(
     (state: RootState) => state.category.brands
   );
-  const selectedPrices = useSelector(
-    (state: RootState) => state.category.prices
-  );
+  // const selectedPrices = useSelector(
+  //   (state: RootState) => state.category.prices
+  // );
   const selectedColors = useSelector(
     (state: RootState) => state.category.colors
   );

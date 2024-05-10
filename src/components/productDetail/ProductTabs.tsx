@@ -1,9 +1,9 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import '../../styles/productDetail/productDetail.scss';
 import Review from './Review';
 import Inquire from './Inquire';
-import ProductInfo from './ProductInfo';
 import ProductsStyling from './ProductStyling';
+import { useLocation } from 'react-router-dom';
 
 // import React, { useRef, useState } from 'react';
 
@@ -14,6 +14,20 @@ import ProductsStyling from './ProductStyling';
 // const deliveryRefund = useRef();
 // const inquire = useRef();
 // const similar = useRef();
+interface ScrollToTopProps {
+  children: React.ReactNode;
+}
+
+export function ScrollToTop(props: ScrollToTopProps) {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    console.log('Scrolling to top');
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return <>{props.children}</>;
+}
 
 export default function ProductTabs() {
   const content1Ref = useRef<HTMLDivElement>(null);
@@ -34,32 +48,34 @@ export default function ProductTabs() {
     content4Ref.current?.scrollIntoView({ behavior: 'smooth' });
   };
   return (
-    <div id='navZone'>
-      <nav id='detailNav'>
-        <div onClick={onContent1Click} role='none'>
-          상품정보
+    <ScrollToTop>
+      <div id='navZone'>
+        <nav id='detailNav'>
+          <div onClick={onContent1Click} role='none'>
+            상품정보
+          </div>
+          <div onClick={onContent2Click} role='none'>
+            리뷰
+          </div>
+          <div onClick={onContent3Click} role='none'>
+            배송/환불
+          </div>
+          <div onClick={onContent4Click} role='none'>
+            문의하기
+          </div>
+        </nav>
+        {/* style={{ border: '3px solid salmon' }} */}
+        <div ref={content1Ref}>
+          <ProductsStyling />
         </div>
-        <div onClick={onContent2Click} role='none'>
-          리뷰
+        <div ref={content2Ref}>
+          <Review />
         </div>
-        <div onClick={onContent3Click} role='none'>
-          배송/환불
+        <div ref={content3Ref}>배송/환불</div>
+        <div ref={content4Ref}>
+          <Inquire />
         </div>
-        <div onClick={onContent4Click} role='none'>
-          문의하기
-        </div>
-      </nav>
-      {/* style={{ border: '3px solid salmon' }} */}
-      <div ref={content1Ref}>
-        <ProductsStyling />
       </div>
-      <div ref={content2Ref}>
-        <Review />
-      </div>
-      <div ref={content3Ref}>배송/환불</div>
-      <div ref={content4Ref}>
-        <Inquire />
-      </div>
-    </div>
+    </ScrollToTop>
   );
 }

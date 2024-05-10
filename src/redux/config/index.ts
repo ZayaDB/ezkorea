@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import address from '../reducers/address';
+import address from '../slices/addressSlice';
 import category from '../slices/categorySlice';
 
 const rootReducer = combineReducers({

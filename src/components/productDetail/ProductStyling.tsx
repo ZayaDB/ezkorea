@@ -1,6 +1,10 @@
 import '../../styles/productDetail/productDetail.scss';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
+// const onPageChange = (e: React.ChangeEvent<unknown>, page: number) => {
+//   setCurrentPage(page);
+// };
+// const LAST_
 export default function ProductsStyling() {
   return (
     <>
