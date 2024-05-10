@@ -50,12 +50,12 @@ $border: 1px solid lightgray;
   margin: 0 auto;
 }
 .detailMain {
-  width: 90vh;
+  width: 80vh;
   padding: 0;
   margin-right: 8px;
 }
 .detailSide {
-  width: calc(1200px - (90vh + 8px));
+  width: calc(1200px - (80vh + 8px));
   height: calc(100vh - 200px);
   @include column();
 }
@@ -73,7 +73,7 @@ $border: 1px solid lightgray;
   position: fixed;
   // background-color: white;
   // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  border: $border;
+  border-top: 3px solid black;
   padding: 8px;
 }
 
@@ -144,7 +144,7 @@ $border: 1px solid lightgray;
   height: 20vh;
   @include column();
   justify-content: space-evenly;
-  border-top: $border;
+  // border-top: $border;
   margin: auto 0;
 }
 .subtitle {
@@ -174,12 +174,16 @@ $border: 1px solid lightgray;
 
 #selectProduct {
   height: 20vh;
-  border-top: $border;
+  // border-top: $border;
   padding-top: 12px;
   @include column();
 }
-#selectProduct button {
-  all: unset;
+.options {
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  width: 100%;
+  text-align: left;
 }
 #selectedPurchase {
   @include column();
@@ -209,7 +213,7 @@ $border: 1px solid lightgray;
   @include row();
   justify-content: space-between;
   padding: 0 8px;
-  border-top: $border;
+  // border-top: $border;
   font-size: $font-size-l;
   font-weight: $font-weight-bold;
 }
