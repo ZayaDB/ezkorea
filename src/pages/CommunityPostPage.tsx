@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import ContentArea from '../styles/ContentArea';
 import theme from '../styles/theme';
+import styled from '@emotion/styled';
 import {
   Box,
   Typography,
@@ -39,14 +40,15 @@ function CommunityPostPage() {
 
   console.log('formState errors1:', errors);
   const [files, setFiles] = useState<File[]>([]);
-
   const [products, setProducts] = useState<string[]>([]);
   const [productName, setProductName] = useState('');
   const [selectedConcepts, setSelectedConcepts] = useState<string[]>([]);
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState<IFormInput | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
+  // 컨셉과 색상 선택에 변화 일어날 시 오류 감지
   useEffect(() => {
     if (selectedConcepts.length > 0) {
       clearErrors('submissionConcepts');
@@ -56,6 +58,77 @@ function CommunityPostPage() {
     }
   }, [selectedConcepts, selectedColors, clearErrors]);
 
+  const triggerFileInput = () => {
+    // ref를 사용하여 실제 input 요소를 트리거합니다
+    fileInputRef.current?.click();
+  };
+
+  // 파일 선택 핸들러
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      const fileArray = Array.from(event.target.files);
+      const newFiles = [...files, ...fileArray];
+      if (newFiles.length < 1 || newFiles.length > 4) {
+        setError('files', {
+          type: 'manual',
+          message: '1개 이상 4개 이하의 사진을 업로드해주세요.',
+        });
+        console.log('사진 에러');
+      } else {
+        clearErrors('files');
+        setFiles(newFiles);
+      }
+    }
+  };
+
+  // 파일 제거 핸들러
+  const handleRemoveFile = (fileIndex: number) => {
+    const newFiles = files.filter((_, index) => index !== fileIndex);
+    if (newFiles.length < 1) {
+      setError('files', {
+        type: 'manual',
+        message: '1개의 이미지는 필수로 첨부해주세요.',
+      });
+    } else {
+      clearErrors('files');
+      setFiles(newFiles);
+    }
+  };
+
+  // 제품명 입력 시 배열에 추가
+  const addProduct = () => {
+    if (productName && !products.includes(productName)) {
+      setProducts([...products, productName]);
+      setProductName(''); // 입력 필드 초기화
+    }
+  };
+
+  //제품평 인풋창에서 엔터 누르면 추가
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // 엔터 키로 인한 폼 제출 방지
+      addProduct();
+    }
+  };
+
+  //체크박스 대신 버튼 토글로 변경
+  const toggleSelection = (
+    item: string,
+    list: string[],
+    setList: React.Dispatch<React.SetStateAction<string[]>>
+  ) => {
+    const currentIndex = list.indexOf(item);
+    const newChecked = [...list];
+    currentIndex === -1
+      ? newChecked.push(item)
+      : newChecked.splice(currentIndex, 1);
+    setList(newChecked);
+    clearErrors(
+      list === selectedConcepts ? 'submissionConcepts' : 'submissionColors'
+    );
+  };
+
+  // 모달 관련
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -105,76 +178,22 @@ function CommunityPostPage() {
     // 여기에 실제 데이터 제출 로직을 추가할 수 있습니다.
   };
 
-  // 파일 선택 핸들러
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
-      const fileArray = Array.from(event.target.files);
-      const newFiles = [...files, ...fileArray];
-      if (newFiles.length < 1 || newFiles.length > 4) {
-        setError('files', {
-          type: 'manual',
-          message: '1개 이상 4개 이하의 사진을 업로드해주세요.',
-        });
-        console.log('사진 에러');
-      } else {
-        clearErrors('files');
-        setFiles(newFiles);
-      }
-    }
-  };
-
-  // 파일 제거 핸들러
-  const handleRemoveFile = (fileIndex: number) => {
-    const newFiles = files.filter((_, index) => index !== fileIndex);
-    if (newFiles.length < 1) {
-      setError('files', {
-        type: 'manual',
-        message: '1개의 이미지는 필수로 첨부해주세요.',
-      });
-    } else {
-      clearErrors('files');
-      setFiles(newFiles);
-    }
-  };
-  const addProduct = () => {
-    if (productName && !products.includes(productName)) {
-      setProducts([...products, productName]);
-      setProductName(''); // 입력 필드 초기화
-    }
-  };
-
-  //제품평 인풋창에서 엔터 누르면 추가
-  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      event.preventDefault(); // 엔터 키로 인한 폼 제출 방지
-      addProduct();
-    }
-  };
-
-  //체크박스 대신 버튼 토글로 변경
-  const toggleSelection = (
-    item: string,
-    list: string[],
-    setList: React.Dispatch<React.SetStateAction<string[]>>
-  ) => {
-    const currentIndex = list.indexOf(item);
-    const newChecked = [...list];
-    currentIndex === -1
-      ? newChecked.push(item)
-      : newChecked.splice(currentIndex, 1);
-    setList(newChecked);
-    clearErrors(
-      list === selectedConcepts ? 'submissionConcepts' : 'submissionColors'
-    );
-  };
-
   return (
     <ContentArea>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box display='flex' flexDirection='column'>
           <SubTitle text='사진'></SubTitle>
           <Box display='flex' flexDirection='row'>
-            <input type='file' multiple onChange={handleFileChange} />
+            <input
+              type='file'
+              multiple
+              onChange={handleFileChange}
+              ref={fileInputRef}
+              style={{ display: 'none' }}
+            />
+            <Button onClick={triggerFileInput} variant='contained'>
+              파일 선택
+            </Button>
 
             {files.map((file, index) => {
               const imageUrl = URL.createObjectURL(file);
@@ -201,8 +220,6 @@ function CommunityPostPage() {
                       right: '0',
                       padding: '2px 5px',
                       lineHeight: '1',
-                      color: 'white',
-                      backgroundColor: 'red',
                       border: 'none',
                       cursor: 'pointer',
                     }}
@@ -266,7 +283,7 @@ function CommunityPostPage() {
 
           <SubTitle text='제품 선택'></SubTitle>
 
-          <Box>
+          <ProductBox>
             <TextField
               type='text'
               value={productName}
@@ -274,21 +291,29 @@ function CommunityPostPage() {
               onKeyDown={handleKeyPress}
               variant='outlined'
               placeholder='제품명을 입력해주세요.'
+              sx={{ width: '100%' }}
             />
             <Button
               type='button'
               onClick={addProduct}
               sx={{
                 color: theme.palette.common.black,
-                backgroundColor: theme.palette.primary.main,
-                ':hover': { backgroundColor: theme.palette.primary.main },
+                backgroundColor: 'primary.main',
+                ':hover': { backgroundColor: 'primary.main' },
               }}
             >
               등록
             </Button>
             <List>
               {products.map((product, index) => (
-                <ListItem key={index}>
+                <ListItem
+                  key={index}
+                  sx={{
+                    border: '1px solid',
+                    borderColor: 'primary.main',
+                    justifyContent: 'space-between',
+                  }}
+                >
                   {product}
                   <Button
                     type='button'
@@ -304,27 +329,12 @@ function CommunityPostPage() {
                 </ListItem>
               ))}
             </List>
-          </Box>
+          </ProductBox>
 
           <SubTitle text='컨셉 선택'></SubTitle>
-          {/* {['antique', 'gaming', 'simple', 'unique'].map(concept => (
-              <label key={concept}>
-                <input
-                  type='checkbox'
-                  checked={selectedConcepts.includes(concept)}
-                  onChange={e =>
-                    handleCheckboxChange('concepts', concept, e.target.checked)
-                  }
-                />
-                {concept}
-              </label>
-            ))}
-            {errors.submissionConcepts && (
-              <p>{errors.submissionConcepts.message}</p>
-            )} */}
           <Box>
             {['antique', 'gaming', 'simple', 'unique'].map(concept => (
-              <Button
+              <SelectButton
                 key={concept}
                 onClick={() =>
                   toggleSelection(
@@ -335,8 +345,6 @@ function CommunityPostPage() {
                 }
                 variant='outlined'
                 sx={{
-                  my: 1,
-                  color: 'black',
                   bgcolor: selectedConcepts.includes(concept)
                     ? 'primary.main'
                     : 'inherit',
@@ -348,7 +356,7 @@ function CommunityPostPage() {
                 }}
               >
                 {concept}
-              </Button>
+              </SelectButton>
             ))}
             {errors.submissionConcepts && (
               <Typography color='error'>
@@ -359,15 +367,13 @@ function CommunityPostPage() {
           <Box>
             <SubTitle text='컬러 선택' />
             {['black', 'white', 'wood', 'pink'].map(color => (
-              <Button
+              <SelectButton
                 key={color}
                 variant='outlined'
                 onClick={() =>
                   toggleSelection(color, selectedColors, setSelectedColors)
                 }
                 sx={{
-                  my: 1,
-                  color: 'black',
                   bgcolor: selectedColors.includes(color)
                     ? 'primary.main'
                     : 'inherit',
@@ -378,18 +384,9 @@ function CommunityPostPage() {
                   },
                 }}
               >
-                <Box
-                  sx={{
-                    width: 24,
-                    height: 24,
-                    borderRadius: '50%',
-                    border: color === 'white' ? 'solid 1px black' : 'none',
-                    bgcolor: color === 'wood' ? '#9A6322' : color,
-                    mr: 1,
-                  }}
-                />
+                <ColorCircle color={color} />
                 {color}
-              </Button>
+              </SelectButton>
             ))}
             {errors.submissionColors && (
               <Typography color='error'>
@@ -415,7 +412,9 @@ function CommunityPostPage() {
             )}
           </div> */}
         </Box>
-        <Button type='button'>취소하기</Button>
+        <Button type='button' variant='outlined'>
+          취소하기
+        </Button>
         <Button
           sx={{
             backgroundColor: theme.palette.primary.main,
@@ -458,3 +457,27 @@ function CommunityPostPage() {
 }
 
 export default CommunityPostPage;
+
+const ProductBox = styled(Box)({
+  maxWidth: '710px',
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+});
+
+const SelectButton = styled(Button)({
+  marginY: '8px',
+  color: 'black',
+  margin: '0 8px 0 0',
+  minWidth: '115px',
+});
+
+// Color 표시 원 스타일 정의
+const ColorCircle = styled(Box)<{ color: string }>(({ color }) => ({
+  width: 24,
+  height: 24,
+  borderRadius: '50%',
+  border: color === 'white' ? '1px solid black' : 'none',
+  backgroundColor: color === 'wood' ? '#9A6322' : color,
+  marginRight: '8px',
+}));
