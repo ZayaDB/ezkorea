@@ -8,8 +8,6 @@
     "@fontsource/roboto": "^5.0.13",
     "@mui/icons-material": "^5.15.16",
     "@mui/material": "^5.15.16",
-    "@mui/icons-material": "^5.15.17",
-    "@mui/material": "^5.15.17",
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
     "@mui/types": "^7.2.14",
     "@redux-devtools/extension": "^3.3.0",
