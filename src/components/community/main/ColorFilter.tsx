@@ -5,7 +5,7 @@ import './../../../styles/community/main.scss';
 
 interface ColorFilterProps {
   colorIndexes: string[];
-  colorButtonClick: () => void;
+  colorButtonClick: (color: string) => void;
 }
 
 const ColorFilter: React.FC<ColorFilterProps> = ({
