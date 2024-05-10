@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useState } from 'react';
+import React, { useState } from 'react';
 import Carousel from 'react-material-ui-carousel';
 
 import Head from './Head';
@@ -12,7 +12,7 @@ import kakao_card_src from '../../assets/images/card_kakao.png';
 import kb_card_src from '../../assets/images/card_kb.png';
 import ss_card_src from '../../assets/images/card_samsung.png';
 import sh_card_src from '../../assets/images/card_sh.png';
-import { Box, Card, Paper, Tab, Tabs, Typography } from '@mui/material';
+import { Paper } from '@mui/material';
 
 /* 결제수단 */
 export default function PaymentMethod() {
