@@ -13,7 +13,6 @@ import Community from './pages/Community';
 import ProductDetail from './pages/ProductDetail';
 import OrderPage from './pages/OrderPage';
 import MyPage from './pages/MyPage';
-import CommunityPostCustomPage from './pages/CommunityPostCustomPage';
 
 function App() {
   const sections = [
@@ -35,7 +34,7 @@ function App() {
           <Route path='/shop/detail' element={<ProductDetail />} />
           <Route path='/community' element={<Community />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/community/post' element={<CommunityPostCustomPage />} />
+          <Route path='/community/post' element={<CommunityPostPage />} />
           <Route path='/order' element={<OrderPage />} />
           <Route path='/my' element={<MyPage />} />
         </Routes>

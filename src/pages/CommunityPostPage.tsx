@@ -16,13 +16,16 @@ import {
   ListItem,
   List,
 } from '@mui/material';
-
+import { useFileHandler } from '../hooks/community/useFileHandler';
+import { useSelectionHandler } from '../hooks/community/useSelectionHandler';
+import { useProductHandler } from '../hooks/community/useProductHandler';
 import SubTitle from '../components/community/post/SubTitle';
 
 interface IFormInput {
   files: File[];
   title: string;
   description: string;
+  products: string[];
   concepts: string[];
   colors: string[];
   submissionConcepts?: string;
@@ -39,14 +42,18 @@ function CommunityPostPage() {
   } = useForm<IFormInput>({});
 
   console.log('formState errors1:', errors);
-  const [files, setFiles] = useState<File[]>([]);
-  const [products, setProducts] = useState<string[]>([]);
-  const [productName, setProductName] = useState('');
-  const [selectedConcepts, setSelectedConcepts] = useState<string[]>([]);
-  const [selectedColors, setSelectedColors] = useState<string[]>([]);
+  const { products, productName, setProductName, addProduct, setProducts } =
+    useProductHandler();
+  // const [products, setProducts] = useState<string[]>([]);
+  // const [productName, setProductName] = useState('');
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState<IFormInput | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { files, handleFileChange, handleRemoveFile } = useFileHandler();
+  const { selections: selectedConcepts, toggleSelection: toggleConcept } =
+    useSelectionHandler<string>();
+  const { selections: selectedColors, toggleSelection: toggleColor } =
+    useSelectionHandler<string>();
 
   // 컨셉과 색상 선택에 변화 일어날 시 오류 감지
   useEffect(() => {
@@ -56,51 +63,14 @@ function CommunityPostPage() {
     if (selectedColors.length > 0) {
       clearErrors('submissionColors');
     }
-  }, [selectedConcepts, selectedColors, clearErrors]);
+    if (files.length > 0) {
+      clearErrors('files');
+    }
+  }, [selectedConcepts, selectedColors, files, clearErrors]);
 
   const triggerFileInput = () => {
     // ref를 사용하여 실제 input 요소를 트리거합니다
     fileInputRef.current?.click();
-  };
-
-  // 파일 선택 핸들러
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
-      const fileArray = Array.from(event.target.files);
-      const newFiles = [...files, ...fileArray];
-      if (newFiles.length < 1 || newFiles.length > 4) {
-        setError('files', {
-          type: 'manual',
-          message: '1개 이상 4개 이하의 사진을 업로드해주세요.',
-        });
-        console.log('사진 에러');
-      } else {
-        clearErrors('files');
-        setFiles(newFiles);
-      }
-    }
-  };
-
-  // 파일 제거 핸들러
-  const handleRemoveFile = (fileIndex: number) => {
-    const newFiles = files.filter((_, index) => index !== fileIndex);
-    if (newFiles.length < 1) {
-      setError('files', {
-        type: 'manual',
-        message: '1개의 이미지는 필수로 첨부해주세요.',
-      });
-    } else {
-      clearErrors('files');
-      setFiles(newFiles);
-    }
-  };
-
-  // 제품명 입력 시 배열에 추가
-  const addProduct = () => {
-    if (productName && !products.includes(productName)) {
-      setProducts([...products, productName]);
-      setProductName(''); // 입력 필드 초기화
-    }
   };
 
   //제품평 인풋창에서 엔터 누르면 추가
@@ -109,23 +79,6 @@ function CommunityPostPage() {
       event.preventDefault(); // 엔터 키로 인한 폼 제출 방지
       addProduct();
     }
-  };
-
-  //체크박스 대신 버튼 토글로 변경
-  const toggleSelection = (
-    item: string,
-    list: string[],
-    setList: React.Dispatch<React.SetStateAction<string[]>>
-  ) => {
-    const currentIndex = list.indexOf(item);
-    const newChecked = [...list];
-    currentIndex === -1
-      ? newChecked.push(item)
-      : newChecked.splice(currentIndex, 1);
-    setList(newChecked);
-    clearErrors(
-      list === selectedConcepts ? 'submissionConcepts' : 'submissionColors'
-    );
   };
 
   // 모달 관련
@@ -138,7 +91,7 @@ function CommunityPostPage() {
     const completeData = {
       fileLength: files.length,
       ...data,
-      products: products,
+      products: products || [],
       concepts: selectedConcepts,
       colors: selectedColors,
     };
@@ -288,9 +241,9 @@ function CommunityPostPage() {
               type='text'
               value={productName}
               onChange={e => setProductName(e.target.value)}
+              placeholder='제품명 입력'
               onKeyDown={handleKeyPress}
               variant='outlined'
-              placeholder='제품명을 입력해주세요.'
               sx={{ width: '100%' }}
             />
             <Button
@@ -336,24 +289,13 @@ function CommunityPostPage() {
             {['antique', 'gaming', 'simple', 'unique'].map(concept => (
               <SelectButton
                 key={concept}
-                onClick={() =>
-                  toggleSelection(
-                    concept,
-                    selectedConcepts,
-                    setSelectedConcepts
-                  )
-                }
-                variant='outlined'
+                onClick={() => toggleConcept(concept)}
                 sx={{
                   bgcolor: selectedConcepts.includes(concept)
                     ? 'primary.main'
                     : 'inherit',
-                  ':hover': {
-                    backgroundColor: selectedConcepts.includes(concept)
-                      ? 'primary.main'
-                      : 'inherit',
-                  },
                 }}
+                variant='outlined'
               >
                 {concept}
               </SelectButton>
@@ -370,18 +312,11 @@ function CommunityPostPage() {
               <SelectButton
                 key={color}
                 variant='outlined'
-                onClick={() =>
-                  toggleSelection(color, selectedColors, setSelectedColors)
-                }
+                onClick={() => toggleColor(color)}
                 sx={{
                   bgcolor: selectedColors.includes(color)
                     ? 'primary.main'
                     : 'inherit',
-                  ':hover': {
-                    backgroundColor: selectedColors.includes(color)
-                      ? 'primary.main'
-                      : 'inherit',
-                  },
                 }}
               >
                 <ColorCircle color={color} />
@@ -394,23 +329,6 @@ function CommunityPostPage() {
               </Typography>
             )}
           </Box>
-          {/* <SubTitle text='컬러 선택'></SubTitle>
-            {['black', 'white', 'wood', 'pink'].map(color => (
-              <label key={color}>
-                <input
-                  type='checkbox'
-                  checked={selectedColors.includes(color)}
-                  onChange={e =>
-                    handleCheckboxChange('colors', color, e.target.checked)
-                  }
-                />
-                {color}
-              </label>
-            ))}
-            {errors.submissionColors && (
-              <p>{errors.submissionColors.message}</p>
-            )}
-          </div> */}
         </Box>
         <Button type='button' variant='outlined'>
           취소하기
@@ -432,10 +350,24 @@ function CommunityPostPage() {
         <DialogTitle>{'아래 내용으로 피드를 등록하시겠습니까?'}</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            제목: {formData?.title}
+            <Typography>제목:</Typography>
+            <Typography>{formData?.title}</Typography>
             <br />
-            설명: {formData?.description}
+            <Typography>설명:</Typography>
+            <Typography>{formData?.description}</Typography>
             <br />
+            {formData?.products && formData?.products.length > 0 ? (
+              formData?.products.length > 1 ? (
+                <Typography>
+                  {' '}
+                  제품명: {formData?.products.join(', ')}{' '}
+                </Typography>
+              ) : (
+                <Typography> 제품명: {formData?.products[0]} </Typography>
+              )
+            ) : (
+              ''
+            )}
             컨셉:
             {formData && formData.concepts.length > 1
               ? formData?.concepts.join(', ')
