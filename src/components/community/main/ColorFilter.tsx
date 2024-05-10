@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // ColorFilter.tsx
 import React from 'react';
 import { Button } from '@mui/material';
@@ -12,9 +13,7 @@ const ColorFilter: React.FC<ColorFilterProps> = ({
   colorIndexes,
   colorButtonClick,
 }) => {
-  const colors = ['White', 'Black', 'Pink', 'Wood'];
-
-  console.log(colors);
+  const colors = ['white', 'black', 'pink', 'wood'];
 
   return (
     <div className='color-filter'>
@@ -22,14 +21,10 @@ const ColorFilter: React.FC<ColorFilterProps> = ({
       {colors.map((color, index) => (
         <Button
           key={index}
-          variant={
-            colorIndexes.includes(color.toLowerCase())
-              ? 'contained'
-              : 'outlined'
-          } // 소문자로 변환하여 비교
-          onClick={() => colorButtonClick(color.toLowerCase())} // 소문자로 전달
+          variant={colorIndexes.includes(color) ? 'contained' : 'outlined'} // 소문자로 변환하여 비교
+          onClick={() => colorButtonClick(color)} // 소문자로 전달
         >
-          {color.toUpperCase()}
+          {color}
         </Button>
       ))}
     </div>

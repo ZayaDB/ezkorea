@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import useToggle from '../../hooks/useToggle';
+// import useToggle from '../../hooks/useToggle';
 import '../../styles/category/productItem.scss';
 import HandleClickHeart from './HandleClickHeart';
 import { Products } from '../../types/typesProducts';
@@ -12,7 +12,7 @@ interface ProductItemProps {
 
 // 상품 카드 컴포넌트
 export default function ProductItem({ prod }: ProductItemProps) {
-  const [isHeart, toggleHeart] = useToggle(prod.heart);
+  // const [isHeart, toggleHeart] = useToggle(prod.heart);
   const [isLiked, setIsLiked] = useState<boolean>(prod.heart);
 
   const handleLikeToggle = () => {
