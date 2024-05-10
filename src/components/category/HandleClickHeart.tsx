@@ -4,7 +4,7 @@ import { styled } from '@mui/system';
 // import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 import CloseIcon from '@mui/icons-material/Close';
 import { Snackbar } from '@mui/base/Snackbar';
-import { SnackbarCloseReason } from '@mui/base/useSnackbar';
+// import { SnackbarCloseReason } from '@mui/base/useSnackbar';
 import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
@@ -59,13 +59,13 @@ export default function HandleClickHeart({
 
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
-  const handleClose = (_: any, reason?: SnackbarCloseReason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
+  // const handleClose = (_: any, reason?: SnackbarCloseReason) => {
+  //   if (reason === 'clickaway') {
+  //     return;
+  //   }
 
-    setOpen(false);
-  };
+  //   setOpen(false);
+  // };
 
   const handleClick = () => {
     onLikeToggle(); // 좋아요 토글 핸들러 호출
@@ -122,7 +122,7 @@ export default function HandleClickHeart({
                 </p>
               </div>
               <CloseIcon
-                onClick={handleClose}
+                // onClick={handleClose}
                 className='snackbar-close-icon'
               />
             </SnackbarContent>
