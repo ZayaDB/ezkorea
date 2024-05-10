@@ -41,7 +41,7 @@ const categories = [
 
 const CategoryDropDown: React.FC = () => {
   return (
-    <DropdownContainer sx={{ zIndex: 3000 }}>
+    <DropdownContainer>
       {categories.map((category, index) => (
         <LinkItem key={index} color='inherit' to={category.link}>
           {category.name}

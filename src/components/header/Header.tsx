@@ -234,6 +234,7 @@ export default function Header(props: HeaderProps) {
               borderBottom: 1,
               borderColor: 'divider',
               fontSize: '16px',
+              zIndex: 'appBar',
             }}
             style={{
               paddingLeft: '23.7%',
