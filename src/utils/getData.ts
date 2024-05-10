@@ -11,8 +11,8 @@ export const getData = async (
     const data = await response.json();
 
     // 데이터를 products와 categoryData로 분리
-    const products = data.filter((item: any) => 'productId' in item);
-    const categoryData = data.filter((item: any) => 'subCategories' in item);
+    const products = data.filter((item: Products[]) => 'productId' in item);
+    const categoryData = data.filter((item: CategoryData[]) => 'subCategories' in item);
 
     return { products, categoryData };
   } catch (error) {
