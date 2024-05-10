@@ -1,6 +1,6 @@
 import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Card, CardMedia, CardContent, Typography } from '@mui/material';
+import { Card, CardMedia, Typography } from '@mui/material';
 import Review1 from '../../assets/images/review_white.webp';
 import Review2 from '../../assets/images/review_white2.webp';
 import Review3 from '../../assets/images/review_white3.webp';
