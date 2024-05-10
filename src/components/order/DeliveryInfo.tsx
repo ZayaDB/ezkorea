@@ -8,6 +8,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import CloseButton from 'react-bootstrap/CloseButton';
 import Postcode from './Postcode';
 import { RootState } from '../../redux/config';
+import { useAddressBook } from '../../hooks/useAddressBook';
 
 /* 수령자 정보 
   - 1. 주문자 정보와 동일 : 정보 가져오기(CustomerInformation에서 내려받기)
@@ -91,9 +92,18 @@ function DeliveryInfoContent() {
   );
 }
 
+/* address 타입 지정 */
+interface Address {
+  name: string;
+  nickname: string;
+  address: string;
+  zipcode: string;
+  phoneNumber: string;
+}
+
 /* 주소록 기능 */
 function AddressBook() {
-  /* 모달창 */
+  /* 주소록 클릭 시 모달창 */
   const style = {
     position: 'absolute' as const,
     top: '50%',
@@ -110,36 +120,23 @@ function AddressBook() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  /* 주소록 */
-  const [name] = useState<string>('진가영');
-  const [addressName] = useState<string>('집');
-  const [zonecode] = useState<string>('12345');
-  const [address] = useState<string>('서울특별시 어쩌구 저쩌구로 166');
-  const [phoneNum] = useState<string>('010-1111-2222');
+  /* 주소록 추가 시 모달창 */
 
   return (
     <>
       <button onClick={handleOpen}>주소록</button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby='modal-modal-title'
-        aria-describedby='modal-modal-description'
-      >
+      <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
           <CloseButton onClick={handleClose} />
           <div className='address-caption'>배송지 목록</div>
-          <div>
-            <div>
-              {name}({addressName})
-            </div>
-            <div>
-              ({zonecode}) {address}
-            </div>
-            <div>{phoneNum}</div>
-          </div>
+          <AddAddress />
+          <button>주소록 추가</button>
         </Box>
       </Modal>
     </>
   );
+}
+
+function AddAddress() {
+  return <></>;
 }
