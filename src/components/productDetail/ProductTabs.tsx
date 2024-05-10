@@ -14,8 +14,11 @@ import { useLocation } from 'react-router-dom';
 // const deliveryRefund = useRef();
 // const inquire = useRef();
 // const similar = useRef();
+interface ScrollToTopProps {
+  children: React.ReactNode;
+}
 
-export function ScrollToTop(props: ProductDetail) {
+export function ScrollToTop(props: ScrollToTopProps) {
   const { pathname } = useLocation();
 
   useEffect(() => {
