@@ -16,6 +16,7 @@ import TextField from '@mui/material/TextField';
 // const onPageChange = (e: React.ChangeEvent<unknown>, page: number) => {
 //   setCurrentPage(page);
 // };
+
 interface ProductDetail {
   children: React.ReactNode;
   page: number;
