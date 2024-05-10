@@ -10,21 +10,52 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 
 // import { createTheme, styled } from '@mui/material/styles';
 // import SaleProduct from './../category/SaleProduct';
 // const cancelRef = useRef(null);
-const [currentPage, setCurrentPage] = useState(1);
-const onPageChange = (e: React.ChangeEvent<unknown>, page: number) => {
-  setCurrentPage(page);
+
+const generateOption = (color: string) => {
+  // count 버튼
+  const [count, setCount] = useState(0);
+  return (
+    <div key={color}>
+      <div id='optionBox'>
+        <div className='selectedColor'>{color}</div>
+        <div id='countZone'>
+          <div className='selectedCount'>
+            <ButtonGroup
+              size='small'
+              variant='contained'
+              aria-label='Basic button group'
+            >
+              <Button onClick={() => setCount(count + 1)} color='secondary'>
+                +
+              </Button>
+              <Button color='secondary' aria-readonly>
+                {count}
+              </Button>
+              <Button
+                onClick={() => setCount(count - 1)}
+                disabled={count < 1}
+                color='secondary'
+              >
+                -
+              </Button>
+            </ButtonGroup>
+          </div>
+          <div className='sellingPrice'>190,000원</div>
+          <div className='selectedClose'>X</div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default function SelectPurchase() {
-  // count 버튼
-  const [count, setCount] = React.useState(1);
   // 드롭다운
-  const [color, setColor] = React.useState('');
+  const [color, setColor] = useState('');
   const handleChange = (event: SelectChangeEvent) => {
     setColor(event.target.value as string);
   };
@@ -38,41 +69,6 @@ export default function SelectPurchase() {
       setSelectedColors([...selectedColors, color]);
       setOptions(prevOptions => [...prevOptions, generateOption(color)]);
     }
-  };
-
-  const generateOption = (color: string) => {
-    return (
-      <div key={color}>
-        <div id='optionBox'>
-          <div className='selectedColor'>{color}</div>
-          <div id='countZone'>
-            <div className='selectedCount'>
-              <ButtonGroup
-                size='small'
-                variant='contained'
-                aria-label='Basic button group'
-              >
-                <Button onClick={() => setCount(count + 1)} color='secondary'>
-                  +
-                </Button>
-                <Button color='secondary' aria-readonly>
-                  {0}
-                </Button>
-                <Button
-                  onClick={() => setCount(count - 1)}
-                  disabled={count < 1}
-                  color='secondary'
-                >
-                  -
-                </Button>
-              </ButtonGroup>
-            </div>
-            <div className='sellingPrice'>190,000원</div>
-            <div className='selectedClose'>X</div>
-          </div>
-        </div>
-      </div>
-    );
   };
 
   return (
