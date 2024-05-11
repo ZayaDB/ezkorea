@@ -1,3 +1,4 @@
+
 import { useSelector } from 'react-redux';
 // import ProductItem from '../category/ProductItem';
 import { RootState } from '../../redux/config';
@@ -8,7 +9,10 @@ export default function HeartProduct() {
   const products = useSelector((state: RootState) => state.category.products);
 
   // isLiked가 true인 상품들 필터링
-  const likedProducts = useSelector((state: RootState) =>
+  // const likedProducts = useSelector((state: RootState) =>
+  //   products.filter(product => isLikedMap[product.productId] === true)
+  // );
+  const likedProducts = useSelector(() =>
     products.filter(product => isLikedMap[product.productId] === true)
   );
 
@@ -29,3 +33,4 @@ export default function HeartProduct() {
     </div>
   );
 }
+

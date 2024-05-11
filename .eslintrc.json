@@ -18,7 +18,7 @@
   "rules": {
     "semi": ["error", "always"],
     "quotes": ["error", "single"],
-    "no-unused-vars": "warn",
+    "no-unused-vars": "off",
     "no-console": "off",
     "func-names": "off",
     "@typescript-eslint/no-explicit-any": "off",
@@ -46,3 +46,4 @@
     "sourceType": "module"
   }
 }
+

@@ -1,7 +1,7 @@
+
 import React, { useState } from 'react';
 import {
   Box,
-  Chip,
   FormControl,
   MenuItem,
   Select,
@@ -9,16 +9,19 @@ import {
   Modal,
 } from '@mui/material';
 import Pagination from '@mui/material/Pagination';
-import ClearIcon from '@mui/icons-material/Clear';
+// import ClearIcon from '@mui/icons-material/Clear';
 import ProductItem from './ProductItem';
 import '../../styles/category/productWrap.scss';
 import { useMediaQuery } from '@mui/material';
 import FilterCompo from './FilterCompo';
 import { useDispatch, useSelector } from 'react-redux';
 import getSelectedValue from '../../utils/getSelectedValue';
+// import {
+//   setSelectedSubCategory,
+//   removeSelectedFilter,
+// } from '../../redux/slices/categorySlice';
 import {
-  setSelectedSubCategory,
-  removeSelectedFilter,
+  setSelectedSubCategory
 } from '../../redux/slices/categorySlice';
 import useSort from '../../hooks/shop/useSort';
 import { SortOption, SubCategory } from '../../types/typesProducts';
@@ -59,43 +62,43 @@ const ProductList: React.FC = () => {
   };
 
   // 칩 렌더링 함수
-  const renderChips = (chipType: string, values: (string | number)[]) => {
-    return (
-      <Box className='filter-chip-bar'>
-        {values.map((value, index) => {
-          const formattedLabel =
-            typeof value === 'number' ? formatPrice(value) : String(value);
+  // const renderChips = (chipType: string, values: (string | number)[]) => {
+  //   return (
+  //     <Box className='filter-chip-bar'>
+  //       {values.map((value, index) => {
+  //         const formattedLabel =
+  //           typeof value === 'number' ? formatPrice(value) : String(value);
 
-          return (
-            <Chip
-              key={`${chipType}-${index}`}
-              label={formattedLabel}
-              onDelete={() => handleDelete(chipType, value)}
-              style={{
-                fontSize: isMobile ? '11px' : '14px',
-                width: isMobile ? '75px' : '100px',
-                height: isMobile ? '30px' : '37px',
-                paddingLeft: isMobile ? '1px' : '2px',
-                paddingRight: isMobile ? '2px' : '3px',
-                paddingTop: isMobile ? '2px' : '4px',
-                borderRadius: 2.8,
-                margin: '4px', // 각 칩 사이의 간격 조정
-                lineHeight: '14px',
-                zIndex: 0,
-              }}
-              deleteIcon={<ClearIcon style={{ fontSize: 16 }} />}
-            />
-          );
-        })}
-      </Box>
-    );
-  };
+  //         return (
+  //           <Chip
+  //             key={`${chipType}-${index}`}
+  //             label={formattedLabel}
+  //             onDelete={() => handleDelete(chipType, value)}
+  //             style={{
+  //               fontSize: isMobile ? '11px' : '14px',
+  //               width: isMobile ? '75px' : '100px',
+  //               height: isMobile ? '30px' : '37px',
+  //               paddingLeft: isMobile ? '1px' : '2px',
+  //               paddingRight: isMobile ? '2px' : '3px',
+  //               paddingTop: isMobile ? '2px' : '4px',
+  //               borderRadius: 2.8,
+  //               margin: '4px', // 각 칩 사이의 간격 조정
+  //               lineHeight: '14px',
+  //               zIndex: 0,
+  //             }}
+  //             deleteIcon={<ClearIcon style={{ fontSize: 16 }} />}
+  //           />
+  //         );
+  //       })}
+  //     </Box>
+  //   );
+  // };
 
   // 가격 포맷팅 함수 (1000 단위 콤마 추가)
-  const formatPrice = (price: number): string => {
-    const formatted = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    return `~${formatted}`; // price값 이하
-  };
+  // const formatPrice = (price: number): string => {
+  //   const formatted = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  //   return `~${formatted}`; // price값 이하
+  // };
 
   const subCategories: SubCategory[] = (
     selectedCategory
@@ -109,37 +112,37 @@ const ProductList: React.FC = () => {
   };
 
   // 칩 삭제 == 스토어에 저장된 필터값 삭제 핸들러
-  const handleDelete = (
-    chipType: string | number,
-    chipValue: string | number
-  ) => {
-    console.info(`Deleting ${chipType} - ${chipValue}`);
-    // Redux 스토어에서 선택한 필터 제거
-    switch (chipType) {
-      case '브랜드':
-        dispatch(
-          removeSelectedFilter({ filterType: 'brands', value: chipValue })
-        );
-        break;
-      case '가격':
-        dispatch(
-          removeSelectedFilter({ filterType: 'prices', value: chipValue })
-        );
-        break;
-      case '색상':
-        dispatch(
-          removeSelectedFilter({ filterType: 'colors', value: chipValue })
-        );
-        break;
-      case '테마':
-        dispatch(
-          removeSelectedFilter({ filterType: 'themes', value: chipValue })
-        );
-        break;
-      default:
-        break;
-    }
-  };
+  // const handleDelete = (
+  //   chipType: string | number,
+  //   chipValue: string | number
+  // ) => {
+  //   console.info(`Deleting ${chipType} - ${chipValue}`);
+  //   // Redux 스토어에서 선택한 필터 제거
+  //   switch (chipType) {
+  //     case '브랜드':
+  //       dispatch(
+  //         removeSelectedFilter({ filterType: 'brands', value: chipValue })
+  //       );
+  //       break;
+  //     case '가격':
+  //       dispatch(
+  //         removeSelectedFilter({ filterType: 'prices', value: chipValue })
+  //       );
+  //       break;
+  //     case '색상':
+  //       dispatch(
+  //         removeSelectedFilter({ filterType: 'colors', value: chipValue })
+  //       );
+  //       break;
+  //     case '테마':
+  //       dispatch(
+  //         removeSelectedFilter({ filterType: 'themes', value: chipValue })
+  //       );
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // };
 
   // 페이지네이션
   const [currentPage, setCurrentPage] = useState(1);
@@ -360,3 +363,4 @@ const ProductList: React.FC = () => {
 };
 
 export default ProductList;
+
