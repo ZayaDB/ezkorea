@@ -12,6 +12,7 @@ export interface CategoryState {
   colors: string[];
   prices: number[];
   themes: string[];
+  isLiked: { [productId: number]: boolean };
 }
 
 const initialState: CategoryState = {
@@ -23,6 +24,7 @@ const initialState: CategoryState = {
   colors: [],
   prices: [],
   themes: [],
+  isLiked: {},
 };
 
 const categorySlice = createSlice({
@@ -71,7 +73,7 @@ const categorySlice = createSlice({
           break;
         case 'prices':
           // if (typeof value === 'number') {
-            state.prices = state.prices.filter(price => price !== value);
+          state.prices = state.prices.filter(price => price !== value);
           // }
           break;
         case 'colors':
@@ -83,6 +85,13 @@ const categorySlice = createSlice({
         default:
           break;
       }
+    },
+    setIsLiked: (
+      state,
+      action: PayloadAction<{ productId: number; isLiked: boolean }>
+    ) => {
+      const { productId, isLiked } = action.payload;
+      state.isLiked[productId] = isLiked;
     },
   },
 });
@@ -98,6 +107,7 @@ export const {
   setThemes,
   clearFilters,
   removeSelectedFilter,
+  setIsLiked,
 } = categorySlice.actions;
 
 export default categorySlice.reducer;

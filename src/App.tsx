@@ -14,6 +14,7 @@ import Community from './pages/Community';
 import ProductDetail from './pages/ProductDetail';
 import OrderPage from './pages/OrderPage';
 import MyPage from './pages/MyPage';
+import NotFound from './pages/NotFound';
 
 function App() {
   const sections = [
@@ -38,6 +39,7 @@ function App() {
           <Route path='/community/post' element={<CommunityPostPage />} />
           <Route path='/order' element={<OrderPage />} />
           <Route path='/my' element={<MyPage />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

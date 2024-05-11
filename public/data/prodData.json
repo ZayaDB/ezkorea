@@ -545,7 +545,8 @@
     "hoverImage": "https://img.29cm.co.kr/next-product/2024/02/28/306a8167151149cab344b956bafef344_20240228155754.jpg?width=700",
     "views": 150,
     "commentCount": 200
-  },  {
+  },
+  {
     "productId": 33,
     "name": "",
     "brand": "모던포인트",
@@ -573,7 +574,7 @@
     "prevPrice": 75000,
     "category1": "조명/인테리어",
     "category2": "조명",
-    "heart": false,
+    "heart": true,
     "thumbnail": "https://img.29cm.co.kr/item/202403/11eedaaf4a8eabb682f2f9ee044f6a0b.jpg?width=700",
     "hoverImage": "https://img.29cm.co.kr/item/202403/11eedaaf4ba54bd882f2f106ee989998.jpg?width=700",
     "views": 150,
@@ -590,12 +591,13 @@
     "prevPrice": 75000,
     "category1": "조명/인테리어",
     "category2": "조명",
-    "heart": false,
+    "heart": true,
     "thumbnail": "https://img.29cm.co.kr/item/202403/11eedaaf4a8eabb682f2f9ee044f6a0b.jpg?width=700",
     "hoverImage": "https://img.29cm.co.kr/item/202403/11eedaaf4ba54bd882f2f106ee989998.jpg?width=700",
     "views": 150,
     "commentCount": 200
-  },  {
+  },
+  {
     "productId": 36,
     "name": "",
     "brand": "",
@@ -606,7 +608,7 @@
     "prevPrice": 75000,
     "category1": "조명/인테리어",
     "category2": "조명",
-    "heart": false,
+    "heart": true,
     "thumbnail": "https://img.29cm.co.kr/item/202403/11eedaaf4a8eabb682f2f9ee044f6a0b.jpg?width=700",
     "hoverImage": "https://img.29cm.co.kr/item/202403/11eedaaf4ba54bd882f2f106ee989998.jpg?width=700",
     "views": 150,

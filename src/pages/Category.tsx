@@ -7,6 +7,7 @@ import SideNav from '../components/category/SideNav';
 import '../styles/category/category.scss';
 
 import { setCategoryData, setProducts } from '../redux/slices/categorySlice';
+import HeartProduct from '../components/category/HeartProduct';
 // import BestProduct from '../components/category/BestProduct';
 
 export default function Category() {
@@ -38,8 +39,6 @@ export default function Category() {
           <ProductList />
         </div>
       </div>
-
-
     </div>
   );
 }

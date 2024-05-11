@@ -4,6 +4,10 @@ import '../../styles/category/productItem.scss';
 import HandleClickHeart from './HandleClickHeart';
 import { Box } from '@mui/material';
 import { Products } from '../../types/typesProducts';
+import prod_review from '../../assets/images/prod_review.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/config';
+import { setIsLiked } from '../../redux/slices/categorySlice';
 
 interface ProductItemProps {
   prod: Products;
@@ -15,16 +19,22 @@ const addCommaNumber = (num: number): string => {
 };
 // 상품 카드 컴포넌트
 export default function ProductItem({ prod }: ProductItemProps) {
-  const [isLiked, setIsLiked] = useState<boolean>(prod.heart);
+  const dispatch = useDispatch();
+
+  const isLiked = useSelector(
+    (state: RootState) => state.category.isLiked[prod.productId] || false
+  );
+  console.log('가져온 isLiked', isLiked);
 
   const handleLikeToggle = () => {
-    setIsLiked(prevIsLiked => !prevIsLiked);
+    dispatch(setIsLiked({ productId: prod.productId, isLiked: !isLiked }));
+    console.log('dispatch한 liked:', isLiked);
   };
 
   // 상품 아이템 클릭 이벤트 핸들러
   const handleProdItemClick = (productId: number): void => {
     console.log('Clicked product ID:', productId);
-    // 클릭한 상품의 productId로 상품 객체 찾기
+    // 클릭한 상품 productId로 상품 찾기
     const clickedProduct = prod; // 이미 prod 객체가 해당 상품을 나타냄
     console.log('Clicked product details:', clickedProduct);
   };
@@ -73,12 +83,18 @@ export default function ProductItem({ prod }: ProductItemProps) {
           )}
           {/* 원가 */}
           {prod.discount !== 0 ? (
-            <div className='prod-prevPrice'>{addCommaNumber(prod.prevPrice)}</div>
+            <div className='prod-prevPrice'>
+              {addCommaNumber(prod.prevPrice)}
+            </div>
           ) : (
             <div style={{ color: 'white' }}>;;;</div>
           )}
           {/* 할인가 */}
           <div className='prod-price'>{addCommaNumber(prod.price)}원</div>
+          <div className='prod-commentCount'>
+            <img src={prod_review} alt='' className='prod-review-icon' />(
+            {addCommaNumber(prod.commentCount)})
+          </div>
         </div>
       </Link>
       <div className='color-heart-box'>

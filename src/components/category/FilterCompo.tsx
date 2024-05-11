@@ -15,6 +15,7 @@ import { clearFilters } from '../../redux/slices/categorySlice';
 import { Filters, Products } from '../../types/typesProducts';
 
 export default function FilterCompo() {
+
   const [filteredProducts, setFilteredProducts] = useState<Products[]>([]);
   const selectedBrands = useSelector(
     (state: RootState) => state.category.brands
@@ -28,6 +29,7 @@ export default function FilterCompo() {
   const selectedThemes = useSelector(
     (state: RootState) => state.category.themes
   );
+
   const [selectedFilters, setSelectedFilters] = useState<Filters>({
     brand: false,
     price: false,
@@ -150,15 +152,6 @@ export default function FilterCompo() {
       >
         검색
       </Button>
-      {/* 필터링된 상품 렌더링 */}
-      {/* {filterProducts.map(product => (
-        <div key={product.productId}>
-          <p>{product.name}</p>
-          <p>{product.price}</p>
-   
-        </div> 
-      ))}
-    */}
     </Box>
   );
 }

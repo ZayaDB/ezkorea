@@ -15,44 +15,38 @@ import '../../styles/category/productWrap.scss';
 import { useMediaQuery } from '@mui/material';
 import FilterCompo from './FilterCompo';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux/config';
+import getSelectedValue from '../../utils/getSelectedValue';
 import {
   setSelectedSubCategory,
   removeSelectedFilter,
 } from '../../redux/slices/categorySlice';
-import useSort from '../../hooks/useSort';
-import { SortOption } from '../../types/typesProducts';
+import useSort from '../../hooks/shop/useSort';
+import { SortOption, SubCategory } from '../../types/typesProducts';
+import { RootState } from '../../redux/config';
 
 const ProductList: React.FC = () => {
-  const selectedBrands = useSelector(
-    (state: RootState) => state.category.brands
-  ); // 선택한브랜드
-  const selectedPrices = useSelector(
-    (state: RootState) => state.category.prices
-  ); //선택한 가격
-  const selectedColors = useSelector(
-    (state: RootState) => state.category.colors
-  ); //선택한 컬러
-  const selectedThemes = useSelector(
-    (state: RootState) => state.category.themes
-  ); // 선택한 테마
-  const categoryData = useSelector(
-    (state: RootState) => state.category.categoryData
-  ); // 카테고리 데이터
-  const prodData = useSelector((state: RootState) => state.category.products);
-  // 상품데이터
-  const selectedCategory = useSelector(
-    (state: RootState) => state.category.selectedCategory
-  ); // 내가 선택한 카테고리
-  const selectedSubCategory = useSelector(
-    (state: RootState) => state.category.selectedSubCategory
-  ); // 내가 선택한 서브 카테고리
-
   const dispatch = useDispatch();
   const isMobile = useMediaQuery('(max-width:768px)');
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   const [sort, setSort] = useState<string>('인기순');
-  const sortedProducts = useSort(prodData, sort as SortOption); // 정렬된 상품 목록
+
+  // 정렬된 상품 목록
+  const sortedProducts = useSort(
+    getSelectedValue((state: RootState) => state.category.products),
+    sort as SortOption
+  );
+  // 내가 선택한 카테고리
+  const selectedCategory = useSelector(
+    (state: RootState) => state.category.selectedCategory
+  );
+  // 내가 선택한 서브 카테고리
+  const selectedSubCategory = useSelector(
+    (state: RootState) => state.category.selectedSubCategory
+  );
+  // 카테고리 데이터
+  const categoryData = useSelector(
+    (state: RootState) => state.category.categoryData
+  );
 
   // 필터 버튼 클릭 핸들러
   const handleFilterButtonClick = () => {
@@ -63,6 +57,7 @@ const ProductList: React.FC = () => {
   const handleFilterModalClose = () => {
     setIsFilterModalOpen(false);
   };
+
   // 칩 렌더링 함수
   const renderChips = (chipType: string, values: (string | number)[]) => {
     return (
@@ -102,12 +97,18 @@ const ProductList: React.FC = () => {
     return `~${formatted}`; // price값 이하
   };
 
+  const subCategories: SubCategory[] = (
+    selectedCategory
+      ? categoryData.find(category => category.name === selectedCategory)
+          ?.subCategories
+      : []
+  ) as SubCategory[];
   // 서브 카테고리 클릭 핸들러
   const handleSubCategoryClick = (subCategory: string) => {
     dispatch(setSelectedSubCategory(subCategory));
   };
 
-  // 삭제 핸들러
+  // 칩 삭제 == 스토어에 저장된 필터값 삭제 핸들러
   const handleDelete = (
     chipType: string | number,
     chipValue: string | number
@@ -140,23 +141,28 @@ const ProductList: React.FC = () => {
     }
   };
 
+  // 페이지네이션
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;
+  // 페이지이동 핸들러
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
     page: number
   ) => {
     setCurrentPage(page);
   };
-
+  // 현재 페이지의 마지막 아이템 인덱스는 12배수
   const indexOfLastItem = currentPage * itemsPerPage;
+  // 현재 페이지의 첫번째 아이템 인덱스는 마지막에서 12를 뺀 값
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  // 렌더링하려는 products는 정렬이 된 proditem들
   const filteredProducts = sortedProducts.filter(
     product =>
       product.category1 === selectedCategory &&
       (selectedSubCategory === 'ALL' ||
         product.category2 === selectedSubCategory)
   );
+  // 현재페이지에서보여줄 정렬이 완료된 아이템을 처음~마지막만 잘라 보여줌
   const currentItems = filteredProducts.slice(
     indexOfFirstItem,
     indexOfLastItem
@@ -169,86 +175,43 @@ const ProductList: React.FC = () => {
         <Box className='select-categories'>
           <Box className='category-1'>{selectedCategory}</Box>
           <Box className='category-2'>
-            {categoryData.map(subCategory => (
-              <Box
-                className='el-cate2'
-                key={subCategory.name}
-                style={{
-                  marginRight: '25px',
-                  fontWeight:
-                    selectedSubCategory === subCategory.name
-                      ? 'bold'
-                      : 'normal',
-                }}
-                onClick={() => handleSubCategoryClick(subCategory.name)}
-              >
-                {isMobile ? (
-                  <Box className='icon-nav'>
-                    <img
-                      src={subCategory.imagePath}
-                      alt={subCategory.name}
-                      style={{
-                        width: '64px',
-                        height: '64px',
-                        objectFit: 'cover',
-                      }}
-                    />
-                    <span>{subCategory.name}</span>
-                  </Box>
-                ) : (
-                  subCategory.name
-                )}
-              </Box>
-            ))}
+            {subCategories &&
+              subCategories.map(subCategory => (
+                <Box
+                  className='el-cate2'
+                  key={subCategory.name}
+                  style={{
+                    marginRight: '25px',
+                    fontWeight:
+                      selectedSubCategory === subCategory.name
+                        ? 'bold'
+                        : 'normal',
+                  }}
+                  onClick={() => handleSubCategoryClick(subCategory.name)}
+                >
+                  {isMobile ? (
+                    <Box className='icon-nav'>
+                      <img
+                        src={subCategory.imagePath}
+                        alt={subCategory.name}
+                        style={{
+                          width: '64px',
+                          height: '64px',
+                          objectFit: 'cover',
+                        }}
+                      />
+                      <span>{subCategory.name}</span>
+                    </Box>
+                  ) : (
+                    subCategory.name
+                  )}
+                </Box>
+              ))}
           </Box>
         </Box>
 
-        {/* 모바일 환경에서 필터링 버튼 */}
-        {isMobile && (
-          <Button
-            onClick={handleFilterButtonClick}
-            style={{ marginRight: '10px' }}
-          >
-            필터링
-          </Button>
-        )}
-
-        {/* 모달 */}
-        <Modal
-          open={isFilterModalOpen} // 모바일 환경에서만 모달 열림
-          onClose={handleFilterModalClose}
-          aria-labelledby='parent-modal-title'
-          aria-describedby='parent-modal-description'
-        >
-          <Box
-            sx={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              width: 400,
-              height: 500,
-              bgcolor: 'background.paper',
-              border: '2px solid #000',
-              boxShadow: 24,
-              p: 4,
-            }}
-          >
-            {/* 모바일 환경에서만 FilterCompo 렌더링 */}
-            <FilterCompo />
-          </Box>
-        </Modal>
-
         {/* 선택한 필터링 데이터 */}
         <Box className='select-filtering-values'>
-          {/* 브랜드 필터링 */}
-          {renderChips('브랜드', selectedBrands)}
-          {/* 색상 필터링 */}
-          {renderChips('색상', selectedColors)}
-          {/* 가격 필터링 */}
-          {renderChips('가격', selectedPrices)}
-          {/* 테마 필터링 */}
-          {renderChips('테마', selectedThemes)}
           {/*             
             <Chip
               key={`${chipType}-${index}`}
@@ -271,6 +234,58 @@ const ProductList: React.FC = () => {
 
           {/* 정렬기준 */}
           <Box className='sort-box'>
+            {/* 모바일 환경에서 필터링 버튼 */}
+            {isMobile && (
+              <Box className='filterBtn'>
+                <Button
+                  onClick={handleFilterButtonClick}
+                  sx={{
+                    width: '100%',
+                    color: '#505050',
+                    fontSize: '12.3px',
+                    border: '1px solid rgb(197, 197, 197)',
+                    paddingTop: '3.7px',
+                    paddingBottom: '3.7px',
+                    paddingLeft: '5px',
+                    paddingRight: '5px',
+                    '&:hover': {
+                      backgroundColor: 'white',
+                      border: '1px solid gray',
+                    },
+                  }}
+                >
+                  필터링
+                </Button>
+              </Box>
+            )}
+
+            {/* 모달 */}
+            {isMobile && (
+              <Modal
+                open={isFilterModalOpen} // 모바일 환경에서만 모달 열림
+                onClose={handleFilterModalClose}
+                aria-labelledby='parent-modal-title'
+                aria-describedby='parent-modal-description'
+              >
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: 400,
+
+                    bgcolor: 'background.paper',
+                    border: '1px solid #000',
+                    boxShadow: 24,
+                    p: 4,
+                  }}
+                >
+                  {/* 모바일 환경에서만 FilterCompo 렌더링 */}
+                  <FilterCompo />
+                </Box>
+              </Modal>
+            )}
             <FormControl
               sx={{
                 m: 1,

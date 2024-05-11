@@ -10,7 +10,7 @@ const formatPriceWithComma = (price: number): string => {
 };
 
 export default function PriceFilter() {
-  const [price, setPrice] = useState<number[]>(); 
+  const [price, setPrice] = useState<number[]>();
   const dispatch = useDispatch();
 
   const handlePriceChange = (event: Event, newValue: number | number[]) => {
@@ -34,9 +34,7 @@ export default function PriceFilter() {
     { value: 700000 },
     { value: 800000 },
     { value: 900000 },
-    { value: 1000000 ,label: '100(만원)'},
-
-    { value: 1000000, label: '+' },
+    { value: 1000000, label: '100+' },
   ];
 
   return (
@@ -51,8 +49,12 @@ export default function PriceFilter() {
         valueLabelDisplay='auto'
         sx={{ color: 'black' }}
         valueLabelFormat={value =>
-          `~${formatPriceWithComma(value as number)}원 이하`
+          `~${formatPriceWithComma(value as number)}원`
         } // 숫자를 천 단위로 포맷하여 표시
+        style={{
+          marginLeft: '15px',
+
+        }}
       />
     </Box>
   );
