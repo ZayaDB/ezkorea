@@ -1,22 +1,32 @@
-import { Typography } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import theme from '../../../styles/theme';
 import { styled } from '@mui/material';
 
 interface SubTitleProps {
   text: string;
+  isRequired: boolean;
 }
 
-const SubTitle: React.FC<SubTitleProps> = ({ text }) => {
+const SubTitle: React.FC<SubTitleProps> = ({ text, isRequired }) => {
   return (
     <>
-      <SubTitleText
-        fontSize={theme.typography.h2.fontSize}
-        fontWeight={theme.typography.h2.fontWeight}
-      >
-        {text}
-      </SubTitleText>
-      <SubTitleDivider />
+      <Box mt='32px'>
+        <Box display='flex' flexDirection='row'>
+          <SubTitleText
+            fontSize={theme.typography.h2.fontSize}
+            fontWeight={theme.typography.h2.fontWeight}
+          >
+            {text}
+          </SubTitleText>
+          {isRequired && (
+            <Typography ml='4px' color='error'>
+              *
+            </Typography>
+          )}
+        </Box>
+        <SubTitleDivider />
+      </Box>
     </>
   );
 };
@@ -27,7 +37,6 @@ export default SubTitle;
 const SubTitleText = styled(Typography)(({ theme }) => ({
   fontSize: theme.typography.body1.fontSize,
   fontWeight: theme.typography.h2.fontWeight,
-  marginTop: '32px',
 }));
 
 // Divider를 상속받아 SubTitleDivider 스타일 컴포넌트 정의
