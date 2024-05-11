@@ -11,15 +11,27 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import { useState } from 'react';
+// import { useMediaQuery } from '@mui/material';
+// import DivDelete from './DivDelete';
 
 // import { createTheme, styled } from '@mui/material/styles';
 // import SaleProduct from './../category/SaleProduct';
 // const cancelRef = useRef(null);
 
 interface OptionProps {
-  color: string;
+  color?: string;
+  title?: string;
 }
 
+// const useStyles = makeStyle(theme => ({
+//   tablet: {
+//     width: '768px',
+//   },
+//   mobile: {
+//     width: '375px',
+//   },
+// }));
+// const matches = useMediaQuery('(max-width:768px)');
 const Option = ({ color }: OptionProps) => {
   const [count, setCount] = useState(0);
 
@@ -34,12 +46,6 @@ const Option = ({ color }: OptionProps) => {
               variant='contained'
               aria-label='Basic button group'
             >
-              <Button onClick={() => setCount(count + 1)} color='secondary'>
-                +
-              </Button>
-              <Button color='secondary' aria-readonly>
-                {count}
-              </Button>
               <Button
                 onClick={() => setCount(count - 1)}
                 disabled={count < 1}
@@ -47,10 +53,16 @@ const Option = ({ color }: OptionProps) => {
               >
                 -
               </Button>
+              <Button color='secondary' aria-readonly>
+                {count}
+              </Button>
+              <Button onClick={() => setCount(count + 1)} color='secondary'>
+                +
+              </Button>
             </ButtonGroup>
           </div>
           <div className='sellingPrice'>190,000원</div>
-          <div className='selectedClose'>X</div>
+          <div className='selectedClose'>x</div>
         </div>
       </div>
     </div>
