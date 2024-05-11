@@ -11,7 +11,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import { useState } from 'react';
-import { useMediaQuery } from '@mui/material';
+// import { useMediaQuery } from '@mui/material';
 // import DivDelete from './DivDelete';
 
 // import { createTheme, styled } from '@mui/material/styles';
@@ -31,7 +31,7 @@ interface OptionProps {
 //     width: '375px',
 //   },
 // }));
-const matches = useMediaQuery('(max-width:768px)');
+// const matches = useMediaQuery('(max-width:768px)');
 const Option = ({ color }: OptionProps) => {
   const [count, setCount] = useState(0);
 
@@ -105,12 +105,7 @@ export default function SelectPurchase() {
   };
   return (
     <div id='selectBox'>
-      <div
-        id='selectPurchase'
-        style={
-          matches ? { width: '480px', position: 'fixed', bottom: '0' } : {}
-        }
-      >
+      <div id='selectPurchase'>
         <div id='purchaseInfo'>
           <div id='brandShare'>
             <div className='productBrand'>209애비뉴</div>

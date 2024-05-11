@@ -25,7 +25,7 @@ $font-weight-medium: 500;
 $font-weight-regular: 400;
 
 .prod-item {
-  width: calc(33.33% - 20px);
+  width: calc(33.33% - 10px);
   height: calc(100% - 10px);
   margin: 3px;
   margin-bottom: 20px;
@@ -92,6 +92,19 @@ $font-weight-regular: 400;
       .prod-price {
         font-size: $font-size-m;
       }
+      .prod-review-icon {
+        width: 15px;
+        height: 16px;
+        margin-right: 5px;
+      }
+      .prod-commentCount {
+        font-size: $font-size-xs;
+      }
+    }
+    .snackbar-message {
+      p {
+        margin-bottom: 0;
+      }
     }
   }
   // Link요소 안먹힘, Heart때문에
@@ -142,7 +155,7 @@ $font-weight-regular: 400;
 // 반응형 미디어 쿼리
 @media (max-width: 768px) {
   .prod-item {
-    width: calc(50% - 20px);
+    width: calc(50% - 10px);
     height: calc(100% - 10px);
     margin: 3px;
     margin-bottom: 10px;
@@ -199,32 +212,34 @@ $font-weight-regular: 400;
 // 반응형 미디어 쿼리
 @media (max-width: 460px) {
   .prod-item {
-    width: calc(50% - 20px);
+    width: calc(50% - 9px);
     height: calc(100% - 10px);
     margin: 3px;
     margin-bottom: 10px;
 
     .link-to-detail {
       .prod-img {
-        height:220px;
+        height: 180px;
       }
       .prod-info {
+        height: 120px;
         @for $i from 1 through 6 {
           .color-circle:nth-child(#{$i}) {
             border-radius: 100%;
             width: 7px;
             height: 7px;
-            margin: 1px;
+            // margin: 1px;
             // line-height: 50px;
           }
         }
 
         .prod-name {
           font-size: $font-size-xxs;
-          margin-bottom: 10px;
+          margin-bottom: 5px;
         }
 
         .prod-brand {
+          padding-bottom: 2px;
           font-size: 10px;
           // height: 10%;
           margin-bottom: 1px;
@@ -243,6 +258,14 @@ $font-weight-regular: 400;
 
         .prod-price {
           font-size: $font-size-xs;
+        }
+        .prod-review-icon {
+          width: 10px;
+          height: 11px;
+          margin-right: 5px;
+        }
+        .prod-commentCount {
+          font-size: 8px;
         }
       }
     }

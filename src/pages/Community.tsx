@@ -6,16 +6,15 @@ import {
   Button,
   IconButton,
   Divider,
-  FormControl,
-  MenuItem,
-  Select,
 } from '@mui/material';
 import { Favorite, Visibility, FavoriteBorder } from '@mui/icons-material';
 import ColorFilter from './../components/community/main/ColorFilter';
 import StyleFilter from './../components/community/main/StyleFilter';
-import SkeletonFeed from './../components/community/main/SkeletonFeed'; // 추가된 부분
+import SkeletonFeed from './../components/community/main/SkeletonFeed';
+import SortSelect from '../components/community/main/SortSelect';
 import './../styles/community/main.scss';
 import { FeedData } from './../types/communityTypes';
+import { Link } from 'react-router-dom';
 
 const Community = () => {
   const [likedItems, setLikedItems] = useState<number[]>([]);
@@ -28,49 +27,73 @@ const Community = () => {
   const [selectedStyleIndexes, setSelectedStyleIndexes] = useState<string[]>(
     []
   );
-  const [sort, setSort] = useState<string>('인기순');
-
-  const fetchDataWithFilters = useCallback(async () => {
-    setIsLoading(true);
-    try {
-      const response = await fetch('/data/feed.json');
-      const data: FeedData[] = await response.json();
-      const filteredData = data.filter(item => {
-        if (
-          selectedColorIndexes.length > 0 &&
-          !selectedColorIndexes.some(color => item.colors.includes(color))
-        ) {
-          return false;
-        }
-        if (
-          selectedStyleIndexes.length > 0 &&
-          !selectedStyleIndexes.some(style => item.concepts.includes(style))
-        ) {
-          return false;
-        }
-        return true;
-      });
-      setFilterData(filteredData);
-      setIsLoading(false);
-      setIsError(false);
-    } catch (error) {
-      setIsLoading(false);
-      setIsError(true);
-    }
-  }, [selectedColorIndexes, selectedStyleIndexes]);
+  const [sort, setSort] = useState<string>('조회수순');
 
   useEffect(() => {
+    const fetchDataWithFilters = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch('/data/feed.json');
+        const data: FeedData[] = await response.json();
+        const filteredData = data.filter(item => {
+          if (
+            selectedColorIndexes.length > 0 &&
+            !selectedColorIndexes.some(color => item.colors.includes(color))
+          ) {
+            return false;
+          }
+          if (
+            selectedStyleIndexes.length > 0 &&
+            !selectedStyleIndexes.some(style => item.concepts.includes(style))
+          ) {
+            return false;
+          }
+          return true;
+        });
+        const sortedData = applySort(filteredData, sort);
+        setFilterData(sortedData);
+        setIsLoading(false);
+        setIsError(false);
+      } catch (error) {
+        setIsLoading(false);
+        setIsError(true);
+      }
+    };
+
     fetchDataWithFilters();
-  }, [fetchDataWithFilters]);
+  }, [selectedColorIndexes, selectedStyleIndexes, sort]);
+
+  const applySort = (data: FeedData[], sort: string) => {
+    const sortedData = [...data];
+    switch (sort) {
+      case '조회수순':
+        sortedData.sort((a, b) => b.views - a.views);
+        break;
+      case '좋아요순':
+        sortedData.sort((a, b) => b.likes - a.likes);
+        break;
+      case '댓글순':
+        sortedData.sort((a, b) => b.commentCount - a.commentCount);
+        break;
+      case '최신순':
+        sortedData.sort(
+          (a, b) =>
+            new Date(b.creationDate).getTime() -
+            new Date(a.creationDate).getTime()
+        );
+        break;
+      default:
+        break;
+    }
+    return sortedData;
+  };
 
   const handleLike = useCallback(
     (feedId: number) => {
       setFilterData(prevFilterData => {
         return prevFilterData.map(item => {
           if (item.feedId === feedId) {
-            // 해당 피드의 좋아요 상태를 반전시킵니다.
             const isLiked = !likedItems.includes(feedId);
-            // 좋아요 개수도 업데이트합니다.
             const newLikes = isLiked ? item.likes + 1 : item.likes - 1;
             return { ...item, likes: newLikes };
           }
@@ -80,10 +103,8 @@ const Community = () => {
 
       setLikedItems(prevLikedItems => {
         if (prevLikedItems.includes(feedId)) {
-          // 이미 좋아요한 경우 좋아요 취소
           return prevLikedItems.filter(id => id !== feedId);
         } else {
-          // 좋아요하지 않은 경우 좋아요 추가
           return [...prevLikedItems, feedId];
         }
       });
@@ -97,23 +118,19 @@ const Community = () => {
   }, []);
 
   const handleColorButtonClick = useCallback((color: string) => {
-    setSelectedColorIndexes(prevIndexes => {
-      if (prevIndexes.includes(color)) {
-        return prevIndexes.filter(c => c !== color);
-      } else {
-        return [...prevIndexes, color];
-      }
-    });
+    setSelectedColorIndexes(prevIndexes =>
+      prevIndexes.includes(color)
+        ? prevIndexes.filter(c => c !== color)
+        : [...prevIndexes, color]
+    );
   }, []);
 
   const handleStyleButtonClick = useCallback((style: string) => {
-    setSelectedStyleIndexes(prevIndexes => {
-      if (prevIndexes.includes(style)) {
-        return prevIndexes.filter(s => s !== style);
-      } else {
-        return [...prevIndexes, style];
-      }
-    });
+    setSelectedStyleIndexes(prevIndexes =>
+      prevIndexes.includes(style)
+        ? prevIndexes.filter(s => s !== style)
+        : [...prevIndexes, style]
+    );
   }, []);
 
   return (
@@ -128,25 +145,36 @@ const Community = () => {
             styleIndexes={selectedStyleIndexes}
             styleButtonClick={handleStyleButtonClick}
           />
-          <Button onClick={handleResetFilters}>필터 초기화</Button>
-          <Box className='sort-box'>
-            <FormControl sx={{ m: 1, minWidth: 120 }}>
-              <Select
-                labelId='sort-label'
-                id='sort-select'
-                value={sort}
-                onChange={event => setSort(event.target.value as string)}
-              >
-                <MenuItem value='인기순'>인기순</MenuItem>
-                <MenuItem value='조회수순'>조회수순</MenuItem>
-                <MenuItem value='댓글순'>댓글순</MenuItem>
-                <MenuItem value='최신순'>최신순</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
+          <Button
+            variant='contained'
+            onClick={() => {
+              handleResetFilters();
+            }}
+            style={{ height: 34, marginLeft: 30 }}
+            sx={{ p: 1 }}
+          >
+            필터 초기화
+          </Button>
+          <Button
+            variant='contained'
+            style={{
+              height: 34,
+              padding: 8,
+              marginRight: 10,
+              marginLeft: 'auto',
+            }}
+          >
+            <Link
+              to='/community/post'
+              style={{ textDecoration: 'none', color: 'unset' }}
+            >
+              글 쓰기
+            </Link>
+          </Button>
         </div>
       </Grid>
       <div className='line'></div>
+      <SortSelect sort={sort} setSort={setSort} />
       <Grid container>
         {isLoading ? (
           [1, 2, 3, 4].map((_, index) => (

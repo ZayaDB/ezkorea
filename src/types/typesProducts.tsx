@@ -4,9 +4,9 @@ export interface Products {
   brand: string;
   colors: string[];
   concepts: string[];
-  price: string;
+  price: number;
   discount: number;
-  prevPrice: string;
+  prevPrice:number;
   category1: string;
   category2: string;
   heart: boolean;
@@ -40,11 +40,11 @@ export interface FilterVisibility {
 }
 
 export interface SideNavProps {
-  // onSelectCategory: (categoryName: string) => void;
-  // onSelectSubCategory: (subCategoryName: string) => void;
   categoryData: CategoryData[];
   prodData: Products[];
 }
+
+
 
 export interface ProductListProps {
   categoryData: CategoryData[];

@@ -79,7 +79,7 @@ const theme = createTheme(); // 기본 테마 생성
 export default function NewItem() {
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ py: 4 }}>
+      <Box sx={{ py: 4, width: 'auto' }}>
         <div className='TitleArea'>
           <Typography sx={{ fontSize: '28px', fontWeight: '700' }}>
             New ITEM

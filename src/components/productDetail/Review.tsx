@@ -163,6 +163,7 @@ export default function Review() {
       <div id='reviewTop'>
         <div id='reviewBox'>
           <div id='reviewName'>리뷰</div>
+          
           <div className='reviewTotal'>리뷰 수</div>
           <div id='ratingBox'>
             <div className='starTotal'>
@@ -285,3 +286,4 @@ export default function Review() {
     </div>
   );
 }
+
