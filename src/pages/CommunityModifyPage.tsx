@@ -16,7 +16,6 @@ import {
   DialogActions,
   DialogContent,
   DialogContentText,
-  DialogTitle,
   Button,
   TextField,
   ListItem,
@@ -58,6 +57,7 @@ export default function CommunityModifyPage() {
   const { products, productName, setProductName, addProduct, setProducts } =
     useProductHandler();
   const [open, setOpen] = useState(false);
+  const [cancelOpen, setCancelOpen] = useState(false);
   const [formData, setFormData] = useState<IFormInput | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [imageUrl, setImageUrl] = useState<string[]>([]);
@@ -77,7 +77,6 @@ export default function CommunityModifyPage() {
   // 렌더링 시 기본 값 채워넣기
   useEffect(() => {
     if (data && data.length > 0) {
-      console.log(data);
       const feed = data.find(feed => feed.feedId.toString() === feedId);
       if (feed) {
         reset({
@@ -133,6 +132,8 @@ export default function CommunityModifyPage() {
   // 모달 관련
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const handleCancelOpen = () => setCancelOpen(true);
+  const handleCancelClose = () => setCancelOpen(false);
 
   // 파일 업로드 인풋 트리거
   const triggerFileInput = () => {
@@ -146,8 +147,6 @@ export default function CommunityModifyPage() {
   };
 
   const onSubmit: SubmitHandler<IFormInput> = data => {
-    console.log('handleSubmit 함수가 호출되었습니다.');
-    console.log(data);
     const completeData = {
       fileLength: files.length,
       ...data,
@@ -155,13 +154,17 @@ export default function CommunityModifyPage() {
       concepts: selectedConcepts,
       colors: selectedColors,
     };
-
-    console.log('Complete submission data:', completeData);
-    console.log(imageUrl.length < 1, !files.length);
-    if (imageUrl.length < 1 && !files.length) {
+    if (
+      imageUrl.length + files.length < 1 ||
+      imageUrl.length + files.length > 4
+    ) {
       setError('files', {
         type: 'manual',
         message: '1개 이상 4개 이하의 사진을 업로드해주세요.',
+      });
+      window.scrollTo({
+        top: 0, // 최상단
+        behavior: 'smooth', // 부드러운 스크롤
       });
     }
 
@@ -183,7 +186,6 @@ export default function CommunityModifyPage() {
       (files.length || imageUrl.length > 0) &&
       files.length + imageUrl.length < 5
     ) {
-      console.log('Form submitted:', completeData);
       setFormData(completeData); // Form 데이터 저장
       handleOpen(); // 모달 열기
     }
@@ -192,7 +194,8 @@ export default function CommunityModifyPage() {
   const confirmSubmit = () => {
     console.log('Confirmed submission:', formData);
     handleClose(); // 모달 닫기
-    // 여기에 실제 데이터 제출 로직을 추가할 수 있습니다.
+    window.location.href = '/community';
+    // 서버에 데이터 전송
   };
   return (
     <ContentArea>
@@ -207,83 +210,109 @@ export default function CommunityModifyPage() {
               ref={fileInputRef}
               style={{ display: 'none' }}
             />
-            <Button onClick={triggerFileInput} variant='contained'>
-              파일 선택
+            <Button onClick={triggerFileInput} variant='text'>
+              <img
+                src='https://cdn-icons-png.flaticon.com/128/15288/15288391.png'
+                alt='Upload file'
+                width='130px'
+              />
             </Button>
-            {imageUrl.map((url, index) => {
-              return (
-                <div
-                  key={index}
-                  style={{
-                    position: 'relative',
-                    display: 'inline-block',
-                    margin: '10px',
-                  }}
-                >
-                  <img
-                    src={url}
-                    alt={`Preview ${index + 1}`}
-                    style={{ width: '100px', height: '100px' }}
-                  />
-                  <button
-                    type='button'
+            <Box display='flex' flexDirection='row' flexWrap='wrap'>
+              {imageUrl.map((url, index) => {
+                return (
+                  <div
+                    key={index}
                     style={{
-                      position: 'absolute',
-                      top: '0',
-                      right: '0',
-                      padding: '2px 5px',
-                      lineHeight: '1',
-                      border: 'none',
-                      cursor: 'pointer',
+                      position: 'relative',
+                      display: 'inline-block',
+                      margin: '10px',
                     }}
-                    onClick={() => handleRemoveUrl(index)}
                   >
-                    X
-                  </button>
-                </div>
-              );
-            })}
-            {files.map((file, index) => {
-              const imageUrl = URL.createObjectURL(file);
-              return (
-                <div
-                  key={index}
-                  style={{
-                    position: 'relative',
-                    display: 'inline-block',
-                    margin: '10px',
-                  }}
-                >
-                  <img
-                    src={imageUrl}
-                    alt={`Preview ${index + 1}`}
-                    style={{ width: '100px', height: '100px' }}
-                    onLoad={() => URL.revokeObjectURL(imageUrl)}
-                  />
-                  <button
-                    type='button'
+                    <img
+                      src={url}
+                      alt={`Preview ${index + 1}`}
+                      style={{
+                        width: '130px',
+                        height: '130px',
+                        borderRadius: '5px',
+                      }}
+                    />
+                    <button
+                      type='button'
+                      style={{
+                        position: 'absolute',
+                        top: '-7px',
+                        right: '-7px',
+                        padding: '2px 6px 3px 6px',
+                        lineHeight: '1',
+                        border: 'none',
+                        cursor: 'pointer',
+                        borderRadius: '5px',
+                        fontSize: '12px',
+                        backgroundColor: '#F6F6F6',
+                      }}
+                      onClick={() => handleRemoveUrl(index)}
+                    >
+                      X
+                    </button>
+                  </div>
+                );
+              })}
+              {files.map((file, index) => {
+                const imageUrl = URL.createObjectURL(file);
+                return (
+                  <div
+                    key={index}
                     style={{
-                      position: 'absolute',
-                      top: '0',
-                      right: '0',
-                      padding: '2px 5px',
-                      lineHeight: '1',
-                      border: 'none',
-                      cursor: 'pointer',
+                      position: 'relative',
+                      display: 'inline-block',
+                      margin: '10px',
                     }}
-                    onClick={() => handleRemoveFile(index)}
                   >
-                    X
-                  </button>
-                </div>
-              );
-            })}
-            {errors.files && (
-              <Typography margin='0px' padding='0px' color='error'>
-                {errors.files.message}
-              </Typography>
-            )}
+                    <img
+                      src={imageUrl}
+                      alt={`Preview ${index + 1}`}
+                      style={{
+                        width: '130px',
+                        height: '130px',
+                        borderRadius: '5px',
+                      }}
+                      onLoad={() => URL.revokeObjectURL(imageUrl)}
+                    />
+                    <button
+                      type='button'
+                      style={{
+                        position: 'absolute',
+                        top: '-7px',
+                        right: '-7px',
+                        padding: '2px 6px 3px 6px',
+                        lineHeight: '1',
+                        border: 'none',
+                        cursor: 'pointer',
+                        borderRadius: '5px',
+                        fontSize: '12px',
+                        backgroundColor: '#F6F6F6',
+                      }}
+                      onClick={() => handleRemoveFile(index)}
+                    >
+                      X
+                    </button>
+                  </div>
+                );
+              })}
+            </Box>
           </Box>
+          <Typography
+            sx={{
+              fontSize: theme.typography.body2.fontSize,
+              color: theme.palette.grey[400],
+            }}
+          >
+            사진은 최대 4장까지 올릴 수 있고 1:1 비율로 자동 조정돼요.
+          </Typography>
+          {errors.files && (
+            <ErrorMsg color='error'>{errors.files.message}</ErrorMsg>
+          )}
           <SubTitle text='글 제목' isRequired={true}></SubTitle>
 
           <TextField
@@ -303,7 +332,7 @@ export default function CommunityModifyPage() {
             error={!!errors.title}
             helperText={errors.title ? errors.title.message : ''}
             FormHelperTextProps={{
-              sx: { marginLeft: 0, marginRight: 0 }, // 마진 왼쪽과 오른쪽을 0으로 설정
+              sx: { marginLeft: 0, marginRight: 0 },
             }}
           />
           <SubTitle text='설명' isRequired={true}></SubTitle>
@@ -325,7 +354,7 @@ export default function CommunityModifyPage() {
             variant='outlined'
             inputProps={{ maxLength: 2000 }}
             FormHelperTextProps={{
-              sx: { marginLeft: 0, marginRight: 0 }, // 마진 왼쪽과 오른쪽을 0으로 설정
+              sx: { marginLeft: 0, marginRight: 0 },
             }}
           />
 
@@ -344,40 +373,47 @@ export default function CommunityModifyPage() {
             <Button
               type='button'
               onClick={addProduct}
+              variant='outlined'
               sx={{
                 color: theme.palette.common.black,
-                backgroundColor: 'primary.main',
+                minHeight: '56px',
+                borderColor: theme.palette.grey[300],
                 ':hover': { backgroundColor: 'primary.main' },
+                margin: '0 0 0 16px',
               }}
             >
               등록
             </Button>
-            <List>
-              {products.map((product, index) => (
-                <ListItem
-                  key={index}
-                  sx={{
-                    border: '1px solid',
-                    borderColor: 'primary.main',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  {product}
-                  <Button
-                    type='button'
-                    onClick={() =>
-                      setProducts(currentProducts =>
-                        currentProducts.filter((_, i) => i !== index)
-                      )
-                    }
-                    color='primary'
-                  >
-                    X
-                  </Button>
-                </ListItem>
-              ))}
-            </List>
           </ProductBox>
+          <List>
+            {products.map((product, index) => (
+              <ListItem
+                key={index}
+                sx={{
+                  border: '1px solid',
+                  borderColor: 'primary.main',
+                  borderRadius: '5px',
+                  justifyContent: 'space-between',
+                  width: 'calc(100% - 80px)',
+                  marginBottom: '16px',
+                }}
+              >
+                {product}
+                <Button
+                  type='button'
+                  onClick={() =>
+                    setProducts(currentProducts =>
+                      currentProducts.filter((_, i) => i !== index)
+                    )
+                  }
+                  color='primary'
+                  sx={{ minWidth: '20px !important' }}
+                >
+                  X
+                </Button>
+              </ListItem>
+            ))}
+          </List>
 
           <SubTitle text='컨셉 선택' isRequired={true}></SubTitle>
           <Box>
@@ -389,6 +425,7 @@ export default function CommunityModifyPage() {
                   bgcolor: selectedConcepts.includes(concept)
                     ? 'primary.main'
                     : 'inherit',
+                  border: selectedConcepts.includes(concept) ? 'none' : 'solid',
                 }}
                 variant='outlined'
               >
@@ -396,9 +433,9 @@ export default function CommunityModifyPage() {
               </SelectButton>
             ))}
             {errors.submissionConcepts && (
-              <Typography color='error'>
+              <ErrorMsg color='error'>
                 {errors.submissionConcepts.message}
-              </Typography>
+              </ErrorMsg>
             )}
           </Box>
           <Box>
@@ -412,6 +449,7 @@ export default function CommunityModifyPage() {
                   bgcolor: selectedColors.includes(color)
                     ? 'primary.main'
                     : 'inherit',
+                  border: selectedColors.includes(color) ? 'none' : 'solid',
                 }}
               >
                 <ColorCircle color={color} />
@@ -419,64 +457,83 @@ export default function CommunityModifyPage() {
               </SelectButton>
             ))}
             {errors.submissionColors && (
-              <Typography color='error'>
+              <ErrorMsg color='error'>
                 {errors.submissionColors.message}
-              </Typography>
+              </ErrorMsg>
             )}
           </Box>
         </Box>
-        <Button type='button' variant='outlined'>
-          취소하기
-        </Button>
-        <Button
-          sx={{
-            backgroundColor: theme.palette.primary.main,
-            color: theme.palette.common.black,
-            ':hover': {
-              backgroundColor: theme.palette.primary.main,
-            },
-          }}
-          type='submit'
+        <Box
+          mt={4}
+          mb={4}
+          display='flex'
+          flexDirection='row'
+          justifyContent='flex-end'
         >
-          등록하기
-        </Button>
+          <Button
+            type='button'
+            variant='outlined'
+            sx={{ margin: '0 16px 0 0', minWidth: '115px' }}
+            onClick={handleCancelOpen}
+          >
+            취소하기
+          </Button>
+          <Button
+            sx={{
+              backgroundColor: theme.palette.primary.main,
+              color: theme.palette.common.black,
+              ':hover': {
+                backgroundColor: theme.palette.primary.main,
+              },
+              minWidth: '115px',
+            }}
+            type='submit'
+          >
+            등록하기
+          </Button>
+        </Box>
       </form>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>{'아래 내용으로 피드를 등록하시겠습니까?'}</DialogTitle>
-        <DialogContent>
+        <DialogContent sx={{ minWidth: 250 }}>
           <DialogContentText>
-            <Typography>제목:</Typography>
-            <Typography>{formData?.title}</Typography>
-            <br />
-            <Typography>설명:</Typography>
-            <Typography>{formData?.description}</Typography>
-            <br />
-            {formData?.products && formData?.products.length > 0 ? (
-              formData?.products.length > 1 ? (
-                <Typography>
-                  {' '}
-                  제품명: {formData?.products.join(', ')}{' '}
-                </Typography>
-              ) : (
-                <Typography> 제품명: {formData?.products[0]} </Typography>
-              )
-            ) : (
-              ''
-            )}
-            컨셉:
-            {formData && formData.concepts.length > 1
-              ? formData?.concepts.join(', ')
-              : formData?.concepts[0]}
-            <br />
-            컬러:
-            {formData && formData.colors.length > 1
-              ? formData?.colors.join(', ')
-              : formData?.colors[0]}
+            <Typography>피드를 등록하시겠습니까?</Typography>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>취소</Button>
-          <Button onClick={confirmSubmit}>등록하기</Button>
+          <Button onClick={handleClose} sx={{ color: theme.palette.grey[200] }}>
+            취소
+          </Button>
+          <Button
+            onClick={confirmSubmit}
+            sx={{ color: theme.palette.common.black }}
+          >
+            등록
+          </Button>
+        </DialogActions>
+      </Dialog>
+      {/* 취소하기 모달 */}
+      <Dialog open={cancelOpen} onClose={handleCancelClose}>
+        <DialogContent sx={{ minWidth: 250 }}>
+          <DialogContentText>
+            <Typography>피드를 등록을 취소하시겠습니까?</Typography>
+            <Typography>작성 내용은 저장되지 않습니다.</Typography>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={handleCancelClose}
+            sx={{ color: theme.palette.grey[200] }}
+          >
+            취소
+          </Button>
+          <Button
+            onClick={() => {
+              window.location.href = '/community';
+            }}
+            sx={{ color: theme.palette.common.black }}
+          >
+            확인
+          </Button>
         </DialogActions>
       </Dialog>
     </ContentArea>
@@ -492,8 +549,9 @@ const ProductBox = styled(Box)({
 const SelectButton = styled(Button)({
   marginY: '8px',
   color: 'black',
-  margin: '0 8px 0 0',
+  margin: '0 8px 8px 0',
   minWidth: '115px',
+  borderColor: theme.palette.grey[200],
 });
 
 // Color 표시 원 스타일 정의
@@ -505,3 +563,9 @@ const ColorCircle = styled(Box)<{ color: string }>(({ color }) => ({
   backgroundColor: color === 'wood' ? '#9A6322' : color,
   marginRight: '8px',
 }));
+
+const ErrorMsg = styled(Typography)({
+  margin: '0px',
+  padding: '0px',
+  fontSize: '12px',
+});

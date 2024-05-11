@@ -40,10 +40,10 @@ function CommunityPostPage() {
     clearErrors,
   } = useForm<IFormInput>({});
 
-  console.log('formState errors1:', errors);
   const { products, productName, setProductName, addProduct, setProducts } =
     useProductHandler();
   const [open, setOpen] = useState(false);
+  const [cancelOpen, setCancelOpen] = useState(false);
   const [formData, setFormData] = useState<IFormInput | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { files, handleFileChange, handleRemoveFile } = useFileHandler();
@@ -82,9 +82,10 @@ function CommunityPostPage() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const handleCancelOpen = () => setCancelOpen(true);
+  const handleCancelClose = () => setCancelOpen(false);
+
   const onSubmit: SubmitHandler<IFormInput> = data => {
-    console.log('handleSubmit 함수가 호출되었습니다.');
-    console.log(data);
     const completeData = {
       fileLength: files.length,
       ...data,
@@ -93,7 +94,6 @@ function CommunityPostPage() {
       colors: selectedColors,
     };
 
-    console.log('Complete submission data:', completeData);
     if (!files.length || files.length > 4) {
       setError('files', {
         type: 'manual',
@@ -123,18 +123,16 @@ function CommunityPostPage() {
       files.length &&
       files.length < 5
     ) {
-      console.log('Form submitted:', completeData);
       setFormData(completeData); // Form 데이터 저장
-      handleOpen(); // 모달 열기
-
-      // 여기에 서버 전송 로직 추가
+      handleOpen();
     }
   };
 
   const confirmSubmit = () => {
     console.log('Confirmed submission:', formData);
     handleClose(); // 모달 닫기
-    // 여기에 실제 데이터 제출 로직을 추가할 수 있습니다.
+    window.location.href = '/community';
+    // 서버 전송 로직
   };
 
   return (
@@ -234,7 +232,7 @@ function CommunityPostPage() {
             error={!!errors.title}
             helperText={errors.title ? errors.title.message : ''}
             FormHelperTextProps={{
-              sx: { marginLeft: 0, marginRight: 0 }, // 마진 왼쪽과 오른쪽을 0으로 설정
+              sx: { marginLeft: 0, marginRight: 0 },
             }}
           />
           <SubTitle text='설명' isRequired={true}></SubTitle>
@@ -280,7 +278,6 @@ function CommunityPostPage() {
                 color: theme.palette.common.black,
                 minHeight: '56px',
                 borderColor: theme.palette.grey[300],
-                // backgroundColor: 'primary.main',
                 ':hover': { backgroundColor: 'primary.main' },
                 margin: '0 0 0 16px',
               }}
@@ -377,6 +374,7 @@ function CommunityPostPage() {
             type='button'
             variant='outlined'
             sx={{ margin: '0 16px 0 0', minWidth: '115px' }}
+            onClick={handleCancelOpen}
           >
             취소하기
           </Button>
@@ -410,6 +408,31 @@ function CommunityPostPage() {
             sx={{ color: theme.palette.common.black }}
           >
             등록
+          </Button>
+        </DialogActions>
+      </Dialog>
+      {/* 취소하기 모달 */}
+      <Dialog open={cancelOpen} onClose={handleCancelClose}>
+        <DialogContent sx={{ minWidth: 250 }}>
+          <DialogContentText>
+            <Typography>피드를 등록을 취소하시겠습니까?</Typography>
+            <Typography>작성 내용은 저장되지 않습니다.</Typography>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={handleCancelClose}
+            sx={{ color: theme.palette.grey[200] }}
+          >
+            취소
+          </Button>
+          <Button
+            onClick={() => {
+              window.location.href = '/community';
+            }}
+            sx={{ color: theme.palette.common.black }}
+          >
+            확인
           </Button>
         </DialogActions>
       </Dialog>
