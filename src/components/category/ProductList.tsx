@@ -212,8 +212,8 @@ const ProductList: React.FC = () => {
 
         {/* 선택한 필터링 데이터 */}
         <Box className='select-filtering-values'>
-          {/*             
-            <Chip
+                      
+            {/* <Chip
               key={`${chipType}-${index}`}
               label={formattedLabel}
               onDelete={() => handleDelete(chipType, value)}

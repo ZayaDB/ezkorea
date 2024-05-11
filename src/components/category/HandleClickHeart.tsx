@@ -2,11 +2,54 @@ import * as React from 'react';
 import { Transition } from 'react-transition-group';
 import { styled } from '@mui/system';
 import CloseIcon from '@mui/icons-material/Close';
-import { Snackbar } from '@mui/material';
+import { Snackbar } from '@mui/base/Snackbar';
 import Checkbox from '@mui/material/Checkbox';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'; // FavoriteBorder import 수정
-import FavoriteIcon from '@mui/icons-material/Favorite'; // Favorite import 추가
-import { SnackbarProvider, useSnackbar, VariantType } from 'notistack';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import Favorite from '@mui/icons-material/Favorite';
+
+// Define styled component for SnackbarContent
+const SnackbarContent = styled('div')(({ theme }) => ({
+  display: 'flex',
+  gap: '8px',
+  overflow: 'hidden',
+  backgroundColor: theme.palette.mode === 'dark' ? grey[900] : '#fff',
+  borderRadius: '5px',
+  border: `1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[500]}`,
+  padding: '0.75rem',
+  color: theme.palette.mode === 'dark' ? grey[50] : grey[900],
+  fontFamily: 'IBM Plex Sans, sans-serif',
+  fontWeight: 500,
+  textAlign: 'start',
+  position: 'relative',
+
+  '& .snackbar-message': {
+    flex: '1 1 0%',
+    maxWidth: '100%',
+  },
+
+  '& .snackbar-title': {
+    margin: 0,
+    lineHeight: '1.5rem',
+    marginRight: '0.5rem',
+  },
+
+  '& .snackbar-description': {
+    margin: 0,
+    lineHeight: '1.5rem',
+    fontWeight: 400,
+    color: theme.palette.mode === 'dark' ? grey[400] : grey[800],
+  },
+
+  '& .snackbar-close-icon': {
+    cursor: 'pointer',
+    flexShrink: 0,
+    padding: '2px',
+    borderRadius: '4px',
+    '&:hover': {
+      background: theme.palette.mode === 'dark' ? grey[800] : grey[50],
+    },
+  },
+}));
 
 interface HandleClickHeartProps {
   productName: string;
@@ -41,8 +84,7 @@ const StyledCheckbox = styled(BlackCheckbox)(({ theme }) => ({
   },
 }));
 
-const ThinHeartBorder = styled(FavoriteBorderIcon)({
-  // FavoriteBorderIcon으로 수정
+const ThinHeartBorder = styled(FavoriteBorder)({
   strokeWidth: '0.00001px',
 });
 
@@ -54,18 +96,22 @@ export default function HandleClickHeart({
   const [open, setOpen] = React.useState(false);
   const [exited, setExited] = React.useState(true);
   const nodeRef = React.useRef(null);
-  const { enqueueSnackbar } = useSnackbar();
 
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
-  const handleClick = (variant: VariantType) => {
+  const handleClose = (
+    event: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const handleClick = () => {
     onLikeToggle();
-    enqueueSnackbar(
-      isLiked ? '찜하기 해제되었습니다 😢' : '찜하기 완료되었습니다 💚',
-      {
-        variant: variant,
-      }
-    );
     setOpen(true);
   };
 
@@ -82,13 +128,13 @@ export default function HandleClickHeart({
       <StyledCheckbox
         {...label}
         icon={<ThinHeartBorder />}
-        checkedIcon={<FavoriteIcon />}
+        checkedIcon={<Favorite />}
         checked={isLiked}
-        onClick={() => handleClick('success')}
+        onClick={handleClick}
       />
-      <SnackbarProvider maxSnack={3}>
+      <StyledSnackbar autoHideDuration={3000} open={open} exited={exited}>
         <Transition
-          timeout={{ enter: 300, exit: 300 }}
+          timeout={{ enter: 400, exit: 400 }}
           in={open}
           appear
           unmountOnExit
@@ -97,37 +143,29 @@ export default function HandleClickHeart({
           nodeRef={nodeRef}
         >
           {status => (
-            <StyledSnackbar
+            <SnackbarContent
               style={{
                 transform: positioningStyles[status],
                 transition: 'transform 300ms ease',
-                backgroundColor: 'white',
-                border: '1px solid gray',
-                padding: '15px',
-                borderRadius: '5px',
-                height: '70px',
               }}
               ref={nodeRef}
-              open={open}
-              onClose={() => setOpen(false)}
             >
-              <div>
-                <div className='snackbar-message'>
-                  <p className='snackbar-title' style={{ marginBottom: 0 }}>
-                    {productName}
-                  </p>
-                  <p className='snackbar-description'>
-                    {isLiked
-                      ? '찜하기 완료되었습니다 💚'
-                      : '찜하기 해제되었습니다 😢'}
-                  </p>
-                </div>
-                <CloseIcon className='snackbar-close-icon' />
+              <div className='snackbar-message'>
+                <p className='snackbar-title'>{productName}</p>
+                <p className='snackbar-description'>
+                  {isLiked
+                    ? '찜하기 완료되었습니다 💚'
+                    : '찜하기 해제되었습니다 😢'}
+                </p>
               </div>
-            </StyledSnackbar>
+              <CloseIcon
+                onClick={handleClose}
+                className='snackbar-close-icon'
+              />
+            </SnackbarContent>
           )}
         </Transition>
-      </SnackbarProvider>
+      </StyledSnackbar>
     </React.Fragment>
   );
 }

@@ -13,10 +13,12 @@ import { RootState } from '../../redux/config';
 import { clearFilters } from '../../redux/slices/categorySlice';
 
 import { Filters, Products } from '../../types/typesProducts';
+import getSelectedValue from '../../utils/getSelectedValue';
 
 export default function FilterCompo() {
 
   const [filteredProducts, setFilteredProducts] = useState<Products[]>([]);
+  
   const selectedBrands = useSelector(
     (state: RootState) => state.category.brands
   );

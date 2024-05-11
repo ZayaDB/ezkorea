@@ -31,12 +31,27 @@ export default function ProductItem({ prod }: ProductItemProps) {
     console.log('dispatch한 liked:', isLiked);
   };
 
-  // 상품 아이템 클릭 이벤트 핸들러
   const handleProdItemClick = (productId: number): void => {
-    console.log('Clicked product ID:', productId);
-    // 클릭한 상품 productId로 상품 찾기
-    const clickedProduct = prod; // 이미 prod 객체가 해당 상품을 나타냄
-    console.log('Clicked product details:', clickedProduct);
+    // 이미 저장된 상품 목록을 가져옴
+    const storedProducts = localStorage.getItem('clickedProducts');
+    let clickedProducts: Products[] = storedProducts
+      ? JSON.parse(storedProducts)
+      : [];
+
+    // 이미 클릭된 상품인지 확인
+    const isAlreadyClicked = clickedProducts.some(
+      (product: Products) => product.productId === productId
+    );
+
+    if (!isAlreadyClicked) {
+      // 중복 저장을 방지하기 위해 로컬 스토리지에 클릭한 상품 추가
+      clickedProducts = [...clickedProducts, prod];
+      localStorage.setItem('clickedProducts', JSON.stringify(clickedProducts));
+    }
+
+    // 상품 상세 페이지로 이동
+    // 예: react-router-dom의 history.push 메서드를 사용하여 이동
+    // history.push(`/productDetail?productId=${productId}`);
   };
 
   const [hovered, setHovered] = useState(false);
