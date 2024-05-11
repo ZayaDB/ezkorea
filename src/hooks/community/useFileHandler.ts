@@ -15,5 +15,5 @@ export function useFileHandler(initialFiles: File[] = []) {
     setFiles(updatedFiles);
   };
 
-  return { files, handleFileChange, handleRemoveFile };
+  return { files, handleFileChange, handleRemoveFile, setFiles };
 }

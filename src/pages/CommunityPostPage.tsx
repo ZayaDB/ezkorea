@@ -44,8 +44,6 @@ function CommunityPostPage() {
   console.log('formState errors1:', errors);
   const { products, productName, setProductName, addProduct, setProducts } =
     useProductHandler();
-  // const [products, setProducts] = useState<string[]>([]);
-  // const [productName, setProductName] = useState('');
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState<IFormInput | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -55,7 +53,7 @@ function CommunityPostPage() {
   const { selections: selectedColors, toggleSelection: toggleColor } =
     useSelectionHandler<string>();
 
-  // 컨셉과 색상 선택에 변화 일어날 시 오류 감지
+  // 컨셉과 색상, 파일 선택에 변화 일어날 시 오류 감지
   useEffect(() => {
     if (selectedConcepts.length > 0) {
       clearErrors('submissionConcepts');

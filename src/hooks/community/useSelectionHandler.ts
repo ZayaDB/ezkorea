@@ -12,5 +12,5 @@ export function useSelectionHandler<T>(initialSelections: T[] = []) {
     }
   };
 
-  return { selections, toggleSelection };
+  return { selections, toggleSelection, setSelections };
 }
