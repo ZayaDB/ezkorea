@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import TextField from '@mui/material/TextField';
+import List from './List';
 
 // import { createTheme, makeStyles } from '@mui/material';
 // const [currentPage, setCurrentPage] = useState(1);
@@ -128,6 +129,7 @@ export default function Review() {
       <div id='reviewTop'>
         <div id='reviewBox'>
           <div id='reviewName'>리뷰</div>
+          
           <div className='reviewTotal'>리뷰 수</div>
           <div id='ratingBox'>
             <div className='starTotal'>

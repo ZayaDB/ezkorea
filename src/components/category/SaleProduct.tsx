@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import ProductItem from './ProductItem';
-import useSort from '../../hooks/useSort';
+import useSort from '../../hooks/shop/useSort';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/config';
 
