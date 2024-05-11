@@ -145,8 +145,25 @@ const Community = () => {
             styleIndexes={selectedStyleIndexes}
             styleButtonClick={handleStyleButtonClick}
           />
-          <Button onClick={handleResetFilters}>필터 초기화</Button>
-          <Button>
+          <Button
+            variant='contained'
+            onClick={() => {
+              handleResetFilters();
+            }}
+            style={{ height: 34, marginLeft: 30 }}
+            sx={{ p: 1 }}
+          >
+            필터 초기화
+          </Button>
+          <Button
+            variant='contained'
+            style={{
+              height: 34,
+              padding: 8,
+              marginRight: 10,
+              marginLeft: 'auto',
+            }}
+          >
             <Link
               to='/community/post'
               style={{ textDecoration: 'none', color: 'unset' }}
