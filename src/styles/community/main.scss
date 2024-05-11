@@ -1,7 +1,7 @@
 .color-filter button,
 .style-filter button {
-  margin: 4px;
   flex: 1;
+  margin-right: 8px;
 }
 
 .filter-container {
@@ -9,6 +9,7 @@
   max-width: 1200px;
   width: 100%;
   justify-content: baseline;
+  align-items: flex-end;
 }
 
 .style-filter {
@@ -16,8 +17,10 @@
 }
 
 .filter-title {
-  margin: 0;
+  margin: 8px 0;
   padding: 0;
+  color: #999;
+  font-size: 14px;
 }
 
 .wrap {
@@ -25,7 +28,7 @@
   max-width: 1200px;
   display: flex;
   position: relative;
-  top: 50px;
+  top: 20px;
   left: 50%;
   transform: translateX(-50%);
   flex-direction: column;
@@ -52,13 +55,12 @@
 .line {
   width: 100%;
   max-width: 1200px;
-  border-bottom: 2px solid #000;
-  margin: 20px auto;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  margin: 10px auto;
 }
 
 .feed-container {
   position: relative;
-
   display: flex;
   flex-direction: column;
   border-radius: 8px;
@@ -73,7 +75,7 @@
 }
 
 .feed-container:hover {
-  outline: 3px solid #5ff531;
+  outline: 2px solid #5ff531;
 }
 
 .feed-img {
@@ -102,11 +104,10 @@
   left: 0; /* 왼쪽으로부터의 위치 */
   right: 0; /* 오른쪽으로부터의 위치 */
   padding: 4px 8px;
-  background-color: rgba(255, 255, 255, 1); /* 배경색 및 투명도 설정 */
+  background-color: #ccc; /* 배경색 및 투명도 설정 */
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
-  color: w;
 }
 
 .profile-img {
