@@ -1,30 +1,57 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-// import useToggle from '../../hooks/useToggle';
 import '../../styles/category/productItem.scss';
 import HandleClickHeart from './HandleClickHeart';
-import { Products } from '../../types/typesProducts';
 import { Box } from '@mui/material';
+import { Products } from '../../types/typesProducts';
+import prod_review from '../../assets/images/prod_review.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/config';
+import { setIsLiked } from '../../redux/slices/categorySlice';
 
 interface ProductItemProps {
   prod: Products;
 }
 
+// 1000단위 콤마를 추가하는 함수
+const addCommaNumber = (num: number): string => {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
 // 상품 카드 컴포넌트
 export default function ProductItem({ prod }: ProductItemProps) {
-  // const [isHeart, toggleHeart] = useToggle(prod.heart);
-  const [isLiked, setIsLiked] = useState<boolean>(prod.heart);
+  const dispatch = useDispatch();
+
+  const isLiked = useSelector(
+    (state: RootState) => state.category.isLiked[prod.productId] || false
+  );
+  console.log('가져온 isLiked', isLiked);
 
   const handleLikeToggle = () => {
-    setIsLiked(prevIsLiked => !prevIsLiked);
+    dispatch(setIsLiked({ productId: prod.productId, isLiked: !isLiked }));
+    console.log('dispatch한 liked:', isLiked);
   };
 
-  // 상품 아이템 클릭 이벤트 핸들러
   const handleProdItemClick = (productId: number): void => {
-    console.log('Clicked product ID:', productId);
-    // 클릭한 상품의 productId로 상품 객체 찾기
-    const clickedProduct = prod; // 이미 prod 객체가 해당 상품을 나타냄
-    console.log('Clicked product details:', clickedProduct);
+    // 이미 저장된 상품 목록을 가져옴
+    const storedProducts = localStorage.getItem('clickedProducts');
+    let clickedProducts: Products[] = storedProducts
+      ? JSON.parse(storedProducts)
+      : [];
+
+    // 이미 클릭된 상품인지 확인
+    const isAlreadyClicked = clickedProducts.some(
+      (product: Products) => product.productId === productId
+    );
+
+    if (!isAlreadyClicked) {
+      // 중복 저장을 방지하기 위해 로컬 스토리지에 클릭한 상품 추가
+      clickedProducts = [...clickedProducts, prod];
+      localStorage.setItem('clickedProducts', JSON.stringify(clickedProducts));
+    }
+
+    // 상품 상세 페이지로 이동
+    // 예: react-router-dom의 history.push 메서드를 사용하여 이동
+    // history.push(`/productDetail?productId=${productId}`);
   };
 
   const [hovered, setHovered] = useState(false);
@@ -71,12 +98,18 @@ export default function ProductItem({ prod }: ProductItemProps) {
           )}
           {/* 원가 */}
           {prod.discount !== 0 ? (
-            <div className='prod-prevPrice'>{prod.prevPrice}</div>
+            <div className='prod-prevPrice'>
+              {addCommaNumber(prod.prevPrice)}
+            </div>
           ) : (
             <div style={{ color: 'white' }}>;;;</div>
           )}
           {/* 할인가 */}
-          <div className='prod-price'>{prod.price}</div>
+          <div className='prod-price'>{addCommaNumber(prod.price)}원</div>
+          <div className='prod-commentCount'>
+            <img src={prod_review} alt='' className='prod-review-icon' />(
+            {addCommaNumber(prod.commentCount)})
+          </div>
         </div>
       </Link>
       <div className='color-heart-box'>

@@ -10,8 +10,9 @@ export interface CategoryState {
   products: Products[];
   brands: string[];
   colors: string[];
-  prices: number;
+  prices: number[];
   themes: string[];
+  isLiked: { [productId: number]: boolean };
 }
 
 const initialState: CategoryState = {
@@ -21,8 +22,9 @@ const initialState: CategoryState = {
   products: [],
   brands: [],
   colors: [],
-  prices: 0,
+  prices: [],
   themes: [],
+  isLiked: {},
 };
 
 const categorySlice = createSlice({
@@ -47,7 +49,7 @@ const categorySlice = createSlice({
     setColors: (state, action: PayloadAction<string[]>) => {
       state.colors = action.payload;
     },
-    setPrices: (state, action: PayloadAction<number>) => {
+    setPrices: (state, action: PayloadAction<number[]>) => {
       state.prices = action.payload;
     },
     setThemes: (state, action: PayloadAction<string[]>) => {
@@ -57,7 +59,7 @@ const categorySlice = createSlice({
       // Reset filter-related state to initial values
       state.brands = [];
       state.colors = [];
-      state.prices = 0;
+      state.prices = [];
       state.themes = [];
     },
     removeSelectedFilter: (
@@ -70,9 +72,9 @@ const categorySlice = createSlice({
           state.brands = state.brands.filter(brand => brand !== value);
           break;
         case 'prices':
-          // Handle removing price filter (adjust logic based on how prices are stored)
-          // For example:
-          // state.prices = state.prices.filter(price => price !== value);
+          // if (typeof value === 'number') {
+          state.prices = state.prices.filter(price => price !== value);
+          // }
           break;
         case 'colors':
           state.colors = state.colors.filter(color => color !== value);
@@ -83,6 +85,13 @@ const categorySlice = createSlice({
         default:
           break;
       }
+    },
+    setIsLiked: (
+      state,
+      action: PayloadAction<{ productId: number; isLiked: boolean }>
+    ) => {
+      const { productId, isLiked } = action.payload;
+      state.isLiked[productId] = isLiked;
     },
   },
 });
@@ -98,6 +107,7 @@ export const {
   setThemes,
   clearFilters,
   removeSelectedFilter,
+  setIsLiked,
 } = categorySlice.actions;
 
 export default categorySlice.reducer;

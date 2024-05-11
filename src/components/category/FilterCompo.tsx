@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Box } from '@mui/system';
 import { Button } from '@mui/material';
 import '../../styles/category/sideFilter.scss';
@@ -12,10 +12,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../redux/config';
 import { clearFilters } from '../../redux/slices/categorySlice';
 
-import { Filters } from '../../types/typesProducts';
+import { Filters, Products } from '../../types/typesProducts';
+import getSelectedValue from '../../utils/getSelectedValue';
 
 export default function FilterCompo() {
-  // const [filteredProducts, setFilteredProducts] = useState<Products[]>([]);
+
+  const [filteredProducts, setFilteredProducts] = useState<Products[]>([]);
+  
   const selectedBrands = useSelector(
     (state: RootState) => state.category.brands
   );
@@ -28,6 +31,7 @@ export default function FilterCompo() {
   const selectedThemes = useSelector(
     (state: RootState) => state.category.themes
   );
+
   const [selectedFilters, setSelectedFilters] = useState<Filters>({
     brand: false,
     price: false,
@@ -38,45 +42,32 @@ export default function FilterCompo() {
   const dispatch = useDispatch();
 
   // useEffect(() => {
-  // filterProducts(); // 필터링된 상품 리스트 업데이트
-
-  // }, [selectedBrands, selectedColors, selectedThemes]);
+  //   filterProducts(); // 필터링된 상품 리스트 업데이트
+  // }, [selectedBrands, selectedPrices, selectedColors, selectedThemes]);
 
   // const filterProducts = () => {
   //   // Redux store에서 모든 상품 가져오기
   //   const allProducts = useSelector(
   //     (state: RootState) => state.category.products
   //   );
-  //   // 필터링된 상품 리스트 생성
-  //   const filteredList = allProducts.filter(product => {
-  //     const isBrandSelected = selectedBrands.includes(product.brand);
-  //     // const isPriceSelected = selectedPrices === 0 || product.price <= selectedPrices;
 
-  //     // product.colors가 배열인지 확인하고, 선택된 색상 중 하나라도 포함되어 있는지 검사
-  //     const isColorSelected = Array.isArray(product.colors)
-  //       ? product.colors.some(color => selectedColors.includes(color))
-  //       : selectedColors.includes(product.colors as string);
+  // const filteredList = allProducts.filter(product => {
+  //   const isBrandSelected = selectedBrands.includes(product.brand);
+  //   const isPriceSelected =
+  //     selectedPrices === 0 || product.price <= selectedPrices;
 
-  //     const isThemeSelected = selectedThemes.includes(product.theme);
-  //     // 모든 필터 조건이 true인 경우에만 포함
-  //     // return isBrandSelected && isPriceSelected && isColorSelected && isThemeSelected;
+  //   // product.colors가 배열인지 확인하고, 선택된 색상 중 하나라도 포함되어 있는지 검사
+  //   const isColorSelected = Array.isArray(product.colors)
+  //     ? product.colors.some(color => selectedColors.includes(color))
+  //     : selectedColors.includes(product.colors as string);
 
-  //     return isBrandSelected && isColorSelected && isThemeSelected;
-  //   });
+  //   const isThemeSelected = selectedThemes.includes(product.theme);
+  // });
 
-  //   // 필터링된 상품 리스트를 컴포넌트 상태에 저장
-  //   setFilteredProducts(filteredList);
-  // };
+  // 필터링된 상품 리스트를 컴포넌트 상태에 저장
+  // setFilteredProducts(filteredList);
 
-  // const renderProducts = () => {
-  //   // 필터링된 상품 리스트를 사용하여 상품을 렌더링
-  //   return filteredProducts.map(product => (
-  //     <div key={product.productId}>
-  //       <p>{product.name}</p>
-  //       <p>{product.price}</p>
-  //       {/* 상품 정보 렌더링 */}
-  //     </div>
-  //   ));
+  // return newProducts;
   // };
 
   const toggleFilter = (filterName: keyof Filters) => {
@@ -84,15 +75,6 @@ export default function FilterCompo() {
       ...prevFilters,
       [filterName]: !prevFilters[filterName],
     }));
-  };
-
-  const filterHandle = () => {
-    console.log('선택된 브랜드:', selectedBrands);
-    console.log('선택된 가격:', selectedPrices);
-    console.log('선택된 색상:', selectedColors);
-    console.log('선택된 테마:', selectedThemes);
-    // 이 값들을 기준으로 상품을 렌더링하기
-    // filterProducts();
   };
 
   const handleResetFilters = () => {
@@ -168,12 +150,10 @@ export default function FilterCompo() {
             color: '#5FF531',
           },
         }}
-        onClick={filterHandle}
+        // onClick={filterProducts}
       >
         검색
       </Button>
-      {/* 필터링된 상품 렌더링 */}
-      {/* {renderProducts()} */}
     </Box>
   );
 }

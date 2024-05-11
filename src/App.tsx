@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './styles/theme';
@@ -14,6 +14,7 @@ import Community from './pages/Community';
 import ProductDetail from './pages/ProductDetail';
 import OrderPage from './pages/OrderPage';
 import MyPage from './pages/MyPage';
+import NotFound from './pages/NotFound';
 
 function App() {
   const sections = [
@@ -42,6 +43,7 @@ function App() {
           />
           <Route path='/order' element={<OrderPage />} />
           <Route path='/my' element={<MyPage />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

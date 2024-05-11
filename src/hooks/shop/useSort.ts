@@ -1,7 +1,5 @@
 import { useMemo } from 'react';
-import { Products,SortOption } from '../types/typesProducts';
-
-
+import { Products, SortOption } from '../../types/typesProducts';
 
 const useSort = (products: Products[], sortOption: SortOption) => {
   const sortedProducts = useMemo(() => {
@@ -11,17 +9,9 @@ const useSort = (products: Products[], sortOption: SortOption) => {
       case '리뷰많은순':
         return products.slice().sort((a, b) => b.commentCount - a.commentCount);
       case '낮은가격순':
-        return products.slice().sort((a, b) => {
-          const priceA = parseInt(a.price.replace(',', ''));
-          const priceB = parseInt(b.price.replace(',', ''));
-          return priceA - priceB;
-        });
+        return products.slice().sort((a, b) => a.price - b.price);
       case '높은가격순':
-        return products.slice().sort((a, b) => {
-          const priceA = parseInt(a.price.replace(',', ''));
-          const priceB = parseInt(b.price.replace(',', ''));
-          return priceB - priceA;
-        });
+        return products.slice().sort((a, b) => b.price - a.price);
       case '할인율높은순':
         return products.slice().sort((a, b) => b.discount - a.discount);
       default:
@@ -33,4 +23,3 @@ const useSort = (products: Products[], sortOption: SortOption) => {
 };
 
 export default useSort;
-

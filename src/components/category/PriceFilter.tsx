@@ -10,11 +10,11 @@ const formatPriceWithComma = (price: number): string => {
 };
 
 export default function PriceFilter() {
-  const [price, setPrice] = useState<number>(500000); // 초기 가격 상태 (예: 50만원)
+  const [price, setPrice] = useState<number[]>();
   const dispatch = useDispatch();
 
   const handlePriceChange = (event: Event, newValue: number | number[]) => {
-    const newPrice = newValue as number; // 새로운 가격 값
+    const newPrice = newValue as number[]; // 새로운 가격 값
     setPrice(newPrice); // 로컬 상태 업데이트
 
     // Redux store에 선택된 가격을 저장
@@ -34,7 +34,7 @@ export default function PriceFilter() {
     { value: 700000 },
     { value: 800000 },
     { value: 900000 },
-    { value: 1000000, label: '100(만원)' },
+    { value: 1000000, label: '100+' },
   ];
 
   return (
@@ -49,8 +49,12 @@ export default function PriceFilter() {
         valueLabelDisplay='auto'
         sx={{ color: 'black' }}
         valueLabelFormat={value =>
-          `${formatPriceWithComma(value as number)}원~`
+          `~${formatPriceWithComma(value as number)}원`
         } // 숫자를 천 단위로 포맷하여 표시
+        style={{
+          marginLeft: '15px',
+
+        }}
       />
     </Box>
   );
