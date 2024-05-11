@@ -111,7 +111,7 @@ export default function CommunityModifyPage() {
     if (selectedColors.length > 0) {
       clearErrors('submissionColors');
     }
-    if (files.length > 0) {
+    if (files.length > 0 || imageUrl.length > 0) {
       clearErrors('files');
     }
   }, [selectedConcepts, selectedColors, files, clearErrors]);
@@ -149,7 +149,8 @@ export default function CommunityModifyPage() {
     };
 
     console.log('Complete submission data:', completeData);
-    if (!files.length) {
+    console.log(imageUrl.length < 1, !files.length);
+    if (imageUrl.length < 1 && !files.length) {
       setError('files', {
         type: 'manual',
         message: '1개 이상 4개 이하의 사진을 업로드해주세요.',
@@ -168,7 +169,11 @@ export default function CommunityModifyPage() {
         message: '하나 이상의 컬러를 선택해주세요.',
       });
     }
-    if (selectedConcepts.length && selectedColors.length && files.length) {
+    if (
+      selectedConcepts.length &&
+      selectedColors.length &&
+      (files.length || imageUrl.length > 0)
+    ) {
       console.log('Form submitted:', completeData);
       setFormData(completeData); // Form 데이터 저장
       handleOpen(); // 모달 열기
@@ -198,7 +203,39 @@ export default function CommunityModifyPage() {
             <Button onClick={triggerFileInput} variant='contained'>
               파일 선택
             </Button>
-
+            {imageUrl.map((url, index) => {
+              return (
+                <div
+                  key={index}
+                  style={{
+                    position: 'relative',
+                    display: 'inline-block',
+                    margin: '10px',
+                  }}
+                >
+                  <img
+                    src={url}
+                    alt={`Preview ${index + 1}`}
+                    style={{ width: '100px', height: '100px' }}
+                  />
+                  <button
+                    type='button'
+                    style={{
+                      position: 'absolute',
+                      top: '0',
+                      right: '0',
+                      padding: '2px 5px',
+                      lineHeight: '1',
+                      border: 'none',
+                      cursor: 'pointer',
+                    }}
+                    // onClick={() => handleRemoveFile(index)}
+                  >
+                    X
+                  </button>
+                </div>
+              );
+            })}
             {files.map((file, index) => {
               const imageUrl = URL.createObjectURL(file);
               return (
