@@ -114,6 +114,9 @@ export default function CommunityModifyPage() {
     if (files.length > 0 || imageUrl.length > 0) {
       clearErrors('files');
     }
+    if (files.length + imageUrl.length < 5) {
+      clearErrors('files');
+    }
   }, [selectedConcepts, selectedColors, files, clearErrors]);
 
   if (loading) return <div>Loading...</div>;
@@ -133,7 +136,7 @@ export default function CommunityModifyPage() {
 
   // 파일 업로드 인풋 트리거
   const triggerFileInput = () => {
-    // ref를 사용하여 실제 input 요소를 트리거합니다
+    // ref를 사용하여 실제 input 요소를 트리거
     fileInputRef.current?.click();
   };
 
@@ -177,7 +180,8 @@ export default function CommunityModifyPage() {
     if (
       selectedConcepts.length &&
       selectedColors.length &&
-      (files.length || imageUrl.length > 0)
+      (files.length || imageUrl.length > 0) &&
+      files.length + imageUrl.length < 5
     ) {
       console.log('Form submitted:', completeData);
       setFormData(completeData); // Form 데이터 저장
@@ -194,7 +198,7 @@ export default function CommunityModifyPage() {
     <ContentArea>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box display='flex' flexDirection='column'>
-          <SubTitle text='사진'></SubTitle>
+          <SubTitle text='사진' isRequired={true}></SubTitle>
           <Box display='flex' flexDirection='row'>
             <input
               type='file'
@@ -280,7 +284,7 @@ export default function CommunityModifyPage() {
               </Typography>
             )}
           </Box>
-          <SubTitle text='글 제목'></SubTitle>
+          <SubTitle text='글 제목' isRequired={true}></SubTitle>
 
           <TextField
             type='text'
@@ -302,7 +306,7 @@ export default function CommunityModifyPage() {
               sx: { marginLeft: 0, marginRight: 0 }, // 마진 왼쪽과 오른쪽을 0으로 설정
             }}
           />
-          <SubTitle text='설명'></SubTitle>
+          <SubTitle text='설명' isRequired={true}></SubTitle>
 
           <TextField
             placeholder='책상 인테리어를 자랑해주세요.'
@@ -325,7 +329,7 @@ export default function CommunityModifyPage() {
             }}
           />
 
-          <SubTitle text='제품 선택'></SubTitle>
+          <SubTitle text='제품 선택' isRequired={false}></SubTitle>
 
           <ProductBox>
             <TextField
@@ -375,7 +379,7 @@ export default function CommunityModifyPage() {
             </List>
           </ProductBox>
 
-          <SubTitle text='컨셉 선택'></SubTitle>
+          <SubTitle text='컨셉 선택' isRequired={true}></SubTitle>
           <Box>
             {['antique', 'gaming', 'simple', 'unique'].map(concept => (
               <SelectButton
@@ -398,7 +402,7 @@ export default function CommunityModifyPage() {
             )}
           </Box>
           <Box>
-            <SubTitle text='컬러 선택' />
+            <SubTitle text='컬러 선택' isRequired={true} />
             {['black', 'white', 'wood', 'pink'].map(color => (
               <SelectButton
                 key={color}
