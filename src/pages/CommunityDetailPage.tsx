@@ -1,59 +1,96 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import CommunityDetail from '../components/community/detail/CommunityDetail'; // 수정된 import 경로
-
-// 가상의 외부 데이터로 가정한 피드 데이터
-const feedData = [
-  {
-    id: 1,
-    imageUrl: 'https://example.com/image1.jpg',
-    caption: '첫 번째 피드',
-    likes: 10,
-    comments: [
-      { id: 1, user: 'user1', text: '댓글 1' },
-      { id: 2, user: 'user2', text: '댓글 2' },
-    ],
-  },
-  {
-    id: 2,
-    imageUrl: 'https://example.com/image2.jpg',
-    caption: '두 번째 피드',
-    likes: 20,
-    comments: [
-      { id: 1, user: 'user3', text: '댓글 1' },
-      { id: 2, user: 'user4', text: '댓글 2' },
-    ],
-  },
-];
 
 const CommunityDetailPage: React.FC = () => {
-  // URL 파라미터에서 피드 ID 가져오기
-  const { feedId } = useParams<{ feedId: string }>();
+  const [feed, setFeed] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
+  const { feedId } = useParams<{ feedId?: string }>();
 
-  // 피드 ID가 없거나 잘못된 경우 예외 처리
-  if (!feedId) {
-    return <div>피드를 찾을 수 없습니다.</div>;
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        if (!feedId) {
+          throw new Error('Feed ID is not provided');
+        }
+
+        const response = await fetch('/data/feed.json'); // 데이터를 가져오는 경로를 적절히 수정해야 합니다.
+        const data = await response.json();
+        const selectedFeed = data.find(
+          (item: any) => item.feedId === parseInt(feedId)
+        );
+        if (selectedFeed) {
+          setFeed(selectedFeed);
+          setIsError(false);
+        } else {
+          setIsError(true);
+        }
+      } catch (error) {
+        setIsError(true);
+      }
+      setIsLoading(false);
+    };
+
+    fetchData();
+  }, [feedId]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
 
-  // 정수로 변환된 피드 ID
-  const parsedFeedId = parseInt(feedId);
-
-  // 피드 ID를 기반으로 해당 피드 정보 찾기
-  const feed = feedData.find(item => item.id === parsedFeedId);
-
-  // 피드 정보가 없는 경우 예외 처리
-  if (!feed) {
-    return <div>피드를 찾을 수 없습니다.</div>;
+  if (isError || !feed) {
+    return <div>Error: Feed not found</div>;
   }
 
-  // 피드 정보가 있는 경우 커뮤니티 디테일 페이지 렌더링
   return (
-    <CommunityDetail
-      imageUrl={feed.imageUrl}
-      caption={feed.caption}
-      likes={feed.likes}
-      comments={feed.comments}
-    />
+    <div style={{ maxWidth: '600px', margin: '0 auto', padding: '20px' }}>
+      {feed.images.map((image: string, index: number) => (
+        <div key={index}>
+          <img
+            src={image}
+            alt='초깔끔 아틀리에의 사진'
+            style={{ width: '100%', marginBottom: '20px' }}
+          />
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              marginBottom: '20px',
+            }}
+          >
+            <img
+              src={feed.profileImage}
+              alt='Profile'
+              style={{
+                width: '30px',
+                height: '30px',
+                borderRadius: '50%',
+                marginRight: '10px',
+              }}
+            />
+            <span>{feed.accountName}</span>
+          </div>
+          <p style={{ marginBottom: '20px' }}>{feed.creationDate}</p>
+        </div>
+      ))}
+      <h2 style={{ marginBottom: '10px' }}>{feed.title}</h2>
+      <p style={{ marginBottom: '20px' }}>{feed.description}</p>
+      <div
+        style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}
+      >
+        <span style={{ marginRight: '10px' }}>Likes: {feed.likes}</span>
+        <span>Comments: {feed.commentCount}</span>
+      </div>
+      <h3>Comments</h3>
+      <ul>
+        {feed.comments.map((comment: any) => (
+          <li key={comment.id} style={{ marginBottom: '10px' }}>
+            <strong>{comment.accountName}</strong>: {comment.content}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 
