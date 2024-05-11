@@ -62,10 +62,6 @@ function CommunityPostPage() {
     }
     if (files.length > 0 || files.length < 5) {
       clearErrors('files');
-      window.scrollTo({
-        top: 0, // 최상단
-        behavior: 'smooth', // 부드러운 스크롤
-      });
     }
   }, [selectedConcepts, selectedColors, files, clearErrors]);
 
@@ -406,7 +402,9 @@ function CommunityPostPage() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>취소</Button>
+          <Button onClick={handleClose} sx={{ color: theme.palette.grey[200] }}>
+            취소
+          </Button>
           <Button
             onClick={confirmSubmit}
             sx={{ color: theme.palette.common.black }}
