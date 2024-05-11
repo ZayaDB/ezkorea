@@ -72,9 +72,6 @@ const Community = () => {
       case '좋아요순':
         sortedData.sort((a, b) => b.likes - a.likes);
         break;
-      case '댓글순':
-        sortedData.sort((a, b) => b.commentCount - a.commentCount);
-        break;
       case '최신순':
         sortedData.sort(
           (a, b) =>
@@ -187,83 +184,88 @@ const Community = () => {
         ) : (
           filterData.map(item => (
             <Grid item xs={6} md={3} key={item.feedId} className='feed'>
-              <Box className='feed-container'>
-                <Box className='feed-box'>
-                  <img
-                    className='feed-img'
-                    src={item.images[0]}
-                    alt={item.title}
-                  />
-                </Box>
-                <Box className='info-box'>
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <Link
+                to={`/community/detail/${item.feedId}`}
+                style={{ textDecoration: 'none' }}
+              >
+                <Box className='feed-container'>
+                  <Box className='feed-box'>
                     <img
-                      className='profile-img'
-                      src={item.profileImage}
-                      alt={item.accountName}
+                      className='feed-img'
+                      src={item.images[0]}
+                      alt={item.title}
                     />
-                    <Typography
-                      variant='body2'
-                      noWrap
-                      title={item.accountName}
-                      style={{
-                        cursor: 'Default',
-                        maxWidth: '100px',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                      }}
-                    >
-                      {item.accountName}
-                    </Typography>
                   </Box>
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      marginLeft: 'auto',
-                    }}
-                  >
-                    <IconButton
-                      sx={{
-                        color: likedItems.includes(item.feedId)
-                          ? 'error.main'
-                          : 'action.active',
-                        margin: 0,
-                        padding: 0,
+                  <Box className='info-box'>
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                      <img
+                        className='profile-img'
+                        src={item.profileImage}
+                        alt={item.accountName}
+                      />
+                      <Typography
+                        variant='body2'
+                        noWrap
+                        title={item.accountName}
+                        style={{
+                          cursor: 'Default',
+                          maxWidth: '100px',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                        }}
+                      >
+                        {item.accountName}
+                      </Typography>
+                    </Box>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        marginLeft: 'auto',
                       }}
-                      onClick={() => handleLike(item.feedId)}
                     >
-                      {likedItems.includes(item.feedId) ? (
-                        <Favorite sx={{ color: 'red', fontSize: '20px' }} />
-                      ) : (
-                        <FavoriteBorder sx={{ fontSize: '20px' }} />
-                      )}
-                    </IconButton>
-                    <Typography
-                      variant='caption'
-                      ml={0.5}
-                      style={{ cursor: 'Default' }}
-                    >
-                      {item.likes}
-                    </Typography>
-                    <Divider
-                      sx={{ mx: 0.5, height: 10 }}
-                      orientation='vertical'
-                    />
-                    <Visibility
-                      sx={{ color: 'text.secondary', fontSize: '20px' }}
-                    />
-                    <Typography
-                      variant='caption'
-                      ml={0.5}
-                      color='text.secondary'
-                      style={{ cursor: 'Default' }}
-                    >
-                      {item.views}
-                    </Typography>
-                  </div>
+                      <IconButton
+                        sx={{
+                          color: likedItems.includes(item.feedId)
+                            ? 'error.main'
+                            : 'action.active',
+                          margin: 0,
+                          padding: 0,
+                        }}
+                        onClick={() => handleLike(item.feedId)}
+                      >
+                        {likedItems.includes(item.feedId) ? (
+                          <Favorite sx={{ color: 'red', fontSize: '20px' }} />
+                        ) : (
+                          <FavoriteBorder sx={{ fontSize: '20px' }} />
+                        )}
+                      </IconButton>
+                      <Typography
+                        variant='caption'
+                        ml={0.5}
+                        style={{ cursor: 'Default' }}
+                      >
+                        {item.likes}
+                      </Typography>
+                      <Divider
+                        sx={{ mx: 0.5, height: 10 }}
+                        orientation='vertical'
+                      />
+                      <Visibility
+                        sx={{ color: 'text.secondary', fontSize: '20px' }}
+                      />
+                      <Typography
+                        variant='caption'
+                        ml={0.5}
+                        color='text.secondary'
+                        style={{ cursor: 'Default' }}
+                      >
+                        {item.views}
+                      </Typography>
+                    </div>
+                  </Box>
                 </Box>
-              </Box>
+              </Link>
             </Grid>
           ))
         )}
