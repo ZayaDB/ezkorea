@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import {
   Box,
@@ -203,7 +202,7 @@ const ProductList: React.FC = () => {
                           objectFit: 'cover',
                         }}
                       />
-                      <span>{subCategory.name}</span>
+                      {/* <span>{subCategory.name}</span> */}
                     </Box>
                   ) : (
                     subCategory.name
@@ -363,4 +362,5 @@ const ProductList: React.FC = () => {
 };
 
 export default ProductList;
+
 
