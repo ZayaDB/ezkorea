@@ -5,7 +5,7 @@ import { useFetchData } from '../hooks/useFetchData';
 import { useFileHandler } from '../hooks/community/useFileHandler';
 import { useProductHandler } from '../hooks/community/useProductHandler';
 import { useSelectionHandler } from '../hooks/community/useSelectionHandler';
-import { FeedData, SelectedProducts } from '../types/communityTypes';
+import { FeedData } from '../types/communityTypes';
 import ContentArea from '../styles/ContentArea';
 import theme from '../styles/theme';
 import styled from '@emotion/styled';
@@ -137,6 +137,11 @@ export default function CommunityModifyPage() {
     fileInputRef.current?.click();
   };
 
+  const handleRemoveUrl = (index: number) => {
+    const updatedFiles = imageUrl.filter((_, i) => i !== index);
+    setImageUrl(updatedFiles);
+  };
+
   const onSubmit: SubmitHandler<IFormInput> = data => {
     console.log('handleSubmit 함수가 호출되었습니다.');
     console.log(data);
@@ -177,8 +182,6 @@ export default function CommunityModifyPage() {
       console.log('Form submitted:', completeData);
       setFormData(completeData); // Form 데이터 저장
       handleOpen(); // 모달 열기
-
-      // 여기에 서버 전송 로직 추가
     }
   };
 
@@ -229,7 +232,7 @@ export default function CommunityModifyPage() {
                       border: 'none',
                       cursor: 'pointer',
                     }}
-                    // onClick={() => handleRemoveFile(index)}
+                    onClick={() => handleRemoveUrl(index)}
                   >
                     X
                   </button>
