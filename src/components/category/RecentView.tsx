@@ -1,12 +1,13 @@
-import React from 'react';
+
+
 import { Link } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { Products } from '../../types/typesProducts';
 import '../../styles/category/category.scss';
-import { useMediaQuery } from '@mui/material';
+// import { useMediaQuery } from '@mui/material';
 
 export default function RecentView() {
-  const isMobile = useMediaQuery('(max-width:768px)');
+  // const isMobile = useMediaQuery('(max-width:768px)');
 
   const clickedProducts: Products[] = JSON.parse(
     localStorage.getItem('clickedProducts') || '[]'
@@ -44,3 +45,4 @@ export default function RecentView() {
     
   );
 }
+

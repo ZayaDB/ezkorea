@@ -1,3 +1,4 @@
+
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -7,7 +8,7 @@ import SideNav from '../components/category/SideNav';
 import '../styles/category/category.scss';
 
 import { setCategoryData, setProducts } from '../redux/slices/categorySlice';
-import HeartProduct from '../components/category/HeartProduct';
+// import HeartProduct from '../components/category/HeartProduct';
 import RecentView from '../components/category/RecentView';
 // import BestProduct from '../components/category/BestProduct';
 
@@ -47,3 +48,4 @@ export default function Category() {
     </div>
   );
 }
+

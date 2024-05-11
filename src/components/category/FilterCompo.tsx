@@ -1,36 +1,40 @@
-import { useState, useEffect } from 'react';
+
+// import { useState, useEffect } from 'react';
+import { useState } from 'react';
+
 import { Box } from '@mui/system';
 import { Button } from '@mui/material';
 import '../../styles/category/sideFilter.scss';
-
 import BrandFilter from './BrandFilter';
 import PriceFilter from './PriceFilter';
 import ColorFilter from './ColorFilter';
 import ThemeFilter from './ThemeFilter';
+// import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../redux/config';
+// import { RootState } from '../../redux/config';
 import { clearFilters } from '../../redux/slices/categorySlice';
 
-import { Filters, Products } from '../../types/typesProducts';
-import getSelectedValue from '../../utils/getSelectedValue';
+// import { Filters, Products } from '../../types/typesProducts';
+import { Filters } from '../../types/typesProducts';
+
+// import getSelectedValue from '../../utils/getSelectedValue';
 
 export default function FilterCompo() {
+  // const [filteredProducts, setFilteredProducts] = useState<Products[]>([]);
 
-  const [filteredProducts, setFilteredProducts] = useState<Products[]>([]);
-  
-  const selectedBrands = useSelector(
-    (state: RootState) => state.category.brands
-  );
-  const selectedPrices = useSelector(
-    (state: RootState) => state.category.prices
-  );
-  const selectedColors = useSelector(
-    (state: RootState) => state.category.colors
-  );
-  const selectedThemes = useSelector(
-    (state: RootState) => state.category.themes
-  );
+  // const selectedBrands = useSelector(
+  //   (state: RootState) => state.category.brands
+  // );
+  // const selectedPrices = useSelector(
+  //   (state: RootState) => state.category.prices
+  // );
+  // const selectedColors = useSelector(
+  //   (state: RootState) => state.category.colors
+  // );
+  // const selectedThemes = useSelector(
+  //   (state: RootState) => state.category.themes
+  // );
 
   const [selectedFilters, setSelectedFilters] = useState<Filters>({
     brand: false,
@@ -157,3 +161,4 @@ export default function FilterCompo() {
     </Box>
   );
 }
+
