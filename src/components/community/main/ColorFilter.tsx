@@ -2,7 +2,9 @@
 // ColorFilter.tsx
 import React from 'react';
 import { Button } from '@mui/material';
+import { Button } from '@mui/material';
 import './../../../styles/community/main.scss';
+// import theme from '../../../styles/theme';
 
 interface ColorFilterProps {
   colorIndexes: string[];
@@ -17,7 +19,7 @@ const ColorFilter: React.FC<ColorFilterProps> = ({
 
   return (
     <div className='color-filter'>
-      <p className='filter-title'>Color</p>
+      <p className='filter-title'>컬러 선택</p>
       {colors.map((color, index) => (
         <Button
           key={index}
