@@ -3,8 +3,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './styles/theme';
 import Home from './pages/Home';
-import {} from './types/typesProducts';
 import CommunityPostPage from './pages/CommunityPostPage';
+import CommunityModifyPage from './pages/CommunityModifyPage';
 import Login from './pages/Login';
 import Header from './components/header/Header';
 import BestProduct from './components/category/BestProduct';
@@ -36,6 +36,10 @@ function App() {
           <Route path='/community' element={<Community />} />
           <Route path='/login' element={<Login />} />
           <Route path='/community/post' element={<CommunityPostPage />} />
+          <Route
+            path='community/modify/:feedId'
+            element={<CommunityModifyPage />}
+          />
           <Route path='/order' element={<OrderPage />} />
           <Route path='/my' element={<MyPage />} />
         </Routes>
