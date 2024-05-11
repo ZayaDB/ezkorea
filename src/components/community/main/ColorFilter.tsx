@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
 // ColorFilter.tsx
 import React from 'react';
-import { Button } from '@mui/material';
+import { Button, Box } from '@mui/material';
 import './../../../styles/community/main.scss';
+import styled from '@emotion/styled';
 // import theme from '../../../styles/theme';
 
 interface ColorFilterProps {
@@ -41,6 +42,7 @@ const ColorFilter: React.FC<ColorFilterProps> = ({
             }),
           }}
         >
+          <ColorCircle color={color} />
           {color}
         </Button>
       ))}
@@ -49,3 +51,12 @@ const ColorFilter: React.FC<ColorFilterProps> = ({
 };
 
 export default ColorFilter;
+
+const ColorCircle = styled(Box)<{ color: string }>(({ color }) => ({
+  width: 15,
+  height: 15,
+  borderRadius: '50%',
+  border: color === 'white' ? '1px solid black' : 'none',
+  backgroundColor: color === 'wood' ? '#9A6322' : color,
+  marginRight: '8px',
+}));
