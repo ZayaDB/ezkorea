@@ -44,7 +44,8 @@ $border: 1px solid lightgray;
 .detailPage {
   display: flex;
   justify-content: baseline;
-  width: 1200px;
+  max-width: 1200px;
+  width: 100%;
   padding-top: 8px;
   // border: 1px solid black;
   margin: 0 auto;
@@ -71,7 +72,7 @@ $border: 1px solid lightgray;
   width: calc(1200px - (90vh + 8px));
   height: calc(100vh - 200px);
   position: fixed;
-  // background-color: white;
+  background-color: white;
   // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   border-top: 3px solid black;
   padding: 8px;

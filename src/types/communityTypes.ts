@@ -21,7 +21,7 @@ export interface FeedData {
   images: string[];
   title: string;
   description: string;
-  selectedProducts?: SelectedProducts;
+  selectedProducts?: SelectedProducts[];
   concepts: string[];
   colors: string[];
   views: number;

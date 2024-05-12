@@ -1,5 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import { useParams } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { useFetchData } from '../hooks/useFetchData';
+import { useFileHandler } from '../hooks/community/useFileHandler';
+import { useProductHandler } from '../hooks/community/useProductHandler';
+import { useSelectionHandler } from '../hooks/community/useSelectionHandler';
+import { FeedData } from '../types/communityTypes';
 import ContentArea from '../styles/ContentArea';
 import theme from '../styles/theme';
 import styled from '@emotion/styled';
@@ -15,9 +21,6 @@ import {
   ListItem,
   List,
 } from '@mui/material';
-import { useFileHandler } from '../hooks/community/useFileHandler';
-import { useSelectionHandler } from '../hooks/community/useSelectionHandler';
-import { useProductHandler } from '../hooks/community/useProductHandler';
 import SubTitle from '../components/community/post/SubTitle';
 
 interface IFormInput {
@@ -31,14 +34,25 @@ interface IFormInput {
   submissionColors?: string;
 }
 
-function CommunityPostPage() {
+export default function CommunityModifyPage() {
+  const { feedId } = useParams<{ feedId: string }>();
+  const [data, loading, error] = useFetchData<FeedData[]>('/data/feed.json');
   const {
     register,
     handleSubmit,
     formState: { errors },
     setError,
     clearErrors,
-  } = useForm<IFormInput>({});
+    reset,
+  } = useForm<IFormInput>({
+    defaultValues: {
+      title: '',
+      description: '',
+      products: [],
+      concepts: [],
+      colors: [],
+    },
+  });
 
   const { products, productName, setProductName, addProduct, setProducts } =
     useProductHandler();
@@ -46,13 +60,49 @@ function CommunityPostPage() {
   const [cancelOpen, setCancelOpen] = useState(false);
   const [formData, setFormData] = useState<IFormInput | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const { files, handleFileChange, handleRemoveFile } = useFileHandler();
-  const { selections: selectedConcepts, toggleSelection: toggleConcept } =
-    useSelectionHandler<string>();
-  const { selections: selectedColors, toggleSelection: toggleColor } =
-    useSelectionHandler<string>();
+  const [imageUrl, setImageUrl] = useState<string[]>([]);
+  const { files, handleFileChange, handleRemoveFile, setFiles } =
+    useFileHandler();
+  const {
+    selections: selectedConcepts,
+    toggleSelection: toggleConcept,
+    setSelections: setSelectedConcepts,
+  } = useSelectionHandler<string>();
+  const {
+    selections: selectedColors,
+    toggleSelection: toggleColor,
+    setSelections: setSelectedColors,
+  } = useSelectionHandler<string>();
 
-  // 컨셉과 색상, 파일 선택에 변화 일어날 시 오류 감지
+  // 렌더링 시 기본 값 채워넣기
+  useEffect(() => {
+    if (data && data.length > 0) {
+      const feed = data.find(feed => feed.feedId.toString() === feedId);
+      if (feed) {
+        reset({
+          title: feed.title,
+          description: feed.description,
+          products: feed.selectedProducts?.map(p => p.productName) || [],
+          concepts: feed.concepts,
+          colors: feed.colors,
+        });
+        setImageUrl(feed.images); // 이미지 파일로 변환하는 로직 필요
+        setProducts(feed.selectedProducts?.map(p => p.productName) || []);
+        setSelectedConcepts(feed.concepts);
+        setSelectedColors(feed.colors);
+      }
+    }
+  }, [
+    data,
+    feedId,
+    reset,
+    setFiles,
+    setProducts,
+    setSelectedConcepts,
+    setSelectedColors,
+  ]);
+
+  // 값 변경에 따른 오류 제거
   useEffect(() => {
     if (selectedConcepts.length > 0) {
       clearErrors('submissionConcepts');
@@ -60,15 +110,16 @@ function CommunityPostPage() {
     if (selectedColors.length > 0) {
       clearErrors('submissionColors');
     }
-    if (files.length > 0 || files.length < 5) {
+    if (files.length > 0 || imageUrl.length > 0) {
+      clearErrors('files');
+    }
+    if (files.length + imageUrl.length < 5) {
       clearErrors('files');
     }
   }, [selectedConcepts, selectedColors, files, clearErrors]);
 
-  const triggerFileInput = () => {
-    // ref를 사용하여 실제 input 요소를 트리거합니다
-    fileInputRef.current?.click();
-  };
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error loading data: {error.message}</div>;
 
   //제품평 인풋창에서 엔터 누르면 추가
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -81,9 +132,19 @@ function CommunityPostPage() {
   // 모달 관련
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
   const handleCancelOpen = () => setCancelOpen(true);
   const handleCancelClose = () => setCancelOpen(false);
+
+  // 파일 업로드 인풋 트리거
+  const triggerFileInput = () => {
+    // ref를 사용하여 실제 input 요소를 트리거
+    fileInputRef.current?.click();
+  };
+
+  const handleRemoveUrl = (index: number) => {
+    const updatedFiles = imageUrl.filter((_, i) => i !== index);
+    setImageUrl(updatedFiles);
+  };
 
   const onSubmit: SubmitHandler<IFormInput> = data => {
     const completeData = {
@@ -93,8 +154,10 @@ function CommunityPostPage() {
       concepts: selectedConcepts,
       colors: selectedColors,
     };
-
-    if (!files.length || files.length > 4) {
+    if (
+      imageUrl.length + files.length < 1 ||
+      imageUrl.length + files.length > 4
+    ) {
       setError('files', {
         type: 'manual',
         message: '1개 이상 4개 이하의 사진을 업로드해주세요.',
@@ -120,11 +183,11 @@ function CommunityPostPage() {
     if (
       selectedConcepts.length &&
       selectedColors.length &&
-      files.length &&
-      files.length < 5
+      (files.length || imageUrl.length > 0) &&
+      files.length + imageUrl.length < 5
     ) {
       setFormData(completeData); // Form 데이터 저장
-      handleOpen();
+      handleOpen(); // 모달 열기
     }
   };
 
@@ -132,15 +195,14 @@ function CommunityPostPage() {
     console.log('Confirmed submission:', formData);
     handleClose(); // 모달 닫기
     window.location.href = '/community';
-    // 서버 전송 로직
+    // 서버에 데이터 전송
   };
-
   return (
     <ContentArea>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box display='flex' flexDirection='column'>
           <SubTitle text='사진' isRequired={true}></SubTitle>
-          <Box display='flex' flexDirection='row' flexWrap='wrap'>
+          <Box display='flex' flexDirection='row'>
             <input
               type='file'
               multiple
@@ -156,6 +218,46 @@ function CommunityPostPage() {
               />
             </Button>
             <Box display='flex' flexDirection='row' flexWrap='wrap'>
+              {imageUrl.map((url, index) => {
+                return (
+                  <div
+                    key={index}
+                    style={{
+                      position: 'relative',
+                      display: 'inline-block',
+                      margin: '10px',
+                    }}
+                  >
+                    <img
+                      src={url}
+                      alt={`Preview ${index + 1}`}
+                      style={{
+                        width: '130px',
+                        height: '130px',
+                        borderRadius: '5px',
+                      }}
+                    />
+                    <button
+                      type='button'
+                      style={{
+                        position: 'absolute',
+                        top: '-7px',
+                        right: '-7px',
+                        padding: '2px 6px 3px 6px',
+                        lineHeight: '1',
+                        border: 'none',
+                        cursor: 'pointer',
+                        borderRadius: '5px',
+                        fontSize: '12px',
+                        backgroundColor: '#F6F6F6',
+                      }}
+                      onClick={() => handleRemoveUrl(index)}
+                    >
+                      X
+                    </button>
+                  </div>
+                );
+              })}
               {files.map((file, index) => {
                 const imageUrl = URL.createObjectURL(file);
                 return (
@@ -193,14 +295,13 @@ function CommunityPostPage() {
                       }}
                       onClick={() => handleRemoveFile(index)}
                     >
-                      x
+                      X
                     </button>
                   </div>
                 );
               })}
             </Box>
           </Box>
-
           <Typography
             sx={{
               fontSize: theme.typography.body2.fontSize,
@@ -212,7 +313,6 @@ function CommunityPostPage() {
           {errors.files && (
             <ErrorMsg color='error'>{errors.files.message}</ErrorMsg>
           )}
-
           <SubTitle text='글 제목' isRequired={true}></SubTitle>
 
           <TextField
@@ -439,15 +539,11 @@ function CommunityPostPage() {
     </ContentArea>
   );
 }
-
-export default CommunityPostPage;
-
 const ProductBox = styled(Box)({
-  width: '100%',
+  maxWidth: '710px',
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'space-between',
-  alignItems: 'center !important',
 });
 
 const SelectButton = styled(Button)({

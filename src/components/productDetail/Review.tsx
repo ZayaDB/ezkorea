@@ -3,7 +3,7 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
-import { ChangeEvent, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
@@ -17,21 +17,31 @@ import TextField from '@mui/material/TextField';
 //   setCurrentPage(page);
 // };
 
-interface ProductDetail {
-  children: React.ReactNode;
-  page: number;
-  index: number;
+// interface ProductDetail {
+//   children: React.ReactNode;
+//   page: number;
+//   index: number;
+// }
+
+export interface Review {
+  reUserId: number;
+  reUserPhoto: string;
+  reUserName: string;
+  reDate: string;
+  rating: number;
+  contentPhoto: string;
+  contentText: string;
 }
 
 // Pagination
-const OpenPage = (props: ProductDetail) => {
-  const { children, page, index } = props;
-  return (
-    <div hidden={page !== index}>
-      {page === index && <Box mt={2}>{children}</Box>}
-    </div>
-  );
-};
+// const OpenPage = (props: ProductDetail) => {
+//   const { children, page, index } = props;
+//   return (
+//     <div hidden={page !== index}>
+//       {page === index && <Box mt={2}>{children}</Box>}
+//     </div>
+//   );
+// };
 
 // Modal
 const style = {
@@ -119,15 +129,41 @@ export default function Review() {
   };
   // pagination
   const [page, setPage] = useState(1);
-  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+  const [reviewData, setReviewData] = useState<Review[]>([]);
+  const reviewsPerPage = 5;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/data/prodReview.json');
+        const data = await response.json();
+        const reviews = data[0].reviews;
+        setReviewData(reviews);
+      } catch (error) {
+        console.error('Error fetching review data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleChangePage = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
     setPage(value);
   };
+
+  const startIndex = (page - 1) * reviewsPerPage;
+  const endIndex = page * reviewsPerPage;
+  const currentReviews = reviewData.slice(startIndex, endIndex);
 
   return (
     <div id='reviewZone'>
       <div id='reviewTop'>
         <div id='reviewBox'>
           <div id='reviewName'>리뷰</div>
+          
           <div className='reviewTotal'>리뷰 수</div>
           <div id='ratingBox'>
             <div className='starTotal'>
@@ -218,320 +254,36 @@ export default function Review() {
         <div className='recent'>최신순</div>
       </div>
       <div className='reviewContents'>
-        <Stack spacing={2}>
-          <OpenPage page={page} index={1}>
-            <div className='reviewItem'>
-              <div className='reviewUser'>
-                <div className='userPhoto'></div>
-                <div className='userName'>두루루</div>
-                <div className='writingdate'>24.05.06</div>
-                <div className='reviewrating'>
-                  <Stack spacing={1}>
-                    <Rating
-                      name='size-small'
-                      defaultValue={2}
-                      size='small'
-                      readOnly
-                    />
-                  </Stack>
-                </div>
-              </div>
-              <div className='reviewWB'>
-                <div className='reviewPhoto'></div>
-                <div className='reviewComments'>
-                  신혼부부,취미 방을 어떻게 가꿀가 생각하다 책상은 필수템이라..
-                  가로 사이즈를 조절할 수 있는 책상을 찾다가 구매 하게
-                  되었습니다 군더더기 없는 심플한 디자인이 너무 마음에
-                  들었습니다 실제로 받았을때 더 만족했습니다 모던한 디자인에 각
-                  모서리 부분에 라운드 곡선이 고급스러운 느낌을 더 해주는것
-                  같았어요
-                </div>
+        {currentReviews.map((item, index) => (
+          <div className='reviewItem' key={index}>
+            <div className='reviewUser'>
+              <div className='userPhoto'></div>
+              <div className='userName'> {item.reUserName}</div>
+              <div className='writingdate'>{item.reDate}</div>
+              <div className='reviewrating'>
+                <Stack spacing={1}>
+                  <Rating
+                    name='size-small'
+                    defaultValue={item.rating}
+                    size='small'
+                    readOnly
+                  />
+                </Stack>
               </div>
             </div>
-            <div className='reviewItem'>
-              <div className='reviewUser'>
-                <div className='userPhoto'></div>
-                <div className='userName'>두루루</div>
-                <div className='writingdate'>24.05.06</div>
-                <div className='reviewrating'>
-                  <Stack spacing={1}>
-                    <Rating
-                      name='size-small'
-                      defaultValue={2}
-                      size='small'
-                      readOnly
-                    />
-                  </Stack>
-                </div>
-              </div>
-              <div className='reviewWB'>
-                <div className='reviewPhoto'></div>
-                <div className='reviewComments'>
-                  신혼부부,취미 방을 어떻게 가꿀가 생각하다 책상은 필수템이라..
-                  가로 사이즈를 조절할 수 있는 책상을 찾다가 구매 하게
-                  되었습니다 군더더기 없는 심플한 디자인이 너무 마음에
-                  들었습니다 실제로 받았을때 더 만족했습니다 모던한 디자인에 각
-                  모서리 부분에 라운드 곡선이 고급스러운 느낌을 더 해주는것
-                  같았어요
-                </div>
-              </div>
+            <div className='reviewWB'>
+              <div className='reviewPhoto'></div>
+              <div className='reviewComments'>{item.contentText}</div>
             </div>
-            <div className='reviewItem'>
-              <div className='reviewUser'>
-                <div className='userPhoto'></div>
-                <div className='userName'>두루루</div>
-                <div className='writingdate'>24.05.06</div>
-                <div className='reviewrating'>
-                  <Stack spacing={1}>
-                    <Rating
-                      name='size-small'
-                      defaultValue={2}
-                      size='small'
-                      readOnly
-                    />
-                  </Stack>
-                </div>
-              </div>
-              <div className='reviewWB'>
-                <div className='reviewPhoto'></div>
-                <div className='reviewComments'>
-                  신혼부부,취미 방을 어떻게 가꿀가 생각하다 책상은 필수템이라..
-                  가로 사이즈를 조절할 수 있는 책상을 찾다가 구매 하게
-                  되었습니다 군더더기 없는 심플한 디자인이 너무 마음에
-                  들었습니다 실제로 받았을때 더 만족했습니다 모던한 디자인에 각
-                  모서리 부분에 라운드 곡선이 고급스러운 느낌을 더 해주는것
-                  같았어요
-                </div>
-              </div>
-            </div>
-            <div className='reviewItem'>
-              <div className='reviewUser'>
-                <div className='userPhoto'></div>
-                <div className='userName'>두루루</div>
-                <div className='writingdate'>24.05.06</div>
-                <div className='reviewrating'>
-                  <Stack spacing={1}>
-                    <Rating
-                      name='size-small'
-                      defaultValue={2}
-                      size='small'
-                      readOnly
-                    />
-                  </Stack>
-                </div>
-              </div>
-              <div className='reviewWB'>
-                <div className='reviewPhoto'></div>
-                <div className='reviewComments'>
-                  신혼부부,취미 방을 어떻게 가꿀가 생각하다 책상은 필수템이라..
-                  가로 사이즈를 조절할 수 있는 책상을 찾다가 구매 하게
-                  되었습니다 군더더기 없는 심플한 디자인이 너무 마음에
-                  들었습니다 실제로 받았을때 더 만족했습니다 모던한 디자인에 각
-                  모서리 부분에 라운드 곡선이 고급스러운 느낌을 더 해주는것
-                  같았어요
-                </div>
-              </div>
-            </div>
-            <div className='reviewItem'>
-              <div className='reviewUser'>
-                <div className='userPhoto'></div>
-                <div className='userName'>두루루</div>
-                <div className='writingdate'>24.05.06</div>
-                <div className='reviewrating'>
-                  <Stack spacing={1}>
-                    <Rating
-                      name='size-small'
-                      defaultValue={2}
-                      size='small'
-                      readOnly
-                    />
-                  </Stack>
-                </div>
-              </div>
-              <div className='reviewWB'>
-                <div className='reviewPhoto'></div>
-                <div className='reviewComments'>
-                  신혼부부,취미 방을 어떻게 가꿀가 생각하다 책상은 필수템이라..
-                  가로 사이즈를 조절할 수 있는 책상을 찾다가 구매 하게
-                  되었습니다 군더더기 없는 심플한 디자인이 너무 마음에
-                  들었습니다 실제로 받았을때 더 만족했습니다 모던한 디자인에 각
-                  모서리 부분에 라운드 곡선이 고급스러운 느낌을 더 해주는것
-                  같았어요
-                </div>
-              </div>
-            </div>
-          </OpenPage>
-          <OpenPage page={page} index={2}>
-            <div className='reviewItem'>
-              <div className='reviewUser'>
-                <div className='userPhoto'></div>
-                <div className='userName'>두루루</div>
-                <div className='writingdate'>24.05.06</div>
-                <div className='reviewrating'>
-                  <Stack spacing={1}>
-                    <Rating
-                      name='size-small'
-                      defaultValue={2}
-                      size='small'
-                      readOnly
-                    />
-                  </Stack>
-                </div>
-              </div>
-              <div className='reviewWB'>
-                <div className='reviewPhoto'></div>
-                <div className='reviewComments'>
-                  주문 폭주로 거의 한 달 걸려서 받았지만ㅠ ㅠ 오래 기다릴 수
-                  있을만큼 예쁘고 튼튼하고 좋아요! 조립은 성인 2명이서 30분 만에
-                  끝냈고, 가방걸이는 숄더백 같이 끈 얇은 가방 3개까지는 걸려서
-                  편하고 좋습니다ㅎㅎㅎ 1400으로 했는데 본체 올려놓고 수납함
-                  올려두니까 딱 맞고, 카멜 싱글 모니터암도 잘 거치됩니다~ 멀티탭
-                  정리함 안 쓸 것 같아서 추가 안 했는데, 막상 써보니까 없는 게
-                  불편해서 따로 구매해 사용 중입니다(스탠드나 충전기 2개 쓰면
-                  멀티탭 필수니까 사실 분은 미리 추가해서 구매하세요;) 화이트
-                  톤으로 데스크테리어하기 좋은 것 같아요! 가성비 예쁜 책상으로
-                  완전 추천합니다!
-                </div>
-              </div>
-            </div>
-            <div className='reviewItem'>
-              <div className='reviewUser'>
-                <div className='userPhoto'></div>
-                <div className='userName'>두루루</div>
-                <div className='writingdate'>24.05.06</div>
-                <div className='reviewrating'>
-                  <Stack spacing={1}>
-                    <Rating
-                      name='size-small'
-                      defaultValue={2}
-                      size='small'
-                      readOnly
-                    />
-                  </Stack>
-                </div>
-              </div>
-              <div className='reviewWB'>
-                <div className='reviewPhoto'></div>
-                <div className='reviewComments'>
-                  주문 폭주로 거의 한 달 걸려서 받았지만ㅠ ㅠ 오래 기다릴 수
-                  있을만큼 예쁘고 튼튼하고 좋아요! 조립은 성인 2명이서 30분 만에
-                  끝냈고, 가방걸이는 숄더백 같이 끈 얇은 가방 3개까지는 걸려서
-                  편하고 좋습니다ㅎㅎㅎ 1400으로 했는데 본체 올려놓고 수납함
-                  올려두니까 딱 맞고, 카멜 싱글 모니터암도 잘 거치됩니다~ 멀티탭
-                  정리함 안 쓸 것 같아서 추가 안 했는데, 막상 써보니까 없는 게
-                  불편해서 따로 구매해 사용 중입니다(스탠드나 충전기 2개 쓰면
-                  멀티탭 필수니까 사실 분은 미리 추가해서 구매하세요;) 화이트
-                  톤으로 데스크테리어하기 좋은 것 같아요! 가성비 예쁜 책상으로
-                  완전 추천합니다!
-                </div>
-              </div>
-            </div>
-            <div className='reviewItem'>
-              <div className='reviewUser'>
-                <div className='userPhoto'></div>
-                <div className='userName'>두루루</div>
-                <div className='writingdate'>24.05.06</div>
-                <div className='reviewrating'>
-                  <Stack spacing={1}>
-                    <Rating
-                      name='size-small'
-                      defaultValue={2}
-                      size='small'
-                      readOnly
-                    />
-                  </Stack>
-                </div>
-              </div>
-              <div className='reviewWB'>
-                <div className='reviewPhoto'></div>
-                <div className='reviewComments'>
-                  주문 폭주로 거의 한 달 걸려서 받았지만ㅠ ㅠ 오래 기다릴 수
-                  있을만큼 예쁘고 튼튼하고 좋아요! 조립은 성인 2명이서 30분 만에
-                  끝냈고, 가방걸이는 숄더백 같이 끈 얇은 가방 3개까지는 걸려서
-                  편하고 좋습니다ㅎㅎㅎ 1400으로 했는데 본체 올려놓고 수납함
-                  올려두니까 딱 맞고, 카멜 싱글 모니터암도 잘 거치됩니다~ 멀티탭
-                  정리함 안 쓸 것 같아서 추가 안 했는데, 막상 써보니까 없는 게
-                  불편해서 따로 구매해 사용 중입니다(스탠드나 충전기 2개 쓰면
-                  멀티탭 필수니까 사실 분은 미리 추가해서 구매하세요;) 화이트
-                  톤으로 데스크테리어하기 좋은 것 같아요! 가성비 예쁜 책상으로
-                  완전 추천합니다!
-                </div>
-              </div>
-            </div>
-            <div className='reviewItem'>
-              <div className='reviewUser'>
-                <div className='userPhoto'></div>
-                <div className='userName'>두루루</div>
-                <div className='writingdate'>24.05.06</div>
-                <div className='reviewrating'>
-                  <Stack spacing={1}>
-                    <Rating
-                      name='size-small'
-                      defaultValue={2}
-                      size='small'
-                      readOnly
-                    />
-                  </Stack>
-                </div>
-              </div>
-              <div className='reviewWB'>
-                <div className='reviewPhoto'></div>
-                <div className='reviewComments'>
-                  주문 폭주로 거의 한 달 걸려서 받았지만ㅠ ㅠ 오래 기다릴 수
-                  있을만큼 예쁘고 튼튼하고 좋아요! 조립은 성인 2명이서 30분 만에
-                  끝냈고, 가방걸이는 숄더백 같이 끈 얇은 가방 3개까지는 걸려서
-                  편하고 좋습니다ㅎㅎㅎ 1400으로 했는데 본체 올려놓고 수납함
-                  올려두니까 딱 맞고, 카멜 싱글 모니터암도 잘 거치됩니다~ 멀티탭
-                  정리함 안 쓸 것 같아서 추가 안 했는데, 막상 써보니까 없는 게
-                  불편해서 따로 구매해 사용 중입니다(스탠드나 충전기 2개 쓰면
-                  멀티탭 필수니까 사실 분은 미리 추가해서 구매하세요;) 화이트
-                  톤으로 데스크테리어하기 좋은 것 같아요! 가성비 예쁜 책상으로
-                  완전 추천합니다!
-                </div>
-              </div>
-            </div>
-            <div className='reviewItem'>
-              <div className='reviewUser'>
-                <div className='userPhoto'></div>
-                <div className='userName'>두루루</div>
-                <div className='writingdate'>24.05.06</div>
-                <div className='reviewrating'>
-                  <Stack spacing={1}>
-                    <Rating
-                      name='size-small'
-                      defaultValue={2}
-                      size='small'
-                      readOnly
-                    />
-                  </Stack>
-                </div>
-              </div>
-              <div className='reviewWB'>
-                <div className='reviewPhoto'></div>
-                <div className='reviewComments'>
-                  주문 폭주로 거의 한 달 걸려서 받았지만ㅠ ㅠ 오래 기다릴 수
-                  있을만큼 예쁘고 튼튼하고 좋아요! 조립은 성인 2명이서 30분 만에
-                  끝냈고, 가방걸이는 숄더백 같이 끈 얇은 가방 3개까지는 걸려서
-                  편하고 좋습니다ㅎㅎㅎ 1400으로 했는데 본체 올려놓고 수납함
-                  올려두니까 딱 맞고, 카멜 싱글 모니터암도 잘 거치됩니다~ 멀티탭
-                  정리함 안 쓸 것 같아서 추가 안 했는데, 막상 써보니까 없는 게
-                  불편해서 따로 구매해 사용 중입니다(스탠드나 충전기 2개 쓰면
-                  멀티탭 필수니까 사실 분은 미리 추가해서 구매하세요;) 화이트
-                  톤으로 데스크테리어하기 좋은 것 같아요! 가성비 예쁜 책상으로
-                  완전 추천합니다!
-                </div>
-              </div>
-            </div>
-          </OpenPage>
-          <OpenPage page={page} index={3}>
-            page 3
-          </OpenPage>
-          <OpenPage page={page} index={4}>
-            page 4
-          </OpenPage>
-          <Pagination count={10} page={page} onChange={handleChange} />
-        </Stack>
+          </div>
+        ))}
+        <Pagination
+          count={Math.ceil(reviewData.length / reviewsPerPage)}
+          page={page}
+          onChange={handleChangePage}
+        />
       </div>
     </div>
   );
 }
+

@@ -33,6 +33,47 @@ $font-weight-regular: 400;
   width: 75%;
 }
 
+.recent-products {
+  width: 100px;
+
+  position: fixed;
+  left: 90%;
+  top: 30%;
+  margin: 5px;
+  .link-to-detail {
+    text-decoration: none;
+    color: black;
+    width: 100%;
+    height: 130px;
+
+    .prod-img {
+      width: 100px;
+      height: 100px;
+      border-radius: 5px;
+      overflow: hidden;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+    }
+    .prod-info {
+      width: 100px;
+      height: 30px;
+      text-decoration: none;
+
+      .prod-name {
+        font-size: $font-size-xs;
+        text-decoration: none;
+        white-space: nowrap; // 넘칠 경우 줄 바꿈 방지
+        overflow: hidden;
+        text-overflow: ellipsis; // 넘칠 경우 ...으로 표시
+      }
+    }
+  }
+}
+
 @media (max-width: $tablet) {
   .category-content {
     display: flex;
