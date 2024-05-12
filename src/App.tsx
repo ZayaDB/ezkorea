@@ -33,7 +33,8 @@ function App() {
           <Route path='/shop' element={<Category />} />
           <Route path='/shop/best' element={<BestProduct />} />
           <Route path='/shop/sale' element={<SaleProduct />} />
-          <Route path='/shop/detail' element={<ProductDetail />} />
+          <Route path='/shop/:productId' element={<ProductDetail />} />
+
           <Route path='/community' element={<Community />} />
           <Route path='/login' element={<Login />} />
           <Route path='/community/post' element={<CommunityPostPage />} />

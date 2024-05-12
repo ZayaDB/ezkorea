@@ -31,7 +31,7 @@ export interface Inquiry {
 }
 
 export interface Product {
-  productId: string;
+  productId: number;
   product_image: string;
   brand_name: string;
   product_name: string;
@@ -49,3 +49,4 @@ export interface Product {
   inquiry: Inquiry[];
   related_products: string[];
 }
+
