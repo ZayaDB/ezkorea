@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
@@ -6,24 +5,27 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import LoginIcon from '../../assets/images/icon-login.png';
+import LoginIcon from '../../assets/images/icon_login2.png';
 import Notification1 from '../../assets/images/notification1.png';
 import Cart1 from '../../assets/images/cart2.png';
-import InputBase from '@mui/material/InputBase';
-import Paper from '@mui/material/Paper';
 import { useMediaQuery } from '@mui/material';
 import Search from '../../assets/images/magnifying.png';
 import ToolBar from './ToolBar';
 import IconButtonWithMenu from './IconButtonWithMenu';
 import BadgeComponent from './BadgeComponent';
 import '../../styles/home/header.scss';
+import { useState } from 'react';
+import { styled } from '@mui/material/styles';
+// import Logo from '../../assets/images/logo.png';
+
+interface Section {
+  title: string;
+  url: string;
+}
 
 interface HeaderProps {
-  sections: ReadonlyArray<{
-    title: string;
-    url: string;
-  }>;
   title: string;
+  sections: Section[];
 }
 
 const theme = createTheme({
@@ -43,13 +45,28 @@ const theme = createTheme({
   },
 });
 
+const StyledButton = styled(Button)(() => ({
+  color: 'black',
+  ':hover': {
+    backgroundColor: 'transparent',
+  },
+}));
+
 // const User = {
 
 // }
 
-export default function Header(props: HeaderProps) {
+export default function Header({ title }: HeaderProps) {
   const isMobile = useMediaQuery('(max-width:619px)');
-  const { title } = props;
+  const [toolbarVisible, setToolbarVisible] = useState(true);
+
+  const handleCommunityClick = () => {
+    setToolbarVisible(false);
+  };
+
+  const handleShoppingClick = () => {
+    setToolbarVisible(true);
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -89,12 +106,37 @@ export default function Header(props: HeaderProps) {
         {/* 쇼핑 타이틀 버튼 & 이동 */}
         {/* mobile(width:600px 이하)에서 사라짐 */}
         <Typography component='h2' variant='h5' color='inherit'>
-          {title}
+          <NavLink to='/' style={{ textDecoration: 'none', color: 'black' }}>
+            <StyledButton
+              onClick={handleShoppingClick}
+              sx={{
+                fontWeight: '400',
+                fontSize: '24px',
+                textTransform: 'none',
+              }}
+              disableRipple
+            >
+              {title}
+            </StyledButton>
+          </NavLink>
+          {/* <NavLink to='/' style={{ width: '2px' }}>
+            <IconButton disableRipple sx={{ padding: 0 }}>
+              <img
+                src={Logo}
+                alt='Dururu'
+                style={{ width: '76px', padding: '0' }}
+              />
+            </IconButton>
+          </NavLink> */}
           {isMobile ? null : (
-            <NavLink to='/' style={{ textDecoration: 'none', color: 'unset' }}>
+            <NavLink
+              to='/shop'
+              style={{ textDecoration: 'none', color: 'unset' }}
+            >
               <Button
                 sx={{
-                  ml: '34px',
+                  ml: '30px',
+                  mr: '12px',
                   fontSize: '17px',
                   fontWeight: '600',
                   ':hover': {
@@ -104,6 +146,7 @@ export default function Header(props: HeaderProps) {
                 }}
                 size='small'
                 disableRipple
+                onClick={handleShoppingClick} // 쇼핑 클릭 시 툴바 보이기
               >
                 쇼핑
               </Button>
@@ -128,6 +171,7 @@ export default function Header(props: HeaderProps) {
                 }}
                 size='small'
                 disableRipple
+                onClick={handleCommunityClick} // 커뮤니티 클릭 시 툴바 숨기기
               >
                 커뮤니티
               </Button>
@@ -137,47 +181,34 @@ export default function Header(props: HeaderProps) {
         <Box>
           {/* 검색창(input) */}
           {/* mobile(width:600px 이하)에서 사라짐 */}
-          {isMobile ? null : (
-            <IconButton disableRipple>
-              <Paper
-                component='form'
-                sx={{
-                  p: '2px 0px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  width: 180,
-                  height: 30,
-                  boxShadow: '0',
-                  border: '1px solid #e5e5e5',
-                }}
-              >
-                <InputBase
-                  sx={{
-                    ml: 1,
-                    flex: 1,
-                  }}
-                  // placeholder='Search Google Maps'
-                />
-                <IconButton
-                  type='button'
-                  sx={{ p: '3px' }}
-                  aria-label='search'
-                  disableRipple
-                >
-                  <img src={Search} alt='Logo' style={{ width: '30px' }} />
-                </IconButton>
-              </Paper>
-            </IconButton>
-          )}
+          {/* {isMobile ? null : ( */}
+          {/* <IconButton
+              type='button'
+              aria-label='search'
+              disableRipple
+            >
+              <img src={Search} alt='Logo' style={{ width: '36px' }} />
+            </IconButton> */}
+          {/* )} */}
 
           {/* 사람(로그인) icon dropdown */}
           {/* mobile(width:600px 이하)에서 사라짐 */}
           {isMobile ? null : (
             <IconButtonWithMenu
               icon={
-                <img src={LoginIcon} alt='Login' style={{ width: '28px' }} />
+                <img
+                  src={LoginIcon}
+                  alt='Login'
+                  style={{ width: '20px', marginRight: '4px' }}
+                />
               }
-              menuItems={['마이페이지', '찜한 상품', '저장한 피드', '로그아웃']}
+              // menuItems={['마이페이지', '찜한 상품', '저장한 피드', '로그아웃']}
+              menuItems={[
+                { title: '마이페이지', path: '/login' },
+                { title: '찜한 상품', path: '/wishlist' },
+                { title: '저장한 피드', path: '/saved-feed' },
+                { title: '로그아웃', path: '/logout' },
+              ]}
             />
           )}
 
@@ -216,6 +247,14 @@ export default function Header(props: HeaderProps) {
           <BadgeComponent badgeContent={5}>
             <img src={Cart1} alt='Cart' style={{ width: '24px' }} />
           </BadgeComponent>
+
+          {/* 검색창(input) */}
+          {/* mobile(width:600px 이하)에서 사라짐 */}
+          {isMobile ? null : (
+            <IconButton type='button' aria-label='search' disableRipple>
+              <img src={Search} alt='Logo' style={{ width: '36px' }} />
+            </IconButton>
+          )}
         </Box>
       </Toolbar>
 
@@ -233,10 +272,11 @@ export default function Header(props: HeaderProps) {
             borderBottom: 1,
             borderColor: 'divider',
             fontSize: '16px',
-            zIndex: 'appBar',
+            zIndex: 'drawer',
+            visibility: toolbarVisible ? 'visible' : 'hidden', // 툴바 가시성 설정
           }}
           style={{
-            paddingLeft: '23.1%',
+            paddingLeft: '26.2%',
           }}
         >
           <ToolBar />
