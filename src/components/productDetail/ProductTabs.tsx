@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import '../../styles/productDetail/productDetail.scss';
+import '../../styles/productDetail/productTabs.scss';
 import Review from './Review';
 import Inquire from './Inquire';
 import ProductsStyling from './ProductStyling';

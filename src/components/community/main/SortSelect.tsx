@@ -42,9 +42,6 @@ const SortSelect = ({ sort, setSort }: SortSelectProps) => {
           <MenuItem value='좋아요순' sx={{ fontSize: '14px' }}>
             좋아요 순
           </MenuItem>
-          <MenuItem value='댓글순' sx={{ fontSize: '14px' }}>
-            댓글 순
-          </MenuItem>
           <MenuItem value='최신순' sx={{ fontSize: '14px' }}>
             최신 순
           </MenuItem>

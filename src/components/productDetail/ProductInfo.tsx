@@ -1,4 +1,4 @@
-import '../../styles/productDetail/productDetail.scss';
+import '../../styles/productDetail/productInfo.scss';
 
 export default function ProductInfo() {
   return <></>;

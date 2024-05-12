@@ -1,0 +1,259 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
+
+// color
+$hover-color: #5ff531;
+
+// font
+$font-size-xxl: 24px;
+$font-size-xl: 22px;
+$font-size-l: 18px;
+$font-size-m: 16px;
+$font-size-s: 14px;
+$font-size-xs: 12px;
+$font-size-xxs: 11px;
+
+$font-weight-bold: 700;
+$font-weight-medium: 500;
+$font-weight-regular: 400;
+
+// custom
+// flex-direction: colummn
+@mixin column {
+  display: flex;
+  flex-direction: column;
+}
+// flex-direction: colummn,center
+@mixin columnCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+// flex-direction: row
+@mixin row {
+  display: flex;
+  align-items: center;
+}
+// border
+$border: 1px solid lightgray;
+
+// 사이드
+#selectBox {
+  position: relative;
+  width: calc(1200px - (90vh + 8px));
+  height: calc(100vh - 200px);
+}
+#selectPurchase {
+  @include column();
+  width: calc(1200px - (90vh + 8px));
+  height: calc(100vh - 200px);
+  position: fixed;
+  background-color: white;
+  // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  border-top: 3px solid black;
+  padding: 8px;
+}
+
+// 구매 상품 정보
+#purchaseInfo {
+  @include column();
+  justify-content: space-evenly;
+  height: 30vh;
+}
+#brandShare {
+  @include row();
+  justify-content: space-between;
+  padding: 0 8px;
+}
+.productBrand {
+  font-size: $font-size-m;
+}
+#shIcon {
+  display: flex;
+  justify-content: baseline;
+}
+.heartIcon,
+.shareIcon {
+  cursor: pointer;
+  padding: 0 4px;
+  margin: 0;
+}
+#heartZone {
+  @include columnCenter();
+}
+.heartTotal {
+  font-size: $font-size-xxs;
+  margin: 0;
+}
+.productName {
+  font-size: $font-size-l;
+  padding: 0 8px;
+  margin-top: 20px;
+}
+
+// 구매 상품 가격
+#priceZone {
+  padding: 0 8px;
+}
+#productPS {
+  height: 10vh;
+  @include columnCenter();
+}
+.sellingPrice {
+  font-size: $font-size-m;
+  color: gray;
+  text-decoration: line-through;
+}
+#sale {
+  display: flex;
+}
+.discountRate,
+.discountedPrice {
+  font-size: $font-size-l;
+  font-weight: $font-weight-bold;
+}
+.discountRate {
+  color: gray;
+}
+
+// 혜택 & 배송
+#savingDelivery {
+  height: 20vh;
+  @include column();
+  justify-content: space-evenly;
+  // border-top: $border;
+  margin: auto 0;
+}
+.subtitle {
+  font-size: $font-size-s;
+  padding: 0 8px;
+}
+.delivery {
+  @include columnCenter();
+}
+.saving,
+#deliveryZone {
+  @include row();
+  font-size: $font-size-s;
+}
+#savingPoint,
+.deliveryPrice {
+  font-weight: $font-weight-bold;
+}
+.deliveryDetailInfo {
+  border: $border;
+  background-color: rgb(240, 239, 239);
+  padding: 8px 0;
+  margin-top: 4px;
+  font-size: $font-size-s;
+  text-align: center;
+}
+
+#selectProduct {
+  height: 20vh;
+  // border-top: $border;
+  padding-top: 12px;
+  @include column();
+}
+.options {
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  width: 100%;
+  text-align: left;
+}
+#selectedPurchase {
+  @include column();
+  margin: 8px;
+}
+#optionBox {
+  @include row();
+  justify-content: space-between;
+}
+#countZone {
+  @include row();
+}
+#countZone div {
+  margin: 4px;
+}
+.selectedClose {
+  cursor: pointer;
+  color: gray;
+  font-weight: $font-weight-bold;
+}
+.selectedClose:hover {
+  color: black;
+  font-weight: $font-weight-bold;
+}
+#purchaseZone {
+  height: 5vh;
+  @include row();
+  justify-content: space-between;
+  padding: 0 8px;
+  // border-top: $border;
+  font-size: $font-size-l;
+  font-weight: $font-weight-bold;
+}
+// #selectedPurchase {
+//   display: none;
+// }
+
+// 버튼
+#buttons {
+  width: 100%;
+  height: 50px;
+  @include row();
+  justify-content: space-between;
+  padding-bottom: 12px;
+  margin-top: 12px;
+}
+
+.cartBtn {
+  width: 50px;
+  height: 50px;
+  border: $border;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.purchaseBtn {
+  width: calc(100% - 50px);
+  height: 50px;
+  border: $border;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-size: $font-size-l;
+  font-weight: $font-weight-bold;
+}
+
+.cartBtn:hover {
+  background-color: $hover-color;
+}
+.purchaseBtn:hover {
+  background-color: $hover-color;
+}
+
+@media (max-width: 768px) {
+  #selectBox {
+    // position: relative;
+    width: 100%;
+    // border: 1px solid black;
+    // height: calc(100vh - 200px);
+  }
+  // 사이드
+  #selectBox {
+    position: static;
+    width: 100%;
+  }
+  #selectPurchase {
+    @include column();
+    background-color: white;
+    // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    border-top: 3px solid black;
+    position: static;
+    width: 100%;
+    // padding: 8px;
+  }
+}
+@media (max-width: 360px) {
+}

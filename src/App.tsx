@@ -1,4 +1,3 @@
-
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './styles/theme';
@@ -15,10 +14,12 @@ import ProductDetail from './pages/ProductDetail';
 import OrderPage from './pages/OrderPage';
 import MyPage from './pages/MyPage';
 import NotFound from './pages/NotFound';
+import SignUp from './pages/SignUp';
+import CommunityDetailPage from './pages/CommunityDetailPage';
 
 function App() {
   const sections = [
-    { title: '쇼핑홈', url: '/' },
+    // { title: '쇼핑홈', url: '/' },
     { title: '카테고리', url: '/shop' },
     { title: '베스트', url: '/shop/best' },
     { title: '세일', url: '/shop/sale' },
@@ -36,6 +37,7 @@ function App() {
           <Route path='/shop/:productId' element={<ProductDetail />} />
           <Route path='/community' element={<Community />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<SignUp />} />
           <Route path='/community/post' element={<CommunityPostPage />} />
           <Route
             path='community/modify/:feedId'
@@ -44,6 +46,10 @@ function App() {
           <Route path='/order' element={<OrderPage />} />
           <Route path='/my' element={<MyPage />} />
           <Route path='*' element={<NotFound />} />
+          <Route
+            path='/community/detail/:feedId'
+            element={<CommunityDetailPage />}
+          />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
@@ -51,4 +57,3 @@ function App() {
 }
 
 export default App;
-

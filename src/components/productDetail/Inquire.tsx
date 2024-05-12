@@ -4,7 +4,7 @@ import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import { useState } from 'react';
-import '../../styles/productDetail/productDetail.scss';
+import '../../styles/productDetail/inquire.scss';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -17,6 +17,7 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import Container from '@mui/material/Container';
 import Pagination from '@mui/material/Pagination';
+import Grid from '@mui/material/Grid';
 // Modal
 const style = {
   position: 'absolute',
@@ -239,9 +240,14 @@ export default function Inquire() {
           </div>
         </div>
       </div>
-      <Container maxWidth='sm'>
-        <Pagination count={10} sx={{ width: 1000 }} />
-      </Container>
+      <Grid
+        container
+        direction='row'
+        justifyContent='center'
+        alignItems='center'
+      >
+        <Pagination count={10} />
+      </Grid>
     </div>
   );
 }
