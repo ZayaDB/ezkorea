@@ -43,6 +43,10 @@ const theme = createTheme({
   },
 });
 
+// const User = {
+
+// }
+
 export default function Header(props: HeaderProps) {
   const isMobile = useMediaQuery('(max-width:619px)');
   const { title } = props;
@@ -173,7 +177,7 @@ export default function Header(props: HeaderProps) {
               icon={
                 <img src={LoginIcon} alt='Login' style={{ width: '28px' }} />
               }
-              menuItems={['마이페이지', '찜한 상품', '저장한 글', '로그아웃']}
+              menuItems={['마이페이지', '찜한 상품', '저장한 피드', '로그아웃']}
             />
           )}
 
@@ -221,7 +225,7 @@ export default function Header(props: HeaderProps) {
         <Toolbar
           variant='dense'
           sx={{
-            width: '99.024vw',
+            width: '99.02vw',
             position: 'sticky',
             mt: '-3px',
             // mb: '20px',
