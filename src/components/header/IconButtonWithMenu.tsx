@@ -3,10 +3,16 @@ import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Fade from '@mui/material/Fade';
+import { Link } from 'react-router-dom'; // 추가
+
+interface MenuItem {
+  title: string;
+  path: string;
+}
 
 interface IconButtonWithMenuProps {
   icon: JSX.Element;
-  menuItems: string[];
+  menuItems: MenuItem[];
 }
 
 export default function IconButtonWithMenu({
@@ -51,9 +57,17 @@ export default function IconButtonWithMenu({
           },
         }}
       >
-        {menuItems.map((item, index) => (
-          <MenuItem key={index} onClick={handleClose}>
-            {item}
+        {menuItems.map((menuItem, index) => (
+          <MenuItem key={index} onClick={handleClose} sx={{ fontSize: '14px' }}>
+            <Link
+              to={menuItem.path}
+              style={{
+                textDecoration: 'none',
+                color: 'inherit',
+              }}
+            >
+              {menuItem.title}
+            </Link>
           </MenuItem>
         ))}
       </Menu>

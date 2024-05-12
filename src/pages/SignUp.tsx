@@ -1,7 +1,6 @@
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
@@ -10,7 +9,6 @@ import { useState, ChangeEvent } from 'react';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Backdrop from '@mui/material/Backdrop';
-import { NavLink } from 'react-router-dom';
 
 const theme = createTheme({
   palette: {
@@ -58,7 +56,7 @@ const InputTextField = styled(TextField)({
   '& label.Mui-focused': {
     // 해당 input focus 되었을 때 placeholder text color
     // floatng label을 사용할 때 처리 필요
-    color: '#5FF531',
+    color: '#666666',
   },
   '& .MuiInput-underline:after': {
     borderBottomColor: 'yellow',
@@ -84,14 +82,7 @@ const StyledButton = styled(Button)(() => ({
   },
 }));
 
-const StyledButton2 = styled(Button)(() => ({
-  ':hover': {
-    color: '#5FF531',
-    backgroundColor: 'transparent',
-  },
-}));
-
-export default function SignIn() {
+export default function SignUp() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -141,16 +132,26 @@ export default function SignIn() {
           <Typography
             variant='h5'
             color='inherit'
-            sx={{ fontSize: '35px', fontWeight: '600', pb: '22px' }}
+            sx={{
+              fontSize: '35px',
+              fontWeight: '600',
+              pb: '22px',
+              textAlign: 'center',
+              color: '#292929',
+            }}
           >
-            LOGIN
+            Welcome to Dururu ☺︎
+            {/* Welcome to Dururu ! ☻  */}
+            {/* Welcome to Dururu :-D */}
+            {/* Sign up to Dururu ☻ */}
           </Typography>
           <Box component='form' noValidate sx={{ mt: 1 }}>
             <InputTextField
               margin='dense'
               fullWidth
+              required
               id='email'
-              label='Email Address'
+              label='이메일'
               name='email'
               autoComplete='email'
               InputProps={{
@@ -170,8 +171,31 @@ export default function SignIn() {
             <InputTextField
               margin='dense'
               fullWidth
+              required
               name='password'
-              label='Password'
+              label='비밀번호'
+              type='password'
+              id='password'
+              autoComplete='current-password'
+              InputProps={{
+                style: {
+                  borderRadius: '2px',
+                },
+              }}
+              helperText={
+                !pwValid &&
+                pw.length > 0 &&
+                '영문, 숫자, 특수문자 포함 8자 이상 입력해주세요.'
+              }
+              value={pw}
+              onChange={handlePassWord}
+            />
+            <InputTextField
+              margin='dense'
+              fullWidth
+              required
+              name='password'
+              label='비밀번호 확인'
               type='password'
               id='password'
               autoComplete='current-password'
@@ -182,6 +206,26 @@ export default function SignIn() {
               }}
               helperText={
                 !pwValid && pw.length > 0 && '비밀번호가 일치하지 않습니다.'
+              }
+              value={pw}
+              onChange={handlePassWord}
+            />
+            <InputTextField
+              margin='dense'
+              fullWidth
+              required
+              name='password'
+              label='휴대전화'
+              type='password'
+              id='password'
+              autoComplete='current-password'
+              InputProps={{
+                style: {
+                  borderRadius: '2px',
+                },
+              }}
+              helperText={
+                !pwValid && pw.length > 0 && '휴대폰 번호를 입력하세요.'
               }
               value={pw}
               onChange={handlePassWord}
@@ -205,7 +249,7 @@ export default function SignIn() {
               size='large'
               onClick={handleOpen}
             >
-              로그인하기
+              회원가입하기
               {/* LOGIN */}
             </StyledButton>
 
@@ -230,28 +274,11 @@ export default function SignIn() {
                     component='h2'
                     sx={{ textAlign: 'center', borderRadius: '10px' }}
                   >
-                    로그인 성공 !
+                    회원가입 완료 ☻
                   </Typography>
                 </Box>
               </Fade>
             </Modal>
-
-            <Grid container>
-              <Grid item xs>
-                <NavLink to='/login'>
-                  <StyledButton2 disableRipple sx={{ fontSize: '12px' }}>
-                    Forgot password?
-                  </StyledButton2>
-                </NavLink>
-              </Grid>
-              <Grid item>
-                <NavLink to='/signup'>
-                  <StyledButton2 disableRipple sx={{ fontSize: '12px' }}>
-                    sign up
-                  </StyledButton2>
-                </NavLink>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
       </Container>
