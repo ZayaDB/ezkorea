@@ -1,10 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
+import {
+  Avatar,
+  Button,
+  Typography,
+  TextField,
+  Grid,
+  Card,
+  CardContent,
+  CardHeader,
+} from '@mui/material';
+import '../styles/community/detail.scss';
+import CommentIcon from '@mui/icons-material/Comment';
+import LikeButton from '../components/community/main/LikeButton';
+import ReactTimeAgo from 'react-time-ago'; // react-time-ago 라이브러리를 가져옵니다.
+import TimeAgo from 'javascript-time-ago'; // javascript-time-ago 라이브러리를 가져옵니다.
+import koLocale from 'javascript-time-ago/locale/ko'; // 한국어 언어 파일을 가져옵니다.
+
+// 한국어 로캘 설정
+TimeAgo.addLocale(koLocale);
 
 const CommunityDetailPage: React.FC = () => {
   const [feed, setFeed] = useState<any>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number>(0);
+  const [commentInput, setCommentInput] = useState<string>('');
+  const [likes, setLikes] = useState<number>(0);
+  const [isLiked, setIsLiked] = useState<boolean>(false);
   const { feedId } = useParams<{ feedId?: string }>();
 
   useEffect(() => {
@@ -15,13 +38,15 @@ const CommunityDetailPage: React.FC = () => {
           throw new Error('Feed ID is not provided');
         }
 
-        const response = await fetch('/data/feed.json'); // 데이터를 가져오는 경로를 적절히 수정해야 합니다.
+        const response = await fetch('/data/feed.json');
         const data = await response.json();
         const selectedFeed = data.find(
           (item: any) => item.feedId === parseInt(feedId)
         );
         if (selectedFeed) {
           setFeed(selectedFeed);
+          setLikes(selectedFeed.likes);
+          setIsLiked(selectedFeed.liked);
           setIsError(false);
         } else {
           setIsError(true);
@@ -35,6 +60,24 @@ const CommunityDetailPage: React.FC = () => {
     fetchData();
   }, [feedId]);
 
+  const handleThumbnailClick = (index: number) => {
+    setSelectedImageIndex(index);
+  };
+
+  const handleCommentInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCommentInput(e.target.value);
+  };
+
+  const handleCommentSubmit = () => {
+    console.log('Submitted comment:', commentInput);
+    setCommentInput('');
+  };
+
+  const handleLike = useCallback(() => {
+    setLikes(prevLikes => (isLiked ? prevLikes - 1 : prevLikes + 1));
+    setIsLiked(prevIsLiked => !prevIsLiked);
+  }, [isLiked]);
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -44,53 +87,140 @@ const CommunityDetailPage: React.FC = () => {
   }
 
   return (
-    <div style={{ maxWidth: '600px', margin: '0 auto', padding: '20px' }}>
-      {feed.images.map((image: string, index: number) => (
-        <div key={index}>
-          <img
-            src={image}
-            alt='초깔끔 아틀리에의 사진'
-            style={{ width: '100%', marginBottom: '20px' }}
+    <Grid
+      container
+      direction='column'
+      alignItems='center'
+      className='community-detail-page'
+    >
+      <Grid item xs={12} className='card-container'>
+        <Card variant='outlined'>
+          <CardHeader
+            avatar={<Avatar src={feed.profileImage} alt='Profile' />}
+            title={feed.accountName}
+            subheader={
+              <ReactTimeAgo date={new Date(feed.creationDate)} locale='ko' />
+            } // 한국어 형식으로 표시
           />
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              marginBottom: '20px',
-            }}
-          >
-            <img
-              src={feed.profileImage}
-              alt='Profile'
-              style={{
-                width: '30px',
-                height: '30px',
-                borderRadius: '50%',
-                marginRight: '10px',
-              }}
+          <CardContent>
+            <Typography variant='h5' gutterBottom>
+              {feed.title}
+            </Typography>
+            <Typography variant='body1' paragraph>
+              {feed.description}
+            </Typography>
+            <div className='thumbnail-container'>
+              <div className='main-image'>
+                <img src={feed.images[selectedImageIndex]} alt='Main' />
+              </div>
+              <div className='thumbnail-button'>
+                {feed.images.map((image: string, index: number) => (
+                  <Button
+                    key={index}
+                    onClick={() => handleThumbnailClick(index)}
+                    sx={{
+                      m: 0,
+                      p: 0,
+                      border: '1px solid 5ff531',
+                      '&:hover': {
+                        outline: '2px solid #5ff531', // 호버 시 보더 적용
+                      },
+                      '&:active': {
+                        outline: '5px solid blue', // 활성화 시 보더 적용
+                      },
+                    }}
+                  >
+                    <img src={image} alt='Thumbnail' />
+                  </Button>
+                ))}
+              </div>
+            </div>
+          </CardContent>
+          <div className='icon-container'>
+            <LikeButton
+              feedId={feed.feedId}
+              initialLiked={isLiked}
+              onLike={handleLike}
+              iconSize='32px'
             />
-            <span>{feed.accountName}</span>
+            <Typography>{likes}</Typography>
+            <CommentIcon sx={{ fontSize: '32px' }} />
+            <Typography>{feed.commentCount}</Typography>
           </div>
-          <p style={{ marginBottom: '20px' }}>{feed.creationDate}</p>
-        </div>
-      ))}
-      <h2 style={{ marginBottom: '10px' }}>{feed.title}</h2>
-      <p style={{ marginBottom: '20px' }}>{feed.description}</p>
-      <div
-        style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}
-      >
-        <span style={{ marginRight: '10px' }}>Likes: {feed.likes}</span>
-        <span>Comments: {feed.commentCount}</span>
-      </div>
-      <h3>Comments</h3>
-      <ul>
+        </Card>
+      </Grid>
+      <Grid item xs={12} className='comments-container'>
+        <Typography variant='h6' gutterBottom>
+          Comments
+        </Typography>
         {feed.comments.map((comment: any) => (
-          <li key={comment.id} style={{ marginBottom: '10px' }}>
-            <strong>{comment.accountName}</strong>: {comment.content}
-          </li>
+          <Card
+            key={comment.id}
+            variant='outlined'
+            style={{ marginBottom: '10px', width: '100%' }}
+          >
+            <CardHeader
+              avatar={<Avatar src={comment.profileImage} alt='Profile' />}
+              title={comment.accountName}
+              subheader={
+                <ReactTimeAgo
+                  date={new Date(comment.creationDate)}
+                  locale='ko'
+                />
+              } // 한국어 형식으로 표시
+            />
+            <CardContent>
+              <Typography variant='body1' paragraph>
+                {comment.content}
+              </Typography>
+              {comment.replies && (
+                <ul>
+                  {comment.replies.map((reply: any) => (
+                    <li key={reply.id}>
+                      <Card variant='outlined' style={{ marginBottom: '5px' }}>
+                        <CardHeader
+                          avatar={
+                            <Avatar src={reply.profileImage} alt='Profile' />
+                          }
+                          title={reply.accountName}
+                          subheader={
+                            <ReactTimeAgo
+                              date={new Date(reply.creationDate)}
+                              locale='ko'
+                            />
+                          } // 한국어 형식으로 표시
+                        />
+                        <CardContent>
+                          <Typography variant='body1' paragraph>
+                            {reply.content}
+                          </Typography>
+                        </CardContent>
+                      </Card>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </CardContent>
+          </Card>
         ))}
-      </ul>
-    </div>
+      </Grid>
+      <Grid item xs={12}>
+        <TextField
+          label='Write a comment...'
+          variant='outlined'
+          fullWidth
+          value={commentInput}
+          onChange={handleCommentInputChange}
+        />
+        <Button
+          onClick={handleCommentSubmit}
+          variant='contained'
+          color='primary'
+        >
+          Submit
+        </Button>
+      </Grid>
+    </Grid>
   );
 };
 
