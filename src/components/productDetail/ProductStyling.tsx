@@ -1,6 +1,6 @@
-import '../../styles/productDetail/productDetail.scss';
+import '../../styles/productDetail/productStyling.scss';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-
+import Grid from '@mui/material/Grid';
 // const onPageChange = (e: React.ChangeEvent<unknown>, page: number) => {
 //   setCurrentPage(page);
 // };
@@ -8,28 +8,35 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 export default function ProductsStyling() {
   return (
     <>
-      <div id='productStyling'>
-        <div id='stylingTop'>
-          <div id='stlyingSub'>
-            <div id='stylingTitle'>유저들의 데스크셋업</div>
-            <div className='stylingTotal'>1,609</div>
+      <Grid
+        container
+        direction='row'
+        justifyContent='center'
+        alignItems='center'
+      >
+        <div id='productStyling'>
+          <div id='stylingTop'>
+            <div id='stlyingSub'>
+              <div id='stylingTitle'>유저들의 데스크셋업</div>
+              <div className='stylingTotal'>1,609</div>
+            </div>
+            <div id='stylingLink'>
+              <a href='#/'>
+                <ArrowForwardIosIcon />
+              </a>
+            </div>
           </div>
-          <div id='stylingLink'>
-            <a href='#/'>
-              <ArrowForwardIosIcon />
-            </a>
+          <div id='stylingBox'>
+            <div className='stylingItem'></div>
+            <div className='stylingItem'></div>
+            <div className='stylingItem'></div>
+            <div className='stylingItem'></div>
           </div>
         </div>
-        <div id='stylingBox'>
-          <div className='stylingItem'></div>
-          <div className='stylingItem'></div>
-          <div className='stylingItem'></div>
-          <div className='stylingItem'></div>
+        <div>
+          <img src='' alt='' />
         </div>
-      </div>
-      <div>
-        <img src='' alt='' />
-      </div>
+      </Grid>
     </>
   );
 }

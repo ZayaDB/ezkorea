@@ -140,7 +140,16 @@ function CommunityPostPage() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box display='flex' flexDirection='column'>
           <SubTitle text='사진' isRequired={true}></SubTitle>
-          <Box display='flex' flexDirection='row' flexWrap='wrap'>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              justifyContent: 'flex-start',
+              gap: 2,
+              marginBottom: '16px',
+            }}
+          >
             <input
               type='file'
               multiple
@@ -148,54 +157,65 @@ function CommunityPostPage() {
               ref={fileInputRef}
               style={{ display: 'none' }}
             />
-            <Button onClick={triggerFileInput} variant='text'>
+            <Button
+              onClick={triggerFileInput}
+              variant='text'
+              sx={{ p: 0, minWidth: 'auto' }}
+            >
               <img
                 src='https://cdn-icons-png.flaticon.com/128/15288/15288391.png'
                 alt='Upload file'
-                width='130px'
+                width='150px'
               />
             </Button>
-            <Box display='flex' flexDirection='row' flexWrap='wrap'>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                justifyContent: 'flex-start',
+                gap: 2,
+              }}
+            >
               {files.map((file, index) => {
                 const imageUrl = URL.createObjectURL(file);
                 return (
-                  <div
+                  <Box
                     key={index}
-                    style={{
+                    sx={{
                       position: 'relative',
-                      display: 'inline-block',
-                      margin: '10px',
+                      width: 150,
+                      height: 150,
+                      borderRadius: '5px',
+                      '& img': {
+                        width: '100%',
+                        height: '100%',
+                      },
+                      '& button': {
+                        position: 'absolute',
+                        top: '-7px',
+                        right: '-7px',
+                        padding: '2px 9px 3px 9px',
+                        border: 'none',
+                        cursor: 'pointer',
+                        backgroundColor: '#F6F6F6',
+                        borderRadius: '5px',
+                        fontSize: '12px',
+                      },
                     }}
                   >
                     <img
                       src={imageUrl}
                       alt={`Preview ${index + 1}`}
-                      style={{
-                        width: '130px',
-                        height: '130px',
-                        borderRadius: '5px',
-                      }}
                       onLoad={() => URL.revokeObjectURL(imageUrl)}
                     />
                     <button
                       type='button'
-                      style={{
-                        position: 'absolute',
-                        top: '-7px',
-                        right: '-7px',
-                        padding: '2px 6px 3px 6px',
-                        lineHeight: '1',
-                        border: 'none',
-                        cursor: 'pointer',
-                        borderRadius: '5px',
-                        fontSize: '12px',
-                        backgroundColor: '#F6F6F6',
-                      }}
                       onClick={() => handleRemoveFile(index)}
                     >
                       x
                     </button>
-                  </div>
+                  </Box>
                 );
               })}
             </Box>

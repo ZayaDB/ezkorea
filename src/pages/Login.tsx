@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -9,6 +8,10 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
+import { useState, ChangeEvent } from 'react';
+interface InputTextFieldProps {
+  color: string;
+}
 
 const theme = createTheme({
   palette: {
@@ -20,6 +23,16 @@ const theme = createTheme({
       main: '#5FF531',
       light: '#F5EBFF',
       contrastText: '#47008F',
+    },
+  },
+  components: {
+    MuiFormHelperText: {
+      styleOverrides: {
+        root: {
+          color: '#D32F2F',
+          // fontWeight: '500',
+        },
+      },
     },
   },
 });
@@ -59,6 +72,36 @@ const StyledButton = styled(Button)(() => ({
 }));
 
 export default function SignIn() {
+  const [email, setEmail] = useState<string>('');
+  const [pw, setPw] = useState<string>('');
+
+  const [emailValid, setEmailValid] = useState<boolean>(false);
+  const [pwValid, setPwValid] = useState<boolean>(false);
+
+  const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
+    const inputEmail: string = e.target.value;
+    setEmail(inputEmail);
+    const regex =
+      /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+    if (regex.test(email)) {
+      setEmailValid(true);
+    } else {
+      setEmailValid(false);
+    }
+  };
+
+  const handlePassWord = (e: ChangeEvent<HTMLInputElement>) => {
+    const inputPassWord: string = e.target.value;
+    setPw(inputPassWord);
+    const regex =
+      /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{8,20}$/;
+    if (regex.test(pw)) {
+      setPwValid(true);
+    } else {
+      setPwValid(false);
+    }
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Container component='main' maxWidth='xs'>
@@ -87,6 +130,14 @@ export default function SignIn() {
                   borderRadius: '2px',
                 },
               }}
+              // error={!emailValid && email.length > 0 ? true : false}
+              helperText={
+                !emailValid &&
+                email.length > 0 &&
+                '올바른 이메일 형식이 아닙니다.'
+              }
+              value={email}
+              onChange={handleEmail}
             />
             <InputTextField
               margin='dense'
@@ -101,6 +152,13 @@ export default function SignIn() {
                   borderRadius: '2px',
                 },
               }}
+              helperText={
+                !pwValid &&
+                pw.length > 0 &&
+                '비밀번호가 일치하지 않습니다.'
+              }
+              value={pw}
+              onChange={handlePassWord}
             />
             <StyledButton
               type='submit'

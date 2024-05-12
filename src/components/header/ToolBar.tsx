@@ -21,8 +21,8 @@ const ToolBar: React.FC = () => {
         </CustomLink>
         {isShoppingHovered && <CategoryDropDown />}
       </div>
-      <CustomLink to='/best'>베스트</CustomLink>
-      <CustomLink to='/sale'>세일</CustomLink>
+      <CustomLink to='/shop/best'>베스트</CustomLink>
+      <CustomLink to='/shop/sale'>세일</CustomLink>
     </Toolbar>
   );
 };

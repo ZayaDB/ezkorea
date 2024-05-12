@@ -1,0 +1,71 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
+
+// color
+$hover-color: #5ff531;
+
+// font
+$font-size-xxl: 24px;
+$font-size-xl: 22px;
+$font-size-l: 18px;
+$font-size-m: 16px;
+$font-size-s: 14px;
+$font-size-xs: 12px;
+$font-size-xxs: 11px;
+
+$font-weight-bold: 700;
+$font-weight-medium: 500;
+$font-weight-regular: 400;
+
+// custom
+// flex-direction: colummn
+@mixin column {
+  display: flex;
+  flex-direction: column;
+}
+// flex-direction: colummn,center
+@mixin columnCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+// flex-direction: row
+@mixin row {
+  display: flex;
+  align-items: center;
+}
+// border
+$border: 1px solid lightgray;
+
+#stylingTop {
+  @include row();
+  justify-content: space-between;
+  font-size: $font-size-l;
+  font-weight: $font-weight-bold;
+  padding: 8px;
+}
+#stlyingSub {
+  @include row();
+}
+#stylingTitle {
+  margin-right: 8px;
+}
+#stylingBox {
+  @include row();
+  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.stylingItem {
+  width: 15vw;
+  height: 15vw;
+  background-image: url(https://image.ohou.se/i/video-service-prd-s3-bucket-thumbnail/651ca73023d57f18887e5017/651ca73023d57f18887e5017.0000001.jpg?gif=1&w=360&webp=1);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  @include row();
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 4px;
+  border-radius: 5px;
+  cursor: pointer;
+}
