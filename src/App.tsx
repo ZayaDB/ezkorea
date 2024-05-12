@@ -15,6 +15,7 @@ import OrderPage from './pages/OrderPage';
 import MyPage from './pages/MyPage';
 import NotFound from './pages/NotFound';
 import SignUp from './pages/SignUp';
+import CommunityDetailPage from './pages/CommunityDetailPage';
 
 function App() {
   const sections = [
@@ -33,7 +34,8 @@ function App() {
           <Route path='/shop' element={<Category />} />
           <Route path='/shop/best' element={<BestProduct />} />
           <Route path='/shop/sale' element={<SaleProduct />} />
-          <Route path='/shop/detail' element={<ProductDetail />} />
+          <Route path='/shop/:productId' element={<ProductDetail />} />
+
           <Route path='/community' element={<Community />} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<SignUp />} />
@@ -45,6 +47,10 @@ function App() {
           <Route path='/order' element={<OrderPage />} />
           <Route path='/my' element={<MyPage />} />
           <Route path='*' element={<NotFound />} />
+          <Route
+            path='/community/detail/:feedId'
+            element={<CommunityDetailPage />}
+          />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
