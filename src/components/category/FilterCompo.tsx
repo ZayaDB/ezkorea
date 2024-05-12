@@ -1,7 +1,5 @@
 
-// import { useState, useEffect } from 'react';
-import { useState } from 'react';
-
+import { useState, useEffect } from 'react';
 import { Box } from '@mui/system';
 import { Button } from '@mui/material';
 import '../../styles/category/sideFilter.scss';
@@ -9,18 +7,21 @@ import BrandFilter from './BrandFilter';
 import PriceFilter from './PriceFilter';
 import ColorFilter from './ColorFilter';
 import ThemeFilter from './ThemeFilter';
-// import { useSelector, useDispatch } from 'react-redux';
-import { useDispatch } from 'react-redux';
-
-// import { RootState } from '../../redux/config';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../redux/config';
 import { clearFilters } from '../../redux/slices/categorySlice';
-
-// import { Filters, Products } from '../../types/typesProducts';
-import { Filters } from '../../types/typesProducts';
-
-// import getSelectedValue from '../../utils/getSelectedValue';
+import { Filters, Products } from '../../types/typesProducts';
+import getSelectedValue from '../../utils/getSelectedValue';
 
 export default function FilterCompo() {
+  const dispatch = useDispatch();
+  const selectedFilters = useSelector((state: RootState) => state.category.selectedFilters);
+
+  const handleApplyFilters = () => {
+    // 선택한 필터 값을 스토어에 저장
+    dispatch(setFilters(selectedFilters));
+  };
+  
   // const [filteredProducts, setFilteredProducts] = useState<Products[]>([]);
 
   // const selectedBrands = useSelector(
@@ -161,4 +162,3 @@ export default function FilterCompo() {
     </Box>
   );
 }
-

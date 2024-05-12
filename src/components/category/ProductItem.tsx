@@ -24,7 +24,7 @@ export default function ProductItem({ prod }: ProductItemProps) {
   const isLiked = useSelector(
     (state: RootState) => state.category.isLiked[prod.productId] || false
   );
-  console.log('가져온 isLiked', isLiked);
+  // console.log('가져온 isLiked', isLiked);
 
   const handleLikeToggle = () => {
     dispatch(setIsLiked({ productId: prod.productId, isLiked: !isLiked }));
