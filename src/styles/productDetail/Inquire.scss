@@ -1,0 +1,145 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
+
+// color
+$hover-color: #5ff531;
+
+// font
+$font-size-xxl: 24px;
+$font-size-xl: 22px;
+$font-size-l: 18px;
+$font-size-m: 16px;
+$font-size-s: 14px;
+$font-size-xs: 12px;
+$font-size-xxs: 11px;
+
+$font-weight-bold: 700;
+$font-weight-medium: 500;
+$font-weight-regular: 400;
+
+// custom
+// flex-direction: colummn
+@mixin column {
+  display: flex;
+  flex-direction: column;
+}
+// flex-direction: colummn,center
+@mixin columnCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+// flex-direction: row
+@mixin row {
+  display: flex;
+  align-items: center;
+}
+// border
+$border: 1px solid lightgray;
+
+// Inquire
+#inquireTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#inquireSubTop {
+  @include row();
+}
+#inquireSubTop div {
+  margin: 0 5px;
+}
+#writingInquiry span {
+  font-size: $font-size-s;
+}
+.inquiryTitle,
+.inquiryTotal {
+  margin: 10px 0;
+  font-size: $font-size-l;
+  font-weight: $font-weight-bold;
+}
+.writingInfo {
+  @include row();
+}
+.type {
+  font-size: $font-size-m;
+  font-weight: $font-weight-bold;
+}
+.writingUser,
+.writingDate {
+  margin-left: 8px;
+  font-size: $font-size-m;
+}
+.writingDate {
+  color: gray;
+  font-size: $font-size-s;
+}
+.inquiryItem {
+  margin-bottom: 8px;
+}
+.reviewedContent {
+  margin-left: 16px;
+  font-size: $font-size-m;
+}
+// file
+.fileBtn {
+  width: 250px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.fileBtn:hover {
+  border: 2px solid #5ff531;
+}
+
+.fileBtn span {
+  width: 50px;
+  height: 50px;
+  color: #5ff531;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 25px;
+  background-color: #aef897;
+}
+
+.selectedFile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #aef897;
+  border: 1px solid #97f37b;
+  margin-top: 20px;
+}
+
+.selectedFile p {
+  font-size: 13px;
+  font-weight: 500;
+  margin-left: 15px;
+}
+
+.selectedFile button {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #5ff531;
+  background-color: transparent;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.selectedFile button:hover {
+  border: 2px solid #5ff531;
+}

@@ -1,4 +1,4 @@
-import '../../styles/productDetail/productDetail.scss';
+import '../../styles/productDetail/review.scss';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
 
 // import { createTheme, makeStyles } from '@mui/material';
 // const [currentPage, setCurrentPage] = useState(1);
@@ -163,7 +164,7 @@ export default function Review() {
       <div id='reviewTop'>
         <div id='reviewBox'>
           <div id='reviewName'>리뷰</div>
-          
+
           <div className='reviewTotal'>리뷰 수</div>
           <div id='ratingBox'>
             <div className='starTotal'>
@@ -277,13 +278,22 @@ export default function Review() {
             </div>
           </div>
         ))}
-        <Pagination
-          count={Math.ceil(reviewData.length / reviewsPerPage)}
-          page={page}
-          onChange={handleChangePage}
-        />
+        <div className='rePagination'>
+          {/* mui 요소 중앙정렬 Grid 사용하기 */}
+          <Grid
+            container
+            direction='row'
+            justifyContent='center'
+            alignItems='center'
+          >
+            <Pagination
+              count={Math.ceil(reviewData.length / reviewsPerPage)}
+              page={page}
+              onChange={handleChangePage}
+            />
+          </Grid>
+        </div>
       </div>
     </div>
   );
 }
-

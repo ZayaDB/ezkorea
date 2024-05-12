@@ -1,0 +1,138 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
+
+// color
+$hover-color: #5ff531;
+
+// font
+$font-size-xxl: 24px;
+$font-size-xl: 22px;
+$font-size-l: 18px;
+$font-size-m: 16px;
+$font-size-s: 14px;
+$font-size-xs: 12px;
+$font-size-xxs: 11px;
+
+$font-weight-bold: 700;
+$font-weight-medium: 500;
+$font-weight-regular: 400;
+
+// custom
+// flex-direction: colummn
+@mixin column {
+  display: flex;
+  flex-direction: column;
+}
+// flex-direction: colummn,center
+@mixin columnCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+// flex-direction: row
+@mixin row {
+  display: flex;
+  align-items: center;
+}
+// border
+$border: 1px solid lightgray;
+
+// Review
+#reviewZone {
+  width: 100%;
+}
+#reviewTop {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  // border: 1px solid black;
+}
+
+#reviewBox {
+  @include row();
+  justify-content: space-between;
+  margin: 0 8px;
+}
+#reviewBox div {
+  // @include heading2;
+  margin: 0 8px;
+}
+.reviewTotal {
+  color: $hover-color;
+}
+
+#ratingBox {
+  @include row();
+  justify-content: baseline;
+}
+.starTotal {
+  margin-right: 4px;
+}
+#writeReview {
+  cursor: pointer;
+}
+.selected {
+  color: $hover-color;
+}
+
+#reviewSorting {
+  display: flex;
+  border-top: $border;
+  border-bottom: $border;
+}
+#reviewSorting div {
+  margin: 8px;
+  cursor: pointer;
+  font-size: $font-size-m;
+  font-weight: $font-weight-bold;
+}
+#reviewName,
+.reviewTotal {
+  margin: 10px 0;
+  font-size: $font-size-l;
+  font-weight: $font-weight-bold;
+}
+.reviewItem {
+  margin-bottom: 12px;
+}
+.reviewUser {
+  @include row();
+  margin: 8px 0;
+}
+.reviewUser div {
+  margin: 0 5px;
+}
+.reviewWB {
+  width: 100%;
+  display: flex;
+  justify-content: baseline;
+}
+.userPhoto {
+  width: 2rem;
+  height: 2rem;
+  background-color: gray;
+  border-radius: 1rem;
+}
+.writingdate {
+  font-size: $font-size-s;
+}
+.reviewPhoto {
+  width: 10vw;
+  height: 10vw;
+  background-image: url(https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/165519133254213206.jpeg?w=720);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  @include row();
+  justify-content: center;
+  margin-right: 8px;
+  border-radius: 5px;
+}
+.reviewComments {
+  width: calc(100% - 10vw);
+  font-size: $font-size-m;
+}
+
+.rePagination {
+  width: 100%;
+}

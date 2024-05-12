@@ -1,4 +1,4 @@
-import '../../styles/productDetail/productDetail.scss';
+import '../../styles/productDetail/productCarousel.scss';
 import Carousel from 'react-bootstrap/Carousel';
 
 export default function ProductCarousel() {

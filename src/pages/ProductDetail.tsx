@@ -1,53 +1,56 @@
+import '../styles/productDetail/productDetail.scss';
 import SelectPurchase from '../components/productDetail/SelectPurchase';
 import ProductTabs from '../components/productDetail/ProductTabs';
 import SimilarProducts from '../components/productDetail/SimilarProducts';
 import ProductCarousel from '../components/productDetail/ProductCarousel';
 import { Container } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Product } from '../types/productDetail';
+import { useMediaQuery } from '@mui/material';
+// import { useEffect, useState } from 'react';
+// import { useParams } from 'react-router-dom';
+// import { Product } from '../types/productDetail';
 
 export default function ProductDetail() {
-  const [validProduct, setValidProduct] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  
-  const { productId } = useParams(); 
+  const isTablet = useMediaQuery('(max-width: 768px)');
 
-  useEffect(() => {
-    const numProductId = Number(productId); 
+  // const [validProduct, setValidProduct] = useState(false);
+  // const [isLoading, setIsLoading] = useState(true);
 
-    const fetchData = async () => {
-      try {
-        const prodDetailResponse = await fetch('/data/prodDetail.json');
-        const prodDetailData: Product[] = await prodDetailResponse.json();
+  // const { productId } = useParams();
 
-        const foundProduct = prodDetailData.find(
-          (prod: Product) => prod.productId === numProductId
-        );
-        
-        if (foundProduct) {
-          setValidProduct(true);
-        } else {
-          setValidProduct(false);
-        }
-      } catch (error) {
-        console.error('데이터를 불러오는 중 오류가 발생했습니다:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  // useEffect(() => {
+  //   const numProductId = Number(productId);
 
-    fetchData(); 
+  //   const fetchData = async () => {
+  //     try {
+  //       const prodDetailResponse = await fetch('/data/prodDetail.json');
+  //       const prodDetailData: Product[] = await prodDetailResponse.json();
 
-  }, [productId]); 
+  //       const foundProduct = prodDetailData.find(
+  //         (prod: Product) => prod.prodId === numProductId
+  //       );
 
-  if (isLoading) {
-    return <h1>로딩 중...</h1>;
-  }
+  //       if (foundProduct) {
+  //         setValidProduct(true);
+  //       } else {
+  //         setValidProduct(false);
+  //       }
+  //     } catch (error) {
+  //       console.error('데이터를 불러오는 중 오류가 발생했습니다:', error);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, [productId]);
+
+  // if (isLoading) {
+  //   return <h1>로딩 중...</h1>;
+  // }
 
   return (
     <div className='App'>
-      {validProduct ? (
+      {/* {validProduct ? (
         <Container>
           <div className='detailPage'>
             <div className='detailMain'>
@@ -64,6 +67,37 @@ export default function ProductDetail() {
         </Container>
       ) : (
         <h1>존재하지 않는 상품입니다.</h1>
+      )} */}
+      {isTablet ? (
+        <Container>
+          <div className='detailPage'>
+            <div className='detailMain'>
+              <ProductCarousel />
+              <div className='detailSide'>
+                <SelectPurchase />
+              </div>
+              <div className='contents'>
+                <ProductTabs />
+                <SimilarProducts />
+              </div>
+            </div>
+          </div>
+        </Container>
+      ) : (
+        <Container>
+          <div className='detailPage'>
+            <div className='detailMain'>
+              <ProductCarousel />
+              <div className='contents'>
+                <ProductTabs />
+                <SimilarProducts />
+              </div>
+            </div>
+            <div className='detailSide'>
+              <SelectPurchase />
+            </div>
+          </div>
+        </Container>
       )}
     </div>
   );
