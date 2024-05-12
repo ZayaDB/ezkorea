@@ -1,18 +1,14 @@
-// slices/categorySlice.ts
-
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { CategoryData, Products } from '../../types/typesProducts';
+import { CategoryData, Products, Filters } from '../../types/typesProducts';
 
 export interface CategoryState {
   selectedCategory: string;
   selectedSubCategory: string;
   categoryData: CategoryData[];
   products: Products[];
-  brands: string[];
-  colors: string[];
-  prices: number;
-  themes: string[];
   isLiked: { [productId: number]: boolean };
+  selectedFilters: Filters;
+  renderingStart: boolean; // renderingStart 추가
 }
 
 const initialState: CategoryState = {
@@ -20,11 +16,14 @@ const initialState: CategoryState = {
   selectedSubCategory: 'ALL',
   categoryData: [],
   products: [],
-  brands: [],
-  colors: [],
-  prices: 0,
-  themes: [],
   isLiked: {},
+  selectedFilters: {
+    brands: [],
+    colors: [],
+    prices: [],
+    themes: [],
+  },
+  renderingStart: false, // 초기값은 false
 };
 
 const categorySlice = createSlice({
@@ -43,24 +42,13 @@ const categorySlice = createSlice({
     setProducts: (state, action: PayloadAction<Products[]>) => {
       state.products = action.payload;
     },
-    setBrands: (state, action: PayloadAction<string[]>) => {
-      state.brands = action.payload;
-    },
-    setColors: (state, action: PayloadAction<string[]>) => {
-      state.colors = action.payload;
-    },
-    setPrices: (state, action: PayloadAction<number>) => {
-      state.prices = action.payload;
-    },
-    setThemes: (state, action: PayloadAction<string[]>) => {
-      state.themes = action.payload;
-    },
     clearFilters: state => {
-      // Reset filter-related state to initial values
-      state.brands = [];
-      state.colors = [];
-      state.prices = 0;
-      state.themes = [];
+      state.selectedFilters = {
+        brands: [],
+        colors: [],
+        prices: [],
+        themes: [],
+      };
     },
     removeSelectedFilter: (
       state,
@@ -69,16 +57,24 @@ const categorySlice = createSlice({
       const { filterType, value } = action.payload;
       switch (filterType) {
         case 'brands':
-          state.brands = state.brands.filter(brand => brand !== value);
+          state.selectedFilters.brands = state.selectedFilters.brands.filter(
+            brand => brand !== value
+          );
           break;
         case 'prices':
-          state.prices = state.prices.filter(price => price !== value);
+          state.selectedFilters.prices = state.selectedFilters.prices.filter(
+            price => price !== value
+          );
           break;
         case 'colors':
-          state.colors = state.colors.filter(color => color !== value);
+          state.selectedFilters.colors = state.selectedFilters.colors.filter(
+            color => color !== value
+          );
           break;
         case 'themes':
-          state.themes = state.themes.filter(theme => theme !== value);
+          state.selectedFilters.themes = state.selectedFilters.themes.filter(
+            theme => theme !== value
+          );
           break;
         default:
           break;
@@ -91,12 +87,33 @@ const categorySlice = createSlice({
       const { productId, isLiked } = action.payload;
       state.isLiked[productId] = isLiked;
     },
-    setFilters: (state, action: PayloadAction<CategoryState>) => {
-      const { brands, colors, prices, themes } = action.payload;
-      state.brands = brands;
-      state.colors = colors;
-      state.prices = prices;
-      state.themes = themes;
+    setFilters: (state, action: PayloadAction<Filters>) => {
+      state.selectedFilters = action.payload;
+    },
+    addFilter: (
+      state,
+      action: PayloadAction<{ filterType: string; value: string | number }>
+    ) => {
+      const { filterType, value } = action.payload;
+      switch (filterType) {
+        case 'brands':
+          state.selectedFilters.brands.push(value as string);
+          break;
+        case 'prices':
+          state.selectedFilters.prices.push(value as number);
+          break;
+        case 'colors':
+          state.selectedFilters.colors.push(value as string);
+          break;
+        case 'themes':
+          state.selectedFilters.themes.push(value as string);
+          break;
+        default:
+          break;
+      }
+    },
+    setRendering: (state, action: PayloadAction<boolean>) => {
+      state.renderingStart = action.payload;
     },
   },
 });
@@ -106,14 +123,12 @@ export const {
   setSelectedSubCategory,
   setCategoryData,
   setProducts,
-  setBrands,
-  setColors,
-  setPrices,
-  setThemes,
   clearFilters,
   removeSelectedFilter,
   setIsLiked,
   setFilters,
+  addFilter,
+  setRendering, // setRendering 액션 추가
 } = categorySlice.actions;
 
 export default categorySlice.reducer;

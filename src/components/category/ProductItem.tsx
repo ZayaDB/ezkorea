@@ -70,10 +70,7 @@ export default function ProductItem({ prod }: ProductItemProps) {
       role='button'
       onClick={() => handleProdItemClick(prod.productId)}
     >
-      <Link
-        to={`/shop/${prod.productId}`}
-        className='link-to-detail'
-      >
+      <Link to={`/shop/${prod.productId}`} className='link-to-detail'>
         {/* 상품이미지 */}
         <div
           className='prod-img'

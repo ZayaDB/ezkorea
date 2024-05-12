@@ -53,10 +53,11 @@ export interface ProductListProps {
   selectedSubCategory: string; // selectedSubCategory를 추가
 }
 export interface Filters {
-  brand: boolean;
-  price: boolean;
-  color: boolean;
-  theme: boolean;
+  brands: string[];
+  colors: string[];
+  prices: number[];
+  themes: string[];
 }
+
 
 export type SortOption = '인기순' | '리뷰많은순' | '낮은가격순' | '높은가격순' | '할인율높은순';
