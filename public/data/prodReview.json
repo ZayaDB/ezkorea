@@ -1,0 +1,186 @@
+[
+  {
+    "reviews": [
+      {
+        "reUserId": 1,
+        "reUserPhoto": "",
+        "reUserName": "둘리",
+        "reDate": "2024-04-20",
+        "rating": 4,
+        "contentPhoto": "photo1.jpg",
+        "contentText": "조명이 너무 어두워서 제품을 제대로 볼 수 없어요."
+      },
+      {
+        "reUserId": 2,
+        "reUserPhoto": "",
+        "reUserName": "토끼",
+        "reDate": "2024-04-22",
+        "rating": 5,
+        "contentPhoto": "photo2.jpg",
+        "contentText": "조명이 밝고 깨끗해서 제품이 아주 아름답게 보여요!"
+      },
+      {
+        "reUserId": 3,
+        "reUserPhoto": "",
+        "reUserName": "도라에몽",
+        "reDate": "2024-04-25",
+        "rating": 4,
+        "contentPhoto": "photo3.jpg",
+        "contentText": "조명 설정이 조금 어렵지만, 한 번 설정하면 제품을 아주 잘 보여줍니다."
+      },
+      {
+        "reUserId": 4,
+        "reUserPhoto": "",
+        "reUserName": "뽀로로",
+        "reDate": "2024-04-28",
+        "rating": 5,
+        "contentPhoto": "photo4.jpg",
+        "contentText": "조명이 너무 화려해서 제품이 아주 멋지게 보여요!"
+      },
+      {
+        "reUserId": 5,
+        "reUserPhoto": "",
+        "reUserName": "짱구",
+        "reDate": "2024-05-01",
+        "rating": 4,
+        "contentPhoto": "photo5.jpg",
+        "contentText": "적당한 밝기의 조명으로 제품이 선명하게 보여서 좋아요."
+      },
+      {
+        "reUserId": 6,
+        "reUserPhoto": "",
+        "reUserName": "스폰지밥",
+        "reDate": "2024-05-04",
+        "rating": 5,
+        "contentPhoto": "photo6.jpg",
+        "contentText": "조명이 부드럽고 자연스러워서 제품이 아주 아름답게 보여요!"
+      },
+      {
+        "reUserId": 7,
+        "reUserPhoto": "",
+        "reUserName": "뚝딱이",
+        "reDate": "2024-05-07",
+        "rating": 4,
+        "contentPhoto": "photo7.jpg",
+        "contentText": "제품을 감싸는 조명이 아주 로맨틱해서 분위기가 좋아요."
+      },
+      {
+        "reUserId": 8,
+        "reUserPhoto": "",
+        "reUserName": "또치",
+        "reDate": "2024-05-10",
+        "rating": 5,
+        "contentPhoto": "photo8.jpg",
+        "contentText": "조명이 부드럽고 따뜻해서 제품을 보는 것이 편안해요."
+      },
+      {
+        "reUserId": 9,
+        "reUserPhoto": "",
+        "reUserName": "패티",
+        "reDate": "2024-05-13",
+        "rating": 4,
+        "contentPhoto": "photo9.jpg",
+        "contentText": "밝기 조절이 자유로워서 다양한 분위기로 제품을 감상할 수 있어요."
+      },
+      {
+        "reUserId": 10,
+        "reUserPhoto": "",
+        "reUserName": "빙글스",
+        "reDate": "2024-05-16",
+        "rating": 5,
+        "contentPhoto": "photo10.jpg",
+        "contentText": "조명이 선명하고 깨끗해서 제품의 디테일이 아주 잘 드러나요."
+      },
+      {
+        "reUserId": 11,
+        "reUserPhoto": "",
+        "reUserName": "펭수",
+        "reDate": "2024-05-19",
+        "rating": 4,
+        "contentPhoto": "photo11.jpg",
+        "contentText": "제품의 조명이 조금 눈부실 수 있어요. 조금 어둡게 조절하면 더 좋을 것 같아요."
+      },
+      {
+        "reUserId": 12,
+        "reUserPhoto": "",
+        "reUserName": "뚜비",
+        "reDate": "2024-05-22",
+        "rating": 5,
+        "contentPhoto": "photo12.jpg",
+        "contentText": "조명이 너무 멋져요! 제품이 정말 아름답게 보여요."
+      },
+      {
+        "reUserId": 13,
+        "reUserPhoto": "",
+        "reUserName": "마이콜",
+        "reDate": "2024-05-25",
+        "rating": 4,
+        "contentPhoto": "photo13.jpg",
+        "contentText": "제품을 감싸는 조명이 아주 로맨틱해요. 분위기를 더해줘서 좋아요."
+      },
+      {
+        "reUserId": 14,
+        "reUserPhoto": "",
+        "reUserName": "브레드",
+        "reDate": "2024-05-28",
+        "rating": 5,
+        "contentPhoto": "photo14.jpg",
+        "contentText": "조명이 부드럽고 자연스러워서 제품이 아주 멋지게 보여요."
+      },
+      {
+        "reUserId": 15,
+        "reUserPhoto": "",
+        "reUserName": "코난",
+        "reDate": "2024-06-01",
+        "rating": 4,
+        "contentPhoto": "photo15.jpg",
+        "contentText": "조명이 조금 어둡게 설정되어 있어요. 밝기를 조절하면 더 좋을 것 같아요."
+      },
+      {
+        "reUserId": 16,
+        "reUserPhoto": "",
+        "reUserName": "피카츄",
+        "reDate": "2024-06-04",
+        "rating": 5,
+        "contentPhoto": "photo16.jpg",
+        "contentText": "조명이 너무 밝고 선명해서 제품을 아주 잘 보여줘요. 만족합니다!"
+      },
+      {
+        "reUserId": 17,
+        "reUserPhoto": "",
+        "reUserName": "뽀로로",
+        "reDate": "2024-06-07",
+        "rating": 4,
+        "contentPhoto": "photo17.jpg",
+        "contentText": "제품을 보는 데 필요한 조명이 아주 적절해요. 편안하게 사용하고 있습니다."
+      },
+      {
+        "reUserId": 18,
+        "reUserPhoto": "",
+        "reUserName": "토마스",
+        "reDate": "2024-06-10",
+        "rating": 5,
+        "contentPhoto": "photo18.jpg",
+        "contentText": "조명이 밝고 균일해서 제품의 디자인이 아주 돋보여요. 만족합니다!"
+      },
+      {
+        "reUserId": 19,
+        "reUserPhoto": "",
+        "reUserName": "둘리",
+        "reDate": "2024-06-13",
+        "rating": 4,
+        "contentPhoto": "photo19.jpg",
+        "contentText": "제품을 보는 데 필요한 조명이 조금 아쉬워요. 조명이 더 밝으면 좋을 것 같아요."
+      },
+      {
+        "reUserId": 20,
+        "reUserPhoto": "",
+        "reUserName": "뚝딱이",
+        "reDate": "2024-06-16",
+        "rating": 5,
+        "contentPhoto": "photo20.jpg",
+        "contentText": "조명이 너무 아름답게 제품을 감싸주어서 너무 만족스럽습니다."
+      }
+    ]
+  }
+]
