@@ -1,4 +1,3 @@
-
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './styles/theme';
@@ -15,6 +14,7 @@ import ProductDetail from './pages/ProductDetail';
 import OrderPage from './pages/OrderPage';
 import MyPage from './pages/MyPage';
 import NotFound from './pages/NotFound';
+import CommunityDetailPage from './pages/CommunityDetailPage';
 
 function App() {
   const sections = [
@@ -45,6 +45,10 @@ function App() {
           <Route path='/order' element={<OrderPage />} />
           <Route path='/my' element={<MyPage />} />
           <Route path='*' element={<NotFound />} />
+          <Route
+            path='/community/detail/:feedId'
+            element={<CommunityDetailPage />}
+          />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
@@ -52,4 +56,3 @@ function App() {
 }
 
 export default App;
-

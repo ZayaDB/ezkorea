@@ -1,13 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import {
-  Box,
-  Grid,
-  Typography,
-  Button,
-  IconButton,
-  Divider,
-} from '@mui/material';
-import { Favorite, Visibility, FavoriteBorder } from '@mui/icons-material';
+import { Box, Grid, Typography, Button, Divider } from '@mui/material';
+import { Visibility } from '@mui/icons-material';
 import ColorFilter from './../components/community/main/ColorFilter';
 import StyleFilter from './../components/community/main/StyleFilter';
 import SkeletonFeed from './../components/community/main/SkeletonFeed';
@@ -15,6 +8,7 @@ import SortSelect from '../components/community/main/SortSelect';
 import './../styles/community/main.scss';
 import { FeedData } from './../types/communityTypes';
 import { Link } from 'react-router-dom';
+import LikeButton from '../components/community/main/LikeButton';
 
 const Community = () => {
   const [likedItems, setLikedItems] = useState<number[]>([]);
@@ -71,9 +65,6 @@ const Community = () => {
         break;
       case '좋아요순':
         sortedData.sort((a, b) => b.likes - a.likes);
-        break;
-      case '댓글순':
-        sortedData.sort((a, b) => b.commentCount - a.commentCount);
         break;
       case '최신순':
         sortedData.sort(
@@ -189,11 +180,16 @@ const Community = () => {
             <Grid item xs={6} md={3} key={item.feedId} className='feed'>
               <Box className='feed-container'>
                 <Box className='feed-box'>
-                  <img
-                    className='feed-img'
-                    src={item.images[0]}
-                    alt={item.title}
-                  />
+                  <Link
+                    to={`/community/detail/${item.feedId}`}
+                    style={{ textDecoration: 'none' }}
+                  >
+                    <img
+                      className='feed-img'
+                      src={item.images[0]}
+                      alt={item.title}
+                    />
+                  </Link>
                 </Box>
                 <Box className='info-box'>
                   <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -223,22 +219,11 @@ const Community = () => {
                       marginLeft: 'auto',
                     }}
                   >
-                    <IconButton
-                      sx={{
-                        color: likedItems.includes(item.feedId)
-                          ? 'error.main'
-                          : 'action.active',
-                        margin: 0,
-                        padding: 0,
-                      }}
-                      onClick={() => handleLike(item.feedId)}
-                    >
-                      {likedItems.includes(item.feedId) ? (
-                        <Favorite sx={{ color: 'red', fontSize: '20px' }} />
-                      ) : (
-                        <FavoriteBorder sx={{ fontSize: '20px' }} />
-                      )}
-                    </IconButton>
+                    <LikeButton
+                      feedId={item.feedId}
+                      initialLiked={false}
+                      onLike={handleLike}
+                    />
                     <Typography
                       variant='caption'
                       ml={0.5}
