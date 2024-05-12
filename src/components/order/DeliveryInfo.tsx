@@ -75,14 +75,22 @@ function DeliveryInfoContent() {
     <div className='deliveryinfo-container'>
       <TextField fullWidth placeholder='받으시는 분' className='text-field' />
       <div className='text-field postcode'>
-        <TextField placeholder='우편번호' value={zonecode} disabled />
+        <TextField
+          placeholder='우편번호'
+          value={zonecode}
+          InputProps={{
+            readOnly: true,
+          }}
+        />
         <Postcode />
       </div>
       <TextField
         fullWidth
         placeholder='기본주소'
         value={address}
-        disabled
+        InputProps={{
+          readOnly: true,
+        }}
         className='text-field'
       />
       <TextField fullWidth placeholder='나머지주소' className='text-field' />

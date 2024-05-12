@@ -24,15 +24,35 @@ function CustomerInformation() {
         fullWidth
         className='text-field'
         value={ordererName}
-        disabled
+        InputProps={{
+          readOnly: true,
+        }}
       />
       <div className='caption'>휴대폰번호</div>
       <div className='orderer-num-container'>
-        <TextField className='num' fullWidth disabled />
+        <TextField
+          className='num'
+          fullWidth
+          InputProps={{
+            readOnly: true,
+          }}
+        />
         <span>-</span>
-        <TextField className='num' fullWidth disabled />
+        <TextField
+          className='num'
+          fullWidth
+          InputProps={{
+            readOnly: true,
+          }}
+        />
         <span>-</span>
-        <TextField className='num' fullWidth disabled />
+        <TextField
+          className='num'
+          fullWidth
+          InputProps={{
+            readOnly: true,
+          }}
+        />
       </div>
       <div></div>
     </div>
