@@ -221,7 +221,7 @@ export default function Header(props: HeaderProps) {
         <Toolbar
           variant='dense'
           sx={{
-            width: '99.024vw',
+            width: '99.02vw',
             position: 'sticky',
             mt: '-3px',
             // mb: '20px',
