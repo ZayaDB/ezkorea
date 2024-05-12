@@ -3,56 +3,65 @@ import ProductTabs from '../components/productDetail/ProductTabs';
 import SimilarProducts from '../components/productDetail/SimilarProducts';
 import ProductCarousel from '../components/productDetail/ProductCarousel';
 import { Container } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 // import { useNavigate, useParams } from 'react-router-dom';
 
 // const isMobile = useMediaQuery('(max-width: 768px)');
 export default function ProductDetail() {
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch('/data/prodReview.json');
-  //       const data = await response.json();
-  //       const reviews = data[0].reviews;
-  //       setReviewData(reviews);
-  //     } catch (error) {
-  //       console.error('Error fetching review data:', error);
-  //     }
-  //   };
+  // id값 넘겨받기
+  const [validProduct, setValidProduct] = useState(false);
 
-  //   fetchData();
-  // }, []);
-  // const navigate = useNavigate();
-  // const params = useParams();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { productId } = useParams();
 
-  // const {productId} =useParams();
+        const categoryResponse = await fetch('/data/prodData.json');
+        const prodData = await categoryResponse.json();
+        const prodDataNum1 = prodData[0].productId;
 
-  // const [result] = prodData.filter(
-  //   (prod) => prod.productId === Number(productId)
-  // );
-  // const matches = useMediaQuery('(max-width:768px)');
+        const prodDetailResponse = await fetch('/data/prodDetail.json');
+        const prodDetailData = await prodDetailResponse.json();
+        const prodDataNum2 = prodDetailData[0].prodId;
+
+        const result =
+          prodDataNum1 === prodDataNum2 && prodDataNum1 === Number(productId);
+
+        if (result) {
+          setValidProduct(true);
+        } else {
+          setValidProduct(false);
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div className='App'>
-      <Container>
-        <div className='detailPage'>
-          <div className='detailMain'>
-            {/* navigation에 인자로 슬래시 없이 어떤 값을 보내면
-           현재 주소 뒤에 /작성한값 으로 이동 */}
-            {/* <button onClick={() => navigate('3')}></button> */}
-
-            <ProductCarousel />
-            <div className='contents'>
-              <ProductTabs />
-              <SimilarProducts />
-
-              {/* reviews props을 List 컴포넌트에 전달합니다. */}
+      {validProduct ? (
+        <Container>
+          <div className='detailPage'>
+            <div className='detailMain'>
+              <ProductCarousel />
+              <div className='contents'>
+                <ProductTabs />
+                <SimilarProducts />
+              </div>
+            </div>
+            <div className='detailSide'>
+              <SelectPurchase />
             </div>
           </div>
-          <div className='detailSide'>
-            <SelectPurchase />
-          </div>
-        </div>
-      </Container>
+        </Container>
+      ) : (
+        <h1>존재하지 않는 상품입니다.</h1>
+      )}
     </div>
   );
 }

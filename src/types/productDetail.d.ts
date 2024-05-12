@@ -31,7 +31,7 @@ export interface Inquiry {
 }
 
 export interface Product {
-  productId: string;
+  prodId: number;
   product_image: string;
   brand_name: string;
   product_name: string;
