@@ -35,7 +35,6 @@ function App() {
           <Route path='/shop/best' element={<BestProduct />} />
           <Route path='/shop/sale' element={<SaleProduct />} />
           <Route path='/shop/:productId' element={<ProductDetail />} />
-
           <Route path='/community' element={<Community />} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<SignUp />} />

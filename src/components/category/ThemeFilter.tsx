@@ -1,14 +1,17 @@
 import { useState } from 'react';
 import { Box, styled } from '@mui/system';
 import Checkbox from '@mui/material/Checkbox';
-import { useDispatch } from 'react-redux';
-import { setThemes } from '../../redux/slices/categorySlice'; // Redux 액션 import
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/config';
+import { setFilters } from '../../redux/slices/categorySlice';
 import '../../styles/category/sideFilter.scss';
-export default function ThemeFilter() {
+
+const ThemeFilter = () => {
   const themes: string[] = ['gaming', 'simple', 'unique', 'antique', 'kitsch'];
 
   const [checkedThemes, setCheckedThemes] = useState<string[]>([]);
-  const dispatch = useDispatch(); // useDispatch hook을 사용하여 dispatch 함수 가져오기
+  const dispatch = useDispatch();
+  const selectedFilters = useSelector((state: RootState) => state.category.selectedFilters);
 
   const handleLabelClick = (theme: string) => {
     const newCheckedThemes = [...checkedThemes];
@@ -21,7 +24,8 @@ export default function ThemeFilter() {
     }
 
     setCheckedThemes(newCheckedThemes);
-    dispatch(setThemes(newCheckedThemes)); // 선택된 테마를 Redux 스토어에 저장
+    // 선택된 테마를 Redux 스토어에 저장
+    dispatch(setFilters({ ...selectedFilters, themes: newCheckedThemes }));
   };
 
   const BlackCheckbox = styled(Checkbox)({
@@ -60,4 +64,6 @@ export default function ThemeFilter() {
       ))}
     </Box>
   );
-}
+};
+
+export default ThemeFilter;

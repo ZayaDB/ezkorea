@@ -1,26 +1,28 @@
 import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-import { useDispatch } from 'react-redux';
-import { setPrices } from '../../redux/slices/categorySlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { setFilters } from '../../redux/slices/categorySlice';
+import { RootState } from '../../redux/config';
 
 // 숫자를 천 단위로 쉼표로 구분하여 포맷하는 함수
 const formatPriceWithComma = (price: number): string => {
   return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
-export default function PriceFilter() {
-  const [price, setPrice] = useState<number[]>();
+const PriceFilter = () => {
+  const [price, setPrice] = useState<number[]>([0, 1000000]); // 가격 범위 선택
   const dispatch = useDispatch();
+  const selectedFilters = useSelector((state: RootState) => state.category.selectedFilters);
 
   const handlePriceChange = (event: Event, newValue: number | number[]) => {
-    const newPrice = newValue as number[]; // 새로운 가격 값
+    const newPrice = newValue as number[]; // 새로운 가격 범위 값
     setPrice(newPrice); // 로컬 상태 업데이트
 
-    // Redux store에 선택된 가격을 저장
-    dispatch(setPrices(newPrice));
+    // 선택된 가격 범위를 함께 업데이트하여 Redux store에 저장
+    dispatch(setFilters({ ...selectedFilters, prices: newPrice }));
 
-    console.log('설정된 가격:', newPrice);
+    console.log('설정된 가격 범위:', newPrice);
   };
 
   const marks = [
@@ -53,9 +55,10 @@ export default function PriceFilter() {
         } // 숫자를 천 단위로 포맷하여 표시
         style={{
           marginLeft: '15px',
-
         }}
       />
     </Box>
   );
-}
+};
+
+export default PriceFilter;

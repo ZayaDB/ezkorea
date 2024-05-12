@@ -34,12 +34,14 @@ $font-weight-regular: 400;
 }
 
 .recent-products {
-  width: 100px;
-
+  width: 130px;
+  height: 500px;
+  overflow-y: scroll;
   position: fixed;
   left: 90%;
   top: 30%;
   margin: 5px;
+  
   .link-to-detail {
     text-decoration: none;
     color: black;

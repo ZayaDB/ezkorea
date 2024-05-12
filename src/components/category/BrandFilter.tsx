@@ -3,35 +3,43 @@ import { useDispatch, useSelector } from 'react-redux';
 import Checkbox from '@mui/material/Checkbox';
 import { Box, styled } from '@mui/system';
 import { RootState } from '../../redux/config';
-import { setBrands } from '../../redux/slices/categorySlice';
+import { setFilters } from '../../redux/slices/categorySlice';
 import '../../styles/category/sideFilter.scss';
 
-export default function BrandFilter() {
+const BrandFilter = () => {
   const dispatch = useDispatch();
-
   const selectedCategory = useSelector(
     (state: RootState) => state.category.selectedCategory
   );
   const products = useSelector((state: RootState) => state.category.products);
+  const selectedFilters = useSelector(
+    (state: RootState) => state.category.selectedFilters
+  );
 
-  const [checkedBrands, setCheckedBrands] = useState<string[]>([]);
+  // 컴포넌트가 마운트될 때 selectedFilters에서 브랜드 필터 값을 초기화
+  const [checkedBrands, setCheckedBrands] = useState<string[]>(
+    selectedFilters.brands || []
+  );
 
   useEffect(() => {
-    setCheckedBrands([]); // 선택된 카테고리가 변경될 때 브랜드 목록 초기화
+    // 선택된 카테고리 변경 시 해당 카테고리의 브랜드 목록을 가져와서 checkedBrands를 업데이트
+    const brandsForCategory = getBrandsByCategory(selectedCategory);
+    // 이전에 저장된 필터 값과 현재 카테고리의 브랜드 목록을 합침
+    const updatedCheckedBrands = brandsForCategory.filter(brand =>
+      checkedBrands.includes(brand)
+    );
+    setCheckedBrands(updatedCheckedBrands);
   }, [selectedCategory]);
 
-  const handleLabelClick = (brand: string) => {
-    const newCheckedBrands = [...checkedBrands];
-    const brandIndex = newCheckedBrands.indexOf(brand);
-
-    if (brandIndex === -1) {
-      newCheckedBrands.push(brand);
-    } else {
-      newCheckedBrands.splice(brandIndex, 1);
-    }
-
+  const handleClick = (brand: string) => {
+    // 선택한 브랜드를 토글하여 checkedBrands를 업데이트
+    const newCheckedBrands = checkedBrands.includes(brand)
+      ? checkedBrands.filter(b => b !== brand)
+      : [...checkedBrands, brand];
     setCheckedBrands(newCheckedBrands);
-    dispatch(setBrands(newCheckedBrands));
+
+    // 업데이트된 브랜드 필터를 Redux store에 저장
+    dispatch(setFilters({ ...selectedFilters, brands: newCheckedBrands }));
   };
 
   const BlackCheckbox = styled(Checkbox)({
@@ -42,11 +50,11 @@ export default function BrandFilter() {
   });
 
   const getBrandsByCategory = (category: string): string[] => {
-    // 선택된 카테고리에 해당하는 제품 브랜드 목록 필터링
+    // 선택된 카테고리에 해당하는 제품의 브랜드 목록을 필터링하고 중복을 제거
     const filteredBrands = products
       .filter(product => product.category1 === category)
       .map(product => product.brand);
-    return Array.from(new Set(filteredBrands)); // 중복 제거 후 배열로 반환
+    return Array.from(new Set(filteredBrands));
   };
 
   return (
@@ -55,7 +63,7 @@ export default function BrandFilter() {
         <Box key={brand} className='brand'>
           <BlackCheckbox
             checked={checkedBrands.includes(brand)}
-            onChange={() => handleLabelClick(brand)}
+            onChange={() => handleClick(brand)}
             inputProps={{ 'aria-label': `${brand} checkbox` }}
             sx={{
               padding: '2px',
@@ -67,7 +75,7 @@ export default function BrandFilter() {
           />
           <Box
             className='brand-name'
-            onClick={() => handleLabelClick(brand)}
+            onClick={() => handleClick(brand)}
             role='button'
             tabIndex={0}
             sx={{ marginLeft: '2px', cursor: 'pointer' }}
@@ -78,4 +86,6 @@ export default function BrandFilter() {
       ))}
     </Box>
   );
-}
+};
+
+export default BrandFilter;

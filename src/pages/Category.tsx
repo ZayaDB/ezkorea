@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -10,10 +9,12 @@ import '../styles/category/category.scss';
 import { setCategoryData, setProducts } from '../redux/slices/categorySlice';
 // import HeartProduct from '../components/category/HeartProduct';
 import RecentView from '../components/category/RecentView';
+import { useMediaQuery } from '@mui/material';
 // import BestProduct from '../components/category/BestProduct';
 
 export default function Category() {
   const dispatch = useDispatch();
+  const isMobile = useMediaQuery('(max-width:1515px)');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,12 +41,8 @@ export default function Category() {
         <div className='containerProducts'>
           <ProductList />
         </div>
-        <RecentView />
+        {!isMobile && <RecentView />}
       </div>
-      
-
-        
     </div>
   );
 }
-
