@@ -164,7 +164,7 @@ interface ItemProps {
 }
 
 function Item(props: ItemProps) {
-  console.log(props);
+  // console.log(props);
 
   const containerClass =
     props.imgClass === 'card_img'
