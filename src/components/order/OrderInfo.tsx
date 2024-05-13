@@ -10,7 +10,7 @@ import {
 
 /* 주문정보 */
 export default function OrderInfo() {
-  const [productPrice, setProductPrice] = useState(10000);
+  const [productPrice] = useState(10000);
 
   return (
     <div className='order-info'>
@@ -28,11 +28,9 @@ export default function OrderInfo() {
             <span>- {productPrice} 원</span>
           </div>
           <div className='space-between'>
-            <span>↳ 상품 쿠폰</span>
-            <span>- {productPrice} 원</span>
-          </div>
-          <div className='space-between'>
-            <span>↳ 장바구니 쿠폰</span>
+            <span>
+              <span className='lightgray'>↳</span> 상품 쿠폰
+            </span>
             <span>- {productPrice} 원</span>
           </div>
         </div>
@@ -43,6 +41,12 @@ export default function OrderInfo() {
         <div className='space-between'>
           <span>배송비</span>
           <span>+ 5,000 원</span>
+        </div>
+        <div className='space-between'>
+          <span>
+            <span className='lightgray'>↳</span> 상품 쿠폰 장바구니 쿠폰
+          </span>
+          <span>- 5000 원</span>
         </div>
 
         <div className='space-between'>

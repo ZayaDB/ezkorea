@@ -35,7 +35,8 @@
     width: 300px;
   }
   &-text {
-    @include body1-bold;
+    @include heading3;
+    font-weight: 700;
     margin-bottom: 15px;
   }
 }

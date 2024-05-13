@@ -72,7 +72,7 @@ function ModalContent({ handleClose }: { handleClose: () => void }) {
 
     if (data !== undefined) {
       dispatch(updateAddressInfo({ fullAddress, zonecode: data.zonecode }));
-      console.log('dispatch');
+      // console.log('dispatch');
     }
 
     handleClose();
