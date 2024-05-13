@@ -8,7 +8,7 @@ export default function HeartProduct() {
   const isLikedMap = useSelector((state: RootState) => state.category.isLiked);
   const products = useSelector((state: RootState) => state.category.products);
 
-  // isLiked가 true인 상품들 필터링
+  // // isLiked가 true인 상품들 필터링
   // const likedProducts = useSelector((state: RootState) =>
   //   products.filter(product => isLikedMap[product.productId] === true)
   // );
