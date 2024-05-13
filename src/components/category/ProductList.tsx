@@ -104,7 +104,7 @@ const ProductList = () => {
       (selectedSubCategory === 'ALL' ||
         product.category2 === selectedSubCategory)
   );
-  console.log(currentProducts);
+
   // 현재페이지에서보여줄 정렬이 완료된 아이템을 처음~마지막만 잘라 보여줌
   const currentItems = currentProducts.slice(indexOfFirstItem, indexOfLastItem);
 

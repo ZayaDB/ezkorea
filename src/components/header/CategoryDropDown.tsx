@@ -1,18 +1,22 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { styled } from '@mui/system';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../redux/config';
+import { useEffect } from 'react';
+import { getData } from '../../utils/getData';
+import { setCategoryData, setProducts } from '../../redux/slices/categorySlice';
 
 const DropdownContainer = styled('div')({
   position: 'absolute',
   top: '100%',
   left: 0,
-  // zIndex: 1,
   minWidth: '120px',
   backgroundColor: 'white',
   boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.2)',
   borderRadius: '3px',
   display: 'flex',
-  flexDirection: 'column', // 위에서 아래로 펼치도록 수정
+  flexDirection: 'column',
   padding: '16px',
   fontSize: '14px',
   marginLeft: '-32px',
@@ -30,22 +34,44 @@ const LinkItem = styled(NavLink)({
   },
 });
 
-const categories = [
-  { name: 'FURNITURE', link: '/saved-feeds' },
-  { name: '책상', link: '/category1' },
-  { name: '의자', link: '/category2' },
-  { name: '모니터암/받침대', link: '/category3' },
-  { name: '거치대', link: '/category4' },
-  { name: '서랍장', link: '/category5' },
-];
-
 const CategoryDropDown: React.FC = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { products } = await getData('/data/prodData.json');
+        const { categoryData } = await getData('/data/categoryData.json');
+        // Redux 스토어에 데이터 저장
+        dispatch(setCategoryData(categoryData));
+        dispatch(setProducts(products));
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, [dispatch]);
+
+  const categoryData = useSelector(
+    (state: RootState) => state.category.categoryData
+  );
+
   return (
     <DropdownContainer>
-      {categories.map((category, index) => (
-        <LinkItem key={index} color='inherit' to={category.link}>
+      {categoryData.map((category, index) => (
+        <div key={index} color='inherit'>
+          {/* 카테고리 이름 렌더링 */}
           {category.name}
-        </LinkItem>
+          {/* ALL이 아닌 subCategories의 이름만 필터링하여 렌더링 */}
+          {category.subCategories
+            .filter((subCategory) => subCategory.name !== 'ALL')
+            .map((subCategory, subIndex) => (
+              <LinkItem key={subIndex} to={`/${subCategory.name.toLowerCase()}`} color='inherit'>
+                {subCategory.name}
+              </LinkItem>
+            ))}
+        </div>
       ))}
     </DropdownContainer>
   );
