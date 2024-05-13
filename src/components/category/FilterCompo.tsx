@@ -10,9 +10,9 @@ import { clearFilters, setRendering } from '../../redux/slices/categorySlice';
 import '../../styles/category/sideFilter.scss';
 
 const FilterCompo = () => {
-  const selectedFilters = useSelector(
-    (state: RootState) => state.category.selectedFilters
-  );
+  // const selectedFilters = useSelector(
+  //   (state: RootState) => state.category.selectedFilters
+  // );
   const dispatch = useDispatch();
   const [brandFilterOpen, setBrandFilterOpen] = useState(false);
   const [priceFilterOpen, setPriceFilterOpen] = useState(false);
