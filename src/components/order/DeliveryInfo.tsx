@@ -1,8 +1,5 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-
 import { useState } from 'react';
-import Head from './Head';
+
 import {
   Box,
   Button,
@@ -14,6 +11,9 @@ import {
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import CloseButton from 'react-bootstrap/CloseButton';
 import Postcode from './Postcode';
+
+import Head from './Head';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/config';
 
 /* 수령자 정보 
@@ -21,7 +21,6 @@ import { RootState } from '../../redux/config';
   - 2. 새로운 배송지 : 배송지 정보 새로 넣기
 */
 export default function DeliveryInfo() {
-  // const [selected, setSelected] = useState<boolean>(true);
   return (
     <div className='order-recipitent-info'>
       <Head text='배송 정보' />
@@ -33,21 +32,11 @@ export default function DeliveryInfo() {
               name='method'
               id='default'
               defaultChecked={true}
-              onClick={() => {
-                // setSelected(true);
-              }}
             />
             주문자 정보와 동일
           </label>
           <label>
-            <input
-              type='radio'
-              name='method'
-              id='new'
-              onClick={() => {
-                // setSelected(false);
-              }}
-            />
+            <input type='radio' name='method' id='new' />
             새로운 배송지
           </label>
         </div>

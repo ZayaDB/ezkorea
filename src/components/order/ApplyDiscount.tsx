@@ -104,8 +104,7 @@ function CouponContent() {
 
   const coupons: Coupon[] = [
     { name: '10% 할인 쿠폰', discount: 0.1 },
-    { name: '20% 할인 쿠폰', discount: 0.2 },
-    // 적용할 수 있는 쿠폰들을 배열에 넣어주세요
+    { name: '15% 할인 쿠폰', discount: 0.15 },
   ];
 
   const applyCoupon = (coupon: Coupon) => {
