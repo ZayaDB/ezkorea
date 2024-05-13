@@ -28,7 +28,7 @@
   max-width: 1200px;
   display: flex;
   position: relative;
-  top: 20px;
+  top: -30px;
   left: 50%;
   transform: translateX(-50%);
   flex-direction: column;
@@ -38,7 +38,7 @@
   display: flex;
   justify-content: space-evenly;
   width: 100%;
-  max-width: 1200px;
+  // max-width: 1200px;
   padding-bottom: 20px;
 }
 /* 마지막 아이템의 패딩 제거 */
@@ -72,6 +72,7 @@
   transition: border-color 0.5s ease;
   cursor: pointer;
   // outline: 1px solid #999;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 .feed-container:hover {
@@ -103,8 +104,8 @@
   bottom: 0; /* 아래로부터의 위치 */
   left: 0; /* 왼쪽으로부터의 위치 */
   right: 0; /* 오른쪽으로부터의 위치 */
-  padding: 4px 8px;
-  background-color: #ccc; /* 배경색 및 투명도 설정 */
+  padding: 8px;
+  background-color: #fff; /* 배경색 및 투명도 설정 */
   display: flex;
   align-items: center;
   flex-wrap: nowrap;

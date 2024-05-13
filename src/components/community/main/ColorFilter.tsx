@@ -23,7 +23,7 @@ const ColorFilter: React.FC<ColorFilterProps> = ({
       {colors.map((color, index) => (
         <Button
           key={index}
-          // variant={colorIndexes.includes(color) ? 'contained' : 'outlined'}
+          // variant='outlined'
           onClick={() => colorButtonClick(color)}
           disableRipple
           sx={{
@@ -31,21 +31,25 @@ const ColorFilter: React.FC<ColorFilterProps> = ({
             m: 0,
             fontSize: '14px',
             lineHeight: '16px',
+            borderRadius: '999px',
             ...(!colorIndexes.includes(color) && {
               // 아웃라인 버튼일 경우
               border: '1px solid rgb(218, 221, 224)', // 아웃라인 버튼의 테두리 스타일을 지정합니다
               color: '#2F3438', // 아웃라인 버튼의 폰트 색상을 지정합니다
               '&:hover': {
                 color: '#000000', // 컨테인드 버튼의 폰트 색상을 호버시 변경합니다
-                border: '1px solid #7f7f7f',
-                backgroundColor: 'transparent',
+                border: '1px solid #5FF531',
               },
-              '&:active': {
-                color: '#000000',
-              }
             }),
             ...(colorIndexes.includes(color) && {
-              border: '1px solid #5FF531',
+              color: '#000000', // 컨테인드 버튼의 폰트 색상을 호버시 변경합니다
+              border: '1px solid #7f7f7f',
+              backgroundColor: '#5FF531',
+              '&:hover': {
+                color: '#000000', // 컨테인드 버튼의 폰트 색상을 호버시 변경합니다
+                border: '1px solid transparent',
+                backgroundColor: '#5FF531',
+              },
             }),
           }}
         >
@@ -64,7 +68,7 @@ const ColorCircle = styled(Box)<{ color: string }>(({ color }) => ({
   height: 15,
   color: '#000000',
   borderRadius: '50%',
-  border: color === 'white' ? '1px solid #E5E5E5' : 'none',
+  border: color === 'white' ? '1px solid #E5E5E5' : 'contained',
   backgroundColor: color === 'wood' ? '#9A6322' : color,
   marginRight: '8px',
 }));
