@@ -103,12 +103,6 @@ const CommunityDetailPage: React.FC = () => {
             } // 한국어 형식으로 표시
           />
           <CardContent>
-            <Typography variant='h5' gutterBottom>
-              {feed.title}
-            </Typography>
-            <Typography variant='body1' paragraph>
-              {feed.description}
-            </Typography>
             <div className='thumbnail-container'>
               <div className='main-image'>
                 <img src={feed.images[selectedImageIndex]} alt='Main' />
@@ -134,6 +128,14 @@ const CommunityDetailPage: React.FC = () => {
                   </Button>
                 ))}
               </div>
+            </div>
+            <div>
+              <Typography variant='h5' gutterBottom>
+                {feed.title}
+              </Typography>
+              <Typography variant='body1' paragraph>
+                {feed.description}
+              </Typography>
             </div>
           </CardContent>
           <div className='icon-container'>

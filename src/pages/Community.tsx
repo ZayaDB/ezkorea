@@ -125,7 +125,7 @@ const Community = () => {
   }, []);
 
   return (
-    <Box className='wrap'>
+    <div className='wrap'>
       <Grid container className='button-wrap'>
         <div className='filter-container'>
           <ColorFilter
@@ -162,10 +162,10 @@ const Community = () => {
               글 쓰기
             </Link>
           </Button>
+          <SortSelect sort={sort} setSort={setSort} />
         </div>
       </Grid>
       <div className='line'></div>
-      <SortSelect sort={sort} setSort={setSort} />
       <Grid container>
         {isLoading ? (
           [1, 2, 3, 4].map((_, index) => (
@@ -253,7 +253,7 @@ const Community = () => {
           ))
         )}
       </Grid>
-    </Box>
+    </div>
   );
 };
 
