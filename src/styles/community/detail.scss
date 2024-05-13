@@ -1,3 +1,8 @@
+html {
+  letter-spacing: -0.3px;
+  -webkit-font-smoothing: antialiased;
+}
+
 .community-detail-page {
   max-width: 800px;
   margin: 0 auto;
@@ -41,6 +46,45 @@
     }
   }
 
+  .feed-profile {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+    height: 80px;
+  }
+
+  .feed-title {
+    font-size: 24px; /* 예시 폰트 크기 */
+    white-space: nowrap; /* 한 줄로 표시되도록 */
+    overflow: hidden; /* 넘치는 부분은 숨기기 */
+    text-overflow: ellipsis; /* 생략 부호 추가 */
+    margin: 30px 0;
+  }
+
+  .feed-description {
+    font-size: 15px;
+    white-space: pre-line;
+    line-height: 32px;
+    word-break: keep-all;
+    word-wrap: break-word;
+  }
+
+  .dot::before {
+    content: '·';
+
+    margin: 4px;
+  }
+
+  .d-data {
+    margin: 0px;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 18px;
+    margin-right: 10px;
+    color: rgb(194, 200, 204);
+    font-weight: bold;
+  }
+
   .comments-container {
     margin-bottom: 20px;
     width: 100%;
@@ -60,7 +104,6 @@
 
 .icon-container {
   display: flex;
-  gap: 8px;
   align-items: center;
   padding: 16px;
 }

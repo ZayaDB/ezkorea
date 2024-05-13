@@ -144,7 +144,7 @@ const Community = () => {
             style={{ height: 34, marginLeft: 30 }}
             sx={{ p: 1 }}
           >
-            필터 초기화
+            초기화
           </Button>
           <Button
             variant='contained'
