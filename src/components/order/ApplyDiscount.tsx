@@ -1,6 +1,8 @@
 import React, { ChangeEvent, useState } from 'react';
 import Head from './Head';
 import { Button, TextField } from '@mui/material';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
 import { addCommasToNumber } from '../../hooks/addCommasToNumber';
 // import { updateMileage } from '../../redux/slices/mileageSlice';
 // import { useDispatch } from 'react-redux';
@@ -78,14 +80,68 @@ export default function ApplyDiscount() {
   );
 }
 
+interface Coupon {
+  name: string;
+  discount: number;
+}
+
 function CouponContent() {
-  const [discount] = useState<number>(42000);
+  const [checked, setChecked] = useState<boolean>(true);
+
+  const handleChange = (event: any) => {
+    setChecked(event.target.checked);
+
+    /* 쿠폰 제거 */
+    removeCoupon();
+  };
+
+  /* 쿠폰 */
+
+  const price = 40000;
+
+  const [currentPrice, setCurrentPrice] = useState<number>(price);
+  const [selectedCoupon, setSelectedCoupon] = useState<Coupon | null>(null);
+
+  const coupons: Coupon[] = [
+    { name: '10% 할인 쿠폰', discount: 0.1 },
+    { name: '20% 할인 쿠폰', discount: 0.2 },
+    // 적용할 수 있는 쿠폰들을 배열에 넣어주세요
+  ];
+
+  const applyCoupon = (coupon: Coupon) => {
+    const discountedPrice = price * (1 - coupon.discount);
+    setCurrentPrice(discountedPrice);
+    setSelectedCoupon(coupon);
+  };
+
+  const removeCoupon = () => {
+    setCurrentPrice(price);
+    setSelectedCoupon(null);
+  };
+
   return (
-    <>
-      <div className='applycoupon'>
-        <span>쿠폰 할인 금액</span>
-        <span>-{discount}원</span>
-      </div>
-    </>
+    <div>
+      <FormControlLabel
+        control={
+          <Switch defaultChecked checked={checked} onChange={handleChange} />
+        }
+        label={checked ? '최대 할인이 적용됐어요' : '최대 할인을 적용하세요'}
+      />
+
+      <h2>상품 가격: {currentPrice}원</h2>
+      {selectedCoupon ? (
+        <p>적용된 쿠폰: {selectedCoupon.name}</p>
+      ) : (
+        <p>적용된 쿠폰이 없습니다.</p>
+      )}
+      <h3>쿠폰 선택</h3>
+      <ul>
+        {coupons.map((coupon, index) => (
+          <li key={index}>
+            <button onClick={() => applyCoupon(coupon)}>{coupon.name}</button>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
