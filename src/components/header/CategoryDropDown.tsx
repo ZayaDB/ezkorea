@@ -64,13 +64,19 @@ const CategoryDropDown: React.FC = () => {
           {/* 카테고리 이름 렌더링 */}
           {category.name}
           {/* ALL이 아닌 subCategories의 이름만 필터링하여 렌더링 */}
-          {category.subCategories
-            .filter((subCategory) => subCategory.name !== 'ALL')
-            .map((subCategory, subIndex) => (
-              <LinkItem key={subIndex} to={`/${subCategory.name.toLowerCase()}`} color='inherit'>
-                {subCategory.name}
-              </LinkItem>
-            ))}
+          <div style={{ display: 'flex', flexDirection: 'row' }}>
+            {category.subCategories
+              .filter(subCategory => subCategory.name !== 'ALL')
+              .map((subCategory, subIndex) => (
+                <LinkItem
+                  key={subIndex}
+                  to={`/${subCategory.name.toLowerCase()}`}
+                  color='inherit'
+                >
+                  {subCategory.name}
+                </LinkItem>
+              ))}
+          </div>
         </div>
       ))}
     </DropdownContainer>

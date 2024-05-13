@@ -191,6 +191,7 @@ const ProductList = () => {
                     paddingBottom: '3.7px',
                     paddingLeft: '5px',
                     paddingRight: '5px',
+                    marginRight: '10px',
                     '&:hover': {
                       backgroundColor: 'white',
                       border: '1px solid gray',
@@ -229,9 +230,10 @@ const ProductList = () => {
                 </Box>
               </Modal>
             )}
+
             <FormControl
               sx={{
-                m: 1,
+                m: '8px 0',
                 minWidth: isMobile ? 40 : 120,
                 maxWidth: isMobile ? 80 : 200,
                 paddingTop: isMobile ? 0.76 : 0,
@@ -248,11 +250,36 @@ const ProductList = () => {
                   zIndex: 0,
                 }}
               >
-                <MenuItem value='인기순'>인기순</MenuItem>
-                <MenuItem value='리뷰많은순'>리뷰많은순</MenuItem>
-                <MenuItem value='낮은가격순'>낮은가격순</MenuItem>
-                <MenuItem value='높은가격순'>높은가격순</MenuItem>
-                <MenuItem value='할인율높은순'>할인율높은순</MenuItem>
+                <MenuItem
+                  sx={{ fontSize: isMobile ? '12px' : '14px' }}
+                  value='인기순'
+                >
+                  인기순
+                </MenuItem>
+                <MenuItem
+                  sx={{ fontSize: isMobile ? '12px' : '14px' }}
+                  value='리뷰많은순'
+                >
+                  리뷰많은순
+                </MenuItem>
+                <MenuItem
+                  sx={{ fontSize: isMobile ? '12px' : '14px' }}
+                  value='낮은가격순'
+                >
+                  낮은가격순
+                </MenuItem>
+                <MenuItem
+                  sx={{ fontSize: isMobile ? '12px' : '14px' }}
+                  value='높은가격순'
+                >
+                  높은가격순
+                </MenuItem>
+                <MenuItem
+                  sx={{ fontSize: isMobile ? '12px' : '14px' }}
+                  value='할인율높은순'
+                >
+                  할인율높은순
+                </MenuItem>
               </Select>
             </FormControl>
           </Box>
