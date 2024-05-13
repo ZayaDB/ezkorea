@@ -16,7 +16,8 @@ import MyPage from './pages/MyPage';
 import NotFound from './pages/NotFound';
 import SignUp from './pages/SignUp';
 import CommunityDetailPage from './pages/CommunityDetailPage';
-import HeartProduct from './components/category/HeartProduct';
+import RecentViewList from './components/mypage/RecentViewList';
+import LikesProduct from './components/mypage/LikesProducts';
 
 function App() {
   const sections = [
@@ -46,7 +47,8 @@ function App() {
           />
           <Route path='/order' element={<OrderPage />} />
           <Route path='/my' element={<MyPage />} />
-          <Route path='/my/wishlist' element={<HeartProduct />} />
+          <Route path='/my/wishlist' element={<LikesProduct />} />
+          <Route path='/my/recentview' element={<RecentViewList />} />
           <Route path='*' element={<NotFound />} />
           <Route
             path='/community/detail/:feedId'

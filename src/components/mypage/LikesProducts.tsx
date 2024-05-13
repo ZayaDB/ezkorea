@@ -1,10 +1,9 @@
-
 import ProductItem from '../category/ProductItem'; // ProductItem 컴포넌트를 가져옴
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/config';
 import '../../styles/category/likes.scss';
 
-export default function HeartProduct() {
+export default function LikesProduct() {
   const isLikedMap = useSelector((state: RootState) => state.category.isLiked);
   const products = useSelector((state: RootState) => state.category.products);
 
@@ -15,12 +14,12 @@ export default function HeartProduct() {
 
   return (
     <div className='likes-page'>
+      <h1> 찜한 상품 </h1>
       <div className='likes-content'>
-      
-          {/* 좋아요가 눌려있는 상품들을 순회하면서 ProductItem 컴포넌트를 렌더링 */}
-          {likedProducts.map(product => (
-            <ProductItem key={product.productId} prod={product} />
-          ))}
+        {/* 좋아요가 눌려있는 상품들을 순회하면서 ProductItem 컴포넌트를 렌더링 */}
+        {likedProducts.map(product => (
+          <ProductItem key={product.productId} prod={product} />
+        ))}
       </div>
     </div>
   );

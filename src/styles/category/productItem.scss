@@ -25,7 +25,7 @@ $font-weight-medium: 500;
 $font-weight-regular: 400;
 
 .prod-item {
-  width: 32.0%;
+  width: 32%;
   height: calc(100% - 10px);
   margin: 3px;
   margin-bottom: 20px;
@@ -132,6 +132,18 @@ $font-weight-regular: 400;
     }
   }
 }
+@media (max-width: 1000px) {
+  .prod-item {
+    width: 48%;
+    .link-to-detail {
+      .prod-img {
+        width: 100%;
+        height: 250px;
+      }
+    }
+  }
+}
+
 @media (max-width: 950px) {
   .prod-item {
     .link-to-detail {
@@ -156,7 +168,7 @@ $font-weight-regular: 400;
 @media (max-width: 768px) {
   .prod-item {
     width: 48%;
-    height: calc(90% - 10px);
+    height: calc(80% - 10px);
     margin: 3px;
     margin-bottom: 10px;
 
@@ -208,6 +220,29 @@ $font-weight-regular: 400;
     font-size: $font-size-s;
   }
 }
+@media (max-width: 665px) {
+  .prod-item {
+    height: 80%;
+    .link-to-detail {
+      .prod-img {
+        height: 180px;
+      }
+      .prod-info {
+        height: 140px;
+      }
+    }
+  }
+}
+@media (max-width: 550px) {
+  .link-to-detail {
+    .prod-img {
+      height: 180px;
+    }
+    .prod-info {
+      height: 120px;
+    }
+  }
+}
 
 // 반응형 미디어 쿼리
 @media (max-width: 460px) {
@@ -215,6 +250,89 @@ $font-weight-regular: 400;
     width: 48%;
     height: calc(90% - 10px);
     margin: 3px;
+    margin-bottom: 10px;
+
+    .link-to-detail {
+      .prod-img {
+        height: 180px;
+      }
+      .prod-info {
+        height: 120px;
+        @for $i from 1 through 6 {
+          .color-circle:nth-child(#{$i}) {
+            border-radius: 100%;
+            width: 7px;
+            height: 7px;
+            // margin: 1px;
+            // line-height: 50px;
+          }
+        }
+
+        .prod-name {
+          font-size: $font-size-xxs;
+          margin-bottom: 5px;
+        }
+
+        .prod-brand {
+          padding-bottom: 2px;
+          font-size: 10px;
+          // height: 10%;
+          margin-bottom: 1px;
+          margin-top: 1px;
+        }
+
+        .prod-discount {
+          font-size: 10px;
+          color: rgb(113, 223, 66);
+        }
+
+        .prod-prevPrice {
+          font-size: 10px;
+          text-decoration: line-through;
+        }
+
+        .prod-price {
+          font-size: $font-size-xs;
+        }
+        .prod-review-icon {
+          width: 10px;
+          height: 11px;
+          margin-right: 5px;
+        }
+        .prod-commentCount {
+          font-size: 8px;
+        }
+      }
+    }
+    .color-heart-box {
+      padding-left: 10px;
+      padding-bottom: 2px;
+      padding-top: 0;
+      .color-wrapper {
+        display: flex;
+        flex-direction: row;
+        padding-top: 9px;
+
+        @for $i from 1 through 6 {
+          .color-circle:nth-child(#{$i}) {
+            border-radius: 100%;
+            width: 6px;
+            height: 6px;
+            margin: 1px;
+            line-height: 50px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// 반응형 미디어 쿼리
+@media (max-width: 420px) {
+  .prod-item {
+    width: 44%;
+    height: calc(90% - 10px);
+    // margin: 3px;
     margin-bottom: 10px;
 
     .link-to-detail {

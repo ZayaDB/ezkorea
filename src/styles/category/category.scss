@@ -24,7 +24,7 @@ body {
   margin: 0 auto;
   // background-color: pink;
   @media (min-width: 1200px) {
-    width: 1200px;
+    width: 1000px;
   }
 }
 
@@ -32,7 +32,7 @@ body {
   // padding-top: 170px;
   display: flex;
   flex-direction: row;
-
+  // width: 1200px;
   overflow-x: hidden;
 }
 
