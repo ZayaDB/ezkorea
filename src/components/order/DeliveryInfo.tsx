@@ -15,7 +15,6 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import CloseButton from 'react-bootstrap/CloseButton';
 import Postcode from './Postcode';
 import { RootState } from '../../redux/config';
-import { useAddressBook } from '../../hooks/useAddressBook';
 
 /* 수령자 정보 
   - 1. 주문자 정보와 동일 : 정보 가져오기(CustomerInformation에서 내려받기)
@@ -117,15 +116,6 @@ function DeliveryInfoContent() {
       <TextField fullWidth placeholder='배송 메시지' />
     </div>
   );
-}
-
-/* address 타입 지정 */
-interface Address {
-  name: string;
-  nickname: string;
-  address: string;
-  zipcode: string;
-  phoneNumber: string;
 }
 
 /* 주소록 기능 */
