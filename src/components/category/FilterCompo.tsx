@@ -4,8 +4,8 @@ import BrandFilter from './BrandFilter';
 import PriceFilter from './PriceFilter';
 import ColorFilter from './ColorFilter';
 import ThemeFilter from './ThemeFilter';
-import { RootState } from '../../redux/config';
-import { useSelector, useDispatch } from 'react-redux';
+// import { RootState } from '../../redux/config';
+import {  useDispatch } from 'react-redux';
 import { clearFilters, setRendering } from '../../redux/slices/categorySlice';
 import '../../styles/category/sideFilter.scss';
 

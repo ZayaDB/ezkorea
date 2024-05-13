@@ -98,12 +98,12 @@ const ProductList = () => {
     setCurrentPage(page);
   };
 
-  const currentProducts = sortedProducts.filter(
-    product =>
-      product.category1 === selectedCategory &&
-      (selectedSubCategory === 'ALL' ||
-        product.category2 === selectedSubCategory)
-  );
+  // const currentProducts = sortedProducts.filter(
+  //   product =>
+  //     product.category1 === selectedCategory &&
+  //     (selectedSubCategory === 'ALL' ||
+  //       product.category2 === selectedSubCategory)
+  // );
 
   // 현재페이지에서보여줄 정렬이 완료된 아이템을 처음~마지막만 잘라 보여줌
   // const currentItems = currentProducts.slice(indexOfFirstItem, indexOfLastItem);
