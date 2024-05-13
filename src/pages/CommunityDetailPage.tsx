@@ -16,6 +16,8 @@ import LikeButton from '../components/community/main/LikeButton';
 import ReactTimeAgo from 'react-time-ago'; // react-time-ago 라이브러리를 가져옵니다.
 import TimeAgo from 'javascript-time-ago'; // javascript-time-ago 라이브러리를 가져옵니다.
 import koLocale from 'javascript-time-ago/locale/ko'; // 한국어 언어 파일을 가져옵니다.
+import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
+import { Link } from 'react-router-dom';
 
 // 한국어 로캘 설정
 TimeAgo.addLocale(koLocale);
@@ -95,20 +97,24 @@ const CommunityDetailPage: React.FC = () => {
     >
       <Grid item xs={12} className='card-container'>
         <Card variant='outlined'>
-          <CardHeader
-            avatar={<Avatar src={feed.profileImage} alt='Profile' />}
-            title={feed.accountName}
-            subheader={
-              <ReactTimeAgo date={new Date(feed.creationDate)} locale='ko' />
-            } // 한국어 형식으로 표시
-          />
+          <div className='feed-profile'>
+            <CardHeader
+              avatar={<Avatar src={feed.profileImage} alt='Profile' />}
+              title={feed.accountName}
+              subheader={
+                <ReactTimeAgo date={new Date(feed.creationDate)} locale='ko' />
+              } // 한국어 형식으로 표시
+            />
+            <Button variant='contained'>
+              <Link
+                to={`/community/modify/${feed.feedId}`}
+                style={{ textDecoration: 'none', color: 'unset' }}
+              >
+                수정하기
+              </Link>
+            </Button>
+          </div>
           <CardContent>
-            <Typography variant='h5' gutterBottom>
-              {feed.title}
-            </Typography>
-            <Typography variant='body1' paragraph>
-              {feed.description}
-            </Typography>
             <div className='thumbnail-container'>
               <div className='main-image'>
                 <img src={feed.images[selectedImageIndex]} alt='Main' />
@@ -135,20 +141,79 @@ const CommunityDetailPage: React.FC = () => {
                 ))}
               </div>
             </div>
+            <div>
+              <Typography variant='h5' className='feed-title'>
+                {feed.title}
+              </Typography>
+              <Typography className='feed-description'>
+                {feed.description}
+              </Typography>
+            </div>
           </CardContent>
-          <div className='icon-container'>
+          <dl className='icon-container'>
             <LikeButton
               feedId={feed.feedId}
               initialLiked={isLiked}
               onLike={handleLike}
-              iconSize='32px'
+              iconSize='24px'
             />
-            <Typography>{likes}</Typography>
-            <CommentIcon sx={{ fontSize: '32px' }} />
-            <Typography>{feed.commentCount}</Typography>
+            <Typography>
+              <dt className='dot d-data'>좋아요 {likes}</dt>
+            </Typography>
+            <CommentIcon sx={{ fontSize: '24px' }} />
+            <Typography>
+              <dt className='dot d-data'>댓글 {feed.commentCount}</dt>
+            </Typography>
+            <ShareOutlinedIcon sx={{ fontSize: '24px' }}></ShareOutlinedIcon>
+            <Typography>
+              <dt className='dot d-data'>공유하기</dt>
+            </Typography>
+          </dl>
+
+          {/* 여기에는 컬러랑 컨셉 */}
+          <div className='concept-color-tags'>
+            <Typography variant='body2' color='textSecondary' gutterBottom>
+              컨셉:
+            </Typography>
+            <div>
+              {feed.concepts.map((concept: string, index: number) => (
+                <span key={index} className='concept-tag'>
+                  {concept}
+                </span>
+              ))}
+            </div>
+            <Typography variant='body2' color='textSecondary' gutterBottom>
+              컬러:
+            </Typography>
+            <div>
+              {feed.colors.map((color: string, index: number) => (
+                <span key={index} className='color-tag'>
+                  {color}
+                </span>
+              ))}
+            </div>
           </div>
         </Card>
       </Grid>
+      {/* 여기에 상품 리스트 */}
+      <Grid container direction='row' spacing={2} className='product-container'>
+        {feed.selectedProducts.map((product: any) => (
+          <Grid item key={product.productId}>
+            <Card variant='outlined' className='product-card'>
+              <CardContent>
+                <img src={product.thumbnail} alt={product.productName} />
+                <Typography variant='h6' gutterBottom>
+                  {product.productName}
+                </Typography>
+                <Typography variant='body1' gutterBottom>
+                  Price: {product.price}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+
       <Grid item xs={12} className='comments-container'>
         <Typography variant='h6' gutterBottom>
           Comments

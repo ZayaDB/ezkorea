@@ -4,15 +4,15 @@ import BrandFilter from './BrandFilter';
 import PriceFilter from './PriceFilter';
 import ColorFilter from './ColorFilter';
 import ThemeFilter from './ThemeFilter';
-import { RootState } from '../../redux/config';
-import { useSelector, useDispatch } from 'react-redux';
+// import { RootState } from '../../redux/config';
+import {  useDispatch } from 'react-redux';
 import { clearFilters, setRendering } from '../../redux/slices/categorySlice';
 import '../../styles/category/sideFilter.scss';
 
 const FilterCompo = () => {
-  const selectedFilters = useSelector(
-    (state: RootState) => state.category.selectedFilters
-  );
+  // const selectedFilters = useSelector(
+  //   (state: RootState) => state.category.selectedFilters
+  // );
   const dispatch = useDispatch();
   const [brandFilterOpen, setBrandFilterOpen] = useState(false);
   const [priceFilterOpen, setPriceFilterOpen] = useState(false);
@@ -98,8 +98,7 @@ const FilterCompo = () => {
         sx={{
           marginTop: '20px',
           marginBottom: '20px',
-          marginLeft: '60%',
-          width: '89px',
+          // marginLeft: '80%',
           backgroundColor: 'black',
           color: 'white',
           '&:hover': {

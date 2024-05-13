@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+
 import ProductItem from './ProductItem';
 import useSort from '../../hooks/shop/useSort';
 import { useEffect, useState } from 'react';
@@ -27,19 +27,19 @@ export default function SaleProduct() {
   const sortedProducts = useSort(prodData, sortOption);
 
   return (
-    <Box className='best-content'>
+    <div className='best-content'>
       <div
         style={{ textAlign: 'center', paddingTop: '40px', fontSize: '25px' }}
       >
         SALES
       </div>
-      <Box className='prod-wrapper-best'>
+      <div className='prod-wrapper-best'>
         {sortedProducts.map(prod => (
           // <Box className='bestProds'>
           <ProductItem key={prod.productId} prod={prod} />
           // </Box>
         ))}
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 }

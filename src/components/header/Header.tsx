@@ -205,7 +205,7 @@ export default function Header({ title }: HeaderProps) {
               // menuItems={['마이페이지', '찜한 상품', '저장한 피드', '로그아웃']}
               menuItems={[
                 { title: '마이페이지', path: '/login' },
-                { title: '찜한 상품', path: '/wishlist' },
+                { title: '찜한 상품', path: '/my/wishlist' },
                 { title: '저장한 피드', path: '/saved-feed' },
                 { title: '로그아웃', path: '/logout' },
               ]}
@@ -264,12 +264,12 @@ export default function Header({ title }: HeaderProps) {
         <Toolbar
           variant='dense'
           sx={{
-            width: '99.02vw',
+            width: 'auto',
             position: 'sticky',
             mt: '-3px',
             // mb: '20px',
             borderRadius: 1,
-            borderBottom: 1,
+            // borderBottom: 1,
             borderColor: 'divider',
             fontSize: '16px',
             zIndex: 'drawer',

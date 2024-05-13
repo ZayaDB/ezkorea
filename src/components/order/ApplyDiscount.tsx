@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import{ ChangeEvent, useState } from 'react';
 import Head from './Head';
 import { Button, TextField } from '@mui/material';
 import FormControlLabel from '@mui/material/FormControlLabel';

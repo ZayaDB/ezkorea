@@ -91,6 +91,11 @@ const StyledButton2 = styled(Button)(() => ({
   },
 }));
 
+// const User = {
+//   email: 'dururu@gmail.com',
+//   pw: 'dururu123!',
+// };
+
 export default function SignIn() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -125,6 +130,14 @@ export default function SignIn() {
       setPwValid(false);
     }
   };
+
+  // const onClickConfirmButton = () => {
+  //   if (email === User.email && pw === User.pw) {
+  //     setIsModalOpen(true);
+  //   } else {
+  //     alert('등록되지 않은 회원입니다.');
+  //   }
+  // };
 
   return (
     <ThemeProvider theme={theme}>
@@ -204,6 +217,7 @@ export default function SignIn() {
               }}
               size='large'
               onClick={handleOpen}
+              // onClick={onClickConfirmButton}
             >
               로그인하기
               {/* LOGIN */}
