@@ -1,4 +1,5 @@
 $color-point: #5ff531;
+$color-point-secondary: #b7ff8b;
 $color-black: #191919;
 $color-gray: #4c4c4c;
 $color-lightgray: #e5e5e5;
@@ -11,6 +12,10 @@ $color-lightgray: #e5e5e5;
   color: $color-gray;
 }
 
-.lightgary {
+.lightgray {
   color: $color-lightgray;
+}
+
+.red {
+  color: red;
 }

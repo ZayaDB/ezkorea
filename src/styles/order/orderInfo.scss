@@ -1,0 +1,54 @@
+@import '../utils/fonts.scss';
+@import '../utils/color.scss';
+
+.order-info {
+  border: solid 2px black;
+  width: 100%;
+  padding: 30px 45px;
+  .title {
+    @include body1-bold;
+  }
+  .order-summary {
+    div {
+      margin-bottom: 10px;
+    }
+    .coupon {
+    }
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .order-info {
+    position: sticky;
+    top: 100px;
+    right: 0;
+    width: 50%;
+    height: 50%;
+    margin-left: 30px;
+    padding: 25px 20px;
+    .order-summary {
+      div {
+        margin-bottom: 5px;
+      }
+
+      &-consent {
+      }
+    }
+
+    .line {
+      border-color: $color-lightgray;
+      border-width: 1px;
+    }
+  }
+}
+
+.space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .total-amount {
+    font-weight: 700;
+    font-size: 25px;
+    display: flex;
+  }
+}
