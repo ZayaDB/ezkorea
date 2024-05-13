@@ -91,10 +91,10 @@ const StyledButton2 = styled(Button)(() => ({
   },
 }));
 
-const User = {
-  email: 'dururu@gmail.com',
-  pw: 'dururu123!',
-};
+// const User = {
+//   email: 'dururu@gmail.com',
+//   pw: 'dururu123!',
+// };
 
 export default function SignIn() {
   const [open, setOpen] = useState(false);
