@@ -67,7 +67,7 @@ export default function OrderInfo() {
 }
 
 function CheckboxesGroup() {
-  const [checked, setChecked] = React.useState([true, false]);
+  const [checked, setChecked] = useState([false, false]);
 
   const handleChange1 = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked([event.target.checked, event.target.checked]);
