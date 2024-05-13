@@ -4,7 +4,7 @@ import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import { useState } from 'react';
-
+import '../../styles/productDetail/inquire.scss';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
