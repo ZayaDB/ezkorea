@@ -264,7 +264,7 @@ export default function Header({ title }: HeaderProps) {
         <Toolbar
           variant='dense'
           sx={{
-            width: '99.02vw',
+            width: 'auto',
             position: 'sticky',
             mt: '-3px',
             // mb: '20px',

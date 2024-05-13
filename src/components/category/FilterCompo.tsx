@@ -98,8 +98,7 @@ const FilterCompo = () => {
         sx={{
           marginTop: '20px',
           marginBottom: '20px',
-          marginLeft: '60%',
-          width: '89px',
+          // marginLeft: '80%',
           backgroundColor: 'black',
           color: 'white',
           '&:hover': {
