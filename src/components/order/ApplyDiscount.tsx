@@ -1,9 +1,9 @@
-import React, { ChangeEvent, useState } from 'react';
+import{ ChangeEvent, useState } from 'react';
 import Head from './Head';
 import { Button, TextField } from '@mui/material';
 import { addCommasToNumber } from '../../hooks/addCommasToNumber';
-import { updateMileage } from '../../redux/slices/mileageSlice';
-import { useDispatch } from 'react-redux';
+// import { updateMileage } from '../../redux/slices/mileageSlice';
+// import { useDispatch } from 'react-redux';
 
 /* 할인 적용
   - 쿠폰 : 쿠폰 적용 시 할인된 가격 표시

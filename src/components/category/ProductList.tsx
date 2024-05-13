@@ -106,7 +106,7 @@ const ProductList = () => {
   );
 
   // 현재페이지에서보여줄 정렬이 완료된 아이템을 처음~마지막만 잘라 보여줌
-  const currentItems = currentProducts.slice(indexOfFirstItem, indexOfLastItem);
+  // const currentItems = currentProducts.slice(indexOfFirstItem, indexOfLastItem);
 
   // 필터 버튼 클릭 핸들러
   const handleFilterButtonClick = () => {
