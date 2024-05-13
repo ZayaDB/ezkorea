@@ -415,41 +415,16 @@ export default function CommunityModifyPage() {
             ))}
           </List>
 
-          <SubTitle text='컨셉 선택' isRequired={true}></SubTitle>
-          <Box>
-            {['antique', 'gaming', 'simple', 'unique'].map(concept => (
-              <SelectButton
-                key={concept}
-                onClick={() => toggleConcept(concept)}
-                sx={{
-                  bgcolor: selectedConcepts.includes(concept)
-                    ? 'primary.main'
-                    : 'inherit',
-                  border: selectedConcepts.includes(concept) ? 'none' : 'solid',
-                }}
-                variant='outlined'
-              >
-                {concept}
-              </SelectButton>
-            ))}
-            {errors.submissionConcepts && (
-              <ErrorMsg color='error'>
-                {errors.submissionConcepts.message}
-              </ErrorMsg>
-            )}
-          </Box>
           <Box>
             <SubTitle text='컬러 선택' isRequired={true} />
             {['black', 'white', 'wood', 'pink'].map(color => (
               <SelectButton
                 key={color}
-                variant='outlined'
                 onClick={() => toggleColor(color)}
                 sx={{
-                  bgcolor: selectedColors.includes(color)
-                    ? 'primary.main'
-                    : 'inherit',
-                  border: selectedColors.includes(color) ? 'none' : 'solid',
+                  ...(selectedColors.includes(color)
+                    ? containedButtonStyles
+                    : outlineButtonStyles),
                 }}
               >
                 <ColorCircle color={color} />
@@ -459,6 +434,28 @@ export default function CommunityModifyPage() {
             {errors.submissionColors && (
               <ErrorMsg color='error'>
                 {errors.submissionColors.message}
+              </ErrorMsg>
+            )}
+          </Box>
+
+          <SubTitle text='컨셉 선택' isRequired={true}></SubTitle>
+          <Box>
+            {['antique', 'gaming', 'simple', 'unique'].map(concept => (
+              <SelectButton
+                key={concept}
+                onClick={() => toggleConcept(concept)}
+                sx={{
+                  ...(selectedConcepts.includes(concept)
+                    ? containedButtonStyles
+                    : outlineButtonStyles),
+                }}
+              >
+                {concept}
+              </SelectButton>
+            ))}
+            {errors.submissionConcepts && (
+              <ErrorMsg color='error'>
+                {errors.submissionConcepts.message}
               </ErrorMsg>
             )}
           </Box>
@@ -547,22 +544,45 @@ const ProductBox = styled(Box)({
 });
 
 const SelectButton = styled(Button)({
-  marginY: '8px',
-  color: 'black',
-  margin: '0 8px 8px 0',
-  minWidth: '115px',
-  borderColor: theme.palette.grey[200],
+  width: 96,
+  padding: '0 12px',
+  fontSize: '14px',
+  height: '32px',
+  borderRadius: '16px',
+  marginRight: '8px',
 });
 
 // Color 표시 원 스타일 정의
 const ColorCircle = styled(Box)<{ color: string }>(({ color }) => ({
-  width: 24,
-  height: 24,
+  width: 15,
+  height: 15,
   borderRadius: '50%',
   border: color === 'white' ? '1px solid black' : 'none',
   backgroundColor: color === 'wood' ? '#9A6322' : color,
   marginRight: '8px',
 }));
+
+const containedButtonStyles = {
+  color: '#000000',
+  border: '1px solid #5FF531',
+  backgroundColor: '#5FF531', // 클릭 효과와 호버 효과를 일관성 있게 만들기 위해 변경
+
+  '&:hover': {
+    color: '#000000',
+    backgroundColor: '#B7FF8B', // 클릭 효과와 호버 효과를 일관성 있게 만들기 위해 변경
+    border: '1px solid #5FF531',
+  },
+};
+
+const outlineButtonStyles = {
+  border: '1px solid rgb(218, 221, 224)',
+  color: '#2F3438',
+  '&:hover': {
+    color: '#5FF531',
+    border: '1px solid #000000',
+    backgroundColor: 'transparent',
+  },
+};
 
 const ErrorMsg = styled(Typography)({
   margin: '0px',
