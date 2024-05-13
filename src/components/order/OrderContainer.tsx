@@ -61,7 +61,6 @@ function CustomerInformation() {
 
 export default function OrderContainer() {
   return (
-    /* container 부분 50%만 차지하게 해야함 */
     <div className='order-content'>
       <div className='margin-bottom'>
         <CustomerInformation />
