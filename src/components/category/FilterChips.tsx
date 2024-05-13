@@ -19,7 +19,7 @@ const FilterChips = () => {
     for (const key in selectedFilters) {
       if (Object.prototype.hasOwnProperty.call(selectedFilters, key)) {
         const value = selectedFilters[key as keyof Filters]; // key를 keyof Filters로 타입 캐스팅
-        console.log(value);
+        // console.log(value);
         // 값이 배열인 경우 각 요소를 별도의 Chip으로 추가
         if (typeof value !== 'number') {
           value.forEach((item: string | number) => {

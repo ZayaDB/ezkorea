@@ -16,13 +16,24 @@ $font-weight-regular: 400;
 * {
   scroll-behavior: smooth;
 }
+body {
+  width: auto;
+}
+.category-page {
+  width:75vw;
+  margin: 0 auto;
+  // background-color: pink;
+  @media (min-width: 1200px) {
+    width: 1200px;
+  }
+}
+
 .category-content {
   // padding-top: 170px;
   display: flex;
   flex-direction: row;
-  width: 100%;
-  max-width: 1200px;
-  margin: auto;
+
+  overflow-x: hidden;
 }
 
 .sideNavigation {
@@ -41,7 +52,7 @@ $font-weight-regular: 400;
   left: 90%;
   top: 30%;
   margin: 5px;
-  
+
   .link-to-detail {
     text-decoration: none;
     color: black;
