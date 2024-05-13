@@ -21,18 +21,24 @@ const StyleFilter: React.FC<StyleFilterProps> = ({
       {styleVariants.map((style, index) => (
         <Button
           key={index}
-          variant={styleIndexes.includes(style) ? 'contained' : 'outlined'}
+          // variant={styleIndexes.includes(style) ? 'contained' : 'outlined'}
           onClick={() => styleButtonClick(style)}
+          disableRipple
           sx={{
-            p: 1,
+            padding: '10px 14px',
             m: 0,
+            fontSize: '14px',
             lineHeight: '16px',
+            // background: styleIndexes.includes(style) ? 'white' : 'outlined',
             ...(!styleIndexes.includes(style) && {
               // 아웃라인 버튼일 경우
-              border: '1px solid #000', // 아웃라인 버튼의 테두리 스타일을 지정합니다
-              color: '#000', // 아웃라인 버튼의 폰트 색상을 지정합니다
+              border: '1px solid rgb(218, 221, 224)', // 아웃라인 버튼의 테두리 스타일을 지정합니다
+
+              color: '#2F3438', // 아웃라인 버튼의 폰트 색상을 지정합니다
               '&:hover': {
-                color: '#5FF531', // 컨테인드 버튼의 폰트 색상을 호버시 변경합니다
+                color: '#000000', // 컨테인드 버튼의 폰트 색상을 호버시 변경합니다
+                border: '1px solid #7f7f7f',
+                backgroundColor: 'transparent',
               },
             }),
             ...(styleIndexes.includes(style) && {
