@@ -14,7 +14,7 @@ export interface Products {
   hoverImage: string;
   views: number;
   commentCount: number;
-  theme: string;
+  themes: string[];
 }
 
 export interface SubCategory {

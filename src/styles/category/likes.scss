@@ -1,0 +1,21 @@
+body {
+  width: auto;
+}
+
+.likes-page {
+  width: 75vw;
+  margin: 0 auto;
+  // background-color: pink;
+  @media (min-width: 1200px) {
+    width: 1200px;
+  }
+}
+
+.likes-content {
+  // padding-top: 170px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow-x: hidden;
+  justify-content: center;
+}

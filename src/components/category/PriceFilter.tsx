@@ -13,7 +13,9 @@ const formatPriceWithComma = (price: number): string => {
 const PriceFilter = () => {
   const [price, setPrice] = useState<number[]>([0, 1000000]); // 가격 범위 선택
   const dispatch = useDispatch();
-  const selectedFilters = useSelector((state: RootState) => state.category.selectedFilters);
+  const selectedFilters = useSelector(
+    (state: RootState) => state.category.selectedFilters
+  );
 
   const handlePriceChange = (event: Event, newValue: number | number[]) => {
     const newPrice = newValue as number[]; // 새로운 가격 범위 값
@@ -49,7 +51,7 @@ const PriceFilter = () => {
         marks={marks}
         onChange={handlePriceChange}
         valueLabelDisplay='auto'
-        sx={{ color: 'black' }}
+        sx={{ color: 'black', width: '90%' }}
         valueLabelFormat={value =>
           `~${formatPriceWithComma(value as number)}원`
         } // 숫자를 천 단위로 포맷하여 표시

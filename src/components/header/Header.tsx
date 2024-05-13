@@ -206,6 +206,7 @@ export default function Header({ title }: HeaderProps) {
               menuItems={[
                 { title: '마이페이지', path: '/login' },
                 { title: '찜한 상품', path: '/my/wishlist' },
+                { title: '최근 본 상품', path: '/my/recentview' },
                 { title: '저장한 피드', path: '/saved-feed' },
                 { title: '로그아웃', path: '/logout' },
               ]}
