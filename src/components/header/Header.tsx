@@ -264,12 +264,12 @@ export default function Header({ title }: HeaderProps) {
         <Toolbar
           variant='dense'
           sx={{
-            width: '99.02vw',
+            width: 'auto',
             position: 'sticky',
             mt: '-3px',
             // mb: '20px',
             borderRadius: 1,
-            borderBottom: 1,
+            // borderBottom: 1,
             borderColor: 'divider',
             fontSize: '16px',
             zIndex: 'drawer',
