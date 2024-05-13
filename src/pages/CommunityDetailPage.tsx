@@ -94,8 +94,9 @@ const CommunityDetailPage: React.FC = () => {
       direction='column'
       alignItems='center'
       className='community-detail-page'
+      sx={{ border: 'none' }}
     >
-      <Grid item xs={12} className='card-container'>
+      <Grid item xs={12} className='card-container' sx={{ border: 'none' }}>
         <Card variant='outlined'>
           <div className='feed-profile'>
             <CardHeader

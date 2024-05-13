@@ -1,28 +1,27 @@
 /* eslint-disable no-unused-vars */
-// ColorFilter.tsx
+// ConceptFilter.tsx
 import React from 'react';
-import { Button, Box } from '@mui/material';
+import { Button } from '@mui/material';
 import './../../../styles/community/main.scss';
-import styled from '@emotion/styled';
 
-interface ColorFilterProps {
-  colorIndexes: string[];
-  colorButtonClick: (color: string) => void;
+interface ConceptFilterProps {
+  conceptIndexes: string[];
+  conceptButtonClick: (concept: string) => void;
 }
 
-const ColorFilter: React.FC<ColorFilterProps> = ({
-  colorIndexes,
-  colorButtonClick,
+const ConceptFilter: React.FC<ConceptFilterProps> = ({
+  conceptIndexes,
+  conceptButtonClick,
 }) => {
-  const colors = ['white', 'black', 'pink', 'wood'];
+  const conceptVariants = ['gaming', 'simple', 'antique', 'unique'];
 
   return (
-    <div className='color-filter'>
-      <p className='filter-title'>컬러 선택</p>
-      {colors.map((color, index) => (
+    <div className='concept-filter'>
+      <p className='filter-title'>Concept</p>
+      {conceptVariants.map((concept, index) => (
         <Button
           key={index}
-          onClick={() => colorButtonClick(color)}
+          onClick={() => conceptButtonClick(concept)}
           disableRipple
           sx={{
             width: '96px',
@@ -30,30 +29,19 @@ const ColorFilter: React.FC<ColorFilterProps> = ({
             fontSize: '14px',
             height: '32px',
             borderRadius: '16px',
-            ...(colorIndexes.includes(color)
+            ...(conceptIndexes.includes(concept)
               ? containedButtonStyles
               : outlineButtonStyles),
           }}
         >
-          <ColorCircle color={color} />
-          {color}
+          {concept}
         </Button>
       ))}
     </div>
   );
 };
 
-export default ColorFilter;
-
-const ColorCircle = styled(Box)<{ color: string }>(({ color }) => ({
-  width: 15,
-  height: 15,
-  color: '#000000',
-  borderRadius: '50%',
-  border: color === 'white' ? '1px solid #E5E5E5' : 'contained',
-  backgroundColor: color === 'wood' ? '#9A6322' : color,
-  marginRight: '8px',
-}));
+export default ConceptFilter;
 
 const containedButtonStyles = {
   color: '#000000',

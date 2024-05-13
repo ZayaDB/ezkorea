@@ -17,12 +17,11 @@ const SortSelect = ({ sort, setSort }: SortSelectProps) => {
   const isMobile = useMediaQuery('(max-width:768px)');
 
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 1.5, p: 0 }}>
+    <Box>
       <FormControl
         sx={{
-          m: 1,
-          minWidth: isMobile ? 40 : 120,
-          maxWidth: isMobile ? 80 : 200,
+          minWidth: isMobile ? 40 : 80,
+          maxWidth: isMobile ? 80 : 120,
           paddingTop: isMobile ? 0.76 : 0,
         }}
       >
@@ -32,7 +31,7 @@ const SortSelect = ({ sort, setSort }: SortSelectProps) => {
           value={sort}
           onChange={event => setSort(event.target.value as string)}
           sx={{
-            height: isMobile ? '32px' : '42px',
+            height: isMobile ? '32px' : '32px',
             fontSize: isMobile ? '12px' : '14px',
           }}
         >
