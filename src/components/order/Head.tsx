@@ -3,8 +3,8 @@ import React from 'react';
 export default function Head({ text }: { text: string }) {
   return (
     <div className='order-head'>
-      <div className='order-head-text'>{text}</div>
       <div className='line'></div>
+      <div className='order-head-text'>{text}</div>
     </div>
   );
 }

@@ -20,14 +20,39 @@ function CustomerInformation() {
       <Head text='주문자 정보' />
 
       <div className='caption'>주문자</div>
-      <TextField fullWidth id='fullWidth' value={ordererName} disabled />
+      <TextField
+        fullWidth
+        className='text-field'
+        value={ordererName}
+        InputProps={{
+          readOnly: true,
+        }}
+      />
       <div className='caption'>휴대폰번호</div>
       <div className='orderer-num-container'>
-        <TextField className='num' fullWidth disabled />
+        <TextField
+          className='num'
+          fullWidth
+          InputProps={{
+            readOnly: true,
+          }}
+        />
         <span>-</span>
-        <TextField className='num' fullWidth disabled />
+        <TextField
+          className='num'
+          fullWidth
+          InputProps={{
+            readOnly: true,
+          }}
+        />
         <span>-</span>
-        <TextField className='num' fullWidth disabled />
+        <TextField
+          className='num'
+          fullWidth
+          InputProps={{
+            readOnly: true,
+          }}
+        />
       </div>
       <div></div>
     </div>
@@ -38,10 +63,18 @@ export default function OrderContainer() {
   return (
     /* container 부분 50%만 차지하게 해야함 */
     <div className='order-content'>
-      <CustomerInformation />
-      <DeliveryInfo />
-      <ApplyDiscount />
-      <PaymentMethod />
+      <div className='margin-bottom'>
+        <CustomerInformation />
+      </div>
+      <div className='margin-bottom'>
+        <DeliveryInfo />
+      </div>
+      <div className='margin-bottom'>
+        <ApplyDiscount />
+      </div>
+      <div className='margin-bottom'>
+        <PaymentMethod />
+      </div>
     </div>
   );
 }
