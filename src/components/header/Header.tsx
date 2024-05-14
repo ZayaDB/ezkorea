@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import {
   createTheme,
   ThemeProvider,
@@ -10,7 +11,6 @@ import {
   useMediaQuery,
 } from '@mui/material/';
 import { NavLink } from 'react-router-dom';
-import { useState } from 'react';
 import '../../styles/home/header.scss';
 import LoginIcon from '../../assets/images/icon_login2.png';
 import Notification1 from '../../assets/images/notification1.png';
@@ -58,8 +58,9 @@ const StyledButton = styled(Button)(() => ({
 
 export default function Header({ title }: HeaderProps) {
   const isMobile = useMediaQuery('(max-width:619px)');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isShoppingHovered, setIsShoppingHovered] = useState(false);
-  const [toolbarContent, setToolbarContent] = useState('Shop'); // 초기 내용은 'shop content'
+  const [toolbarContent, setToolbarContent] = useState('Shop');
 
   const handleShoppingClick = () => {
     setToolbarContent('Shop');
@@ -68,6 +69,23 @@ export default function Header({ title }: HeaderProps) {
   const handleCommunityClick = () => {
     setToolbarContent('Community');
   };
+
+  useEffect(() => {
+    const loggedInStatus = sessionStorage.getItem('isLoggedIn') === 'true';
+    setIsLoggedIn(loggedInStatus);
+  }, []);
+
+  const menuItems = [
+    { title: '마이페이지', path: isLoggedIn ? '/my' : '/login' },
+    { title: '찜한 상품', path: '/my/wishlist' },
+    { title: '최근 본 상품', path: '/my/recentview' },
+    { title: '작성한 피드', path: '/saved-feed' },
+  ];
+
+  if (isLoggedIn) {
+    // Add logout menu item when user is logged in
+    menuItems.push({ title: '로그아웃', path: '/logout' });
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -89,19 +107,13 @@ export default function Header({ title }: HeaderProps) {
         {/* 알림(종) icon */}
         {/* mobile(width:600px 이하)부터 생김 */}
         {isMobile && (
-          <IconButton
-            sx={{
-              '&.MuiButtonBase-root:hover': {
-                bgcolor: 'transparent',
-              },
-            }}
-          >
+          <BadgeComponent badgeContent={isLoggedIn ? 5 : undefined}>
             <img
               src={Notification1}
               alt='Logo'
               style={{ width: '24px', padding: 2 }}
             />
-          </IconButton>
+          </BadgeComponent>
         )}
 
         {/* 쇼핑 타이틀 버튼 & 이동 */}
@@ -192,13 +204,7 @@ export default function Header({ title }: HeaderProps) {
                 />
               }
               // menuItems={['마이페이지', '찜한 상품', '저장한 피드', '로그아웃']}
-              menuItems={[
-                { title: '마이페이지', path: '/login' },
-                { title: '찜한 상품', path: '/my/wishlist' },
-                { title: '최근 본 상품', path: '/my/recentview' },
-                { title: '작성한 피드', path: '/saved-feed' },
-                { title: '로그아웃', path: '/logout' },
-              ]}
+              menuItems={menuItems}
             />
           )}
 
@@ -218,23 +224,17 @@ export default function Header({ title }: HeaderProps) {
           {/* 알림(종) icon */}
           {/* mobile(width:600px 이하)에서 사라짐 */}
           {isMobile ? null : (
-            <IconButton
-              sx={{
-                '&.MuiButtonBase-root:hover': {
-                  bgcolor: 'transparent',
-                },
-              }}
-            >
+            <BadgeComponent badgeContent={isLoggedIn ? 5 : undefined}>
               <img
                 src={Notification1}
                 alt='Logo'
                 style={{ width: '24px', padding: 2 }}
               />
-            </IconButton>
+            </BadgeComponent>
           )}
 
           {/* cart 아이콘 */}
-          <BadgeComponent badgeContent={5}>
+          <BadgeComponent badgeContent={isLoggedIn ? 5 : undefined}>
             <img src={Cart1} alt='Cart' style={{ width: '24px' }} />
           </BadgeComponent>
 

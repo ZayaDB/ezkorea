@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/config';
-import { Box } from '@mui/material';
 import { Products } from '../../types/productTypes';
 import ProductItem from '../category/ProductItem';
 import '../../styles/category/likes.scss';
