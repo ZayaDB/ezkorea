@@ -20,6 +20,7 @@ import LikesProduct from './components/mypage/LikesProducts';
 import MainLayout from './pages/MainLayout';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+import CommunityResultPage from './pages/CommunityResultPage';
 
 const App = () => {
   const ScrollToTop = () => {
@@ -45,6 +46,7 @@ const App = () => {
             <Route path='/shop/:productId' element={<ProductDetail />} />
             <Route path='/community' element={<Community />} />
             <Route path='/community/post' element={<CommunityPostPage />} />
+            <Route path='/community/result' element={<CommunityResultPage />} />
             <Route
               path='community/modify/:feedId'
               element={<CommunityModifyPage />}

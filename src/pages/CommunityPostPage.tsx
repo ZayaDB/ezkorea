@@ -21,7 +21,10 @@ import { useProductHandler } from '../hooks/community/useProductHandler';
 import SubTitle from '../components/community/post/SubTitle';
 import { IFormInput } from '../types/communityTypes';
 import { useDispatch } from 'react-redux';
-import { submitFeed } from '../redux/slices/communitySlice';
+// import { submitFeed } from '../redux/slices/communitySlice';
+import { useNavigate } from 'react-router-dom';
+import { submitFeedAndRedirect } from '../redux/actions/communityActions';
+import { AppDispatch } from '../redux/config';
 
 function CommunityPostPage() {
   const {
@@ -43,7 +46,8 @@ function CommunityPostPage() {
     useSelectionHandler<string>();
   const { selections: selectedColors, toggleSelection: toggleColor } =
     useSelectionHandler<string>();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
 
   // 컨셉과 색상, 파일 선택에 변화 일어날 시 오류 감지
   useEffect(() => {
@@ -85,15 +89,14 @@ function CommunityPostPage() {
         products.length > 0
           ? [
               {
-                productId: 5,
-                productName: products[0] || '컴팩트 조명',
-                thumbnail:
-                  'https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/163788842247379788.jpg?w=100',
-                price: '120000',
+                productId: 4,
+                productName: 'KIDS MOTION DESK',
+                thumbnail: 'https://i.ibb.co/mcn8nmF/rrw3-1.png',
+                price: '1264000',
               },
               {
-                productId: 6,
-                productName: products[1] || '로지텍 무선 블루투스 키보드',
+                productId: 4,
+                productName: products[0] || '로지텍 무선 블루투스 키보드',
                 thumbnail:
                   'https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/163109433375113133.jpg?w=100',
                 price: '50000',
@@ -147,7 +150,6 @@ function CommunityPostPage() {
       files.length < 5
     ) {
       setFormData(completeData); // Form 데이터 저장
-      dispatch(submitFeed(completeData));
       handleOpen();
     }
   };
@@ -155,7 +157,11 @@ function CommunityPostPage() {
   const confirmSubmit = () => {
     console.log('Confirmed submission:', formData);
     handleClose(); // 모달 닫기
-    window.location.href = '/community';
+    if (formData) {
+      dispatch(submitFeedAndRedirect(formData, navigate));
+    }
+
+    // window.location.href = '/community/result';
     // 서버 전송 로직
   };
 

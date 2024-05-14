@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useParams } from 'react-router-dom';
 import {
   Avatar,
   Button,
@@ -18,11 +17,13 @@ import TimeAgo from 'javascript-time-ago'; // javascript-time-ago 라이브러�
 import koLocale from 'javascript-time-ago/locale/ko'; // 한국어 언어 파일을 가져옵니다.
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/config';
 
 // 한국어 로캘 설정
 TimeAgo.addLocale(koLocale);
 
-const CommunityDetailPage: React.FC = () => {
+const CommunityResultPage: React.FC = () => {
   const [feed, setFeed] = useState<any>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
@@ -30,37 +31,19 @@ const CommunityDetailPage: React.FC = () => {
   const [commentInput, setCommentInput] = useState<string>('');
   const [likes, setLikes] = useState<number>(0);
   const [isLiked, setIsLiked] = useState<boolean>(false);
-  const { feedId } = useParams<{ feedId?: string }>();
+  const selectedFeed = useSelector((state: RootState) => state.community.feed);
+  console.log(selectedFeed);
 
   useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        if (!feedId) {
-          throw new Error('Feed ID is not provided');
-        }
-
-        const response = await fetch('/data/feed.json');
-        const data = await response.json();
-        const selectedFeed = data.find(
-          (item: any) => item.feedId === parseInt(feedId)
-        );
-        if (selectedFeed) {
-          setFeed(selectedFeed);
-          setLikes(selectedFeed.likes);
-          setIsLiked(selectedFeed.liked);
-          setIsError(false);
-        } else {
-          setIsError(true);
-        }
-      } catch (error) {
-        setIsError(true);
-      }
-      setIsLoading(false);
-    };
-
-    fetchData();
-  }, [feedId]);
+    console.log(selectedFeed);
+    if (selectedFeed) {
+      setFeed(selectedFeed);
+      setLikes(selectedFeed.likes);
+      setIsError(false);
+    } else {
+      setIsError(true);
+    }
+  }, [selectedFeed]);
 
   const handleThumbnailClick = (index: number) => {
     setSelectedImageIndex(index);
@@ -290,4 +273,4 @@ const CommunityDetailPage: React.FC = () => {
   );
 };
 
-export default CommunityDetailPage;
+export default CommunityResultPage;
