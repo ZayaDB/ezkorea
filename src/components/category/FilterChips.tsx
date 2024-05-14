@@ -1,7 +1,7 @@
 import { Chip, IconButton } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../redux/config';
-import { Filters } from '../../types/typesProducts';
+import { Filters } from '../../types/productTypes';
 import { removeSelectedFilter } from '../../redux/slices/categorySlice';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -39,12 +39,13 @@ const FilterChips = () => {
                     <IconButton
                       onClick={() => onRemoveFilter(key as string, item)}
                     >
-                     <CloseIcon
+                      <CloseIcon
                         sx={{
                           width: '14px',
                           color: '#333333',
                           height: '14px;',
-                        }}/>
+                        }}
+                      />
                     </IconButton>
                   }
                   style={{

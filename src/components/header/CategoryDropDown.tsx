@@ -3,9 +3,10 @@ import { NavLink } from 'react-router-dom';
 import { styled } from '@mui/system';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../redux/config';
-import { useEffect } from 'react';
-import { getData } from '../../utils/getData';
-import { setCategoryData, setProducts } from '../../redux/slices/categorySlice';
+import {
+  setSelectedCategory,
+  setSelectedSubCategory,
+} from '../../redux/slices/categorySlice';
 
 const DropdownContainer = styled('div')({
   position: 'absolute',
@@ -37,25 +38,17 @@ const LinkItem = styled(NavLink)({
 const CategoryDropDown: React.FC = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { products } = await getData('/data/prodData.json');
-        const { categoryData } = await getData('/data/categoryData.json');
-        // Redux 스토어에 데이터 저장
-        dispatch(setCategoryData(categoryData));
-        dispatch(setProducts(products));
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, [dispatch]);
-
   const categoryData = useSelector(
     (state: RootState) => state.category.categoryData
   );
+
+  const handleSubCategoryClick = (
+    categoryName: string,
+    subCategoryName: string
+  ) => {
+    dispatch(setSelectedCategory(categoryName));
+    dispatch(setSelectedSubCategory(subCategoryName));
+  };
 
   return (
     <DropdownContainer>
@@ -70,8 +63,11 @@ const CategoryDropDown: React.FC = () => {
               .map((subCategory, subIndex) => (
                 <LinkItem
                   key={subIndex}
-                  to={`/${subCategory.name.toLowerCase()}`}
+                  to={'/shop'}
                   color='inherit'
+                  onClick={() =>
+                    handleSubCategoryClick(category.name, subCategory.name)
+                  } // 카테고리 클릭 시 dispatch
                 >
                   {subCategory.name}
                 </LinkItem>
