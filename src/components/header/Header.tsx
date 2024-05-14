@@ -1,22 +1,26 @@
+import {
+  createTheme,
+  ThemeProvider,
+  styled,
+  Toolbar,
+  Button,
+  IconButton,
+  Typography,
+  Box,
+  useMediaQuery,
+} from '@mui/material/';
 import { NavLink } from 'react-router-dom';
-import Toolbar from '@mui/material/Toolbar';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Box from '@mui/material/Box';
+import { useState } from 'react';
+import '../../styles/home/header.scss';
 import LoginIcon from '../../assets/images/icon_login2.png';
 import Notification1 from '../../assets/images/notification1.png';
 import Cart1 from '../../assets/images/cart2.png';
-import { useMediaQuery } from '@mui/material';
 import Search from '../../assets/images/magnifying.png';
-import ToolBar from './ToolBar';
 import IconButtonWithMenu from './IconButtonWithMenu';
 import BadgeComponent from './BadgeComponent';
-import '../../styles/home/header.scss';
-import { useState } from 'react';
-import { styled } from '@mui/material/styles';
-// import Logo from '../../assets/images/logo.png';
+import CustomLink from './CustomLink';
+import CategoryDropDown from './CategoryDropDown';
+// import Logo from '../../assets/images/logo.png'; // logo 만들면 넣기
 
 interface Section {
   title: string;
@@ -52,20 +56,17 @@ const StyledButton = styled(Button)(() => ({
   },
 }));
 
-// const User = {
-
-// }
-
 export default function Header({ title }: HeaderProps) {
   const isMobile = useMediaQuery('(max-width:619px)');
-  const [toolbarVisible, setToolbarVisible] = useState(true);
-
-  const handleCommunityClick = () => {
-    setToolbarVisible(false);
-  };
+  const [isShoppingHovered, setIsShoppingHovered] = useState(false);
+  const [toolbarContent, setToolbarContent] = useState('Shop'); // 초기 내용은 'shop content'
 
   const handleShoppingClick = () => {
-    setToolbarVisible(true);
+    setToolbarContent('Shop');
+  };
+
+  const handleCommunityClick = () => {
+    setToolbarContent('Community');
   };
 
   return (
@@ -179,18 +180,6 @@ export default function Header({ title }: HeaderProps) {
           )}
         </Typography>
         <Box>
-          {/* 검색창(input) */}
-          {/* mobile(width:600px 이하)에서 사라짐 */}
-          {/* {isMobile ? null : ( */}
-          {/* <IconButton
-              type='button'
-              aria-label='search'
-              disableRipple
-            >
-              <img src={Search} alt='Logo' style={{ width: '36px' }} />
-            </IconButton> */}
-          {/* )} */}
-
           {/* 사람(로그인) icon dropdown */}
           {/* mobile(width:600px 이하)에서 사라짐 */}
           {isMobile ? null : (
@@ -205,8 +194,9 @@ export default function Header({ title }: HeaderProps) {
               // menuItems={['마이페이지', '찜한 상품', '저장한 피드', '로그아웃']}
               menuItems={[
                 { title: '마이페이지', path: '/login' },
-                { title: '찜한 상품', path: '/wishlist' },
-                { title: '저장한 피드', path: '/saved-feed' },
+                { title: '찜한 상품', path: '/my/wishlist' },
+                { title: '최근 본 상품', path: '/my/recentview' },
+                { title: '작성한 피드', path: '/saved-feed' },
                 { title: '로그아웃', path: '/logout' },
               ]}
             />
@@ -257,29 +247,47 @@ export default function Header({ title }: HeaderProps) {
           )}
         </Box>
       </Toolbar>
-
-      {/* 헤더 하위 카테고리: 쇼핑홈, 카테고리, 베스트, 세일  */}
+      {/* 헤더 하단 툴바 & 커스텀 */}
       {/* mobile(width:600px 이하)에서 사라짐 */}
       {isMobile ? null : (
         <Toolbar
           variant='dense'
           sx={{
-            width: '99.02vw',
+            width: 'auto',
             position: 'sticky',
             mt: '-3px',
             // mb: '20px',
             borderRadius: 1,
-            borderBottom: 1,
+            // borderBottom: 1,
             borderColor: 'divider',
             fontSize: '16px',
             zIndex: 'drawer',
-            visibility: toolbarVisible ? 'visible' : 'hidden', // 툴바 가시성 설정
           }}
           style={{
-            paddingLeft: '26.2%',
+            paddingLeft: '27.8%',
           }}
         >
-          <ToolBar />
+          {/* 하위 카테고리 변경: shop > community */}
+          {toolbarContent === 'Shop' && (
+            <>
+              <div
+                style={{ position: 'relative', display: 'inline-block' }}
+                onMouseEnter={() => setIsShoppingHovered(true)}
+                onMouseLeave={() => setIsShoppingHovered(false)}
+              >
+                <CustomLink to='/shop'>카테고리</CustomLink>
+                {isShoppingHovered && <CategoryDropDown />}
+              </div>
+              <CustomLink to='/shop/best'>베스트</CustomLink>
+              <CustomLink to='/shop/sale'>세일</CustomLink>
+            </>
+          )}
+          {toolbarContent === 'Community' && (
+            <>
+              <CustomLink to='/community'>커뮤니티 홈</CustomLink>
+              <CustomLink to='/community/likes'>좋아요 한 피드</CustomLink>
+            </>
+          )}
         </Toolbar>
       )}
     </ThemeProvider>

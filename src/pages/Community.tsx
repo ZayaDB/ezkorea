@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { Box, Grid, Typography, Button, Divider } from '@mui/material';
 import { Visibility } from '@mui/icons-material';
 import ColorFilter from './../components/community/main/ColorFilter';
-import StyleFilter from './../components/community/main/StyleFilter';
+import ConceptFilter from '../components/community/main/ConceptFilter';
 import SkeletonFeed from './../components/community/main/SkeletonFeed';
 import SortSelect from '../components/community/main/SortSelect';
 import './../styles/community/main.scss';
@@ -18,9 +18,9 @@ const Community = () => {
   const [selectedColorIndexes, setSelectedColorIndexes] = useState<string[]>(
     []
   );
-  const [selectedStyleIndexes, setSelectedStyleIndexes] = useState<string[]>(
-    []
-  );
+  const [selectedConceptIndexes, setSelectedConceptIndexes] = useState<
+    string[]
+  >([]);
   const [sort, setSort] = useState<string>('조회수순');
 
   useEffect(() => {
@@ -37,8 +37,10 @@ const Community = () => {
             return false;
           }
           if (
-            selectedStyleIndexes.length > 0 &&
-            !selectedStyleIndexes.some(style => item.concepts.includes(style))
+            selectedConceptIndexes.length > 0 &&
+            !selectedConceptIndexes.some(concept =>
+              item.concepts.includes(concept)
+            )
           ) {
             return false;
           }
@@ -55,7 +57,7 @@ const Community = () => {
     };
 
     fetchDataWithFilters();
-  }, [selectedColorIndexes, selectedStyleIndexes, sort]);
+  }, [selectedColorIndexes, selectedConceptIndexes, sort]);
 
   const applySort = (data: FeedData[], sort: string) => {
     const sortedData = [...data];
@@ -105,7 +107,7 @@ const Community = () => {
 
   const handleResetFilters = useCallback(() => {
     setSelectedColorIndexes([]);
-    setSelectedStyleIndexes([]);
+    setSelectedConceptIndexes([]);
   }, []);
 
   const handleColorButtonClick = useCallback((color: string) => {
@@ -116,43 +118,56 @@ const Community = () => {
     );
   }, []);
 
-  const handleStyleButtonClick = useCallback((style: string) => {
-    setSelectedStyleIndexes(prevIndexes =>
-      prevIndexes.includes(style)
-        ? prevIndexes.filter(s => s !== style)
-        : [...prevIndexes, style]
+  const handleConceptButtonClick = useCallback((concept: string) => {
+    setSelectedConceptIndexes(prevIndexes =>
+      prevIndexes.includes(concept)
+        ? prevIndexes.filter(s => s !== concept)
+        : [...prevIndexes, concept]
     );
   }, []);
 
   return (
-    <Box className='wrap'>
+    <div className='wrap'>
       <Grid container className='button-wrap'>
         <div className='filter-container'>
           <ColorFilter
             colorIndexes={selectedColorIndexes}
             colorButtonClick={handleColorButtonClick}
           />
-          <StyleFilter
-            styleIndexes={selectedStyleIndexes}
-            styleButtonClick={handleStyleButtonClick}
+          <ConceptFilter
+            conceptIndexes={selectedConceptIndexes}
+            conceptButtonClick={handleConceptButtonClick}
           />
           <Button
-            variant='contained'
             onClick={() => {
               handleResetFilters();
             }}
-            style={{ height: 34, marginLeft: 30 }}
-            sx={{ p: 1 }}
+            sx={{
+              width: '96px',
+              padding: '0 12px',
+              fontSize: '14px',
+              height: '32px',
+              borderRadius: '16px',
+              fontWeight: 600,
+              ...outlineButtonStyles,
+            }}
           >
-            필터 초기화
+            초기화
           </Button>
           <Button
-            variant='contained'
-            style={{
-              height: 34,
-              padding: 8,
-              marginRight: 10,
-              marginLeft: 'auto',
+            sx={{
+              width: '96px',
+              padding: '0 12px',
+              fontSize: '14px',
+              height: '32px',
+              borderRadius: '16px',
+              fontWeight: 700,
+              ...containedButtonStyles,
+              '&:hover': {
+                ...containedButtonStyles['&:hover'], // 기존의 호버 스타일을 가져오고
+                backgroundColor: '#B7FF8B', // 필요한 스타일만 변경
+                borderColor: '#5FF531',
+              },
             }}
           >
             <Link
@@ -162,10 +177,9 @@ const Community = () => {
               글 쓰기
             </Link>
           </Button>
+          <SortSelect sort={sort} setSort={setSort} />
         </div>
       </Grid>
-      <div className='line'></div>
-      <SortSelect sort={sort} setSort={setSort} />
       <Grid container>
         {isLoading ? (
           [1, 2, 3, 4].map((_, index) => (
@@ -192,7 +206,13 @@ const Community = () => {
                   </Link>
                 </Box>
                 <Box className='info-box'>
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      cursor: 'pointer',
+                    }}
+                  >
                     <img
                       className='profile-img'
                       src={item.profileImage}
@@ -203,7 +223,7 @@ const Community = () => {
                       noWrap
                       title={item.accountName}
                       style={{
-                        cursor: 'Default',
+                        cursor: 'pointer',
                         maxWidth: '100px',
                         overflow: 'hidden',
                         textOverflow: 'ellipsis',
@@ -236,7 +256,11 @@ const Community = () => {
                       orientation='vertical'
                     />
                     <Visibility
-                      sx={{ color: 'text.secondary', fontSize: '20px' }}
+                      sx={{
+                        color: 'text.secondary',
+                        fontSize: '20px',
+                        cursor: 'auto',
+                      }}
                     />
                     <Typography
                       variant='caption'
@@ -253,8 +277,29 @@ const Community = () => {
           ))
         )}
       </Grid>
-    </Box>
+    </div>
   );
 };
 
 export default Community;
+
+const containedButtonStyles = {
+  color: '#000000',
+  border: '1px solid #5FF531',
+  backgroundColor: '#5FF531', // 클릭 효과와 호버 효과를 일관성 있게 만들기 위해 변경
+  '&:hover': {
+    color: '#000000',
+    backgroundColor: '#B7FF8B', // 클릭 효과와 호버 효과를 일관성 있게 만들기 위해 변경
+    border: '1px solid #5FF531',
+  },
+};
+
+const outlineButtonStyles = {
+  border: '1px solid #5FF531',
+  color: '#2F3438',
+  '&:hover': {
+    color: '#5FF531',
+    border: '1px solid #000000',
+    backgroundColor: 'transparent',
+  },
+};

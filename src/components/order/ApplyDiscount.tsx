@@ -1,9 +1,19 @@
-import React, { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import Head from './Head';
-import { Button, TextField } from '@mui/material';
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  CardMedia,
+  Modal,
+  TextField,
+} from '@mui/material';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
 import { addCommasToNumber } from '../../hooks/addCommasToNumber';
-import { updateMileage } from '../../redux/slices/mileageSlice';
-import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/config';
 
 /* 할인 적용
   - 쿠폰 : 쿠폰 적용 시 할인된 가격 표시
@@ -11,10 +21,10 @@ import { useDispatch } from 'react-redux';
 */
 export default function ApplyDiscount() {
   const [mileage] = useState<number>(1000);
-
   const [inputMileage, setInputMileage] = useState<number>();
+  const [isError, setIsError] = useState<boolean>(false);
 
-  const handleMileageChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleMileageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(event.target.value);
     if (!isNaN(value)) {
       setInputMileage(value);
@@ -30,8 +40,10 @@ export default function ApplyDiscount() {
     return input !== undefined && input <= mileage;
   };
 
-  // 입력값이 있고 유효하지 않은 경우 에러 표시
-  const isError = inputMileage !== undefined && !isValidMileage(inputMileage);
+  // onBlur 이벤트로 유효성 검사를 수행합니다.
+  const handleMileageBlur = () => {
+    setIsError(inputMileage !== undefined && !isValidMileage(inputMileage));
+  };
 
   return (
     <div className='discount-container'>
@@ -49,8 +61,9 @@ export default function ApplyDiscount() {
               placeholder='사용 금액 입력'
               value={inputMileage}
               size='small'
-              // 입력값이 변경될 때 유효성 검사 함수 호출
+              // onBlur 이벤트로 유효성 검사 수행
               error={isError}
+              onBlur={handleMileageBlur}
               onChange={handleMileageChange}
             />
             <Button
@@ -79,13 +92,152 @@ export default function ApplyDiscount() {
 }
 
 function CouponContent() {
-  const [discount] = useState<number>(42000);
+  const [checked, setChecked] = useState<boolean>(true);
+
+  const handleChange = (event: any) => {
+    setChecked(event.target.checked);
+  };
+
+  /* 상품 정보 */
+  const productName = useSelector(
+    (state: RootState) => state.product.products[0].product_name
+  );
+  const brandName = useSelector(
+    (state: RootState) => state.product.products[0].brand_name
+  );
+  const productImg = useSelector(
+    (state: RootState) => state.product.products[0].product_image
+  );
+  // const discountRate = useSelector(
+  //   (state: RootState) => state.product.products[0].discount_rate
+  // );
+  const discountedPrice = useSelector(
+    (state: RootState) => state.product.products[0].discounted_price
+  );
+  const productPrice = useSelector(
+    (state: RootState) => state.product.products[0].regular_price
+  );
+
+  const selectedOption = useSelector(
+    (state: RootState) => state.product.selectedOption
+  );
+  // const selectedProductId = useSelector(
+  //   (state: RootState) => state.product.selectedProductId
+  // );
+  const selectedQuantity = useSelector(
+    (state: RootState) => state.product.selectedQuantity
+  );
+
+  /* 쿠폰 */
+  const style = {
+    position: 'absolute' as const,
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+
+  const [showModal, setShowModal] = useState<boolean>(false);
+
+  // const handleOpen = () => setShowModal(true);
+  const handleClose = () => setShowModal(false);
+
   return (
-    <>
-      <div className='applycoupon'>
-        <span>쿠폰 할인 금액</span>
-        <span>-{discount}원</span>
+    <div>
+      <FormControlLabel
+        control={
+          <Switch defaultChecked checked={checked} onChange={handleChange} />
+        }
+        label={checked ? '최대 할인이 적용됐어요' : '최대 할인을 적용하세요'}
+      />
+
+      <div>
+        <Card sx={{ maxWidth: '100%' }}>
+          <Box sx={{ display: 'flex' }}>
+            <CardMedia
+              component='img'
+              alt='상품 이미지'
+              height='200'
+              image={productImg}
+            />
+            <CardContent sx={{ width: '150%' }}>
+              <div>{brandName}</div>
+              <div>{productName}</div>
+              <div>옵션 : {selectedOption}</div>
+              <div>
+                {addCommasToNumber(productPrice)} 원/수량 {selectedQuantity}개
+              </div>
+              <div>
+                <span>상품 쿠폰</span>
+                <span className=''>
+                  {checked
+                    ? `-${productPrice - discountedPrice}원`
+                    : '선택 안함'}
+                </span>
+              </div>
+            </CardContent>
+          </Box>
+        </Card>
       </div>
-    </>
+
+      {/* <Button
+        className='mileage-button'
+        fullWidth
+        variant='outlined'
+        color='primary'
+        onClick={handleOpen}
+      >
+        쿠폰 변경
+      </Button> */}
+
+      {showModal ? (
+        <>
+          <Modal open={showModal} onClose={handleClose}>
+            <Box sx={style}>
+              <FormControlLabel
+                control={
+                  <Switch
+                    defaultChecked
+                    checked={checked}
+                    onChange={handleChange}
+                  />
+                }
+                label={
+                  checked ? '최대 할인이 적용됐어요' : '최대 할인을 적용하세요'
+                }
+              />
+              {/* 상품 */}
+              <Card sx={{ maxWidth: '100%' }}>
+                <Box sx={{ display: 'flex' }}>
+                  <CardContent sx={{ width: '150%' }}>
+                    <div>{brandName}</div>
+                    <div>{productName}</div>
+                    <div>옵션 : {selectedOption}</div>
+                    <div>
+                      {addCommasToNumber(productPrice)} 원/수량{' '}
+                      {selectedQuantity}개
+                    </div>
+                    <div>
+                      <span>상품 쿠폰</span>
+                      <span>
+                        {checked
+                          ? `-${productPrice - discountedPrice}원`
+                          : '사용 가능한 쿠폰 없음'}
+                      </span>
+                    </div>
+                  </CardContent>
+                </Box>
+              </Card>
+            </Box>
+          </Modal>
+        </>
+      ) : (
+        ''
+      )}
+    </div>
   );
 }

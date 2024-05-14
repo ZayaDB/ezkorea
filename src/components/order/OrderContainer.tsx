@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 
-import { useState } from 'react';
 import DeliveryInfo from './DeliveryInfo';
 import Head from './Head';
 import PaymentMethod from './PaymentMethod';
@@ -13,7 +12,9 @@ import ApplyDiscount from './ApplyDiscount';
 */
 function CustomerInformation() {
   const [ordererName] = useState<string>('');
-  // const [ordererPhoneNum] = useState<number>();
+  const [phoneNumFirst] = useState<string>();
+  const [phoneNumSecond] = useState<number>();
+  const [phoneNumThird] = useState<number>();
 
   return (
     <div className='order-customer-info'>
@@ -36,6 +37,7 @@ function CustomerInformation() {
           InputProps={{
             readOnly: true,
           }}
+          value={phoneNumFirst}
         />
         <span>-</span>
         <TextField
@@ -44,6 +46,7 @@ function CustomerInformation() {
           InputProps={{
             readOnly: true,
           }}
+          value={phoneNumSecond}
         />
         <span>-</span>
         <TextField
@@ -52,6 +55,7 @@ function CustomerInformation() {
           InputProps={{
             readOnly: true,
           }}
+          value={phoneNumThird}
         />
       </div>
       <div></div>
@@ -61,7 +65,6 @@ function CustomerInformation() {
 
 export default function OrderContainer() {
   return (
-    /* container 부분 50%만 차지하게 해야함 */
     <div className='order-content'>
       <div className='margin-bottom'>
         <CustomerInformation />

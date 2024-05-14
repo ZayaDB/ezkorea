@@ -1,6 +1,5 @@
 .color-filter button,
-.style-filter button {
-  flex: 1;
+.concept-filter button {
   margin-right: 8px;
 }
 
@@ -8,17 +7,15 @@
   display: flex;
   max-width: 1200px;
   width: 100%;
-  justify-content: baseline;
+  justify-content: space-between;
   align-items: flex-end;
 }
 
-.style-filter {
-  padding-left: 30px;
+.concept-filter {
+  padding-left: 20px;
 }
 
 .filter-title {
-  margin: 8px 0;
-  padding: 0;
   color: #999;
   font-size: 14px;
 }
@@ -28,7 +25,6 @@
   max-width: 1200px;
   display: flex;
   position: relative;
-  top: 20px;
   left: 50%;
   transform: translateX(-50%);
   flex-direction: column;
@@ -38,7 +34,7 @@
   display: flex;
   justify-content: space-evenly;
   width: 100%;
-  max-width: 1200px;
+  // max-width: 1200px;
   padding-bottom: 20px;
 }
 /* 마지막 아이템의 패딩 제거 */
@@ -49,14 +45,7 @@
 
 .button-wrap {
   max-width: 1200px;
-  padding: 0;
-}
-
-.line {
-  width: 100%;
-  max-width: 1200px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-  margin: 10px auto;
+  padding: 0 10px 20px 10px;
 }
 
 .feed-container {
@@ -72,6 +61,7 @@
   transition: border-color 0.5s ease;
   cursor: pointer;
   // outline: 1px solid #999;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 .feed-container:hover {
@@ -103,8 +93,8 @@
   bottom: 0; /* 아래로부터의 위치 */
   left: 0; /* 왼쪽으로부터의 위치 */
   right: 0; /* 오른쪽으로부터의 위치 */
-  padding: 4px 8px;
-  background-color: #ccc; /* 배경색 및 투명도 설정 */
+  padding: 5px 8px;
+  background-color: #fff; /* 배경색 및 투명도 설정 */
   display: flex;
   align-items: center;
   flex-wrap: nowrap;

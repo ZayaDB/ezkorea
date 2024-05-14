@@ -91,6 +91,11 @@ const StyledButton2 = styled(Button)(() => ({
   },
 }));
 
+// const User = {
+//   email: 'dururu@gmail.com',
+//   pw: 'dururu123!',
+// };
+
 export default function SignIn() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -126,6 +131,14 @@ export default function SignIn() {
     }
   };
 
+  // const onClickConfirmButton = () => {
+  //   if (email === User.email && pw === User.pw) {
+  //     setIsModalOpen(true);
+  //   } else {
+  //     alert('등록되지 않은 회원입니다.');
+  //   }
+  // };
+
   return (
     <ThemeProvider theme={theme}>
       <Container component='main' maxWidth='xs'>
@@ -138,13 +151,15 @@ export default function SignIn() {
             alignItems: 'center',
           }}
         >
+          <NavLink to='/' style={{ textDecoration: 'none', color: 'black' }}>
           <Typography
             variant='h5'
             color='inherit'
-            sx={{ fontSize: '35px', fontWeight: '600', pb: '22px' }}
+            sx={{ fontSize: '40px', fontWeight: '600', pb: '25px' }}
           >
-            LOGIN
+            Dururu
           </Typography>
+          </NavLink>
           <Box component='form' noValidate sx={{ mt: 1 }}>
             <InputTextField
               margin='dense'
@@ -204,6 +219,7 @@ export default function SignIn() {
               }}
               size='large'
               onClick={handleOpen}
+              // onClick={onClickConfirmButton}
             >
               로그인하기
               {/* LOGIN */}

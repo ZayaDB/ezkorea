@@ -69,16 +69,27 @@ const ProductList = () => {
       ) {
         return false;
       }
-      if (prices.length > 0 && !prices.includes(product.price)) {
+      // prices 필터 적용
+      if (prices.length > 0) {
+        // prices 배열에서 최소값(minPrice)과 최대값(maxPrice) 추출
+        const [minPrice, maxPrice] = prices;
+        // 상품의 가격이 minPrice와 maxPrice 사이에 있는지 확인
+        if (product.price < minPrice || product.price > maxPrice) {
+          return false;
+        }
+      }
+
+      if (
+        themes.length > 0 &&
+        !product.concepts.some(theme => themes.includes(theme))
+      ) {
         return false;
       }
-      if (themes.length > 0 && !themes.includes(product.theme)) {
-        return false;
-      }
+
       return true;
     });
 
-    return filteredProducts; // 이 부분에서 반환 필요
+    return filteredProducts;
   });
 
   // 정렬된 필터된 상품 목록
@@ -97,16 +108,6 @@ const ProductList = () => {
   ) => {
     setCurrentPage(page);
   };
-
-  const currentProducts = sortedProducts.filter(
-    product =>
-      product.category1 === selectedCategory &&
-      (selectedSubCategory === 'ALL' ||
-        product.category2 === selectedSubCategory)
-  );
-  console.log(currentProducts);
-  // 현재페이지에서보여줄 정렬이 완료된 아이템을 처음~마지막만 잘라 보여줌
-  const currentItems = currentProducts.slice(indexOfFirstItem, indexOfLastItem);
 
   // 필터 버튼 클릭 핸들러
   const handleFilterButtonClick = () => {
@@ -183,14 +184,16 @@ const ProductList = () => {
                 <Button
                   onClick={handleFilterButtonClick}
                   sx={{
-                    width: '100%',
-                    color: '#505050',
+                    width: '90%',
+                    color: '#323232',
                     fontSize: '12.3px',
                     border: '1px solid rgb(197, 197, 197)',
-                    paddingTop: '3.7px',
-                    paddingBottom: '3.7px',
-                    paddingLeft: '5px',
-                    paddingRight: '5px',
+                    paddingTop: '4.5px',
+                    paddingBottom: '4.5px',
+                    paddingLeft: '9px',
+                    paddingRight: '9px',
+                    marginTop: '14px',
+                    marginRight: '10px',
                     '&:hover': {
                       backgroundColor: 'white',
                       border: '1px solid gray',
@@ -217,9 +220,11 @@ const ProductList = () => {
                     left: '50%',
                     transform: 'translate(-50%, -50%)',
                     width: 400,
-
+                    height: 500,
+                    overflowY: 'scroll',
+                    scrollwidth: 'none',
                     bgcolor: 'background.paper',
-                    border: '1px solid #000',
+                    border: '2px solid #000',
                     boxShadow: 24,
                     p: 4,
                   }}
@@ -229,9 +234,10 @@ const ProductList = () => {
                 </Box>
               </Modal>
             )}
+
             <FormControl
               sx={{
-                m: 1,
+                m: '8px 0',
                 minWidth: isMobile ? 40 : 120,
                 maxWidth: isMobile ? 80 : 200,
                 paddingTop: isMobile ? 0.76 : 0,
@@ -248,11 +254,36 @@ const ProductList = () => {
                   zIndex: 0,
                 }}
               >
-                <MenuItem value='인기순'>인기순</MenuItem>
-                <MenuItem value='리뷰많은순'>리뷰많은순</MenuItem>
-                <MenuItem value='낮은가격순'>낮은가격순</MenuItem>
-                <MenuItem value='높은가격순'>높은가격순</MenuItem>
-                <MenuItem value='할인율높은순'>할인율높은순</MenuItem>
+                <MenuItem
+                  sx={{ fontSize: isMobile ? '12px' : '14px' }}
+                  value='인기순'
+                >
+                  인기순
+                </MenuItem>
+                <MenuItem
+                  sx={{ fontSize: isMobile ? '12px' : '14px' }}
+                  value='리뷰많은순'
+                >
+                  리뷰많은순
+                </MenuItem>
+                <MenuItem
+                  sx={{ fontSize: isMobile ? '12px' : '14px' }}
+                  value='낮은가격순'
+                >
+                  낮은가격순
+                </MenuItem>
+                <MenuItem
+                  sx={{ fontSize: isMobile ? '12px' : '14px' }}
+                  value='높은가격순'
+                >
+                  높은가격순
+                </MenuItem>
+                <MenuItem
+                  sx={{ fontSize: isMobile ? '12px' : '14px' }}
+                  value='할인율높은순'
+                >
+                  할인율높은순
+                </MenuItem>
               </Select>
             </FormControl>
           </Box>

@@ -1,7 +1,6 @@
 import MainSlide from '../components/Home/MainSlide';
 import MoodCarousel from '../components/Home/MoodCarousel';
 import LeviewCarousel from '../components/Home/LeviewCarousel';
-import Footer from '../components/Home/Footer';
 import NewItem from '../components/Home/NewItem';
 import MdPick from '../components/Home/MdPick';
 
@@ -13,7 +12,6 @@ export default function Home() {
       <NewItem />
       <LeviewCarousel />
       <MdPick />
-      <Footer />
     </>
   );
 }
