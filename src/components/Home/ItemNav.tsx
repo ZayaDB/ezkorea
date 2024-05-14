@@ -51,7 +51,17 @@ const IconNav: React.FC = () => {
   };
 
   return (
-      <div>
+    <div style={{ width: '100vw' }}>
+      <div
+        style={{
+          margin: 'auto',
+          width: '1200px',
+          overflowX: 'scroll',
+          display: 'flex',
+          flexDirection: 'row',
+          scrollbarWidth: 'none',
+        }}
+      >
         {category.map((cate: CategoryData) =>
           cate.subCategories
             .filter(subCategory => subCategory.name !== 'ALL')
@@ -77,6 +87,7 @@ const IconNav: React.FC = () => {
             ))
         )}
       </div>
+    </div>
   );
 };
 

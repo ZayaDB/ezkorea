@@ -1,38 +1,32 @@
 import Carousel from 'react-bootstrap/Carousel';
-import mainSlide2 from '../../assets/images/main_slide13.webp';
 import '../../styles/home/carousel.scss';
+import best1 from '../../assets/images/best1.webp';
+import best2 from '../../assets/images/best2.webp';
+import best4 from '../../assets/images/best4.webp';
+
+import '../../styles/category/likes.scss';
 
 export default function CarouselCompo() {
   return (
-    <div>
+    <div className='carouselBest'>
+      <span className='best-title'>BEST</span>
+      <span className='best-desc'>
+        똑같은 일상을 좀 더 특별하게,
+        <br />
+        다양한 제품으로 감각적인 데스크를 완성해보세요
+      </span>
       <div style={{ width: 'auto', margin: 0, padding: 0 }}>
         <Carousel>
           <Carousel.Item>
-            <img className='d-block w-100' src={mainSlide2} alt='First slide' />
-            <Carousel.Caption>
-              <h3>First slide label</h3>
-              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-            </Carousel.Caption>
+            <img className='d-block w-100' src={best1} alt='First slide' />
           </Carousel.Item>
+
           <Carousel.Item>
-            <img
-              className='d-block w-100'
-              src={mainSlide2}
-              alt='Second slide'
-            />
-            <Carousel.Caption>
-              <h3>Second slide label</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </Carousel.Caption>
+            <img className='d-block w-100' src={best2} alt='Second slide' />
           </Carousel.Item>
+
           <Carousel.Item>
-            <img className='d-block w-100' src={mainSlide2} alt='Third slide' />
-            <Carousel.Caption>
-              <h3>Third slide label</h3>
-              <p>
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-              </p>
-            </Carousel.Caption>
+            <img className='d-block w-100' src={best4} alt='Third slide' />
           </Carousel.Item>
         </Carousel>
       </div>
