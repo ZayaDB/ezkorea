@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { styled } from '@mui/system';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../redux/config';
+import { useDispatch } from 'react-redux';
 import {
   setSelectedCategory,
   setSelectedSubCategory,
 } from '../../redux/slices/categorySlice';
+import { getData } from '../../utils/getData';
+import { CategoryData } from '../../types/productTypes';
 
 const DropdownContainer = styled('div')({
   position: 'absolute',
@@ -37,10 +38,19 @@ const LinkItem = styled(NavLink)({
 
 const CategoryDropDown: React.FC = () => {
   const dispatch = useDispatch();
+  const [categoryData, setCategoryData] = useState<CategoryData[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { categoryData } = await getData('/data/categoryData.json');
+        setCategoryData(categoryData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
 
-  const categoryData = useSelector(
-    (state: RootState) => state.category.categoryData
-  );
+    fetchData();
+  }, []);
 
   const handleSubCategoryClick = (
     categoryName: string,
@@ -63,7 +73,9 @@ const CategoryDropDown: React.FC = () => {
               .map((subCategory, subIndex) => (
                 <LinkItem
                   key={subIndex}
-                  to={'/shop'}
+                  to={`/shop?category=${encodeURIComponent(
+                    category.name
+                  )}&subCategory=${encodeURIComponent(subCategory.name)}`}
                   color='inherit'
                   onClick={() =>
                     handleSubCategoryClick(category.name, subCategory.name)

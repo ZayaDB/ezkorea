@@ -9,7 +9,6 @@ import {
   Modal,
 } from '@mui/material';
 import Pagination from '@mui/material/Pagination';
-// import ClearIcon from '@mui/icons-material/Clear';
 import ProductItem from './ProductItem';
 import '../../styles/category/productWrap.scss';
 import { useMediaQuery } from '@mui/material';

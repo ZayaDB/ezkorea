@@ -18,11 +18,24 @@ import CommunityDetailPage from './pages/CommunityDetailPage';
 import RecentViewList from './components/mypage/RecentViewList';
 import LikesProduct from './components/mypage/LikesProducts';
 import MainLayout from './pages/MainLayout';
+import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 
-function App() {
+const App = () => {
+  const ScrollToTop = () => {
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+      window.scrollTo(0, 0); // 페이지 이동 시 스크롤을 최상단으로 이동
+    }, [pathname]); // pathname이 변경될 때마다 useEffect가 실행되어 스크롤을 초기화
+
+    return null;
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route element={<MainLayout />}>
             <Route path='/' element={<Home />} />
@@ -52,6 +65,6 @@ function App() {
       </BrowserRouter>
     </ThemeProvider>
   );
-}
+};
 
 export default App;
