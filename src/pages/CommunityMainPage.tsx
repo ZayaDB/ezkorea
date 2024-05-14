@@ -9,8 +9,9 @@ import './../styles/community/main.scss';
 import { FeedData } from '../types/communityTypes';
 import { Link } from 'react-router-dom';
 import LikeButton from '../components/community/main/LikeButton';
+import ProtectedButton from '../components/common/ProtectedButton';
 
-const Community = () => {
+const CommunityMainPage = () => {
   const [likedItems, setLikedItems] = useState<number[]>([]);
   const [filterData, setFilterData] = useState<FeedData[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -154,7 +155,8 @@ const Community = () => {
           >
             초기화
           </Button>
-          <Button
+          <ProtectedButton
+            redirectTo='/community/post'
             sx={{
               width: '96px',
               padding: '0 12px',
@@ -170,13 +172,8 @@ const Community = () => {
               },
             }}
           >
-            <Link
-              to='/community/post'
-              style={{ textDecoration: 'none', color: 'unset' }}
-            >
-              글 쓰기
-            </Link>
-          </Button>
+            글쓰기
+          </ProtectedButton>
           <SortSelect sort={sort} setSort={setSort} />
         </div>
       </Grid>
@@ -281,7 +278,7 @@ const Community = () => {
   );
 };
 
-export default Community;
+export default CommunityMainPage;
 
 const containedButtonStyles = {
   color: '#000000',

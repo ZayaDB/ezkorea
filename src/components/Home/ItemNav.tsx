@@ -51,32 +51,32 @@ const IconNav: React.FC = () => {
   };
 
   return (
-    <div>
-      {category.map((cate: CategoryData) =>
-        cate.subCategories
-          .filter(subCategory => subCategory.name !== 'ALL')
-          .map((subCategory, subIndex) => (
-            <LinkItem
-              key={subIndex}
-              to={`/shop?category=${encodeURIComponent(
-                cate.name
-              )}&subCategory=${encodeURIComponent(subCategory.name)}`}
-              color='inherit'
-              onClick={() =>
-                handleSubCategoryClick(cate.name, subCategory.name)
-              }
-            >
-              <img
-                src={subCategory.imagePath}
-                alt=''
-                width='100px'
-                height='100px'
-              />
-              {subCategory.name}
-            </LinkItem>
-          ))
-      )}
-    </div>
+      <div>
+        {category.map((cate: CategoryData) =>
+          cate.subCategories
+            .filter(subCategory => subCategory.name !== 'ALL')
+            .map((subCategory, subIndex) => (
+              <LinkItem
+                key={subIndex}
+                to={`/shop?category=${encodeURIComponent(
+                  cate.name
+                )}&subCategory=${encodeURIComponent(subCategory.name)}`}
+                color='inherit'
+                onClick={() =>
+                  handleSubCategoryClick(cate.name, subCategory.name)
+                }
+              >
+                <img
+                  src={subCategory.imagePath}
+                  alt=''
+                  width='120px'
+                  height='120px'
+                />
+                {subCategory.name}
+              </LinkItem>
+            ))
+        )}
+      </div>
   );
 };
 

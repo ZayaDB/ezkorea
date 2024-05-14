@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 // ColorFilter.tsx
 import React from 'react';
 import { Button, Box } from '@mui/material';
@@ -18,7 +17,7 @@ const ColorFilter: React.FC<ColorFilterProps> = ({
 
   return (
     <div className='color-filter'>
-      <p className='filter-title'>컬러 선택</p>
+      <p className='filter-title'>Color</p>
       {colors.map((color, index) => (
         <Button
           key={index}
