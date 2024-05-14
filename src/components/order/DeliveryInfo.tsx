@@ -248,7 +248,9 @@ function AddressBook() {
       </Button>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
-          <CloseButton onClick={handleClose} />
+          <div className='right-sort'>
+            <CloseButton onClick={handleClose} />
+          </div>
           <div className='address-caption'>배송지 목록</div>
           <AddAddress />
           <button>주소록 추가</button>
