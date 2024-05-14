@@ -12,7 +12,7 @@ export default function MainLayout() {
     { title: '세일', url: '/shop/sale' },
   ];
 
-  const isMobile = useMediaQuery('(max-width:500px)');
+  const isMobile = useMediaQuery('(max-width:619px)');
 
   return (
     <>
