@@ -4,6 +4,7 @@ import Review from './Review';
 import Inquire from './Inquire';
 import ProductsStyling from './ProductStyling';
 import { useLocation } from 'react-router-dom';
+import ProductInfo, { DeliveryInfo } from './ProductInfo';
 
 // import React, { useRef, useState } from 'react';
 
@@ -55,10 +56,10 @@ export default function ProductTabs() {
             상품정보
           </div>
           <div onClick={onContent2Click} role='none'>
-            리뷰
+            배송/환불
           </div>
           <div onClick={onContent3Click} role='none'>
-            배송/환불
+            리뷰
           </div>
           <div onClick={onContent4Click} role='none'>
             문의하기
@@ -67,11 +68,14 @@ export default function ProductTabs() {
         {/* style={{ border: '3px solid salmon' }} */}
         <div ref={content1Ref}>
           <ProductsStyling />
+          <ProductInfo />
         </div>
         <div ref={content2Ref}>
-          <Review />
+          <DeliveryInfo />
+          <div ref={content3Ref}>
+            <Review />
+          </div>
         </div>
-        <div ref={content3Ref}>배송/환불</div>
         <div ref={content4Ref}>
           <Inquire />
         </div>

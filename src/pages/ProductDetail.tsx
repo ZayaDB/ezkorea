@@ -8,8 +8,31 @@ import { useMediaQuery } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Product } from '../types/productDetail';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+declare module '@mui/material/styles' {
+  interface ThemeOptions {
+    overrides?: {
+      MuiContainer?: {
+        root?: {
+          padding?: string | number;
+        };
+      };
+    };
+  }
+}
 
 export default function ProductDetail() {
+  const theme = createTheme({
+    overrides: {
+      MuiContainer: {
+        root: {
+          padding: 0,
+        },
+      },
+    },
+  });
+
   const isTablet = useMediaQuery('(max-width: 768px)');
 
   const [isLoading, setIsLoading] = useState(true);
@@ -65,41 +88,43 @@ export default function ProductDetail() {
       ) : (
         <h1>존재하지 않는 상품입니다.</h1>
       )} */}
-      {validProduct ? (
-        isTablet ? (
-          <Container>
-            <div className='detailPage'>
-              <div className='detailMain'>
-                <ProductCarousel />
+      <ThemeProvider theme={theme}>
+        {validProduct ? (
+          isTablet ? (
+            <Container>
+              <div className='detailPage'>
+                <div className='detailMain'>
+                  <ProductCarousel />
+                  <div className='detailSide'>
+                    <SelectPurchase />
+                  </div>
+                  <div className='contents'>
+                    <ProductTabs />
+                    <SimilarProducts />
+                  </div>
+                </div>
+              </div>
+            </Container>
+          ) : (
+            <Container>
+              <div className='detailPage'>
+                <div className='detailMain'>
+                  <ProductCarousel />
+                  <div className='contents'>
+                    <ProductTabs />
+                    <SimilarProducts />
+                  </div>
+                </div>
                 <div className='detailSide'>
                   <SelectPurchase />
                 </div>
-                <div className='contents'>
-                  <ProductTabs />
-                  <SimilarProducts />
-                </div>
               </div>
-            </div>
-          </Container>
+            </Container>
+          )
         ) : (
-          <Container>
-            <div className='detailPage'>
-              <div className='detailMain'>
-                <ProductCarousel />
-                <div className='contents'>
-                  <ProductTabs />
-                  <SimilarProducts />
-                </div>
-              </div>
-              <div className='detailSide'>
-                <SelectPurchase />
-              </div>
-            </div>
-          </Container>
-        )
-      ) : (
-        <h1>존재하지 않는 상품입니다.</h1>
-      )}
+          <h1>존재하지 않는 상품입니다.</h1>
+        )}
+      </ThemeProvider>
     </div>
   );
 }
