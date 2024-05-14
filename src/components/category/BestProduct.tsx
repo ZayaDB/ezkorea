@@ -3,8 +3,7 @@ import useSort from '../../hooks/shop/useSort';
 import { useEffect, useState } from 'react';
 import { getData } from '../../utils/getData';
 import { Products } from '../../types/productTypes';
-
-import '../../styles/category/productWrap.scss';
+import '../../styles/category/likes.scss';
 
 export default function BestProduct() {
   const [prodData, setProdData] = useState<Products[]>([]); // Specify the type as Products[]
@@ -26,13 +25,12 @@ export default function BestProduct() {
   const sortedProducts = useSort(prodData, sortOption);
 
   return (
-    <div className='best-content'>
-      <div className='prod-wrapper-best'>
+    <div className='likes-page'>
+      <br />
+      <div className='likes-content'>
         {/* 상위 50개만 렌더링하기 */}
         {sortedProducts.slice(0, 50).map((prod, index) => (
-          // <Box className='bestProds'>
           <ProductItem key={prod.productId} prod={prod} rank={index + 1} />
-          // </Box>
         ))}
       </div>
     </div>
