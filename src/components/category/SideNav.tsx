@@ -12,8 +12,8 @@ import { useMediaQuery } from '@mui/material';
 import FilterCompo from './FilterCompo';
 
 const categoryMapping: { [key: string]: string } = {
-  가구: 'furniture',
-  전자기기: 'electronics',
+  '가구': 'furniture',
+  '전자기기': 'electronics',
   '조명/인테리어': 'lighting-interior',
   '데코/식물': 'deco-plant',
 };

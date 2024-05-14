@@ -12,6 +12,7 @@ import { setIsLiked } from '../../redux/slices/categorySlice';
 interface ProductItemProps {
   prod: Products;
   rank?: number;
+  disc?: boolean;
 }
 
 const addCommaNumber = (num?: number): string => {
@@ -25,7 +26,7 @@ const addCommaNumber = (num?: number): string => {
 };
 
 // 상품 카드 컴포넌트
-export default function ProductItem({ prod, rank }: ProductItemProps) {
+export default function ProductItem({ prod, rank, disc }: ProductItemProps) {
   const dispatch = useDispatch();
 
   const isLiked = useSelector(
@@ -87,7 +88,6 @@ export default function ProductItem({ prod, rank }: ProductItemProps) {
           onMouseLeave={handleMouseLeave}
         >
           {rank && <div className='rank'>{rank}</div>}
-
           <img
             src={hovered ? prod.hoverImage : prod.thumbnail}
             alt={prod.name}
@@ -99,10 +99,22 @@ export default function ProductItem({ prod, rank }: ProductItemProps) {
           {/* 상품명 */}
           <div className='prod-name'>{prod.name}</div>
           {/* 할인율 */}
-          {prod.discount !== 0 ? (
-            <div className='prod-discount'>{prod.discount}%</div>
+          {disc !== true ? (
+            <div>
+              {prod.discount !== 0 ? (
+                <div className='prod-discount'>{prod.discount}%</div>
+              ) : (
+                <div style={{ color: 'white' }}>;;;</div>
+              )}
+            </div>
           ) : (
-            <div style={{ color: 'white' }}>;;;</div>
+            <div>
+              {prod.discount !== 0 ? (
+                <div className='prod-discount-sale'>{prod.discount}%</div>
+              ) : (
+                <div style={{ color: 'white' }}>;;;</div>
+              )}
+            </div>
           )}
           {/* 원가 */}
           {prod.discount !== 0 ? (
@@ -113,6 +125,7 @@ export default function ProductItem({ prod, rank }: ProductItemProps) {
             <div style={{ color: 'white' }}>;;;</div>
           )}
           {/* 할인가 */}
+
           <div className='prod-price'>{addCommaNumber(prod.price)}원</div>
           <div className='prod-commentCount'>
             <img src={prod_review} alt='' className='prod-review-icon' />(
