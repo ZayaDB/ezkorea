@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { styled } from '@mui/system';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../redux/config';
+import { useDispatch } from 'react-redux';
+import { getData } from '../../utils/getData';
 import {
   setSelectedCategory,
   setSelectedSubCategory,
@@ -27,9 +27,20 @@ const LinkItem = styled(NavLink)({
 
 const IconNav: React.FC = () => {
   const dispatch = useDispatch();
-  const categoryData = useSelector(
-    (state: RootState) => state.category.categoryData
-  );
+  const [category, setCategory] = useState<CategoryData[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { categoryData } = await getData('/data/categoryData.json');
+        setCategory(categoryData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleSubCategoryClick = (
     categoryName: string,
@@ -41,18 +52,18 @@ const IconNav: React.FC = () => {
 
   return (
     <div>
-      {categoryData.map((category: CategoryData) =>
-        category.subCategories
+      {category.map((cate: CategoryData) =>
+        cate.subCategories
           .filter(subCategory => subCategory.name !== 'ALL')
           .map((subCategory, subIndex) => (
             <LinkItem
               key={subIndex}
               to={`/shop?category=${encodeURIComponent(
-                category.name
+                cate.name
               )}&subCategory=${encodeURIComponent(subCategory.name)}`}
               color='inherit'
               onClick={() =>
-                handleSubCategoryClick(category.name, subCategory.name)
+                handleSubCategoryClick(cate.name, subCategory.name)
               }
             >
               <img
