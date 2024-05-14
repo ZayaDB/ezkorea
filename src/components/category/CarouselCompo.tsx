@@ -16,7 +16,7 @@ export default function CarouselCompo() {
         다양한 제품으로 감각적인 데스크를 완성해보세요
       </span>
       <div style={{ width: 'auto', margin: 0, padding: 0 }}>
-        <Carousel>
+        <Carousel interval={5000}>
           <Carousel.Item>
             <img className='d-block w-100' src={best1} alt='First slide' />
           </Carousel.Item>

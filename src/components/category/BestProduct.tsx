@@ -27,16 +27,6 @@ export default function BestProduct() {
 
   return (
     <div className='best-content'>
-      <div
-        style={{
-          textAlign: 'center',
-          paddingTop: '40px',
-          fontSize: '25px',
-          // overflowY: 'scroll',
-        }}
-      >
-        BEST PRODUCTS
-      </div>
       <div className='prod-wrapper-best'>
         {/* 상위 50개만 렌더링하기 */}
         {sortedProducts.slice(0, 50).map((prod, index) => (
