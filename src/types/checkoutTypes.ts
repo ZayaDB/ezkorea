@@ -33,7 +33,7 @@ export interface OrderInfo {
 }
 
 export interface Discount {
-  productCoupon?: number;
+  productCoupon?: boolean;
   productCouponAmount?: number;
   shippingCoupon?: boolean;
   mileage?: number;
