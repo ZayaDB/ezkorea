@@ -135,6 +135,12 @@ const ProductList = () => {
     setIsFilterModalOpen(false);
   };
 
+  // 검색 버튼 클릭 핸들러
+  const handleApplyFilters = () => {
+    // 필터 적용 후 모달 닫기
+    setIsFilterModalOpen(false);
+  };
+
   const subCategories: SubCategory[] = (
     selectedCategory
       ? categoryData.find(category => category.name === selectedCategory)
@@ -148,12 +154,12 @@ const ProductList = () => {
   };
 
   return (
-    <Box className='prod-container'>
+    <div className='prod-container'>
       {/* 카테고리 선택 */}
-      <Box className='prod-selec-value'>
-        <Box className='select-categories'>
-          <Box className='category-1'>{selectedCategory}</Box>
-          <Box className='category-2'>
+      <div className='prod-selec-value'>
+        <div className='select-categories'>
+          {!isMobile && <div className='category-1'>{selectedCategory}</div>}
+          <div className='category-2'>
             {subCategories &&
               subCategories.map(subCategory => (
                 <Box
@@ -169,39 +175,37 @@ const ProductList = () => {
                   onClick={() => handleSubCategoryClick(subCategory.name)}
                 >
                   {isMobile ? (
-                    <Box
-                      className='icon-nav'
-                      style={{
-                        justifyContent: 'center',
-                      }}
-                    >
+                    <div className='icon-nav' style={{}}>
                       <div
                         style={{
                           backgroundImage: `url(${subCategory.imagePath})`,
                           backgroundSize: 'cover',
-                          width: '100px', // 원하는 너비 설정
-                          height: '100px', // 원하는 높이 설정
-                          borderRadius: '10px', // 테두리 둥글게 처리 (선택적)
+                          width: '80px',
+                          height: '80px',
+                          borderRadius: '10px',
+                          // border: '1px solid black',
                         }}
                       ></div>
-                      <div>{subCategory.name}</div>
-                    </Box>
+                      <div className='iconName'>
+                        <span className='iconSpan'> {subCategory.name}</span>
+                      </div>
+                    </div>
                   ) : (
                     subCategory.name
                   )}
                 </Box>
               ))}
-          </Box>
-        </Box>
+          </div>
+        </div>
 
         {/* 선택한 필터링 데이터 */}
-        <Box className='select-filtering-values'>
+        <div className='select-filtering-values'>
           <FilterChips />
           {/* 정렬기준 */}
-          <Box className='sort-box'>
+          <div className='sort-box'>
             {/* 모바일 환경에서 필터링 버튼 */}
             {isMobile && (
-              <Box className='filterBtn'>
+              <div className='filterBtn'>
                 <Button
                   onClick={handleFilterButtonClick}
                   sx={{
@@ -223,7 +227,7 @@ const ProductList = () => {
                 >
                   필터링
                 </Button>
-              </Box>
+              </div>
             )}
 
             {/* 모달 */}
@@ -251,7 +255,7 @@ const ProductList = () => {
                   }}
                 >
                   {/* 모바일 환경에서만 FilterCompo 렌더링 */}
-                  <FilterCompo />
+                  <FilterCompo onApplyFilters={handleApplyFilters} />
                 </Box>
               </Modal>
             )}
@@ -307,12 +311,12 @@ const ProductList = () => {
                 </MenuItem>
               </Select>
             </FormControl>
-          </Box>
-        </Box>
-      </Box>
+          </div>
+        </div>
+      </div>
 
       {/* 상품 목록 */}
-      <Box className='prod-wrapper'>
+      <div className='prod-wrapper'>
         {renderingStart
           ? sortedFilteredProducts
               .filter(
@@ -332,18 +336,18 @@ const ProductList = () => {
               )
               .slice(indexOfFirstItem, indexOfLastItem)
               .map(prod => <ProductItem key={prod.productId} prod={prod} />)}
-      </Box>
+      </div>
 
       {!isMobile && (
-        <Box style={{ marginLeft: '45%' }}>
+        <div style={{ marginLeft: '45%' }}>
           <Pagination
             count={Math.ceil(filteredProducts.length / itemsPerPage)}
             page={currentPage}
             onChange={handlePageChange}
           />
-        </Box>
+        </div>
       )}
-    </Box>
+    </div>
   );
 };
 

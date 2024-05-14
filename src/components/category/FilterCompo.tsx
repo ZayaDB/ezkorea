@@ -1,3 +1,4 @@
+import React, { FC } from 'react';
 import { useState } from 'react';
 import { Box, Button } from '@mui/material';
 import BrandFilter from './BrandFilter';
@@ -5,12 +6,14 @@ import PriceFilter from './PriceFilter';
 import ColorFilter from './ColorFilter';
 import ThemeFilter from './ThemeFilter';
 // import { RootState } from '../../redux/config';
-import {  useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { clearFilters, setRendering } from '../../redux/slices/categorySlice';
 import '../../styles/category/sideFilter.scss';
+interface FilterCompoProps {
+  onApplyFilters: () => void; // onApplyFilters 함수의 타입 정의
+}
 
-const FilterCompo = () => {
-
+const FilterCompo: FC<FilterCompoProps> = ({ onApplyFilters }) => {
   const dispatch = useDispatch();
   const [brandFilterOpen, setBrandFilterOpen] = useState(false);
   const [priceFilterOpen, setPriceFilterOpen] = useState(false);
@@ -19,6 +22,10 @@ const FilterCompo = () => {
 
   const handleApplyFilters = () => {
     dispatch(setRendering(true));
+
+    if (typeof onApplyFilters === 'function') {
+      onApplyFilters();
+    }
   };
 
   const handleResetFilters = () => {
@@ -81,7 +88,6 @@ const FilterCompo = () => {
               justifyContent: 'space-between',
               alignItems: 'center',
               cursor: 'pointer',
-        
             }}
             onClick={() => filter.setOpen(!filter.isOpen)}
           >

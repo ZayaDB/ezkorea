@@ -1,7 +1,11 @@
 [
   {
-    "prodId": "3",
-    "product_image": "https://img.29cm.co.kr/item/202307/11ee2c37d76ecbf5bdfadf5067f409c4.jpg?width=700",
+    "prodId": "4",
+    "product_image": [
+      "https://i.ibb.co/mcn8nmF/rrw3-1.png",
+      "https://i.ibb.co/t8h0FqQ/rrw2.png",
+      "https://i.ibb.co/PWc1L1G/rrw1-2.png"
+    ],
     "brand_name": "일광전구",
     "product_name": "SNOWMAN15 Portable Stand 3Colors",
     "regular_price": 110000,
@@ -11,7 +15,20 @@
     "commentCount": 20,
     "colorOption": ["gray", "pink"],
     "community_feed": "community_feed_url_here",
-    "product_info_image": "product_info_image_url_here",
+    "product_info_image": [
+      "https://i.ibb.co/gmxmSB7/04-Study-Room-Set-01.jpg",
+      "https://i.ibb.co/VgsZFPp/top.jpg",
+      "https://i.ibb.co/gywJyTL/color.jpg",
+      "https://i.ibb.co/QMpbR8x/cont1.jpg",
+      "https://i.ibb.co/kJ3Nhnd/cont2.jpg",
+      "https://i.ibb.co/hLJQhwm/cont3.jpg",
+      "https://i.ibb.co/R0X8LFB/cont4.jpg",
+      "https://i.ibb.co/XxHrPDW/cont5.jpg",
+      "https://i.ibb.co/bHVkZTg/cont6.jpg",
+      "https://i.ibb.co/thRFL46/line.jpg",
+      "https://i.ibb.co/KVvCJb0/install.jpg",
+      "https://i.ibb.co/1MWbsDm/notice.jpg"
+    ],
     "reviews": [
       {
         "reUserId": 1,
@@ -194,7 +211,9 @@
         "contentText": "조명이 너무 아름답게 제품을 감싸주어서 너무 만족스럽습니다."
       }
     ],
-    "delivery_refund": "",
+    "delivery_refund": [
+      "https://rareraw.openhost.cafe24.com/images/product/common/pc/delivery.jpg"
+    ],
     "inquiryTotal": 8,
     "inquiry": [
       {

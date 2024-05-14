@@ -25,7 +25,9 @@ $font-weight-regular: 400;
     margin: 5px;
     cursor: pointer;
   }
-
+  .nav.active {
+    color: #5ff531; // 활성화된 카테고리의 텍스트 색상
+  }
   .furniture-box,
   .electronics-box,
   .lighting-interior-box,

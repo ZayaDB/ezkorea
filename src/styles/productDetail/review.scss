@@ -45,12 +45,15 @@ $border: 1px solid lightgray;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 12px;
+  margin-bottom: 8px;
   // border: 1px solid black;
 }
 
 #reviewBox {
+  width: 80%;
   @include row();
-  justify-content: space-between;
+  justify-content: baseline;
   margin: 0 8px;
 }
 #reviewBox div {
@@ -70,6 +73,20 @@ $border: 1px solid lightgray;
 }
 #writeReview {
   cursor: pointer;
+  width: 100px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  font-weight: $font-weight-bold;
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 8px;
+  background-color: black;
+  color: white;
+}
+#writeReview:hover {
+  cursor: pointer;
+  background-color: black;
 }
 .selected {
   color: $hover-color;
@@ -79,12 +96,19 @@ $border: 1px solid lightgray;
   display: flex;
   border-top: $border;
   border-bottom: $border;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
-#reviewSorting div {
+#reviewSorting button {
+  border: none;
+  background: none;
   margin: 8px;
   cursor: pointer;
-  font-size: $font-size-m;
+  font-size: $font-size-l;
   font-weight: $font-weight-bold;
+}
+#reviewSorting button:hover {
+  color: #5ff531;
 }
 #reviewName,
 .reviewTotal {
