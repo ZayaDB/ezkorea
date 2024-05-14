@@ -25,7 +25,12 @@ const initialState: CheckoutState = {
   orderInfo: [],
   deliveryInfoType: [],
   phoneNum: [],
-  discount: [],
+  discount: [
+    {
+      discountChecked: true,
+      productCoupon: true,
+    },
+  ],
   paymentMethod: [],
 };
 

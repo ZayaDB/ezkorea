@@ -33,6 +33,7 @@ export interface OrderInfo {
 }
 
 export interface Discount {
+  discountChecked: boolean;
   productCoupon?: boolean;
   productCouponAmount?: number;
   shippingCoupon?: boolean;

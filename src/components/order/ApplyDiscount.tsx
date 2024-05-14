@@ -12,14 +12,29 @@ import {
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import { addCommasToNumber } from '../../hooks/addCommasToNumber';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/config';
+import { setDiscount } from '../../redux/slices/checkoutSlice';
 
 /* 할인 적용
   - 쿠폰 : 쿠폰 적용 시 할인된 가격 표시
   - 포인트 : 1,000P 이상 사용 가능 멘트
 */
+
 export default function ApplyDiscount() {
+  const dispatch = useDispatch();
+
+  const handleDiscountDispatch = () => {
+    dispatch(
+      setDiscount([
+        {
+          discountChecked: true,
+          mileage: mileage,
+        },
+      ])
+    );
+  };
+
   const [mileage] = useState<number>(1000);
   const [inputMileage, setInputMileage] = useState<number>();
   const [isError, setIsError] = useState<boolean>(false);
@@ -33,6 +48,7 @@ export default function ApplyDiscount() {
 
   const applyAllMileage = () => {
     setInputMileage(mileage);
+    handleDiscountDispatch();
   };
 
   // 마일리지 입력이 유효한지 검증하는 함수
@@ -43,6 +59,7 @@ export default function ApplyDiscount() {
   // onBlur 이벤트로 유효성 검사를 수행합니다.
   const handleMileageBlur = () => {
     setIsError(inputMileage !== undefined && !isValidMileage(inputMileage));
+    handleDiscountDispatch();
   };
 
   return (
