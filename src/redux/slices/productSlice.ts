@@ -37,7 +37,7 @@ const productSlice = createSlice({
       state.selectedQuantity = action.payload;
     },
     setSelectedProductId: (state, action: PayloadAction<number>) => {
-      state.selectedQuantity = action.payload;
+      state.selectedProductId = action.payload;
     },
   },
 });
