@@ -30,3 +30,29 @@ export interface FeedData {
   comments?: Comment[];
   creationDate: string;
 }
+
+export interface IFormInput {
+  files: File[];
+  title: string;
+  description: string;
+  products: string[];
+  concepts: string[];
+  colors: string[];
+  submissionConcepts?: string;
+  submissionColors?: string;
+  feedId: number;
+  accountName: string;
+  profileImage: string;
+  images: string[];
+  selectedProducts?: SelectedProducts[];
+  views: number;
+  likes: number;
+  commentCount: number;
+  comments?: Comment[];
+  creationDate: string;
+}
+
+export interface IFeedPreview {
+  feedId: number;
+  image: string;
+}

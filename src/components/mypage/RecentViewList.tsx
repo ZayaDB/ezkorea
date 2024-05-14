@@ -4,8 +4,9 @@ import '../../styles/category/likes.scss';
 
 const RecentViewList = () => {
   const clickedProducts: Products[] = JSON.parse(
-    localStorage.getItem('clickedProducts') || '[]'
+    sessionStorage.getItem('clickedProducts') || '[]'
   );
+
   return (
     <div className='likes-page'>
       <h1> 최근 본 상품 </h1>

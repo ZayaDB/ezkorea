@@ -7,7 +7,6 @@ import {
   setSelectedCategory,
   setSelectedSubCategory,
 } from '../../redux/slices/categorySlice';
-import { WidthFull } from '@mui/icons-material';
 
 interface CategoryData {
   name: string;
