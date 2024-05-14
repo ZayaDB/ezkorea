@@ -5,6 +5,7 @@ import FolderIcon from '@mui/icons-material/Folder';
 import RestoreIcon from '@mui/icons-material/Restore';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { NavLink } from 'react-router-dom';
 
 export default function LabelBottomNavigation() {
   const [value, setValue] = React.useState('recents');
@@ -27,26 +28,34 @@ export default function LabelBottomNavigation() {
       value={value}
       onChange={handleChange}
     >
-      <BottomNavigationAction
-        label='Home'
-        value='recents'
-        icon={<RestoreIcon />}
-      />
-      <BottomNavigationAction
-        label='Shopping'
-        value='favorites'
-        icon={<FavoriteIcon />}
-      />
-      <BottomNavigationAction
-        label='Community'
-        value='nearby'
-        icon={<LocationOnIcon />}
-      />
-      <BottomNavigationAction
-        label='Mypage'
-        value='folder'
-        icon={<FolderIcon />}
-      />
+      <NavLink to='/'>
+        <BottomNavigationAction
+          label='Home'
+          value='recents'
+          icon={<RestoreIcon />}
+        />
+      </NavLink>
+      <NavLink to='/shop'>
+        <BottomNavigationAction
+          label='Shopping'
+          value='favorites'
+          icon={<FavoriteIcon />}
+        />
+      </NavLink>
+      <NavLink to='/community'>
+        <BottomNavigationAction
+          label='Community'
+          value='nearby'
+          icon={<LocationOnIcon />}
+        />
+      </NavLink>
+      <NavLink to='/my'>
+        <BottomNavigationAction
+          label='Mypage'
+          value='folder'
+          icon={<FolderIcon />}
+        />
+      </NavLink>
     </BottomNavigation>
   );
 }
