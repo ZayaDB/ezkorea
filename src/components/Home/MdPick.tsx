@@ -34,7 +34,7 @@ export default function Homepage() {
   const onRun = () => setAnimate(true);
 
   return (
-    <div className='wrapper'>
+    <div className='wrapper' style={{ paddingBottom: '30px' }}>
       <div className='TitleArea'>
         <Typography sx={{ fontSize: '28px', fontWeight: '600' }}>
           MD&apos;s PICK

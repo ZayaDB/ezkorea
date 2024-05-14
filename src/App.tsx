@@ -21,6 +21,7 @@ import MainLayout from './pages/MainLayout';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import CommunityResultPage from './pages/CommunityResultPage';
+import Logout from './components/Home/Logout';
 
 const App = () => {
   const ScrollToTop = () => {
@@ -63,6 +64,7 @@ const App = () => {
           </Route>
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<SignUp />} />
+          <Route path='/logout' element={<Logout />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

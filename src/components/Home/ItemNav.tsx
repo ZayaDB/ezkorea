@@ -51,42 +51,38 @@ const IconNav: React.FC = () => {
   };
 
   return (
-    <div style={{ width: '100vw' }}>
-      <div
-        style={{
-          margin: 'auto',
-          width: '1200px',
-          overflowX: 'scroll',
-          display: 'flex',
-          flexDirection: 'row',
-          scrollbarWidth: 'none',
-        }}
-      >
-        {category.map((cate: CategoryData) =>
-          cate.subCategories
-            .filter(subCategory => subCategory.name !== 'ALL')
-            .map((subCategory, subIndex) => (
-              <LinkItem
-                key={subIndex}
-                to={`/shop?category=${encodeURIComponent(
-                  cate.name
-                )}&subCategory=${encodeURIComponent(subCategory.name)}`}
-                color='inherit'
-                onClick={() =>
-                  handleSubCategoryClick(cate.name, subCategory.name)
-                }
-              >
-                <img
-                  src={subCategory.imagePath}
-                  alt=''
-                  width='120px'
-                  height='120px'
-                />
-                {subCategory.name}
-              </LinkItem>
-            ))
-        )}
-      </div>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        overflowX: 'scroll',
+        scrollbarWidth: 'none',
+      }}
+    >
+      {category.map((cate: CategoryData) =>
+        cate.subCategories
+          .filter(subCategory => subCategory.name !== 'ALL')
+          .map((subCategory, subIndex) => (
+            <LinkItem
+              key={subIndex}
+              to={`/shop?category=${encodeURIComponent(
+                cate.name
+              )}&subCategory=${encodeURIComponent(subCategory.name)}`}
+              color='inherit'
+              onClick={() =>
+                handleSubCategoryClick(cate.name, subCategory.name)
+              }
+            >
+              <img
+                src={subCategory.imagePath}
+                alt=''
+                width='140px'
+                height='140px'
+              />
+              <div style={{ textAlign: 'center' }}>{subCategory.name}</div>
+            </LinkItem>
+          ))
+      )}
     </div>
   );
 };

@@ -25,7 +25,7 @@ TimeAgo.addLocale(koLocale);
 
 const CommunityResultPage: React.FC = () => {
   const [feed, setFeed] = useState<any>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState<number>(0);
   const [commentInput, setCommentInput] = useState<string>('');
