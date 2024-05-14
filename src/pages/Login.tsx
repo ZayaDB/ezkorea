@@ -151,13 +151,15 @@ export default function SignIn() {
             alignItems: 'center',
           }}
         >
+          <NavLink to='/' style={{ textDecoration: 'none', color: 'black' }}>
           <Typography
             variant='h5'
             color='inherit'
-            sx={{ fontSize: '35px', fontWeight: '600', pb: '22px' }}
+            sx={{ fontSize: '40px', fontWeight: '600', pb: '25px' }}
           >
-            LOGIN
+            Dururu
           </Typography>
+          </NavLink>
           <Box component='form' noValidate sx={{ mt: 1 }}>
             <InputTextField
               margin='dense'

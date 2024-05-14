@@ -9,6 +9,7 @@ import { useState, ChangeEvent } from 'react';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Backdrop from '@mui/material/Backdrop';
+import { NavLink } from 'react-router-dom';
 
 const theme = createTheme({
   palette: {
@@ -129,6 +130,7 @@ export default function SignUp() {
             alignItems: 'center',
           }}
         >
+          <NavLink to='/' style={{ textDecoration: 'none', color: 'black' }}>
           <Typography
             variant='h5'
             color='inherit'
@@ -145,6 +147,7 @@ export default function SignUp() {
             {/* Welcome to Dururu :-D */}
             {/* Sign up to Dururu ☻ */}
           </Typography>
+          </NavLink>
           <Box component='form' noValidate sx={{ mt: 1 }}>
             <InputTextField
               margin='dense'
