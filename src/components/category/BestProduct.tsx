@@ -38,9 +38,10 @@ export default function BestProduct() {
         BEST PRODUCTS
       </div>
       <div className='prod-wrapper-best'>
-        {sortedProducts.map(prod => (
+        {/* 상위 50개만 렌더링하기 */}
+        {sortedProducts.slice(0, 50).map((prod, index) => (
           // <Box className='bestProds'>
-          <ProductItem key={prod.productId} prod={prod} />
+          <ProductItem key={prod.productId} prod={prod} rank={index + 1} />
           // </Box>
         ))}
       </div>
