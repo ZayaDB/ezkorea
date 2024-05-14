@@ -95,7 +95,7 @@ const StyledButton2 = styled(Button)(() => ({
 
 export default function SignIn() {
   const [userData, setUserData] = useState<User[]>([]);
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
   const [errorModalOpen, setErrorModalOpen] = useState(false);
   const handleErrorModalClose = () => setErrorModalOpen(false);
   const navigate = useNavigate();
@@ -277,7 +277,7 @@ export default function SignIn() {
                 },
               }}
             >
-              <Fade in={open}>
+              <Fade in={errorModalOpen}>
                 <Box sx={style}>
                   <Typography
                     id='transition-modal-title'
