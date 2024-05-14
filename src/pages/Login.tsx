@@ -6,11 +6,13 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
-import { useState, ChangeEvent } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Backdrop from '@mui/material/Backdrop';
 import { NavLink } from 'react-router-dom';
+import { User } from '../types/userTypes';
 
 const theme = createTheme({
   palette: {
@@ -91,53 +93,74 @@ const StyledButton2 = styled(Button)(() => ({
   },
 }));
 
-// const User = {
-//   email: 'dururu@gmail.com',
-//   pw: 'dururu123!',
-// };
-
 export default function SignIn() {
+  const [userData, setUserData] = useState<User[]>([]);
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [errorModalOpen, setErrorModalOpen] = useState(false);
+  const handleErrorModalClose = () => setErrorModalOpen(false);
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState<string>('');
   const [pw, setPw] = useState<string>('');
+  const [emailValid, setEmailValid] = useState<boolean>(true);
+  const [pwValid, setPwValid] = useState<boolean>(true);
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [pwTouched, setPwTouched] = useState<boolean>(false);
 
-  const [emailValid, setEmailValid] = useState<boolean>(false);
-  const [pwValid, setPwValid] = useState<boolean>(false);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/data/userData.json');
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        const userData = await response.json();
+        setUserData(userData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
     const inputEmail: string = e.target.value;
     setEmail(inputEmail);
     const regex =
       /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-    if (regex.test(email)) {
-      setEmailValid(true);
-    } else {
-      setEmailValid(false);
-    }
+    setEmailValid(regex.test(inputEmail));
   };
+
 
   const handlePassWord = (e: ChangeEvent<HTMLInputElement>) => {
     const inputPassWord: string = e.target.value;
     setPw(inputPassWord);
-    const regex =
-      /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{8,20}$/;
-    if (regex.test(pw)) {
-      setPwValid(true);
-    } else {
-      setPwValid(false);
-    }
+    setPwTouched(true);
+    setErrorMessage('');
+    const regex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,20}$/;
+    setPwValid(regex.test(inputPassWord));
   };
 
-  // const onClickConfirmButton = () => {
-  //   if (email === User.email && pw === User.pw) {
-  //     setIsModalOpen(true);
-  //   } else {
-  //     alert('등록되지 않은 회원입니다.');
-  //   }
-  // };
+  const onClickConfirmButton = () => {
+    const user = userData.find((user) => user.email === email);
+
+    if (emailValid && pwValid) {
+      if (user) {
+        if (user.password === pw) {
+          console.log('success');
+          sessionStorage.setItem('isLoggedIn', 'true');
+          navigate('/');
+        } else {
+          setErrorMessage('비밀번호가 틀렸습니다.');
+          setPwValid(false);
+        }
+      } else {
+        setErrorMessage('등록되지 않은 회원입니다.');
+        setErrorModalOpen(true);
+      }
+    }
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -175,9 +198,9 @@ export default function SignIn() {
               }}
               // error={!emailValid && email.length > 0 ? true : false}
               helperText={
-                !emailValid &&
-                email.length > 0 &&
-                '올바른 이메일 형식이 아닙니다.'
+                !emailValid && email.length > 0
+                  ? '올바른 이메일 형식이 아닙니다.'
+                  : ''
               }
               value={email}
               onChange={handleEmail}
@@ -195,11 +218,27 @@ export default function SignIn() {
                   borderRadius: '2px',
                 },
               }}
+              // helperText={
+              //   !pwValid
+              //     ? '잘못된 비밀번호 형식입니다.'
+              //     : pw.length === 0 && '비밀번호를 입력해주세요.'
+              // }
+              // helperText={
+              //   !pwValid && pw.length > 0
+              //     ? errorMessage
+              //       ? errorMessage
+              //       : '잘못된 비밀번호 형식입니다.'
+              //     : pw.length === 0 && '비밀번호를 입력해주세요.'
+              // }
               helperText={
-                !pwValid && pw.length > 0 && '비밀번호가 일치하지 않습니다.'
+                pwTouched && !pwValid
+                  ? errorMessage || '잘못된 비밀번호 형식입니다.'
+                  : ''
               }
+              // error={!pwValid || !!errorMessage}
               value={pw}
               onChange={handlePassWord}
+              error={pwTouched && !pwValid}
             />
             <StyledButton
               fullWidth
@@ -218,7 +257,7 @@ export default function SignIn() {
                 },
               }}
               size='large'
-              onClick={handleOpen}
+              onClick={onClickConfirmButton}
               // onClick={onClickConfirmButton}
             >
               로그인하기
@@ -226,10 +265,10 @@ export default function SignIn() {
             </StyledButton>
 
             <Modal
-              aria-labelledby='transition-modal-title'
-              aria-describedby='transition-modal-description'
-              open={open}
-              onClose={handleClose}
+              aria-labelledby='error-modal-title'
+              aria-describedby='error-modal-description'
+              open={errorModalOpen}
+              onClose={handleErrorModalClose}
               closeAfterTransition
               slots={{ backdrop: Backdrop }}
               slotProps={{
@@ -247,6 +286,33 @@ export default function SignIn() {
                     sx={{ textAlign: 'center', borderRadius: '10px' }}
                   >
                     로그인 성공 !
+                  </Typography>
+                </Box>
+              </Fade>
+            </Modal>
+
+            <Modal
+              aria-labelledby='error-modal-title'
+              aria-describedby='error-modal-description'
+              open={errorModalOpen}
+              onClose={handleErrorModalClose}
+              closeAfterTransition
+              slots={{ backdrop: Backdrop }}
+              slotProps={{
+                backdrop: {
+                  timeout: 500,
+                },
+              }}
+            >
+              <Fade in={errorModalOpen}>
+                <Box sx={style}>
+                  <Typography
+                    id='error-modal-title'
+                    variant='h6'
+                    component='h2'
+                    sx={{ textAlign: 'center', borderRadius: '10px' }}
+                  >
+                    등록되지 않은 회원입니다.
                   </Typography>
                 </Box>
               </Fade>
