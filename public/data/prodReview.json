@@ -7,7 +7,7 @@
         "reUserName": "둘리",
         "reDate": "2024-04-20",
         "rating": 4,
-        "contentPhoto": "photo1.jpg",
+        "contentPhoto": "https://image.ohou.se/image/resize/bucketplace-v2-development/uploads-cards-snapshots-171336277864150712.jpeg/640/none",
         "contentText": "조명이 너무 어두워서 제품을 제대로 볼 수 없어요."
       },
       {
@@ -181,6 +181,7 @@
         "contentPhoto": "photo20.jpg",
         "contentText": "조명이 너무 아름답게 제품을 감싸주어서 너무 만족스럽습니다."
       }
-    ]
+    ],
+    "reviewTotal": 20
   }
 ]

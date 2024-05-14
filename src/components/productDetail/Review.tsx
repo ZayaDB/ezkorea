@@ -11,7 +11,9 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
-
+// import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
+import theme from '../../styles/theme';
 // import { createTheme, makeStyles } from '@mui/material';
 // const [currentPage, setCurrentPage] = useState(1);
 // const onPageChange = (e: React.ChangeEvent<unknown>, page: number) => {
@@ -23,6 +25,13 @@ import Grid from '@mui/material/Grid';
 //   page: number;
 //   index: number;
 // }
+// export const theme = createTheme({
+//   palette: {
+//     primary: {
+//       main: '#4AD395',
+//     },
+//   },
+// });
 
 export interface Review {
   reUserId: number;
@@ -105,6 +114,8 @@ export function FileInput() {
 }
 
 export default function Review() {
+  // 리뷰 개수
+  const [rvTotal, setRvTotal] = useState();
   // rating
   const value = 3.5;
 
@@ -144,9 +155,11 @@ export default function Review() {
         const response = await fetch('/data/prodReview.json');
         const data = await response.json();
         const reviews = data[0].reviews;
+        const reviewTo = data[0].reviewTotal;
         setReviewData(reviews);
         setReviews(reviews);
         setSortedReviews(reviews); // 초기에 정렬되지 않은 데이터로 설정
+        setRvTotal(reviewTo);
       } catch (error) {
         console.error('Error fetching review data:', error);
       }
@@ -190,29 +203,33 @@ export default function Review() {
     setSortBy('최신순');
   };
   return (
-    <div id='reviewZone'>
-      <div id='reviewTop'>
-        <div id='reviewBox'>
-          <div id='reviewName'>리뷰</div>
+    <ThemeProvider theme={theme}>
+      <div id='reviewZone'>
+        <div id='reviewTop'>
+          <div id='reviewBox'>
+            <div id='reviewName'>리뷰</div>
 
-          <div className='reviewTotal'>리뷰 수</div>
-          <div id='ratingBox'>
-            <div className='starTotal'>
-              <Box
-                sx={{
-                  width: 120,
-                  display: 'flex',
-                  alignItems: 'center',
-                }}
-              >
-                <Rating name='read-only' value={value} readOnly />
-                <Box sx={{ ml: 2 }}></Box>
-              </Box>
+            <div className='reviewTotal'>{rvTotal}</div>
+            <div id='ratingBox'>
+              <div className='starTotal'>
+                <Box
+                  sx={{
+                    width: 120,
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Rating name='read-only' value={value} readOnly />
+                  <Box sx={{ ml: 2 }}></Box>
+                </Box>
+              </div>
+              <div className='rating'>평점</div>
             </div>
-            <div className='rating'>평점</div>
           </div>
           <div id='writeReview'>
-            <Button onClick={handleOpen}>리뷰쓰기</Button>
+            <Button onClick={handleOpen}>
+              <h6>리뷰쓰기</h6>
+            </Button>
           </div>
         </div>
         <div>
@@ -278,60 +295,60 @@ export default function Review() {
             </Alert>
           </Snackbar>
         </div>
-      </div>
 
-      <div id='reviewSorting'>
-        <button className='highestRating' onClick={sortByHighestRating}>
-          별점 높은순
-        </button>
-        <button className='lowestRating' onClick={sortByLowestRating}>
-          별점 낮은순
-        </button>
-        <button className='recent' onClick={sortByRecent}>
-          최신순
-        </button>
-      </div>
-      <div className='reviewContents'>
-        {sortedReviews.slice(startIndex, endIndex).map((item, index) => (
-          <div className='reviewItem' key={index}>
-            <div className='reviewUser'>
-              <div className='userPhoto'></div>
-              <div className='userName'> {item.reUserName}</div>
-              <div className='writingdate'>{item.reDate}</div>
-              <div className='reviewrating'>
-                <Stack spacing={1}>
-                  <Rating
-                    name='size-small'
-                    defaultValue={item.rating}
-                    size='small'
-                    readOnly
-                  />
-                </Stack>
+        <div id='reviewSorting'>
+          <button className='highestRating' onClick={sortByHighestRating}>
+            별점 높은순
+          </button>
+          <button className='lowestRating' onClick={sortByLowestRating}>
+            별점 낮은순
+          </button>
+          <button className='recent' onClick={sortByRecent}>
+            최신순
+          </button>
+        </div>
+        <div className='reviewContents'>
+          {sortedReviews.slice(startIndex, endIndex).map((item, index) => (
+            <div className='reviewItem' key={index}>
+              <div className='reviewUser'>
+                <div className='userPhoto'></div>
+                <div className='userName'> {item.reUserName}</div>
+                <div className='writingdate'>{item.reDate}</div>
+                <div className='reviewrating'>
+                  <Stack spacing={1}>
+                    <Rating
+                      name='size-small'
+                      defaultValue={item.rating}
+                      size='small'
+                      readOnly
+                    />
+                  </Stack>
+                </div>
+              </div>
+              <div className='reviewWB'>
+                <div className='reviewPhoto'></div>
+                <div className='reviewComments'>{item.contentText}</div>
               </div>
             </div>
-            <div className='reviewWB'>
-              <div className='reviewPhoto'></div>
-              <div className='reviewComments'>{item.contentText}</div>
-            </div>
-          </div>
-        ))}
+          ))}
 
-        <div className='rePagination'>
-          {/* mui 요소 중앙정렬 Grid 사용하기 */}
-          <Grid
-            container
-            direction='row'
-            justifyContent='center'
-            alignItems='center'
-          >
-            <Pagination
-              count={Math.ceil(reviewData.length / reviewsPerPage)}
-              page={page}
-              onChange={handleChangePage}
-            />
-          </Grid>
+          <div className='rePagination'>
+            {/* mui 요소 중앙정렬 Grid 사용하기 */}
+            <Grid
+              container
+              direction='row'
+              justifyContent='center'
+              alignItems='center'
+            >
+              <Pagination
+                count={Math.ceil(reviewData.length / reviewsPerPage)}
+                page={page}
+                onChange={handleChangePage}
+              />
+            </Grid>
+          </div>
         </div>
       </div>
-    </div>
+    </ThemeProvider>
   );
 }

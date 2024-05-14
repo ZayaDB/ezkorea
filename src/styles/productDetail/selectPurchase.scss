@@ -50,7 +50,7 @@ $border: 1px solid lightgray;
   position: fixed;
   background-color: white;
   // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  border-top: 3px solid black;
+  border-top: 5px solid black;
   padding: 8px;
 }
 
@@ -238,7 +238,7 @@ $border: 1px solid lightgray;
   #selectBox {
     // position: relative;
     width: 100%;
-    border: 1px solid black;
+    // border: 1px solid black;
     // height: calc(100vh - 200px);
   }
 
