@@ -9,6 +9,7 @@ import './../styles/community/main.scss';
 import { FeedData } from './../types/communityTypes';
 import { Link } from 'react-router-dom';
 import LikeButton from '../components/community/main/LikeButton';
+import ProtectedButton from '../components/common/ProtectedButton';
 
 const Community = () => {
   const [likedItems, setLikedItems] = useState<number[]>([]);
@@ -154,7 +155,8 @@ const Community = () => {
           >
             초기화
           </Button>
-          <Button
+          <ProtectedButton
+            redirectTo='/community/post'
             sx={{
               width: '96px',
               padding: '0 12px',
@@ -170,13 +172,32 @@ const Community = () => {
               },
             }}
           >
+            글쓰기
+          </ProtectedButton>
+          {/* <Button
+            sx={{
+              width: '96px',
+              padding: '0 12px',
+              fontSize: '14px',
+              height: '32px',
+              borderRadius: '16px',
+              fontWeight: 700,
+              ...containedButtonStyles,
+              '&:hover': {
+                ...containedButtonStyles['&:hover'], // 기존의 호버 스타일을 가져오고
+                backgroundColor: '#B7FF8B', // 필요한 스타일만 변경
+                borderColor: '#5FF531',
+              },
+            }}
+          >
+
             <Link
               to='/community/post'
               style={{ textDecoration: 'none', color: 'unset' }}
             >
               글 쓰기
             </Link>
-          </Button>
+          </Button> */}
           <SortSelect sort={sort} setSort={setSort} />
         </div>
       </Grid>
