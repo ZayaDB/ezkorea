@@ -19,17 +19,12 @@ import { useFileHandler } from '../hooks/community/useFileHandler';
 import { useSelectionHandler } from '../hooks/community/useSelectionHandler';
 import { useProductHandler } from '../hooks/community/useProductHandler';
 import SubTitle from '../components/community/post/SubTitle';
-
-interface IFormInput {
-  files: File[];
-  title: string;
-  description: string;
-  products: string[];
-  concepts: string[];
-  colors: string[];
-  submissionConcepts?: string;
-  submissionColors?: string;
-}
+import { IFormInput } from '../types/communityTypes';
+import { useDispatch } from 'react-redux';
+// import { submitFeed } from '../redux/slices/communitySlice';
+import { useNavigate } from 'react-router-dom';
+import { submitFeedAndRedirect } from '../redux/actions/communityActions';
+import { AppDispatch } from '../redux/config';
 
 function CommunityPostPage() {
   const {
@@ -51,6 +46,8 @@ function CommunityPostPage() {
     useSelectionHandler<string>();
   const { selections: selectedColors, toggleSelection: toggleColor } =
     useSelectionHandler<string>();
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
 
   // 컨셉과 색상, 파일 선택에 변화 일어날 시 오류 감지
   useEffect(() => {
@@ -87,11 +84,40 @@ function CommunityPostPage() {
 
   const onSubmit: SubmitHandler<IFormInput> = data => {
     const completeData = {
-      fileLength: files.length,
       ...data,
-      products: products || [],
+      selectedProducts:
+        products.length > 0
+          ? [
+              {
+                productId: 4,
+                productName: 'KIDS MOTION DESK',
+                thumbnail: 'https://i.ibb.co/mcn8nmF/rrw3-1.png',
+                price: '1264000',
+              },
+              {
+                productId: 4,
+                productName: products[0] || '로지텍 무선 블루투스 키보드',
+                thumbnail:
+                  'https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/163109433375113133.jpg?w=100',
+                price: '50000',
+              },
+            ]
+          : [],
       concepts: selectedConcepts,
       colors: selectedColors,
+      accountName: 'dururu',
+      profileImage:
+        'https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c',
+      images: [
+        'https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/168164950371720285.jpeg?w=720',
+        'https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/168164951087339833.jpeg?w=720',
+        'https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/168164950853505057.jpeg?w=720',
+      ],
+      views: 0,
+      likes: 0,
+      commentCount: 0,
+      comments: [],
+      creationDate: new Date().toISOString().slice(0, 10),
     };
 
     if (!files.length || files.length > 4) {
@@ -131,13 +157,17 @@ function CommunityPostPage() {
   const confirmSubmit = () => {
     console.log('Confirmed submission:', formData);
     handleClose(); // 모달 닫기
-    window.location.href = '/community';
+    if (formData) {
+      dispatch(submitFeedAndRedirect(formData, navigate));
+    }
+
+    // window.location.href = '/community/result';
     // 서버 전송 로직
   };
 
   return (
     <ContentArea>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} style={{ paddingBottom: '50px' }}>
         <Box display='flex' flexDirection='column'>
           <SubTitle text='사진' isRequired={true}></SubTitle>
           <Box
