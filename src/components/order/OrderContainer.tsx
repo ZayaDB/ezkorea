@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 
-import { useForm } from 'react-hook-form';
 import DeliveryInfo from './DeliveryInfo';
 import Head from './Head';
 import PaymentMethod from './PaymentMethod';

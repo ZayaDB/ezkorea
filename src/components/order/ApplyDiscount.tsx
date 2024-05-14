@@ -108,9 +108,9 @@ function CouponContent() {
   const productImg = useSelector(
     (state: RootState) => state.product.products[0].product_image
   );
-  const discountRate = useSelector(
-    (state: RootState) => state.product.products[0].discount_rate
-  );
+  // const discountRate = useSelector(
+  //   (state: RootState) => state.product.products[0].discount_rate
+  // );
   const discountedPrice = useSelector(
     (state: RootState) => state.product.products[0].discounted_price
   );
@@ -143,7 +143,7 @@ function CouponContent() {
 
   const [showModal, setShowModal] = useState<boolean>(false);
 
-  const handleOpen = () => setShowModal(true);
+  // const handleOpen = () => setShowModal(true);
   const handleClose = () => setShowModal(false);
 
   return (
@@ -173,8 +173,10 @@ function CouponContent() {
               </div>
               <div>
                 <span>상품 쿠폰</span>
-                <span>
-                  {checked ? `-${productPrice - discountedPrice}원` : ''}
+                <span className=''>
+                  {checked
+                    ? `-${productPrice - discountedPrice}원`
+                    : '선택 안함'}
                 </span>
               </div>
             </CardContent>
@@ -182,7 +184,7 @@ function CouponContent() {
         </Card>
       </div>
 
-      <Button
+      {/* <Button
         className='mileage-button'
         fullWidth
         variant='outlined'
@@ -190,7 +192,7 @@ function CouponContent() {
         onClick={handleOpen}
       >
         쿠폰 변경
-      </Button>
+      </Button> */}
 
       {showModal ? (
         <>
@@ -222,7 +224,9 @@ function CouponContent() {
                     <div>
                       <span>상품 쿠폰</span>
                       <span>
-                        {checked ? `-${productPrice - discountedPrice}원` : ''}
+                        {checked
+                          ? `-${productPrice - discountedPrice}원`
+                          : '사용 가능한 쿠폰 없음'}
                       </span>
                     </div>
                   </CardContent>
