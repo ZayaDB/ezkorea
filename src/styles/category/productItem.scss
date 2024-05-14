@@ -1,3 +1,4 @@
+
 $color-point: #5ff531;
 $color-black: #191919;
 $color-gray: #4c4c4c;
@@ -330,7 +331,7 @@ $font-weight-regular: 400;
 // 반응형 미디어 쿼리
 @media (max-width: 420px) {
   .prod-item {
-    width: 44%;
+    width: 48%;
     height: calc(90% - 10px);
     // margin: 3px;
     margin-bottom: 10px;
@@ -340,7 +341,7 @@ $font-weight-regular: 400;
         height: 180px;
       }
       .prod-info {
-        height: 120px;
+        height: 110px;
         @for $i from 1 through 6 {
           .color-circle:nth-child(#{$i}) {
             border-radius: 100%;
@@ -409,3 +410,11 @@ $font-weight-regular: 400;
     }
   }
 }
+
+// 반응형 미디어 쿼리
+@media (max-width: 370px) {
+  .prod-item {
+    width: 48%;
+  }
+}
+

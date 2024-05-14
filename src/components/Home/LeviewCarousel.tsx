@@ -40,6 +40,10 @@ export default function LeviewCarousel() {
     },
   ];
 
+
+
+
+  
   return (
     <div>
       <div className='TitleArea'>

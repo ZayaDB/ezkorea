@@ -1,69 +1,72 @@
-import React, { useEffect, useState } from 'react';
-import { getData } from '../../utils/getData';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { CategoryData } from '../../types/typesProducts';
 import { styled } from '@mui/system';
-// import { setSelectedCategory } from '../../redux/slices/categorySlice';
-// import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../redux/config';
+import {
+  setSelectedCategory,
+  setSelectedSubCategory,
+} from '../../redux/slices/categorySlice';
 
-const ItemNav: React.FC = () => {
-  const LinkItem = styled(NavLink)({
-    // padding: '8px 12px',
-    textDecoration: 'none',
-    whiteSpace: 'nowrap',
-    color: '#191919',
-    '&:hover': {
-      backgroundColor: '#ffffff',
-      borderRadius: '3px',
-      color: '#5ff531',
-    },
-  });
+interface CategoryData {
+  name: string;
+  subCategories: { name: string; imagePath: string }[];
+}
 
-  const [categoryData, setCategoryData] = useState<CategoryData[]>([]);
+const LinkItem = styled(NavLink)({
+  padding: '8px 12px',
+  textDecoration: 'none',
+  whiteSpace: 'nowrap',
+  color: '#191919',
+  '&:hover': {
+    backgroundColor: '#ffffff',
+    borderRadius: '3px',
+    color: '#5ff531',
+  },
+});
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { categoryData } = await getData('/data/categoryData.json');
-        setCategoryData(categoryData);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
+const IconNav: React.FC = () => {
+  const dispatch = useDispatch();
+  const categoryData = useSelector(
+    (state: RootState) => state.category.categoryData
+  );
 
-    fetchData();
-  }, []);
+  const handleSubCategoryClick = (
+    categoryName: string,
+    subCategoryName: string
+  ) => {
+    dispatch(setSelectedCategory(categoryName));
+    dispatch(setSelectedSubCategory(subCategoryName));
+  };
 
   return (
     <div>
-      {categoryData.map((category: CategoryData) => (
-        <div key={category.name}>
-          <div className='subcategories-container'>
-            {category.subCategories
-              .filter(subCategory => subCategory.name !== 'ALL')
-              .map((subCategory, subIndex) => (
-                <LinkItem
-                  key={subIndex}
-                  to={`/${subCategory.name.toLowerCase()}`}
-                  color='inherit'
-                  style={{ display: 'inline-block', textAlign: 'center' }}
-                >
-                  <div
-                    style={{
-                      backgroundImage: `url(${subCategory.imagePath})`,
-                      backgroundSize: 'cover',
-                      width: '180px', // 원하는 너비 설정
-                      height: '180px', // 원하는 높이 설정
-                    }}
-                  ></div>
-                  <div>{subCategory.name}</div>
-                </LinkItem>
-              ))}
-          </div>
-        </div>
-      ))}
+      {categoryData.map((category: CategoryData) =>
+        category.subCategories
+          .filter(subCategory => subCategory.name !== 'ALL')
+          .map((subCategory, subIndex) => (
+            <LinkItem
+              key={subIndex}
+              to={`/shop?category=${encodeURIComponent(
+                category.name
+              )}&subCategory=${encodeURIComponent(subCategory.name)}`}
+              color='inherit'
+              onClick={() =>
+                handleSubCategoryClick(category.name, subCategory.name)
+              }
+            >
+              <img
+                src={subCategory.imagePath}
+                alt=''
+                width='100px'
+                height='100px'
+              />
+              {subCategory.name}
+            </LinkItem>
+          ))
+      )}
     </div>
   );
 };
 
-export default ItemNav;
+export default IconNav;
