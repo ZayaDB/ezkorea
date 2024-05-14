@@ -59,7 +59,7 @@ export default function SelectPurchase() {
   //   }
   // };
   const [spInfo, setSpInfo] = useState<Product | null>();
-
+  console.log(spInfo);
   // fetch
   useEffect(() => {
     const fetchData = async () => {
