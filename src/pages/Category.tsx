@@ -1,27 +1,19 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-
-import { getData } from '../utils/getData';
 import ProductList from '../components/category/ProductList';
 import SideNav from '../components/category/SideNav';
 import '../styles/category/category.scss';
-
+import { getData } from '../utils/getData';
 import { setCategoryData, setProducts } from '../redux/slices/categorySlice';
-// import HeartProduct from '../components/category/HeartProduct';
-import RecentView from '../components/category/RecentView';
-import { useMediaQuery } from '@mui/material';
-// import BestProduct from '../components/category/BestProduct';
+import { useDispatch } from 'react-redux';
 
-export default function Category() {
+const Category = () => {
   const dispatch = useDispatch();
-  const isMobile = useMediaQuery('(max-width:1515px)');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const { products } = await getData('/data/prodData.json');
         const { categoryData } = await getData('/data/categoryData.json');
-        // Redux 스토어에 데이터 저장
         dispatch(setCategoryData(categoryData));
         dispatch(setProducts(products));
       } catch (error) {
@@ -30,7 +22,7 @@ export default function Category() {
     };
 
     fetchData();
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className='category-page'>
@@ -41,8 +33,9 @@ export default function Category() {
         <div className='containerProducts'>
           <ProductList />
         </div>
-        {!isMobile && <RecentView />}
       </div>
     </div>
   );
-}
+};
+
+export default Category;

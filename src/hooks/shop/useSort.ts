@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Products, SortOption } from '../../types/typesProducts';
+import { Products, SortOption } from '../../types/productTypes';
 
 const useSort = (products: Products[], sortOption: SortOption) => {
   const sortedProducts = useMemo(() => {

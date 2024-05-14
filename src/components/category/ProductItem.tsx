@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import '../../styles/category/productItem.scss';
 import HandleClickHeart from './HandleClickHeart';
 import { Box } from '@mui/material';
-import { Products } from '../../types/typesProducts';
+import { Products } from '../../types/productTypes';
 import prod_review from '../../assets/images/prod_review.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/config';

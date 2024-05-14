@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import {
   Box,
   FormControl,
@@ -15,18 +16,34 @@ import { useMediaQuery } from '@mui/material';
 import FilterCompo from './FilterCompo';
 import { useDispatch, useSelector } from 'react-redux';
 import getSelectedValue from '../../utils/getSelectedValue';
-import { setSelectedSubCategory } from '../../redux/slices/categorySlice';
+import {
+  setSelectedCategory,
+  setSelectedSubCategory,
+} from '../../redux/slices/categorySlice';
 import useSort from '../../hooks/shop/useSort';
-import { SortOption, SubCategory } from '../../types/typesProducts';
+import { SortOption, SubCategory } from '../../types/productTypes';
 import { RootState } from '../../redux/config';
 import FilterChips from './FilterChips';
 
 const ProductList = () => {
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const categoryName = queryParams.get('category');
+  const subCategoryName = queryParams.get('subCategory');
+
+  // categoryName과 subCategoryName이 null이 아닐 때만 dispatch
+  useEffect(() => {
+    if (categoryName && subCategoryName) {
+      dispatch(setSelectedCategory(categoryName));
+      dispatch(setSelectedSubCategory(subCategoryName));
+    }
+  }, [dispatch, categoryName, subCategoryName]);
+
   const isMobile = useMediaQuery('(max-width:768px)');
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   const [sort, setSort] = useState<string>('인기순');
 
-  const dispatch = useDispatch();
   // renderingStart 상태값 가져오기
   const renderingStart = useSelector(
     (state: RootState) => state.category.renderingStart
@@ -43,11 +60,11 @@ const ProductList = () => {
   const selectedSubCategory = useSelector(
     (state: RootState) => state.category.selectedSubCategory
   );
-
   // 카테고리 데이터
   const categoryData = useSelector(
     (state: RootState) => state.category.categoryData
   );
+
   // 필터된 상품 목록 가져오기
   const filteredProducts = useSelector((state: RootState) => {
     const allProducts = state.category.products;
@@ -153,17 +170,22 @@ const ProductList = () => {
                   onClick={() => handleSubCategoryClick(subCategory.name)}
                 >
                   {isMobile ? (
-                    <Box className='icon-nav'>
-                      <img
-                        src={subCategory.imagePath}
-                        alt={subCategory.name}
+                    <Box
+                      className='icon-nav'
+                      style={{
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <div
                         style={{
-                          width: '64px',
-                          height: '64px',
-                          objectFit: 'cover',
+                          backgroundImage: `url(${subCategory.imagePath})`,
+                          backgroundSize: 'cover',
+                          width: '100px', // 원하는 너비 설정
+                          height: '100px', // 원하는 높이 설정
+                          borderRadius: '10px', // 테두리 둥글게 처리 (선택적)
                         }}
-                      />
-                      {/* <span>{subCategory.name}</span> */}
+                      ></div>
+                      <div>{subCategory.name}</div>
                     </Box>
                   ) : (
                     subCategory.name

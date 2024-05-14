@@ -1,4 +1,4 @@
-import { Products, CategoryData } from '../types/typesProducts';
+import { Products, CategoryData } from '../types/productTypes';
 
 export const getData = async (
   url: string
@@ -12,7 +12,9 @@ export const getData = async (
 
     // 데이터를 products와 categoryData로 분리
     const products = data.filter((item: Products[]) => 'productId' in item);
-    const categoryData = data.filter((item: CategoryData[]) => 'subCategories' in item);
+    const categoryData = data.filter(
+      (item: CategoryData[]) => 'subCategories' in item
+    );
 
     return { products, categoryData };
   } catch (error) {

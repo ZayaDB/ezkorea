@@ -3,7 +3,7 @@ import { Box } from '@mui/system';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilters } from '../../redux/slices/categorySlice';
 import { RootState } from '../../redux/config';
-import { Products } from '../../types/typesProducts';
+import { Products } from '../../types/productTypes';
 
 export default function ColorFilter() {
   const dispatch = useDispatch();
