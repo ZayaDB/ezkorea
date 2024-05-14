@@ -152,13 +152,13 @@ export default function SignIn() {
           }}
         >
           <NavLink to='/' style={{ textDecoration: 'none', color: 'black' }}>
-          <Typography
-            variant='h5'
-            color='inherit'
-            sx={{ fontSize: '40px', fontWeight: '600', pb: '25px' }}
-          >
-            Dururu
-          </Typography>
+            <Typography
+              variant='h5'
+              color='inherit'
+              sx={{ fontSize: '40px', fontWeight: '600', pb: '25px' }}
+            >
+              Dururu
+            </Typography>
           </NavLink>
           <Box component='form' noValidate sx={{ mt: 1 }}>
             <InputTextField
