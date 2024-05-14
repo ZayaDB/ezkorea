@@ -8,27 +8,23 @@
       },
       {
         "name": "책상",
-        "imagePath": "https://i.ibb.co/1RgtW5T/pngwing-com-12.png"
+        "imagePath": "https://rareraw.com/web/product/extra/small/202308/a38a858b0ca0991bf99d4291e1222e54.jpg"
       },
       {
         "name": "의자",
-        "imagePath": "https://i.ibb.co/vVjKQKk/pngwing-com-13.png"
+        "imagePath": "https://rareraw.com/web/product/extra/small/202308/04e2fef341b6917c946a9bdd8e91823f.jpg"
       },
       {
-        "name": "모니터암/받침대",
-        "imagePath": "https://i.ibb.co/vVjKQKk/pngwing-com-13.png"
-      },
-      {
-        "name": "거치대",
-        "imagePath": "https://i.ibb.co/vVjKQKk/pngwing-com-13.png"
+        "name": "모니터 스탠드",
+        "imagePath": "https://rareraw.com/web/product/extra/small/202308/125c84befe5053a0518ca0b19a2266e3.jpg"
       },
       {
         "name": "서랍장",
-        "imagePath": "https://i.ibb.co/vVjKQKk/pngwing-com-13.png"
+        "imagePath": "https://rareraw.com/web/product/extra/small/202308/09a488fcb1437e003f41eedc4623e287.jpg"
       },
       {
         "name": "선반",
-        "imagePath": "https://i.ibb.co/vVjKQKk/pngwing-com-13.png"
+        "imagePath": "https://rareraw.com/web/product/extra/small/202308/fb4b0eb1c25363b1845db6558f03fad4.jpg"
       }
     ]
   },
@@ -36,24 +32,51 @@
     "name": "전자기기",
     "subCategories": [
       { "name": "ALL", "imagePath": "/images/devices_all.jpg" },
-      { "name": "키보드", "imagePath": "/images/keyboard.jpg" },
-      { "name": "마우스", "imagePath": "/images/mouse.jpg" },
-      { "name": "스피커", "imagePath": "/images/speaker.jpg" },
-      { "name": "멀티탭", "imagePath": "/images/multi_tap.jpg" },
-      { "name": "충전기", "imagePath": "/images/charger.jpg" }
+      {
+        "name": "키보드",
+        "imagePath": "https://image.ohou.se/i/bucketplace-v2-development/uploads/openapi/20917509/1689294763470.jpg?gif=1&w=1280&h=1280&c=c&webp=1"
+      },
+      {
+        "name": "마우스",
+        "imagePath": "https://image.sivillage.com/upload/C00001/s3/goods/org/114/231212007447114.jpg?RS=750&SP=1"
+      },
+      { "name": "스피커", "imagePath": "https://m.rooming.co.kr/web/product/medium/drmvsn/P0000QFB.jpg" },
+      {
+        "name": "멀티탭",
+        "imagePath": "https://product-image.wconcept.co.kr/productimg/image/img0/93/300351293_add2_JI9508.jpg"
+      },
+      { "name": "충전기", "imagePath": "https://image.sivillage.com/upload/C00001/goods/org/118/231027006676118.jpg?RS=750&SP=1https://image.sivillage.com/upload/C00001/goods/org/114/231027006676114.jpg?RS=750&SP=1" }
     ]
   },
   {
     "name": "조명/인테리어",
     "subCategories": [
       { "name": "ALL", "imagePath": "/images/lighting_all.jpg" },
-      { "name": "조명", "imagePath": "/images/light.jpg" },
-      { "name": "오브제", "imagePath": "/images/objects.jpg" },
-      { "name": "시계", "imagePath": "/images/clock.jpg" },
-      { "name": "캘린더", "imagePath": "/images/calendar.jpg" },
-      { "name": "트레이", "imagePath": "/images/tray.jpg" },
-      { "name": "타공판", "imagePath": "/images/perforated_panel.jpg" },
-      { "name": "데스크매트", "imagePath": "/images/desk_mat.jpg" }
+      {
+        "name": "조명",
+        "imagePath": "https://bibliotheque.co.kr/web/product/big/202312/ae61136d20b7d6a38d9bee971a083a16.jpeg"
+      },
+      { "name": "오브제", "imagePath": "//oimu-seoul.com/web/product/medium/202208/8a0d70e6d21138fd8d5d658b02a102ab.gif" },
+      {
+        "name": "시계",
+        "imagePath": "https://acaciasf.com/cdn/shop/products/meteorblack_900x.jpg?v=1599645275"
+      },
+      {
+        "name": "캘린더",
+        "imagePath": "https://image.ohou.se/i/bucketplace-v2-development/uploads/openapi/4541212/1668491852260.jpg?gif=1&w=1280&h=1280&c=c&webp=1"
+      },
+      {
+        "name": "트레이",
+        "imagePath": "https://rareraw.com/web/product/extra/small/202308/d01727cc13256399c7a5e41c99b14c39.jpg"
+      },
+      {
+        "name": "타공판",
+        "imagePath": "https://rareraw.com/web/product/extra/small/202308/667903377bbd576e30a9808f3e3ed432.jpg"
+      },
+      {
+        "name": "데스크매트",
+        "imagePath": "https://www.intermarket.co.kr/data/goods/65867220d1219.jpg"
+      }
     ]
   },
   {
@@ -63,7 +86,10 @@
       { "name": "디퓨저", "imagePath": "/images/diffuser.jpg" },
       { "name": "캔들", "imagePath": "/images/candle.jpg" },
       { "name": "인센스", "imagePath": "/images/incense.jpg" },
-      { "name": "식물", "imagePath": "/images/plant.jpg" }
+      {
+        "name": "식물",
+        "imagePath": "https://cdn.eqlstore.com/goods/EQBR/24/01/23/GQD424012382745_0_ORGINL_1705987607684.jpg?RS=1300"
+      }
     ]
   }
 ]
