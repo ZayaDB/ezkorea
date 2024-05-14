@@ -147,7 +147,7 @@ export default function Review() {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [sortedReviews, setSortedReviews] = useState<Review[]>([]);
   const [sortBy, setSortBy] = useState<string>('');
-
+  console.log(sortBy);
   // fetch
   useEffect(() => {
     const fetchData = async () => {
@@ -178,6 +178,7 @@ export default function Review() {
   const startIndex = (page - 1) * reviewsPerPage;
   const endIndex = page * reviewsPerPage;
   const currentReviews = reviewData.slice(startIndex, endIndex);
+  console.log(currentReviews);
   // 소팅
   // 정렬
   // 별점 높은순 정렬
