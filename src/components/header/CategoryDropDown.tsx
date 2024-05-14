@@ -28,7 +28,7 @@ const LinkItem = styled(NavLink)({
   padding: '8px 12px',
   textDecoration: 'none',
   whiteSpace: 'nowrap',
-  color: '#191919',
+  color: '#000000',
   '&:hover': {
     backgroundColor: '#ffffff',
     borderRadius: '3px',
@@ -65,25 +65,38 @@ const CategoryDropDown: React.FC = () => {
       {categoryData.map((category, index) => (
         <div key={index} color='inherit'>
           {/* 카테고리 이름 렌더링 */}
-          {category.name}
+
           {/* ALL이 아닌 subCategories의 이름만 필터링하여 렌더링 */}
-          <div style={{ display: 'flex', flexDirection: 'row' }}>
-            {category.subCategories
-              .filter(subCategory => subCategory.name !== 'ALL')
-              .map((subCategory, subIndex) => (
-                <LinkItem
-                  key={subIndex}
-                  to={`/shop?category=${encodeURIComponent(
-                    category.name
-                  )}&subCategory=${encodeURIComponent(subCategory.name)}`}
-                  color='inherit'
-                  onClick={() =>
-                    handleSubCategoryClick(category.name, subCategory.name)
-                  } // 카테고리 클릭 시 dispatch
-                >
-                  {subCategory.name}
-                </LinkItem>
-              ))}
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              width: '600px',
+              padding: '15px 12px',
+            }}
+          >
+            <div style={{ width: '20%', fontWeight: 700 }}>
+              {' '}
+              {category.name}{' '}
+            </div>
+            <div style={{ width: '80%' }}>
+              {category.subCategories
+                .filter(subCategory => subCategory.name !== 'ALL')
+                .map((subCategory, subIndex) => (
+                  <LinkItem
+                    key={subIndex}
+                    to={`/shop?category=${encodeURIComponent(
+                      category.name
+                    )}&subCategory=${encodeURIComponent(subCategory.name)}`}
+                    color='inherit'
+                    onClick={() =>
+                      handleSubCategoryClick(category.name, subCategory.name)
+                    } // 카테고리 클릭 시 dispatch
+                  >
+                    {subCategory.name}
+                  </LinkItem>
+                ))}
+            </div>
           </div>
         </div>
       ))}
