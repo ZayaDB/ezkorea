@@ -7,6 +7,7 @@ import {
   setSelectedCategory,
   setSelectedSubCategory,
 } from '../../redux/slices/categorySlice';
+import { WidthFull } from '@mui/icons-material';
 
 interface CategoryData {
   name: string;
@@ -51,32 +52,39 @@ const IconNav: React.FC = () => {
   };
 
   return (
-      <div>
-        {category.map((cate: CategoryData) =>
-          cate.subCategories
-            .filter(subCategory => subCategory.name !== 'ALL')
-            .map((subCategory, subIndex) => (
-              <LinkItem
-                key={subIndex}
-                to={`/shop?category=${encodeURIComponent(
-                  cate.name
-                )}&subCategory=${encodeURIComponent(subCategory.name)}`}
-                color='inherit'
-                onClick={() =>
-                  handleSubCategoryClick(cate.name, subCategory.name)
-                }
-              >
-                <img
-                  src={subCategory.imagePath}
-                  alt=''
-                  width='120px'
-                  height='120px'
-                />
-                {subCategory.name}
-              </LinkItem>
-            ))
-        )}
-      </div>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        overflowX: 'scroll',
+        scrollbarWidth: 'none',
+      }}
+    >
+      {category.map((cate: CategoryData) =>
+        cate.subCategories
+          .filter(subCategory => subCategory.name !== 'ALL')
+          .map((subCategory, subIndex) => (
+            <LinkItem
+              key={subIndex}
+              to={`/shop?category=${encodeURIComponent(
+                cate.name
+              )}&subCategory=${encodeURIComponent(subCategory.name)}`}
+              color='inherit'
+              onClick={() =>
+                handleSubCategoryClick(cate.name, subCategory.name)
+              }
+            >
+              <img
+                src={subCategory.imagePath}
+                alt=''
+                width='140px'
+                height='140px'
+              />
+              <div style={{ textAlign: 'center' }}>{subCategory.name}</div>
+            </LinkItem>
+          ))
+      )}
+    </div>
   );
 };
 
