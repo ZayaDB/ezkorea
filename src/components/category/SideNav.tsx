@@ -1,5 +1,3 @@
-// SideNav.tsx
-
 import { useEffect, useState } from 'react';
 import { Box } from '@mui/system';
 import { CategoryData } from '../../types/productTypes';
@@ -11,7 +9,7 @@ import {
   setSelectedSubCategory,
 } from '../../redux/slices/categorySlice';
 import { useMediaQuery } from '@mui/material';
-import FilterComponent from './FilterCompo';
+import FilterCompo from './FilterCompo';
 
 const categoryMapping: { [key: string]: string } = {
   가구: 'furniture',
@@ -55,6 +53,11 @@ export default function SideNav() {
     dispatch(setSelectedSubCategory(subCategoryName));
   };
 
+  // 검색 버튼 클릭 핸들러
+  const handleApplyFilters = () => {
+    return;
+  };
+
   return (
     <Box className='side-nav'>
       {categoryData.map((category: CategoryData) => (
@@ -69,6 +72,7 @@ export default function SideNav() {
           >
             <Box className='nav-title'>{category.name}</Box>
           </Box>
+
           {activeCategory === category.name &&
             category.subCategories.length > 0 && (
               <Box className={`${categoryMapping[category.name]}-box`}>
@@ -100,7 +104,7 @@ export default function SideNav() {
             )}
         </Box>
       ))}
-      {!isMobile && <FilterComponent />}
+      {!isMobile && <FilterCompo onApplyFilters={handleApplyFilters} />}
     </Box>
   );
 }
