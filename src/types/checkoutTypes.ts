@@ -5,7 +5,7 @@ export interface OrdererInfo {
 }
 
 /* 배송 정보 */
-export interface DeliveryInfo {
+export interface DeliveryInfoType {
   recipient: string;
   postcode: number;
   addressDefault: string;
@@ -15,8 +15,8 @@ export interface DeliveryInfo {
 
 export interface PhoneNum {
   numFirst: string;
-  numSecond: number;
-  numThird: number;
+  numSecond: string;
+  numThird: string;
 }
 
 /* 주문 정보 */

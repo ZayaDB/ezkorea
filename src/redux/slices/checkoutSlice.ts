@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
   OrdererInfo,
   OrderInfo,
-  DeliveryInfo,
+  DeliveryInfoType,
   PhoneNum,
   Discount,
   PaymentMethod,
@@ -13,7 +13,7 @@ import {
 export interface CheckoutState {
   ordererInfo: OrdererInfo[];
   orderInfo: OrderInfo[];
-  deliveryInfo: DeliveryInfo[];
+  deliveryInfoType: DeliveryInfoType[];
   phoneNum: PhoneNum[];
   discount: Discount[];
   paymentMethod: PaymentMethod[];
@@ -23,7 +23,7 @@ export interface CheckoutState {
 const initialState: CheckoutState = {
   ordererInfo: [],
   orderInfo: [],
-  deliveryInfo: [],
+  deliveryInfoType: [],
   phoneNum: [],
   discount: [],
   paymentMethod: [],
@@ -40,8 +40,8 @@ export const CheckouteSlice = createSlice({
     setOrderInfo: (state, action: PayloadAction<OrderInfo[]>) => {
       state.orderInfo = action.payload;
     },
-    setDeliveryInfo: (state, action: PayloadAction<DeliveryInfo[]>) => {
-      state.deliveryInfo = action.payload;
+    setDeliveryInfoType: (state, action: PayloadAction<DeliveryInfoType[]>) => {
+      state.deliveryInfoType = action.payload;
     },
     setPhoneNum: (state, action: PayloadAction<PhoneNum[]>) => {
       state.phoneNum = action.payload;
@@ -59,7 +59,7 @@ export const CheckouteSlice = createSlice({
 export const {
   setOrdererInfo,
   setOrderInfo,
-  setDeliveryInfo,
+  setDeliveryInfoType,
   setPhoneNum,
   setDiscount,
   setPaymentMethod,
