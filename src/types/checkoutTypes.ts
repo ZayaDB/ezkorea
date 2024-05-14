@@ -1,18 +1,43 @@
 /* 주문자 정보 */
 export interface OrdererInfo {
-  ordererName: string;
-  phoneNumFirst: number;
-  phoneNumSecond: number;
-  phoneNumThird: number;
+  name?: string;
+  phoneNum?: PhoneNum[];
 }
 
 /* 배송 정보 */
 export interface DeliveryInfo {
-  name: string;
+  recipient: string;
   postcode: number;
   addressDefault: string;
   addressRemaining: string;
-  phoneNumFirst: number;
-  phoneNumSecond: number;
-  phoneNumThird: number;
+  phoneNum: PhoneNum[];
+}
+
+export interface PhoneNum {
+  numFirst: string;
+  numSecond: number;
+  numThird: number;
+}
+
+/* 주문 정보 */
+export interface OrderInfo {
+  orderDate: string;
+  orderNum: string;
+  productImg: string;
+  brand: string;
+  productName: string;
+  option: string;
+  productPrice: number;
+  quantity: number;
+}
+
+export interface Discount {
+  productCoupon?: number;
+  productCouponAmount?: number;
+  shippingCoupon?: boolean;
+  mileage?: number;
+}
+
+export interface PaymentMethod {
+  method: string;
 }
