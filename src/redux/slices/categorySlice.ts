@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { CategoryData, Products, Filters } from '../../types/typesProducts';
+import { CategoryData, Products, Filters } from '../../types/productTypes';
 
 export interface CategoryState {
   selectedCategory: string;
@@ -8,7 +8,7 @@ export interface CategoryState {
   products: Products[];
   isLiked: { [productId: number]: boolean };
   selectedFilters: Filters;
-  renderingStart: boolean; // renderingStart 추가
+  renderingStart: boolean;
 }
 
 const initialState: CategoryState = {
@@ -23,7 +23,7 @@ const initialState: CategoryState = {
     prices: [],
     themes: [],
   },
-  renderingStart: false, // 초기값은 false
+  renderingStart: false,
 };
 
 const categorySlice = createSlice({

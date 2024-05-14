@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { Box } from '@mui/system';
-import { CategoryData } from '../../types/typesProducts';
+import { CategoryData } from '../../types/productTypes';
 import '../../styles/category/sideNav.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/config';
