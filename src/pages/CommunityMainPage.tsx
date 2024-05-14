@@ -1,12 +1,12 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { Box, Grid, Typography, Button, Divider } from '@mui/material';
 import { Visibility } from '@mui/icons-material';
-import ColorFilter from './../components/community/main/ColorFilter';
+import ColorFilter from '../components/community/main/ColorFilter';
 import ConceptFilter from '../components/community/main/ConceptFilter';
-import SkeletonFeed from './../components/community/main/SkeletonFeed';
+import SkeletonFeed from '../components/community/main/SkeletonFeed';
 import SortSelect from '../components/community/main/SortSelect';
 import './../styles/community/main.scss';
-import { FeedData } from './../types/communityTypes';
+import { FeedData } from '../types/communityTypes';
 import { Link } from 'react-router-dom';
 import LikeButton from '../components/community/main/LikeButton';
 

@@ -8,7 +8,7 @@ import Login from './pages/Login';
 import BestProduct from './components/category/BestProduct';
 import SaleProduct from './components/category/SaleProduct';
 import Category from './pages/Category';
-import Community from './pages/Community';
+import CommunityMainPage from './pages/CommunityMainPage';
 import ProductDetail from './pages/ProductDetail';
 import OrderPage from './pages/OrderPage';
 import MyPage from './pages/MyPage';
@@ -43,7 +43,7 @@ const App = () => {
             <Route path='/shop/best' element={<BestProduct />} />
             <Route path='/shop/sale' element={<SaleProduct />} />
             <Route path='/shop/:productId' element={<ProductDetail />} />
-            <Route path='/community' element={<Community />} />
+            <Route path='/community' element={<CommunityMainPage />} />
             <Route path='/community/post' element={<CommunityPostPage />} />
             <Route
               path='community/modify/:feedId'

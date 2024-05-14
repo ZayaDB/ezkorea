@@ -9,6 +9,8 @@ import {
   Card,
   CardContent,
   CardHeader,
+  Container,
+  Box,
 } from '@mui/material';
 import '../styles/community/detail.scss';
 import CommentIcon from '@mui/icons-material/Comment';
@@ -19,7 +21,6 @@ import koLocale from 'javascript-time-ago/locale/ko'; // 한국어 언어 파일
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import { Link } from 'react-router-dom';
 
-// 한국어 로캘 설정
 TimeAgo.addLocale(koLocale);
 
 const CommunityDetailPage: React.FC = () => {
@@ -89,15 +90,14 @@ const CommunityDetailPage: React.FC = () => {
   }
 
   return (
-    <Grid
-      container
-      direction='column'
-      alignItems='center'
-      className='community-detail-page'
-      sx={{ border: 'none' }}
-    >
-      <Grid item xs={12} className='card-container' sx={{ border: 'none' }}>
-        <Card variant='outlined'>
+    <>
+      <Grid
+        container
+        direction='column'
+        alignItems='center'
+        className='detail-page'
+      >
+        <Container>
           <div className='feed-profile'>
             <CardHeader
               avatar={<Avatar src={feed.profileImage} alt='Profile' />}
@@ -115,7 +115,7 @@ const CommunityDetailPage: React.FC = () => {
               </Link>
             </Button>
           </div>
-          <CardContent>
+          <Box>
             <div className='thumbnail-container'>
               <div className='main-image'>
                 <img src={feed.images[selectedImageIndex]} alt='Main' />
@@ -150,7 +150,7 @@ const CommunityDetailPage: React.FC = () => {
                 {feed.description}
               </Typography>
             </div>
-          </CardContent>
+          </Box>
           <dl className='icon-container'>
             <LikeButton
               feedId={feed.feedId}
@@ -194,25 +194,30 @@ const CommunityDetailPage: React.FC = () => {
               ))}
             </div>
           </div>
-        </Card>
-      </Grid>
-      {/* 여기에 상품 리스트 */}
-      <Grid container direction='row' spacing={2} className='product-container'>
-        {feed.selectedProducts.map((product: any) => (
-          <Grid item key={product.productId}>
-            <Card variant='outlined' className='product-card'>
-              <CardContent>
-                <img src={product.thumbnail} alt={product.productName} />
-                <Typography variant='h6' gutterBottom>
-                  {product.productName}
-                </Typography>
-                <Typography variant='body1' gutterBottom>
-                  Price: {product.price}
-                </Typography>
-              </CardContent>
-            </Card>
+          {/* 여기에 상품 리스트 */}
+          <Grid
+            container
+            direction='row'
+            spacing={2}
+            className='product-container'
+          >
+            {feed.selectedProducts.map((product: any) => (
+              <Grid item key={product.productId}>
+                <Card variant='outlined' className='product-card'>
+                  <CardContent>
+                    <img src={product.thumbnail} alt={product.productName} />
+                    <Typography variant='h6' gutterBottom>
+                      {product.productName}
+                    </Typography>
+                    <Typography variant='body1' gutterBottom>
+                      Price: {product.price}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
           </Grid>
-        ))}
+        </Container>
       </Grid>
 
       <Grid item xs={12} className='comments-container'>
@@ -286,7 +291,7 @@ const CommunityDetailPage: React.FC = () => {
           Submit
         </Button>
       </Grid>
-    </Grid>
+    </>
   );
 };
 

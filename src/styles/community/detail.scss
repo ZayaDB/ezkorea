@@ -3,14 +3,9 @@ html {
   -webkit-font-smoothing: antialiased;
 }
 
-.community-detail-page {
+.detail-page {
   max-width: 800px;
   margin: 0 auto;
-
-  .card-container {
-    margin-bottom: 20px;
-    width: 100%;
-  }
 
   .thumbnail-container {
     display: flex;
@@ -49,8 +44,8 @@ html {
   .feed-profile {
     display: flex;
     justify-content: space-between;
-    padding: 16px;
     height: 80px;
+    padding: 12px 0;
   }
 
   .feed-title {
