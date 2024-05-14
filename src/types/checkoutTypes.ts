@@ -11,12 +11,13 @@ export interface DeliveryInfoType {
   addressDefault: string;
   addressRemaining: string;
   phoneNum: PhoneNum[];
+  message?: string;
 }
 
 export interface PhoneNum {
   numFirst: string;
-  numSecond: string;
-  numThird: string;
+  numSecond: number;
+  numThird: number;
 }
 
 /* 주문 정보 */
