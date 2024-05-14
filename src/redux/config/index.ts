@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from '@reduxjs/toolkit';
 import address from '../slices/addressSlice';
 import category from '../slices/categorySlice';
 import checkout from '../slices/checkoutSlice';

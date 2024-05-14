@@ -9,10 +9,12 @@ export default function Home() {
   return (
     <>
       <MainSlide />
+
       <ItemNav />
       <MoodCarousel />
       <NewItem />
       <LeviewCarousel />
+
       <MdPick />
     </>
   );
