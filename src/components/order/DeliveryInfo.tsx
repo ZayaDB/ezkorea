@@ -1,8 +1,5 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-
 import { useState } from 'react';
-import Head from './Head';
+
 import {
   Box,
   Button,
@@ -14,14 +11,17 @@ import {
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import CloseButton from 'react-bootstrap/CloseButton';
 import Postcode from './Postcode';
+
+import Head from './Head';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/config';
+import { setDeliveryInfoType } from '../../redux/slices/checkoutSlice';
 
 /* 수령자 정보 
   - 1. 주문자 정보와 동일 : 정보 가져오기(CustomerInformation에서 내려받기)
   - 2. 새로운 배송지 : 배송지 정보 새로 넣기
 */
 export default function DeliveryInfo() {
-  // const [selected, setSelected] = useState<boolean>(true);
   return (
     <div className='order-recipitent-info'>
       <Head text='배송 정보' />
@@ -33,21 +33,11 @@ export default function DeliveryInfo() {
               name='method'
               id='default'
               defaultChecked={true}
-              onClick={() => {
-                // setSelected(true);
-              }}
             />
             주문자 정보와 동일
           </label>
           <label>
-            <input
-              type='radio'
-              name='method'
-              id='new'
-              onClick={() => {
-                // setSelected(false);
-              }}
-            />
+            <input type='radio' name='method' id='new' />
             새로운 배송지
           </label>
         </div>
@@ -59,6 +49,47 @@ export default function DeliveryInfo() {
 }
 
 function DeliveryInfoContent() {
+  /* value 값 */
+  // const recipient = useSelector(
+  //   (state: RootState) => state.checkout.deliveryInfoType[0].recipient
+  // );
+  // const postcode = useSelector(
+  //   (state: RootState) => state.checkout.deliveryInfoType[0].postcode
+  // );
+  // const addressDefault = useSelector(
+  //   (state: RootState) => state.checkout.deliveryInfoType[0].addressDefault
+  // );
+  // const addressRemaining = useSelector(
+  //   (state: RootState) => state.checkout.deliveryInfoType[0].addressRemaining
+  // );
+  // const phoneNum = useSelector(
+  //   (state: RootState) => state.checkout.deliveryInfoType[0].phoneNum
+  // );
+  // console.log(phoneNum);
+
+  const dispatch = useDispatch();
+
+  const handleDeliveryInfoDispatch = () => {
+    dispatch(
+      setDeliveryInfoType([
+        {
+          recipient: 'dd',
+          postcode: 12345,
+          addressDefault: '123 Main St',
+          addressRemaining: 'Apt 101',
+          phoneNum: [
+            {
+              numFirst: '010',
+              numSecond: '5533',
+              numThird: '2499',
+            },
+          ],
+        },
+      ])
+    );
+  };
+  console.log(handleDeliveryInfoDispatch);
+
   /* address 불러오기 */
   const address = useSelector((state: RootState) => state.address.fullAddress);
   const zonecode = useSelector((state: RootState) => state.address.zonecode);
@@ -66,6 +97,8 @@ function DeliveryInfoContent() {
   console.log(address, zonecode);
 
   const [firstNum, setFirstNum] = useState<string>('010');
+  // const [secondNum, setSecondNum] = useState<string>('');
+  // const [thirdNum, setThirdNum] = useState<string>('');
 
   const handleChange = (event: SelectChangeEvent) => {
     setFirstNum(event.target.value);

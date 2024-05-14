@@ -12,7 +12,17 @@ import kakao_card_src from '../../assets/images/card_kakao.png';
 import kb_card_src from '../../assets/images/card_kb.png';
 import ss_card_src from '../../assets/images/card_samsung.png';
 import sh_card_src from '../../assets/images/card_sh.png';
-import { Paper } from '@mui/material';
+import {
+  Box,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Paper,
+  Tab,
+  Tabs,
+  Typography,
+} from '@mui/material';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 /* 결제수단 */
 export default function PaymentMethod() {
@@ -154,7 +164,7 @@ interface ItemProps {
 }
 
 function Item(props: ItemProps) {
-  console.log(props);
+  // console.log(props);
 
   const containerClass =
     props.imgClass === 'card_img'
@@ -176,6 +186,165 @@ function Item(props: ItemProps) {
   );
 }
 
+/* 일반 결제 */
+interface TabPanelProps {
+  children?: React.ReactNode;
+  index: number;
+  value: number;
+}
+
+function CustomTabPanel(props: TabPanelProps) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role='tabpanel'
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+function a11yProps(index: number) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
+
+/* 일반 결제 content */
 function GeneralContent() {
-  return <div></div>;
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
+
+  /* 신용/체크카드 카드사 선택 */
+  const [cardcompany, setCardcompany] = useState<string>();
+  const [bank, setBank] = useState<string>();
+
+  const handleChangeCard = (event: SelectChangeEvent) => {
+    setCardcompany(event.target.value as string);
+  };
+  const handleChangeBank = (event: SelectChangeEvent) => {
+    setBank(event.target.value as string);
+  };
+
+  return (
+    <Box sx={{ width: '100%' }}>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label='basic tabs example'
+        >
+          <Tab label='신용/체크카드' {...a11yProps(0)} />
+          <Tab label='무통장입금' {...a11yProps(1)} />
+          <Tab label='네이버페이' {...a11yProps(2)} />
+        </Tabs>
+      </Box>
+      <CustomTabPanel value={value} index={0}>
+        {/* 신용/체크카드 */}
+        <FormControl fullWidth>
+          <InputLabel id='demo-simple-select-label'>
+            카드사를 선택해주세요
+          </InputLabel>
+          <Select
+            labelId='demo-simple-select-label'
+            id='demo-simple-select'
+            value={cardcompany}
+            label=' 카드사를 선택해주세요 '
+            onChange={handleChangeCard}
+          >
+            <MenuItem value={10}>KB국민카드</MenuItem>
+            <MenuItem value={20}>신한카드</MenuItem>
+            <MenuItem value={30}>삼성카드</MenuItem>
+            <MenuItem value={40}>현대카드</MenuItem>
+            <MenuItem value={50}>BC카드</MenuItem>
+            <MenuItem value={60}>롯데카드</MenuItem>
+            <MenuItem value={70}>KEB하나카드</MenuItem>
+            <MenuItem value={80}>우리카드</MenuItem>
+            <MenuItem value={90}>NH농협카드</MenuItem>
+            <MenuItem value={100}>씨티카드</MenuItem>
+            <MenuItem value={110}>카카오뱅크카드</MenuItem>
+            <MenuItem value={120}>케이뱅크카드</MenuItem>
+            <MenuItem value={130}>전북카드</MenuItem>
+            <MenuItem value={140}>광주카드</MenuItem>
+          </Select>
+        </FormControl>
+        {cardcompany != undefined ? <Installment /> : ''}
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={1}>
+        {/* 무통장 입금 */}
+        <FormControl fullWidth>
+          <InputLabel>은행을 선택해주세요</InputLabel>
+          <Select
+            value={bank}
+            label=' 은행을 선택해주세요'
+            onChange={handleChangeBank}
+          >
+            <MenuItem value={10}>농협</MenuItem>
+            <MenuItem value={20}>국민은행</MenuItem>
+            <MenuItem value={30}>신한은행</MenuItem>
+            <MenuItem value={40}>우리은행</MenuItem>
+            <MenuItem value={50}>기업은행</MenuItem>
+            <MenuItem value={60}>하나은행</MenuItem>
+            <MenuItem value={70}>대구은행</MenuItem>
+            <MenuItem value={80}>부산은행</MenuItem>
+            <MenuItem value={90}>우체국</MenuItem>
+            <MenuItem value={100}>SC제일은행</MenuItem>
+            <MenuItem value={110}>광주은행</MenuItem>
+            <MenuItem value={120}>경남은행</MenuItem>
+            <MenuItem value={130}>수협</MenuItem>
+            <MenuItem value={140}>케이뱅크</MenuItem>
+          </Select>
+        </FormControl>
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={2}>
+        {/* 네이버페이 */}
+      </CustomTabPanel>
+    </Box>
+  );
+}
+
+function Installment() {
+  const [installment, setInstallment] = useState('');
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setInstallment(event.target.value as string);
+  };
+
+  return (
+    <div>
+      <FormControl fullWidth>
+        <Select
+          value={installment}
+          onChange={handleChange}
+          displayEmpty
+          inputProps={{ 'aria-label': 'Without label' }}
+        >
+          <MenuItem value=''>일시불</MenuItem>
+          <MenuItem value={2}>2개월 무이자</MenuItem>
+          <MenuItem value={3}>3개월 무이자</MenuItem>
+          <MenuItem value={4}>4개월</MenuItem>
+          <MenuItem value={5}>5개월</MenuItem>
+          <MenuItem value={6}>6개월</MenuItem>
+          <MenuItem value={7}>7개월</MenuItem>
+          <MenuItem value={8}>8개월</MenuItem>
+          <MenuItem value={9}>9개월</MenuItem>
+          <MenuItem value={10}>10개월</MenuItem>
+          <MenuItem value={11}>11개월</MenuItem>
+        </Select>
+      </FormControl>
+    </div>
+  );
 }

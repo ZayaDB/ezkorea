@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux';
 import address from '../slices/addressSlice';
 import category from '../slices/categorySlice';
-import mileage from '../slices/mileageSlice';
+import checkout from '../slices/checkoutSlice';
+import product from '../slices/productSlice';
 
 const rootReducer = combineReducers({
   address,
   category,
-  mileage,
+  checkout,
+  product,
 });
 
 export default rootReducer;
