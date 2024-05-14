@@ -1,4 +1,3 @@
-
 $color-point: #5ff531;
 $color-black: #191919;
 $color-gray: #4c4c4c;
@@ -47,12 +46,25 @@ $font-weight-regular: 400;
       width: 100%;
       height: 259px; // 이미지의 높이를 고정값으로 설정
       overflow: hidden;
-
+      position: relative;
       img {
         width: 100%;
         height: 100%;
         object-fit: cover;
         display: block;
+      }
+
+      .rank {
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: #ffffff;
+        background-color: rgba(46, 46, 46, 0.8);
+        // color: #000000;
+        // background-color: rgba(237, 237, 237, 0.8);
+        padding: 12px 20px;
+        // border-radius: 4px;
+        z-index: 1; /* 이미지 위에 겹치도록 z-index 설정 */
       }
     }
 
@@ -417,4 +429,3 @@ $font-weight-regular: 400;
     width: 48%;
   }
 }
-

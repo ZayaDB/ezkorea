@@ -47,11 +47,13 @@ const ProductList = () => {
   const renderingStart = useSelector(
     (state: RootState) => state.category.renderingStart
   );
+
   // 정렬된 상품 목록
   const sortedProducts = useSort(
     getSelectedValue((state: RootState) => state.category.products),
     sort as SortOption
   );
+
   // 선택한 카테고리와 서브 카테고리
   const selectedCategory = useSelector(
     (state: RootState) => state.category.selectedCategory
@@ -339,7 +341,7 @@ const ProductList = () => {
       </div>
 
       {!isMobile && (
-        <div style={{ marginLeft: '45%' }}>
+        <div style={{ marginLeft: '40%' }}>
           <Pagination
             count={Math.ceil(filteredProducts.length / itemsPerPage)}
             page={currentPage}
