@@ -12,19 +12,6 @@ import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import { useState } from 'react';
 import Grid from '@mui/material/Grid';
-// import { useMediaQuery } from "@material-ui/core";
-
-// import { useMediaQuery } from '@mui/material';
-// import DivDelete from './DivDelete';
-
-// import { createTheme, styled } from '@mui/material/styles';
-// import SaleProduct from './../category/SaleProduct';
-// const cancelRef = useRef(null);
-
-interface OptionProps {
-  color?: string;
-  title?: string;
-}
 
 // const useStyles = makeStyle(theme => ({
 //   tablet: {
@@ -35,42 +22,6 @@ interface OptionProps {
 //   },
 // }));
 // const matches = useMediaQuery('(max-width:768px)');
-const Option = ({ color }: OptionProps) => {
-  const [count, setCount] = useState(0);
-
-  return (
-    <div key={color}>
-      <div id='optionBox'>
-        <div className='selectedColor'>{color}</div>
-        <div id='countZone'>
-          <div className='selectedCount'>
-            <ButtonGroup
-              size='small'
-              variant='contained'
-              aria-label='Basic button group'
-            >
-              <Button
-                onClick={() => setCount(count - 1)}
-                disabled={count < 1}
-                color='secondary'
-              >
-                -
-              </Button>
-              <Button color='secondary' aria-readonly>
-                {count}
-              </Button>
-              <Button onClick={() => setCount(count + 1)} color='secondary'>
-                +
-              </Button>
-            </ButtonGroup>
-          </div>
-          <div className='sellingPrice'>190,000원</div>
-          <div className='selectedClose'>x</div>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 export default function SelectPurchase() {
   // // 드롭다운
@@ -89,23 +40,42 @@ export default function SelectPurchase() {
   //     setOptions(prevOptions => [...prevOptions, generateOption(color)]);
   //   }
   // };
-  const [color, setColor] = useState('');
-  const [options, setOptions] = useState<JSX.Element[]>([]);
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
+  const [counts, setCounts] = useState<number[]>([]);
 
-  const handleAddOption = (color: string) => {
-    if (!selectedColors.includes(color)) {
-      setSelectedColors([...selectedColors, color]);
-      setOptions(prevOptions => [
-        ...prevOptions,
-        <Option key={color} color={color} />,
-      ]);
+  const handleChange = (event: SelectChangeEvent<string>) => {
+    const selectedColor = event.target.value;
+    const index = selectedColors.indexOf(selectedColor);
+
+    if (index === -1) {
+      setSelectedColors([...selectedColors, selectedColor]);
+      setCounts([...counts, 1]);
+    } else {
+      const updatedCounts = [...counts];
+      updatedCounts[index]++;
+      setCounts(updatedCounts);
     }
   };
 
-  const handleChange = (event: SelectChangeEvent<string>) => {
-    setColor(event.target.value as string);
+  const handleIncrease = (index: number) => {
+    const updatedCounts = [...counts];
+    updatedCounts[index]++;
+    setCounts(updatedCounts);
   };
+
+  const handleDecrease = (index: number) => {
+    if (counts[index] > 1) {
+      const updatedCounts = [...counts];
+      updatedCounts[index]--;
+      setCounts(updatedCounts);
+    }
+  };
+
+  const onRemove = (index: number) => {
+    setSelectedColors(selectedColors.filter((_, i) => i !== index));
+    setCounts(counts.filter((_, i) => i !== index));
+  };
+
   return (
     <Grid container direction='row' justifyContent='center' alignItems='center'>
       <div id='selectBox'>
@@ -156,36 +126,56 @@ export default function SelectPurchase() {
                 <Select
                   labelId='demo-simple-select-label'
                   id='demo-simple-select'
-                  value={color}
+                  value=''
                   label='color*'
                   onChange={handleChange}
                 >
-                  <MenuItem value={'White'}>
-                    {/* White div 클릭 시, 선택 옵션을 추가함 */}
-                    <button
-                      className='options'
-                      onClick={() => handleAddOption('white')}
-                    >
-                      White
-                    </button>
-                  </MenuItem>
-
-                  <MenuItem value={'Black'}>
-                    {/* 다른 색상을 추가할 경우 */}
-                    <button
-                      className='options'
-                      onClick={() => handleAddOption('black')}
-                    >
-                      black
-                    </button>
-                  </MenuItem>
+                  <MenuItem value={'White'}>White</MenuItem>
+                  <MenuItem value={'Black'}>Black</MenuItem>
                 </Select>
               </FormControl>
             </Box>
           </div>
           <div id='selectedPurchase'>
             {/* 추가된 선택 옵션들을 렌더링함 */}
-            {options}
+            {selectedColors.map((selectedColor, index) => (
+              <div key={selectedColor}>
+                <div id='optionBox'>
+                  <div className='selectedColor'>{selectedColor}</div>
+                  <div id='countZone'>
+                    <div className='selectedCount'>
+                      <ButtonGroup
+                        size='small'
+                        variant='contained'
+                        aria-label='Basic button group'
+                      >
+                        <Button
+                          onClick={() => handleIncrease(index)}
+                          color='secondary'
+                        >
+                          +
+                        </Button>
+                        <Button color='secondary'>{counts[index]}</Button>
+                        <Button
+                          onClick={() => handleDecrease(index)}
+                          disabled={counts[index] === 1}
+                          color='secondary'
+                        >
+                          -
+                        </Button>
+                      </ButtonGroup>
+                    </div>
+                    <div className='sellingPrice'>190,000원</div>
+                    <button
+                      className='selectedClose'
+                      onClick={() => onRemove(index)}
+                    >
+                      x
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
           <div id='purchaseZone'>
             <div className='PurchaseTitle'>주문금액</div>

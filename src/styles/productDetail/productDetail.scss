@@ -51,12 +51,12 @@ $border: 1px solid lightgray;
   margin: 0 auto;
 }
 .detailMain {
-  width: 80vh;
+  width: 85vh;
   padding: 0;
   margin-right: 8px;
 }
 .detailSide {
-  width: calc(1200px - (80vh + 8px));
+  width: calc(1200px - (85vh + 8px));
   height: calc(100vh - 200px);
   @include column();
 }
@@ -65,6 +65,7 @@ $border: 1px solid lightgray;
   .detailPage {
     max-width: 480px;
     display: flex;
+    align-items: center;
     flex-direction: column;
     padding-top: 8px;
     margin: 0 auto;
@@ -79,18 +80,21 @@ $border: 1px solid lightgray;
 }
 @media (max-width: 360px) {
   .detailPage {
-    max-width: 320px;
+    max-width: 360px;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 8px;
     margin: 0 auto;
+    padding: 0;
   }
   .detailMain {
-    width: 100%; /* 80%의 가로 너비를 차지하도록 함 */
+    width: 100%;
+    padding: 0;
+    margin: 0px;
   }
 
   .detailSide {
-    width: 320px; /* 가로 너비를 100%로 설정하여 가득 차도록 함 */
+    width: 340px; /* 가로 너비를 100%로 설정하여 가득 차도록 함 */
   }
 }

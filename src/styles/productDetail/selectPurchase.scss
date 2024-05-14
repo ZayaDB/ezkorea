@@ -39,12 +39,13 @@ $border: 1px solid lightgray;
 // 사이드
 #selectBox {
   position: relative;
-  width: calc(1200px - (90vh + 8px));
+  width: calc(1200px - (85vh + 8px));
   height: calc(100vh - 200px);
+  box-sizing: border-box;
 }
 #selectPurchase {
   @include column();
-  width: calc(1200px - (90vh + 8px));
+  width: calc(1200px - (85vh + 8px));
   height: calc(100vh - 200px);
   position: fixed;
   background-color: white;
@@ -237,23 +238,35 @@ $border: 1px solid lightgray;
   #selectBox {
     // position: relative;
     width: 100%;
-    // border: 1px solid black;
+    border: 1px solid black;
     // height: calc(100vh - 200px);
   }
-  // 사이드
-  #selectBox {
-    position: static;
-    width: 100%;
-  }
+
   #selectPurchase {
     @include column();
     background-color: white;
-    // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     border-top: 3px solid black;
-    position: static;
+    position: static; /* 수정 */
     width: 100%;
-    // padding: 8px;
+    margin: 0 auto;
   }
 }
 @media (max-width: 360px) {
+  #selectBox {
+    position: relative;
+    width: 100%;
+    // border: 1px solid black;
+    // height: calc(100vh - 200px);
+  }
+
+  #selectPurchase {
+    #selectPurchase {
+      @include column();
+      background-color: white;
+      border-top: 3px solid black;
+      position: static; /* 수정 */
+      width: 100%;
+      margin: 0 auto;
+    }
+  }
 }

@@ -132,7 +132,12 @@ export default function Review() {
   const [page, setPage] = useState(1);
   const [reviewData, setReviewData] = useState<Review[]>([]);
   const reviewsPerPage = 5;
+  // sort
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [sortedReviews, setSortedReviews] = useState<Review[]>([]);
+  const [sortBy, setSortBy] = useState<string>('');
 
+  // fetch
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -140,6 +145,8 @@ export default function Review() {
         const data = await response.json();
         const reviews = data[0].reviews;
         setReviewData(reviews);
+        setReviews(reviews);
+        setSortedReviews(reviews); // 초기에 정렬되지 않은 데이터로 설정
       } catch (error) {
         console.error('Error fetching review data:', error);
       }
@@ -154,11 +161,34 @@ export default function Review() {
   ) => {
     setPage(value);
   };
-
+  // 페이지네이션
   const startIndex = (page - 1) * reviewsPerPage;
   const endIndex = page * reviewsPerPage;
   const currentReviews = reviewData.slice(startIndex, endIndex);
+  // 소팅
+  // 정렬
+  // 별점 높은순 정렬
+  const sortByHighestRating = () => {
+    const sorted = [...reviews].sort((a, b) => b.rating - a.rating);
+    setSortedReviews(sorted);
+    setSortBy('별점 높은순');
+  };
 
+  // 별점 낮은순 정렬
+  const sortByLowestRating = () => {
+    const sorted = [...reviews].sort((a, b) => a.rating - b.rating);
+    setSortedReviews(sorted);
+    setSortBy('별점 낮은순');
+  };
+
+  // 최신순 정렬
+  const sortByRecent = () => {
+    const sorted = [...reviews].sort(
+      (a, b) => new Date(b.reDate).getTime() - new Date(a.reDate).getTime()
+    );
+    setSortedReviews(sorted);
+    setSortBy('최신순');
+  };
   return (
     <div id='reviewZone'>
       <div id='reviewTop'>
@@ -251,11 +281,18 @@ export default function Review() {
       </div>
 
       <div id='reviewSorting'>
-        <div className='best selected'>베스트순</div>
-        <div className='recent'>최신순</div>
+        <button className='highestRating' onClick={sortByHighestRating}>
+          별점 높은순
+        </button>
+        <button className='lowestRating' onClick={sortByLowestRating}>
+          별점 낮은순
+        </button>
+        <button className='recent' onClick={sortByRecent}>
+          최신순
+        </button>
       </div>
       <div className='reviewContents'>
-        {currentReviews.map((item, index) => (
+        {sortedReviews.slice(startIndex, endIndex).map((item, index) => (
           <div className='reviewItem' key={index}>
             <div className='reviewUser'>
               <div className='userPhoto'></div>
@@ -278,6 +315,7 @@ export default function Review() {
             </div>
           </div>
         ))}
+
         <div className='rePagination'>
           {/* mui 요소 중앙정렬 Grid 사용하기 */}
           <Grid
