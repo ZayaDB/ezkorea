@@ -22,27 +22,28 @@ export default function LabelBottomNavigation() {
 
   return (
     <BottomNavigation
-      sx={{ width: 500, position: 'fixed', bottom: '0', zIndex: '9000' }}
+      sx={{ width: '100vw', position: 'fixed', bottom: '0', zIndex: '9000' }}
+      showLabels
       value={value}
       onChange={handleChange}
     >
       <BottomNavigationAction
-        label='Recents'
+        label='Home'
         value='recents'
         icon={<RestoreIcon />}
       />
       <BottomNavigationAction
-        label='Favorites'
+        label='Shopping'
         value='favorites'
         icon={<FavoriteIcon />}
       />
       <BottomNavigationAction
-        label='Nearby'
+        label='Community'
         value='nearby'
         icon={<LocationOnIcon />}
       />
       <BottomNavigationAction
-        label='Folder'
+        label='Mypage'
         value='folder'
         icon={<FolderIcon />}
       />
