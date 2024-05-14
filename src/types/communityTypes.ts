@@ -51,3 +51,8 @@ export interface IFormInput {
   comments?: Comment[];
   creationDate: string;
 }
+
+export interface IFeedPreview {
+  feedId: number;
+  image: string;
+}

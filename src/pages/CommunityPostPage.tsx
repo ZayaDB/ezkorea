@@ -117,7 +117,7 @@ function CommunityPostPage() {
       likes: 0,
       commentCount: 0,
       comments: [],
-      creationDate: new Date().toISOString().slice(0, 10),
+      creationDate: new Date().toISOString(),
     };
 
     if (!files.length || files.length > 4) {
