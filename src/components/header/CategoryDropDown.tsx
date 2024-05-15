@@ -64,8 +64,6 @@ const CategoryDropDown: React.FC = () => {
     <DropdownContainer>
       {categoryData.map((category, index) => (
         <div key={index} color='inherit'>
-          {/* 카테고리 이름 렌더링 */}
-
           {/* ALL이 아닌 subCategories의 이름만 필터링하여 렌더링 */}
           <div
             style={{
@@ -75,10 +73,7 @@ const CategoryDropDown: React.FC = () => {
               padding: '15px 12px',
             }}
           >
-            <div style={{ width: '20%', fontWeight: 700 }}>
-              {' '}
-              {category.name}{' '}
-            </div>
+            <div style={{ width: '20%', fontWeight: 700 }}>{category.name}</div>
             <div style={{ width: '80%' }}>
               {category.subCategories
                 .filter(subCategory => subCategory.name !== 'ALL')

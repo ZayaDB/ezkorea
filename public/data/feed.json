@@ -1,7 +1,7 @@
 [
   {
     "feedId": 1,
-    "accountName": "desk_master",
+    "accountName": "dururu",
     "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
     "images": [
       "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/projects/168856428667281853.png?w=720"
@@ -46,7 +46,7 @@
           {
             "id": "c3",
             "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
-            "accountName": "desk_master",
+            "accountName": "dururu",
             "content": "이 거치대는 Adjustable Pro에서 구매했습니다. 매우 튼튼하고 조절이 자유로워 추천드립니다.",
             "creationDate": "2024-01-17"
           }
@@ -65,7 +65,14 @@
     ],
     "title": "심플 모던 오피스 셋업",
     "description": "작은 책상에 아이맥을 올려 작업하는게 어려워서 큰 책상을 추가로 두었어요!\n가구 배치만 효율적으로 하면, 더 알차게 공간을 구성할 수 있다는 것을 경험하면서 점점 맥시멀이 되고 있답니다..ㅎㅎㅎㅎㅎ\n \n \n 작은 가구가 좋은 또 다른 이유는! 가구 배치 변경에 제약이 별로 없다는 것이에요. 1년 동안, 책상이 벌써 동서남북으로 돌아버렸다죠~ \n 창문 쪽에도 책상을 배치해서 소품들로 기분 전환을 하기도 했어요. ",
-    "selectedProducts": [],
+    "selectedProducts": [
+      {
+        "productId": 4,
+        "productName": "KIDS MOTION DESK",
+        "thumbnail": "https://i.ibb.co/mcn8nmF/rrw3-1.png",
+        "price": "1264000"
+      }
+    ],
     "concepts": ["simple"],
     "colors": ["white"],
     "views": 4987,
@@ -116,7 +123,7 @@
   },
   {
     "feedId": 4,
-    "accountName": "setup_lover",
+    "accountName": "dururu",
     "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
     "images": [
       "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/168164950371720285.jpeg?w=720",
@@ -127,10 +134,58 @@
     "description": "공간 절약을 위한 작고 실용적인 홈 오피스 셋업입니다.",
     "selectedProducts": [
       {
-        "productId": 5,
-        "productName": "컴팩트 조명",
-        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/163788842247379788.jpg?w=100",
-        "price": "120000"
+        "productId": 4,
+        "productName": "KIDS MOTION DESK",
+        "thumbnail": "https://i.ibb.co/mcn8nmF/rrw3-1.png",
+        "price": "1264000"
+      },
+      {
+        "productId": 6,
+        "productName": "로지텍 무선 블루투스 키보드",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/163109433375113133.jpg?w=100",
+        "price": "50000"
+      },
+      {
+        "productId": 6,
+        "productName": "로지텍 무선 블루투스 키보드",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/163109433375113133.jpg?w=100",
+        "price": "50000"
+      },
+      {
+        "productId": 6,
+        "productName": "로지텍 무선 블루투스 키보드",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/163109433375113133.jpg?w=100",
+        "price": "50000"
+      },
+      {
+        "productId": 6,
+        "productName": "로지텍 무선 블루투스 키보드",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/163109433375113133.jpg?w=100",
+        "price": "50000"
+      },
+      {
+        "productId": 6,
+        "productName": "로지텍 무선 블루투스 키보드",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/163109433375113133.jpg?w=100",
+        "price": "50000"
+      },
+      {
+        "productId": 6,
+        "productName": "로지텍 무선 블루투스 키보드",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/163109433375113133.jpg?w=100",
+        "price": "50000"
+      },
+      {
+        "productId": 6,
+        "productName": "로지텍 무선 블루투스 키보드",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/163109433375113133.jpg?w=100",
+        "price": "50000"
+      },
+      {
+        "productId": 6,
+        "productName": "로지텍 무선 블루투스 키보드",
+        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/163109433375113133.jpg?w=100",
+        "price": "50000"
       },
       {
         "productId": 6,
@@ -276,7 +331,7 @@
   },
   {
     "feedId": 8,
-    "accountName": "office_designer",
+    "accountName": "dururu",
     "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
     "images": [
       "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/161311357069176332.jpg?w=720",
@@ -654,10 +709,10 @@
     "description": "창의적인 디자인 작업을 위한 편안하고 아늑한 공간입니다.",
     "selectedProducts": [
       {
-        "productId": 25,
-        "productName": "yellow 스탠딩 조명",
-        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/158710992464690998.jpg?w=100",
-        "price": "500000"
+        "productId": 4,
+        "productName": "KIDS MOTION DESK",
+        "thumbnail": "https://i.ibb.co/mcn8nmF/rrw3-1.png",
+        "price": "1264000"
       },
       {
         "productId": 26,
@@ -824,10 +879,10 @@
     "description": "예술 작업을 위한 단조로운 아틀리에 공간입니다.",
     "selectedProducts": [
       {
-        "productId": 30,
-        "productName": "제로데스크 에보 컴퓨터 책상",
-        "thumbnail": "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/168144627162089910.jpg?w=100",
-        "price": "20000"
+        "productId": 4,
+        "productName": "KIDS MOTION DESK",
+        "thumbnail": "https://i.ibb.co/mcn8nmF/rrw3-1.png",
+        "price": "1264000"
       }
     ],
     "concepts": ["unique", "simple"],

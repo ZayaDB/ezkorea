@@ -11,14 +11,22 @@ import { setIsLiked } from '../../redux/slices/categorySlice';
 
 interface ProductItemProps {
   prod: Products;
+  rank?: number;
+  disc?: boolean;
 }
 
-// 1000단위 콤마를 추가하는 함수
-const addCommaNumber = (num: number): string => {
+const addCommaNumber = (num?: number): string => {
+  // num이 undefined이거나 null인 경우 처리
+  if (num === undefined || num === null) {
+    return ''; // 또는 다른 기본값을 반환할 수도 있습니다.
+  }
+
+  // num이 유효한 숫자인 경우 1000단위 콤마를 추가하여 반환
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
+
 // 상품 카드 컴포넌트
-export default function ProductItem({ prod }: ProductItemProps) {
+export default function ProductItem({ prod, rank, disc }: ProductItemProps) {
   const dispatch = useDispatch();
 
   const isLiked = useSelector(
@@ -31,27 +39,32 @@ export default function ProductItem({ prod }: ProductItemProps) {
     console.log('dispatch한 liked:', isLiked);
   };
 
-  const handleProdItemClick = (productId: number): void => {
-    // 이미 저장된 상품 목록을 가져옴
-    const storedProducts = localStorage.getItem('clickedProducts');
-    let clickedProducts: Products[] = storedProducts
-      ? JSON.parse(storedProducts)
-      : [];
+  const inputSession = (product: Products): void => {
+    const storedProducts = sessionStorage.getItem('clickedProducts');
+    let clickedProducts: Products[] = [];
 
-    // 이미 클릭된 상품인지 확인
+    if (storedProducts) {
+      try {
+        const parsedProducts = JSON.parse(storedProducts);
+        if (Array.isArray(parsedProducts)) {
+          clickedProducts = parsedProducts;
+        }
+      } catch (error) {
+        console.error('clickedProducts 파싱 중 오류 발생:', error);
+      }
+    }
+
     const isAlreadyClicked = clickedProducts.some(
-      (product: Products) => product.productId === productId
+      (prod: Products) => prod.productId === product.productId
     );
 
     if (!isAlreadyClicked) {
-      // 중복 저장을 방지하기 위해 로컬 스토리지에 클릭한 상품 추가
-      clickedProducts = [...clickedProducts, prod];
-      localStorage.setItem('clickedProducts', JSON.stringify(clickedProducts));
+      clickedProducts.push(product);
+      sessionStorage.setItem(
+        'clickedProducts',
+        JSON.stringify(clickedProducts)
+      );
     }
-
-    // 상품 상세 페이지로 이동
-    // 예: react-router-dom의 history.push 메서드를 사용하여 이동
-    // history.push(`/productDetail?productId=${productId}`);
   };
 
   const [hovered, setHovered] = useState(false);
@@ -65,18 +78,16 @@ export default function ProductItem({ prod }: ProductItemProps) {
   };
 
   return (
-    <Box
-      className='prod-item'
-      role='button'
-      onClick={() => handleProdItemClick(prod.productId)}
-    >
+    <Box className='prod-item' role='button' onClick={() => inputSession(prod)}>
       <Link to={`/shop/${prod.productId}`} className='link-to-detail'>
         {/* 상품이미지 */}
+
         <div
           className='prod-img'
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
+          {rank && <div className='rank'>{rank}</div>}
           <img
             src={hovered ? prod.hoverImage : prod.thumbnail}
             alt={prod.name}
@@ -88,10 +99,22 @@ export default function ProductItem({ prod }: ProductItemProps) {
           {/* 상품명 */}
           <div className='prod-name'>{prod.name}</div>
           {/* 할인율 */}
-          {prod.discount !== 0 ? (
-            <div className='prod-discount'>{prod.discount}%</div>
+          {disc !== true ? (
+            <div>
+              {prod.discount !== 0 ? (
+                <div className='prod-discount'>{prod.discount}%</div>
+              ) : (
+                <div style={{ color: 'white' }}>;;;</div>
+              )}
+            </div>
           ) : (
-            <div style={{ color: 'white' }}>;;;</div>
+            <div>
+              {prod.discount !== 0 ? (
+                <div className='prod-discount-sale'>{prod.discount}%</div>
+              ) : (
+                <div style={{ color: 'white' }}>;;;</div>
+              )}
+            </div>
           )}
           {/* 원가 */}
           {prod.discount !== 0 ? (
@@ -102,6 +125,7 @@ export default function ProductItem({ prod }: ProductItemProps) {
             <div style={{ color: 'white' }}>;;;</div>
           )}
           {/* 할인가 */}
+
           <div className='prod-price'>{addCommaNumber(prod.price)}원</div>
           <div className='prod-commentCount'>
             <img src={prod_review} alt='' className='prod-review-icon' />(
@@ -112,7 +136,7 @@ export default function ProductItem({ prod }: ProductItemProps) {
       <div className='color-heart-box'>
         {/* 옵션 - 컬러 */}
         <div className='color-wrapper'>
-          {prod.colors.map((color, index) => (
+          {prod.colors?.map((color, index) => (
             <div
               key={index}
               className='color-circle'

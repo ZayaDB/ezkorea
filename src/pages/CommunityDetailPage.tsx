@@ -12,6 +12,15 @@ import {
   Container,
   Box,
 } from '@mui/material';
+import {
+  ProductInfo,
+  ColorCircle,
+  TagButton,
+  CustomTypography,
+  ImgButton,
+  ProductBox,
+  ProductImage,
+} from '../components/community/detail/StyledComponents';
 import '../styles/community/detail.scss';
 import CommentIcon from '@mui/icons-material/Comment';
 import LikeButton from '../components/community/main/LikeButton';
@@ -20,7 +29,12 @@ import ShareIcon from '@mui/icons-material/Share';
 import { FeedData, Comment, SelectedProducts } from '../types/communityTypes';
 import koLocale from 'javascript-time-ago/locale/ko';
 import TimeAgo from 'javascript-time-ago';
-import styled from '@emotion/styled';
+import { Swiper, SwiperSlide } from 'swiper/react'; // Swiper와 SwiperSlide 임포트
+import { Navigation, Pagination, Scrollbar } from 'swiper/modules'; // Swiper 모듈 임포트
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 
 TimeAgo.addLocale(koLocale);
 
@@ -33,6 +47,9 @@ const CommunityDetailPage: React.FC = () => {
   const [likes, setLikes] = useState<number>(0);
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const { feedId } = useParams<{ feedId?: string }>();
+  const formatPrice = (price: number): string => {
+    return new Intl.NumberFormat().format(price);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -120,7 +137,7 @@ const CommunityDetailPage: React.FC = () => {
           <Box className='main-image'>
             <img src={feed.images[selectedImageIndex]} alt='Main' />
           </Box>
-          <Box className='thumbnail-button'>
+          <Box>
             {feed.images.map((image: string, index: number) => (
               <ImgButton
                 key={index}
@@ -133,24 +150,64 @@ const CommunityDetailPage: React.FC = () => {
         </Box>
 
         {/* 상품 리스트 */}
-        <Grid container direction='row' className='product-container'>
-          {feed.selectedProducts?.map(
-            (
-              product: SelectedProducts // 수정된 부분: Product 타입 대신 SelectedProducts 타입 사용
-            ) => (
-              <Grid item key={product.productName}>
-                <Card variant='outlined' className='product-card'>
-                  <CardContent>
-                    <img src={product.thumbnail} alt={product.productName} />
-                    <Typography gutterBottom>{product.productName}</Typography>
-                    <Typography variant='body1' gutterBottom>
-                      {product.price}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            )
-          )}
+        <Typography
+          variant='body2'
+          sx={{ mb: 1 }}
+          display={'flex'}
+          alignItems={'center'}
+          fontSize={14}
+        >
+          <Typography mr={1} fontWeight={900} color={'#5ff531'}>
+            #
+          </Typography>
+          상품 태그
+          <Typography fontSize={14} fontWeight={700} ml={1}>
+            {feed.selectedProducts ? feed.selectedProducts.length : 0}
+          </Typography>
+          개
+        </Typography>
+        <Grid
+          container
+          direction='row'
+          sx={{ gap: '16px' }}
+          width={'100%'}
+          bgcolor={'red'}
+        >
+          <Swiper
+            modules={[Navigation, Pagination, Scrollbar]} // 수정된 부분: Swiper 모듈 설정
+            spaceBetween={16}
+            slidesPerView={'auto'}
+            navigation
+            pagination={{ clickable: true }}
+            scrollbar={{ draggable: true }}
+          >
+            {feed.selectedProducts?.map(
+              (
+                product: SelectedProducts // 수정된 부분: Product 타입 대신 SelectedProducts 타입 사용
+              ) => (
+                <SwiperSlide
+                  key={product.productName}
+                  tag='section'
+                  style={{ width: '128px' }}
+                >
+                  <Box width={128}>
+                    <ProductBox>
+                      <ProductImage
+                        src={product.thumbnail}
+                        alt={product.productName}
+                      />
+                    </ProductBox>
+                    <ProductInfo variant='body2' gutterBottom>
+                      {product.productName}
+                    </ProductInfo>
+                    <ProductInfo fontWeight={700} variant='body2' gutterBottom>
+                      {formatPrice(parseInt(product.price))}원
+                    </ProductInfo>
+                  </Box>
+                </SwiperSlide>
+              )
+            )}
+          </Swiper>
         </Grid>
 
         {/* 컨셉 및 컬러 */}
@@ -303,61 +360,3 @@ const CommunityDetailPage: React.FC = () => {
 };
 
 export default CommunityDetailPage;
-
-const ColorCircle = styled(Box)<{ color: string }>(({ color }) => ({
-  width: 15,
-  height: 15,
-  color: '#000000',
-  borderRadius: '50%',
-  border: color === 'white' ? '1px solid #E5E5E5' : 'contained',
-  backgroundColor: color === 'wood' ? '#9A6322' : color,
-  marginRight: '8px',
-}));
-
-const outlineButtonStyles = {
-  border: '1px solid rgb(218, 221, 224)',
-  color: '#2F3438',
-};
-
-const TagButton = styled(Button)`
-  width: 96px;
-  margin: 0 4px 0 0;
-  padding: 0 12px;
-  font-size: 14px; /* fontSize 속성 수정 */
-  height: 32px; /* height 속성 수정 */
-  border-radius: 16px; /* borderRadius 속성 수정 */
-  font-weight: 600; /* fontWeight 속성 수정 */
-  pointer-events: none; /* pointerEvents 속성 수정 */
-  &:hover {
-    background-color: initial;
-  }
-  ${outlineButtonStyles}/* outlineButtonStyles 추가 */
-`;
-
-const CustomTypography = styled(Typography)`
-  font-weight: bold;
-  color: rgb(130, 140, 148);
-  font-size: 14px;
-  cursor: pointer;
-  &:hover {
-    font-weight: 800;
-    color: #5ff531;
-  }
-`;
-
-const ImgButton = styled(Button)`
-  margin: 0;
-  padding: 0;
-  height: 100px;
-  overflow: hidden;
-  margin-bottom: 10px;
-  border-radius: 0;
-  &:hover {
-    outline: 2px solid #5ff531;
-  }
-  img {
-    width: 100%;
-    object-fit: cover;
-    object-position: center;
-  }
-`;

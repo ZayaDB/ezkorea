@@ -4,7 +4,7 @@ html {
 }
 
 .content-container {
-  max-width: 800px;
+  max-width: 880px;
   width: 100%;
   margin: 0 auto;
 }
@@ -17,8 +17,8 @@ html {
     flex: 1;
     margin-right: 12px;
     overflow: hidden;
-    width: 640px;
-    height: 640px;
+    width: 720px;
+    height: 720px;
 
     img {
       width: 100%;
@@ -27,12 +27,6 @@ html {
       object-position: center;
     }
   }
-
-  .thumbnail-button {
-    flex: 0 0 100px;
-    display: flex;
-    flex-direction: column;
-  }
 }
 
 .feed-profile {
@@ -40,10 +34,6 @@ html {
   justify-content: space-between;
   height: 64px;
   padding: 12px 0;
-}
-
-.product-container {
-  gap: 16px;
 }
 
 .feed-title {
