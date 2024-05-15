@@ -9,7 +9,6 @@ import { useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
-// const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 export default function CartPage() {
   const selectOption = useSelector(

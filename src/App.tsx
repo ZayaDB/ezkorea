@@ -24,6 +24,8 @@ import Logout from './components/Home/Logout';
 import ProductDetailPage from './pages/ProductDetailPage';
 import CartPage from './pages/CartPage';
 import OrderHistory from './components/mypage/OrderHistory';
+import ResultPage from './pages/ResultPage';
+import SearchPage from './pages/SearchPage';
 
 const App = () => {
   const ScrollToTop = () => {
@@ -43,6 +45,8 @@ const App = () => {
         <Routes>
           <Route element={<MainLayout />}>
             <Route path='/' element={<Home />} />
+            <Route path='/search' element={<SearchPage />} />
+            <Route path='/result' element={<ResultPage />} />
             <Route path='shop' element={<CategoryPage />} />
             <Route path='/shop/best' element={<BestPage />} />
             <Route path='/shop/sale' element={<SalePage />} />
