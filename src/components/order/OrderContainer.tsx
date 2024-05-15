@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 
 import DeliveryInfo from './DeliveryInfo';
@@ -11,14 +11,23 @@ import ApplyDiscount from './ApplyDiscount';
   - session에 담긴 user_id 확인 후 휴대폰 번호, 배송지 주소 불러오기
 */
 function CustomerInformation() {
+  const [ordererName, setOrdererName] = useState<string>('');
+  const [phoneNumFirst, setPhoneNumFist] = useState<string>();
+  const [phoneNumSecond, setPhoneNumSecond] = useState<number>();
+  const [phoneNumThird, setPhoneNumThird] = useState<number>();
+
   const userDataString = sessionStorage.getItem('isLoggedIn');
-
-  console.log(userDataString);
-
-  const [ordererName] = useState<string>('');
-  const [phoneNumFirst] = useState<string>();
-  const [phoneNumSecond] = useState<number>();
-  const [phoneNumThird] = useState<number>();
+  useEffect(() => {
+    if (userDataString) {
+      const userData = JSON.parse(userDataString);
+      setOrdererName(userData[0].username);
+      const phoneNumber = userData[0].phone;
+      const phoneNumberParts = phoneNumber.split('-');
+      setPhoneNumFist(phoneNumberParts[0]);
+      setPhoneNumSecond(phoneNumberParts[1]);
+      setPhoneNumThird(phoneNumberParts[2]);
+    }
+  }, [userDataString]);
 
   return (
     <div className='order-customer-info'>
