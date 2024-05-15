@@ -10,7 +10,18 @@ export default function MainSlide() {
       <div style={{ width: 'auto', margin: 0, padding: 0 }}>
         <Carousel>
           <Carousel.Item>
-            <img className='d-block w-100' src={mainSlide2} alt='First slide' />
+            <img
+              className='d-block w-100'
+              src={mainSlide2}
+              alt='First slide'
+              style={{
+                height: 'auto',
+                margin: '0 auto',
+                maxHeight: '540px',
+                objectFit: 'cover',
+                filter: 'brightness(60%) contrast(120%) grayscale(40%)',
+              }}
+            />
             <Carousel.Caption>
               <h3>First slide label</h3>
               <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
@@ -21,6 +32,13 @@ export default function MainSlide() {
               className='d-block w-100'
               src={mainSlide2}
               alt='Second slide'
+              style={{
+                height: 'auto',
+                margin: '0 auto',
+                maxHeight: '540px',
+                objectFit: 'cover',
+                filter: 'brightness(60%) contrast(120%) grayscale(40%)',
+              }}
             />
             <Carousel.Caption>
               <h3>Second slide label</h3>
@@ -28,7 +46,18 @@ export default function MainSlide() {
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img className='d-block w-100' src={mainSlide2} alt='Third slide' />
+            <img
+              className='d-block w-100'
+              src={mainSlide2}
+              alt='Third slide'
+              style={{
+                height: 'auto',
+                margin: '0 auto',
+                maxHeight: '540px',
+                objectFit: 'cover',
+                filter: 'brightness(60%) contrast(120%) grayscale(40%)',
+              }}
+            />
             <Carousel.Caption>
               <h3>Third slide label</h3>
               <p>

@@ -16,7 +16,7 @@ export default function MainLayout() {
 
   return (
     <>
-      <Header title='Dururu' sections={sections} />
+      <Header title='dururu' sections={sections} />
       <Outlet />
       {isMobile ? null : <Footer />}
       {isMobile && <BottomNav />}
