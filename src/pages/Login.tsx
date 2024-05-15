@@ -149,7 +149,7 @@ export default function SignIn() {
       if (user) {
         if (user.password === pw) {
           console.log('success');
-          sessionStorage.setItem('isLoggedIn', 'JSON.stringify(userData)');
+          sessionStorage.setItem('isLoggedIn', JSON.stringify(userData));
           navigate('/');
         } else {
           setErrorMessage('비밀번호가 틀렸습니다.');
