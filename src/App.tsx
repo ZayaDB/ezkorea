@@ -53,7 +53,7 @@ const App = () => {
               path='community/modify/:feedId'
               element={<CommunityModifyPage />}
             />
-
+            <Route path='/cart' element={<CartPage />} />
             <Route path='/order' element={<OrderPage />} />
             <Route path='/my' element={<MyPage />} />
             <Route path='/my/wishlist' element={<LikesProduct />} />
