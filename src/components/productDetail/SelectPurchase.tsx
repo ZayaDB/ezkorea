@@ -251,7 +251,11 @@ export default function SelectPurchase() {
               <AddShoppingCartIcon />
             </div>
             <Box className='purchaseBtn'>
-              <ProtectedButton redirectTo='/login' onClick={handleSubmit}>
+              <ProtectedButton
+                redirectTo='/login'
+                onClick={handleSubmit}
+                sx={{ width: 200, height: 200 }}
+              >
                 주문하기
               </ProtectedButton>
             </Box>
