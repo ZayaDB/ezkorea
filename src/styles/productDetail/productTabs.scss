@@ -44,7 +44,11 @@ $border: 1px solid lightgray;
 #detailNav {
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
 }
 #detailNav div {
   font-size: $font-size-l;

@@ -1,4 +1,3 @@
-
 import '../styles/order/cart.scss';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
@@ -7,25 +6,43 @@ import Checkbox from '@mui/material/Checkbox';
 import { useState } from 'react';
 import { RootState } from '../redux/config';
 import { useSelector } from 'react-redux';
+import Box from '@mui/material/Box';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+// const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 export default function CartPage() {
+  const selectOption = useSelector(
+    (state: RootState) => state.product.selectedOption
+  );
+  const selectedQuantity = useSelector(
+    (state: RootState) => state.product.selectedQuantity
+  );
+  const selectedProductId = useSelector(
+    (state: RootState) => state.product.selectedProductId
+  );
 
-    const selectOption = useSelector(
-      (state: RootState) => state.product.selectedOption
-    );
-    const selectedQuantity = useSelector(
-      (state: RootState) => state.product.selectedQuantity
-    );
-    const selectedProductId = useSelector(
-      (state: RootState) => state.product.selectedProductId
-    );
-
-    console.log(selectOption, selectedQuantity, selectedProductId);
-
+  console.log(selectOption, selectedQuantity, selectedProductId);
 
   // 체크 박스
+  const [checked, setChecked] = useState([true, false]);
+
+  const handleChange1 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked([event.target.checked, event.target.checked]);
+  };
+
+  const handleChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked([event.target.checked, checked[1]]);
+  };
+
+  const children = (
+    <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
+      <FormControlLabel
+        label='Child 1'
+        control={<Checkbox checked={checked[0]} onChange={handleChange2} />}
+      />
+    </Box>
+  );
 
   // 수량버튼
   const [counts, setCounts] = useState<number>(1);
@@ -46,7 +63,16 @@ export default function CartPage() {
         <div id='cartList'>
           <div className='cartTitle'>
             <div className='titleCheckbox'>
-              <Checkbox {...label} defaultChecked />
+              <FormControlLabel
+                label='Parent'
+                control={
+                  <Checkbox
+                    checked={checked[0] && checked[1]}
+                    indeterminate={checked[0] !== checked[1]}
+                    onChange={handleChange1}
+                  />
+                }
+              />
             </div>
             <div className='titleDetail'>상품정보</div>
             <div className='titleCountBtn'>수량</div>
@@ -54,10 +80,7 @@ export default function CartPage() {
             <div className='titleDelivery'>배송비</div>
           </div>
           <div className='purchaseInfo'>
-            <div className='purchasecheckbox'>
-              {' '}
-              <Checkbox {...label} defaultChecked />
-            </div>
+            <div className='purchasecheckbox'>{children}</div>
             <div className='purchasePD'>
               <div className='purchaseProduct'>상품이미지</div>
               <div className='purchaseDetail'>
@@ -121,4 +144,3 @@ export default function CartPage() {
     </Grid>
   );
 }
-
