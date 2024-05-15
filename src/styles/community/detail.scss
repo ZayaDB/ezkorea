@@ -94,8 +94,8 @@ html {
   padding: 40px 0;
 }
 
-.swiper-button-prev:after,
-.swiper-button-next:after {
+.product-container > .swiper > .swiper-button-prev:after,
+.product-container > .swiper > .swiper-button-next:after {
   display: none;
   font-size: 24px;
   font-weight: 900;
@@ -110,16 +110,16 @@ html {
   }
 }
 
-.swiper-button-prev svg,
-.swiper-button-next svg {
-  width: 0%;
+.product-container > .swiper > .swiper-button-prev svg,
+.product-container > .swiper > .swiper-button-next svg {
+  width: 50%;
   height: 100%;
   object-fit: contain;
   transform-origin: center;
 }
 
-.swiper-button-prev,
-.swiper-button-next {
+.product-container > .swiper > .swiper-button-prev,
+.product-container > .swiper > .swiper-button-next {
   position: absolute;
   top: var(--swiper-navigation-top-offset, 50%);
   width: calc(var(--swiper-navigation-size) / 44 * 10);
@@ -131,4 +131,24 @@ html {
   align-items: center;
   justify-content: center;
   color: #000;
+}
+
+.comment-input-container {
+  width: 100%;
+  display: flex;
+  gap: 8px;
+  height: 40px;
+  margin: 40px 0;
+}
+
+.comment-input-container label {
+  display: flex;
+  align-items: center;
+  top: -7.5px;
+  color: rgb(130, 140, 148);
+}
+
+.comment-input input {
+  height: 24px;
+  padding: 8px;
 }

@@ -4,12 +4,10 @@ import {
   Avatar,
   Button,
   Typography,
-  TextField,
   Grid,
   Card,
   CardContent,
   CardHeader,
-  Container,
   Box,
 } from '@mui/material';
 import {
@@ -19,6 +17,7 @@ import {
   CustomTypography,
   ImgButton,
   ProductBox,
+  InputTextField,
 } from '../components/community/detail/StyledComponents';
 import '../styles/community/detail.scss';
 import CommentIcon from '@mui/icons-material/Comment';
@@ -171,18 +170,16 @@ const CommunityDetailPage: React.FC = () => {
           position={'relative'}
           className='product-container'
         >
-          <Swiper
-            modules={[Navigation]}
-            spaceBetween={20}
-            slidesPerView={6}
-            centeredSlides={false}
-            style={{ marginLeft: 0, width: '100%' }}
-            navigation
-          >
-            {feed.selectedProducts?.map(
-              (
-                product: SelectedProducts // 수정된 부분: Product 타입 대신 SelectedProducts 타입 사용
-              ) => (
+          {feed.selectedProducts && feed.selectedProducts.length > 6 ? (
+            <Swiper
+              modules={[Navigation]}
+              spaceBetween={20}
+              slidesPerView={6}
+              centeredSlides={false}
+              style={{ marginLeft: 0, width: '100%' }}
+              navigation
+            >
+              {feed.selectedProducts.map((product: SelectedProducts) => (
                 <SwiperSlide
                   key={product.productName}
                   tag='section'
@@ -200,9 +197,24 @@ const CommunityDetailPage: React.FC = () => {
                     </ProductInfo>
                   </Box>
                 </SwiperSlide>
-              )
-            )}
-          </Swiper>
+              ))}
+            </Swiper>
+          ) : (
+            feed.selectedProducts &&
+            feed.selectedProducts.map((product: SelectedProducts) => (
+              <Box width={128} key={product.productName}>
+                <ProductBox className='product-img'>
+                  <img src={product.thumbnail} alt={product.productName} />
+                </ProductBox>
+                <ProductInfo variant='body2' gutterBottom>
+                  {product.productName}
+                </ProductInfo>
+                <ProductInfo fontWeight={700} variant='body2' gutterBottom>
+                  {formatPrice(parseInt(product.price))}원
+                </ProductInfo>
+              </Box>
+            ))
+          )}
         </Grid>
 
         {/* 컨셉 및 컬러 */}
@@ -261,8 +273,33 @@ const CommunityDetailPage: React.FC = () => {
         </Box>
       </Grid>
 
+      {/* 댓글 작성 */}
+      <Box className='comment-input-container'>
+        <InputTextField
+          label='댓글을 입력하세요'
+          fullWidth
+          value={commentInput}
+          onChange={handleCommentInputChange}
+          className='comment-input'
+          variant='outlined'
+        />
+        <Button
+          onClick={handleCommentSubmit}
+          variant='contained'
+          color='primary'
+          sx={{
+            boxShadow: 'none',
+            '&:hover': {
+              boxShadow: 'none',
+            },
+          }}
+        >
+          입력
+        </Button>
+      </Box>
+
       {/* 댓글 */}
-      <Typography letterSpacing={1} mt={3} mb={3}>
+      <Typography letterSpacing={1} mb={3}>
         <CommentIcon sx={{ fontSize: '24px', mr: 1 }} />
         댓글 {feed.commentCount}
       </Typography>
@@ -333,23 +370,6 @@ const CommunityDetailPage: React.FC = () => {
           </Card>
         )
       )}
-      {/* 댓글 작성 */}
-      <Container>
-        <TextField
-          label='Write a comment...'
-          variant='outlined'
-          fullWidth
-          value={commentInput}
-          onChange={handleCommentInputChange}
-        />
-        <Button
-          onClick={handleCommentSubmit}
-          variant='contained'
-          color='primary'
-        >
-          Submit
-        </Button>
-      </Container>
     </Box>
   );
 };

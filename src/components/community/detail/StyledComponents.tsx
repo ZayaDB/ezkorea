@@ -1,5 +1,5 @@
 import { styled } from '@mui/material/styles';
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography, Button, TextField, colors } from '@mui/material';
 
 export const ColorCircle = styled(Box)<{ color: string }>(({ color }) => ({
   width: 15,
@@ -105,3 +105,31 @@ export const ImgButton = styled(Box)`
     pointer-events: none;
   }
 `;
+
+export const InputTextField = styled(TextField)({
+  '& label': {
+    // placeholder text color
+    color: '#7f7f7f',
+  },
+  '& label.Mui-focused': {
+    // 해당 input focus 되었을 때 placeholder text color
+    // floatng label을 사용할 때 처리 필요
+    color: '#666666',
+  },
+  '& .MuiInput-underline:after': {
+    borderBottomColor: 'yellow',
+  },
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: '#e5e5e5',
+    },
+    '&:hover fieldset': {
+      borderColor: '#c0c0c0',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: '#000000',
+      borderWidth: '1.8px',
+      color: '#5ff531',
+    },
+  },
+});
