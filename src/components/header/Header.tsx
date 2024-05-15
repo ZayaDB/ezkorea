@@ -106,7 +106,7 @@ export default function Header({ title }: HeaderProps) {
       >
         {/* 알림(종) icon */}
         {/* mobile(width:600px 이하)부터 생김 */}
-        {isMobile && (
+        {/* {isMobile && (
           <BadgeComponent badgeContent={isLoggedIn ? 5 : undefined}>
             <img
               src={Notification1}
@@ -114,7 +114,7 @@ export default function Header({ title }: HeaderProps) {
               style={{ width: '24px', padding: 2 }}
             />
           </BadgeComponent>
-        )}
+        )} */}
 
         {/* 쇼핑 타이틀 버튼 & 이동 */}
         {/* mobile(width:600px 이하)에서 사라짐 */}
@@ -192,6 +192,20 @@ export default function Header({ title }: HeaderProps) {
           )}
         </Typography>
         <Box>
+
+          {/* search(돋보기) icon */}
+          {/* mobile(width:600px 이하)부터 생김 */}
+          {/* {isMobile && ( */}
+          <IconButton
+              type='button'
+              sx={{ p: '2px' }}
+              aria-label='search'
+              disableRipple
+            >
+              <img src={Search} alt='Logo' style={{ width: '36px' }} />
+            </IconButton>
+          {/* )} */}
+
           {/* 사람(로그인) icon dropdown */}
           {/* mobile(width:600px 이하)에서 사라짐 */}
           {isMobile ? null : (
@@ -208,22 +222,9 @@ export default function Header({ title }: HeaderProps) {
             />
           )}
 
-          {/* search(돋보기) icon */}
-          {/* mobile(width:600px 이하)부터 생김 */}
-          {isMobile && (
-            <IconButton
-              type='button'
-              sx={{ p: '2px' }}
-              aria-label='search'
-              disableRipple
-            >
-              <img src={Search} alt='Logo' style={{ width: '36px' }} />
-            </IconButton>
-          )}
-
           {/* 알림(종) icon */}
           {/* mobile(width:600px 이하)에서 사라짐 */}
-          {isMobile ? null : (
+          {/* {isMobile ? null : ( */}
             <BadgeComponent badgeContent={isLoggedIn ? 5 : undefined}>
               <img
                 src={Notification1}
@@ -231,7 +232,7 @@ export default function Header({ title }: HeaderProps) {
                 style={{ width: '24px', padding: 2 }}
               />
             </BadgeComponent>
-          )}
+          {/* )} */}
 
           {/* cart 아이콘 */}
           <BadgeComponent badgeContent={isLoggedIn ? 5 : undefined}>
@@ -240,11 +241,11 @@ export default function Header({ title }: HeaderProps) {
 
           {/* 검색창(input) */}
           {/* mobile(width:600px 이하)에서 사라짐 */}
-          {isMobile ? null : (
+          {/* {isMobile ? null : (
             <IconButton type='button' aria-label='search' disableRipple>
               <img src={Search} alt='Logo' style={{ width: '36px' }} />
             </IconButton>
-          )}
+          )} */}
         </Box>
       </Toolbar>
       {/* 헤더 하단 툴바 & 커스텀 */}
