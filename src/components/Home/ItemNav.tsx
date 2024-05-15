@@ -14,7 +14,7 @@ interface CategoryData {
 }
 
 const LinkItem = styled(NavLink)({
-  padding: '8px',
+  padding: '6px',
   textDecoration: 'none',
   whiteSpace: 'nowrap',
   color: '#191919',
@@ -56,7 +56,7 @@ const IconNav: React.FC = () => {
         width: '100%',
         display: 'flex',
         justifyContent: 'center',
-        marginTop: '5px',
+        marginTop: '18px',
       }}
     >
       <div
@@ -95,8 +95,8 @@ const IconNav: React.FC = () => {
                     src={subCategory.imagePath}
                     alt={subCategory.name}
                     style={{
-                      width: isSmall ? '124px' : '126px',
-                      height: isSmall ? '124px' : '126px',
+                      width: isSmall ? '122px' : '120px',
+                      height: isSmall ? '122px' : '120px',
                     }}
                   />
                   <div style={{ textAlign: 'center' }}>{subCategory.name}</div>
