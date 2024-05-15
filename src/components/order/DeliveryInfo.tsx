@@ -27,7 +27,6 @@ export default function DeliveryInfo() {
 
   const handleMethodChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsNewAddress(event.target.id === 'new');
-    console.log(isNewAddress);
   };
 
   return (
@@ -91,8 +90,17 @@ function DeliveryInfoContent({ isNewAddress }: { isNewAddress: boolean }) {
   const address = useSelector((state: RootState) => state.address.fullAddress);
   const zonecode = useSelector((state: RootState) => state.address.zonecode);
 
+  useEffect(() => {
+    setDefaultAddress(address);
+  }, [address]);
+  useEffect(() => {
+    setPostcode(zonecode);
+  }, [zonecode]);
+
   /* 각 TextField의 값 관리 */
   const [recipient, setRecipient] = useState<string>('');
+  const [postcode, setPostcode] = useState<string>('');
+  const [defaultAddress, setDefaultAddress] = useState<string>('');
   const [remainingAddress, setRemainingAddress] = useState<string>('');
   const [firstNum, setFirstNum] = useState<string>('010');
   const [secondNum, setSecondNum] = useState<string>();
@@ -102,14 +110,38 @@ function DeliveryInfoContent({ isNewAddress }: { isNewAddress: boolean }) {
   useEffect(() => {
     if (isNewAddress) {
       setRecipient('');
+      setPostcode('');
+      setDefaultAddress('');
       setRemainingAddress('');
       setFirstNum('010');
       setSecondNum('');
       setThirdNum('');
       setMessage('');
       dispatch(resetAddress());
+    } else {
+      setRecipient('dururu');
+      setPostcode('');
+      setDefaultAddress('');
+      setRemainingAddress('');
+      setFirstNum('010');
+      setSecondNum('1234');
+      setThirdNum('1234');
+      setMessage('');
+      dispatch(resetAddress());
     }
   }, [isNewAddress]);
+
+  // useEffect(() => {
+  //   if (isNewAddress) {
+  //     setRecipient('두루루미');
+  //     setPostcode('05237');
+  //     setDefaultAddress('서울 강동구 고덕로 429');
+  //     setRemainingAddress('5층 제2강의실');
+  //     setFirstNum('010');
+  //     setSecondNum('2333');
+  //     setThirdNum('2222');
+  //   }
+  // }, [isNewAddress]);
 
   const handleChange = (event: SelectChangeEvent) => {
     setFirstNum(event.target.value);
@@ -127,7 +159,7 @@ function DeliveryInfoContent({ isNewAddress }: { isNewAddress: boolean }) {
       <div className='text-field postcode'>
         <TextField
           placeholder='우편번호'
-          value={zonecode}
+          value={postcode}
           InputProps={{
             readOnly: true,
           }}
@@ -137,7 +169,7 @@ function DeliveryInfoContent({ isNewAddress }: { isNewAddress: boolean }) {
       <TextField
         fullWidth
         placeholder='기본주소'
-        value={address}
+        value={defaultAddress}
         InputProps={{
           readOnly: true,
         }}
@@ -234,10 +266,16 @@ function AddressBook() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const [addressBook, setAddressBook] = useState<boolean>(false);
+
+  const handleAddressBook = () => {
+    setAddressBook(true);
+  };
+
   /* 주소록 추가 시 모달창 */
 
   return (
-    <>
+    <div className='addressbook-container'>
       <Button
         onClick={handleOpen}
         variant='contained'
@@ -252,14 +290,24 @@ function AddressBook() {
             <CloseButton onClick={handleClose} />
           </div>
           <div className='address-caption'>배송지 목록</div>
-          <AddAddress />
-          <button>주소록 추가</button>
+          <div className='address-box'>
+            <div className='space-between'>
+              <span>두루루미</span>
+              <Button onClick={handleAddressBook}>선택</Button>
+            </div>
+            <div>010-2333-2222</div>
+            <div>(05237)서울 강동구 고덕로 429 5층 제2강의실</div>
+          </div>
+          <div className='address-box'>
+            <div className='space-between'>
+              <span>두루루미</span>
+              <Button>선택</Button>
+            </div>
+            <div>010-2333-2222</div>
+            <div>(05237)서울 강동구 고덕로 429 5층 제2강의실</div>
+          </div>
         </Box>
       </Modal>
-    </>
+    </div>
   );
-}
-
-function AddAddress() {
-  return <></>;
 }

@@ -78,6 +78,7 @@
       }
     }
   }
+
   /* 배송 정보 컨텐츠  */
   .deliveryinfo-container {
     .text-field {
@@ -91,6 +92,14 @@
       margin-right: 10px;
     }
   }
+}
+.address-caption {
+  @include body1-bold;
+}
+.address-box {
+  margin-top: 10px;
+  border-bottom: 1px solid $color-lightgray;
+  padding: 10px;
 }
 
 /* 할인 적용 */

@@ -29,15 +29,15 @@ const addCommaNumber = (num?: number): string => {
 export default function ProductItem({ prod, rank, disc }: ProductItemProps) {
   const dispatch = useDispatch();
 
-  const isLiked = useSelector(
-    (state: RootState) => state.category.isLiked[prod.productId] || false
-  );
-  // console.log('가져온 isLiked', isLiked);
+   // useSelector를 통해 isLiked 상태를 가져옵니다.
+   const isLiked = useSelector((state: RootState) => state.category.isLiked[prod.productId] || false);
 
-  const handleLikeToggle = () => {
-    dispatch(setIsLiked({ productId: prod.productId, isLiked: !isLiked }));
-    console.log('dispatch한 liked:', isLiked);
-  };
+   // 좋아요 토글 핸들러
+   const handleLikeToggle = () => {
+     // setIsLiked 액션을 dispatch 하기 전에 현재 상태를 가져옵니다.
+     const updatedIsLiked = !isLiked;
+     dispatch(setIsLiked({ productId: prod.productId, isLiked: updatedIsLiked }));
+   };
 
   const inputSession = (product: Products): void => {
     const storedProducts = sessionStorage.getItem('clickedProducts');

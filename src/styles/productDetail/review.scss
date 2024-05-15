@@ -117,7 +117,7 @@ $border: 1px solid lightgray;
   font-weight: $font-weight-bold;
 }
 .reviewItem {
-  margin-bottom: 12px;
+  margin: 20px;
 }
 .reviewUser {
   @include row();
