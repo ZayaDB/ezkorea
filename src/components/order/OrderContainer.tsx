@@ -16,7 +16,7 @@ function CustomerInformation() {
   const [phoneNumSecond, setPhoneNumSecond] = useState<number>();
   const [phoneNumThird, setPhoneNumThird] = useState<number>();
 
-  const userDataString = sessionStorage.getItem('isLoggedIn');
+  const userDataString = sessionStorage.getItem('UserData');
   useEffect(() => {
     if (userDataString) {
       const userData = JSON.parse(userDataString);
