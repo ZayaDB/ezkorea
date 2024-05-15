@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Head from './Head';
 import {
   Box,
@@ -49,8 +49,13 @@ export default function ApplyDiscount() {
 
   const applyAllMileage = () => {
     setInputMileage(mileage);
-    handleMileageDispatch();
   };
+
+  useEffect(() => {
+    // inputMileage가 변경될 때마다 실행될 코드
+    if (inputMileage <= 1000) handleMileageDispatch();
+    setIsError(inputMileage !== undefined && !isValidMileage(inputMileage));
+  }, [inputMileage]);
 
   // 마일리지 입력이 유효한지 검증하는 함수
   const isValidMileage = (input: number | undefined) => {
@@ -60,7 +65,6 @@ export default function ApplyDiscount() {
   // onBlur 이벤트로 유효성 검사를 수행합니다.
   const handleMileageBlur = () => {
     setIsError(inputMileage !== undefined && !isValidMileage(inputMileage));
-    handleMileageDispatch();
   };
 
   return (
