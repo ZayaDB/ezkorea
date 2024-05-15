@@ -1,6 +1,5 @@
 import '../../styles/productDetail/selectPurchase.scss';
-import * as React from 'react';
-import Box from '@mui/material/Box';
+import { Box } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -14,6 +13,13 @@ import { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../../styles/theme';
+import { useDispatch } from 'react-redux';
+import {
+  setSelectedOption,
+  setSelectedQuantity,
+  setSelectedProductId,
+} from '../../redux/slices/productSlice'; // Redux slice의 액션 import
+import { useNavigate } from 'react-router-dom';
 
 // const useStyles = makeStyle(theme => ({
 //   tablet: {
@@ -41,6 +47,7 @@ export interface Product {
   inquiryTotal?: number;
   related_products?: string[];
 }
+
 export default function SelectPurchase() {
   // // 드롭다운
   // const [color, setColor] = useState('');
@@ -58,13 +65,17 @@ export default function SelectPurchase() {
   //     setOptions(prevOptions => [...prevOptions, generateOption(color)]);
   //   }
   // };
-  const [spInfo, setSpInfo] = useState<Product | null>();
-  console.log(spInfo);
+  const [spInfo, setSpInfo] = useState<Product>();
+  const navigate = useNavigate();
+  const [selectedColors, setSelectedColors] = useState<string[]>([]);
+  const [counts, setCounts] = useState<number[]>([]);
+  const dispatch = useDispatch();
+  
   // fetch
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('/data/productDetail.json');
+        const response = await fetch('/data/prodDetail.json');
         const data = await response.json();
         const purchase = data[0];
 
@@ -76,9 +87,6 @@ export default function SelectPurchase() {
 
     fetchData();
   }, []);
-
-  const [selectedColors, setSelectedColors] = useState<string[]>([]);
-  const [counts, setCounts] = useState<number[]>([]);
 
   const handleChange = (event: SelectChangeEvent<string>) => {
     const selectedColor = event.target.value;
@@ -113,6 +121,15 @@ export default function SelectPurchase() {
     setCounts(counts.filter((_, i) => i !== index));
   };
 
+  const handleSubmit = () => {
+    const selectedProductId = spInfo?.prodId || 0;
+    dispatch(setSelectedOption(selectedColors));
+    dispatch(setSelectedQuantity(counts));
+    dispatch(setSelectedProductId(selectedProductId));
+
+    navigate('/cart');
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Grid
@@ -125,7 +142,7 @@ export default function SelectPurchase() {
           <div id='selectPurchase'>
             <div id='purchaseInfo'>
               <div id='brandShare'>
-                <div className='productBrand'>일광전구</div>
+                <div className='productBrand'>{spInfo?.brand_name}</div>
                 <div id='shIcon'>
                   <div className='shareIcon'>
                     <ShareIcon />
@@ -228,7 +245,9 @@ export default function SelectPurchase() {
               <div className='cartBtn'>
                 <AddShoppingCartIcon />
               </div>
-              <div className='purchaseBtn'>주문하기</div>
+              <Box className='purchaseBtn' onClick={handleSubmit}>
+                주문하기
+              </Box>
             </div>
           </div>
         </div>
@@ -236,3 +255,4 @@ export default function SelectPurchase() {
     </ThemeProvider>
   );
 }
+
