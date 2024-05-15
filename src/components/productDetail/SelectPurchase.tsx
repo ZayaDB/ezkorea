@@ -187,59 +187,71 @@ export default function SelectPurchase() {
                       </MenuItem>
                     ))}
                   </Select>
-                </FormControl>
-              </Box>
-            </div>
-            <div id='selectedPurchase'>
-              {/* 추가된 선택 옵션들을 렌더링함 */}
-              {selectedColors.map((selectedColor, index) => (
-                <div key={selectedColor}>
-                  <div id='optionBox'>
-                    <div className='selectedColor'>{selectedColor}</div>
-                    <div id='countZone'>
-                      <div className='selectedCount'>
-                        <ButtonGroup
-                          size='small'
-                          variant='contained'
-                          aria-label='Basic button group'
-                        >
-                          <Button
-                            onClick={() => handleIncrease(index)}
-                            color='secondary'
-                          >
-                            +
-                          </Button>
-                          <Button color='secondary'>{counts[index]}</Button>
-                          <Button
-                            onClick={() => handleDecrease(index)}
-                            disabled={counts[index] === 1}
-                            color='secondary'
-                          >
-                            -
-                          </Button>
-                        </ButtonGroup>
-                      </div>
-                      <div className='sellingPrice'>190,000원</div>
-                      <button
-                        className='selectedClose'
-                        onClick={() => onRemove(index)}
+                )}
+              </FormControl>
+            </Box>
+          </div>
+          <div id='selectedPurchase'>
+            {/* 추가된 선택 옵션들을 렌더링함 */}
+            {selectedColors.map((selectedColor, index) => (
+              <div key={selectedColor}>
+                <div id='optionBox'>
+                  <div className='selectedColor'>{selectedColor}</div>
+                  <div id='countZone'>
+                    <div className='selectedCount'>
+                      <ButtonGroup
+                        size='small'
+                        variant='contained'
+                        aria-label='Basic button group'
                       >
-                        x
-                      </button>
+                        <Button
+                          onClick={() => handleIncrease(index)}
+                          color='secondary'
+                        >
+                          +
+                        </Button>
+                        <Button color='secondary'>{counts[index]}</Button>
+                        <Button
+                          onClick={() => handleDecrease(index)}
+                          disabled={counts[index] === 1}
+                          color='secondary'
+                        >
+                          -
+                        </Button>
+                      </ButtonGroup>
                     </div>
+                    <div className='sellingPrice'>
+                      {addCommasToNumber(spInfo?.regular_price ?? 0)}원
+                    </div>
+                    <button
+                      className='selectedClose'
+                      onClick={() => onRemove(index)}
+                    >
+                      x
+                    </button>
                   </div>
                 </div>
-              ))}
-            </div>
-            <div id='purchaseZone'>
-              <div className='PurchaseTitle'>주문금액</div>
-              <div className='purChaseTotal'>145,000원</div>
-            </div>
-            <div id='buttons'>
-              <div className='cartBtn'>
-                <AddShoppingCartIcon />
               </div>
-              <Box className='purchaseBtn' onClick={handleSubmit}>
+            ))}
+          </div>
+          <div id='purchaseZone'>
+            <div className='PurchaseTitle'>주문금액</div>
+            <div className='purChaseTotal'>
+              {addCommasToNumber(
+                calculateTotalPrice(
+                  spInfo?.discounted_price ?? 0,
+                  counts.reduce((acc, curr) => acc + curr, 0)
+                )
+              )}
+              원
+            </div>
+          </div>
+          <div id='buttons'>
+            <div className='cartBtn'>
+              <AddShoppingCartIcon />
+            </div>
+            <Box className='purchaseBtn'>
+              <ProtectedButton redirectTo='/login' onClick={handleSubmit}>
                 주문하기
               </ProtectedButton>
             </Box>
