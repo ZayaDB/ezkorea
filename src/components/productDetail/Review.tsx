@@ -103,6 +103,7 @@ export default function Review() {
   const startIndex = (page - 1) * reviewsPerPage;
   const endIndex = page * reviewsPerPage;
   const currentReviews = reviewData.slice(startIndex, endIndex);
+  console.log(currentReviews);
 
   // 별점 높은순 정렬
   const sortByHighestRating = () => {
