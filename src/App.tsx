@@ -8,12 +8,7 @@ import Login from './pages/Login';
 import BestPage from './pages/BestPage';
 import SalePage from './pages/SalePage';
 import CategoryPage from './pages/CategoryPage';
-<<<<<<< HEAD
 import CommunityMainPage from './pages/CommunityMainPage';
-import ProductDetail from './pages/ProductDetail';
-=======
-import Community from './pages/Community';
->>>>>>> cbc49fe3b52c5b4eb03ab629efe19fb1d155c790
 import OrderPage from './pages/OrderPage';
 import MyPage from './pages/MyPage';
 import NotFound from './pages/NotFoundPage';
@@ -51,13 +46,8 @@ const App = () => {
             <Route path='shop' element={<CategoryPage />} />
             <Route path='/shop/best' element={<BestPage />} />
             <Route path='/shop/sale' element={<SalePage />} />
-<<<<<<< HEAD
-            <Route path='/shop/:productId' element={<ProductDetail />} />
-            <Route path='/community' element={<CommunityMainPage />} />
-=======
             <Route path='/shop/:productId' element={<ProductDetailPage />} />
-            <Route path='/community' element={<Community />} />
->>>>>>> cbc49fe3b52c5b4eb03ab629efe19fb1d155c790
+            <Route path='/community' element={<CommunityMainPage />} />
             <Route path='/community/post' element={<CommunityPostPage />} />
             <Route path='/community/result' element={<CommunityResultPage />} />
             <Route
