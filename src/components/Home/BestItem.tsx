@@ -77,10 +77,10 @@ export default function BestItem() {
       <div style={{ maxWidth: '1200px' }}>
           <Box sx={{ py: 4, width: 'auto' }}>
             <div className='TitleArea'>
-              <Typography sx={{ fontSize: '32px', fontWeight: '700' }}>
+              <Typography sx={{ fontSize: '30px', fontWeight: '700' }}>
                 BEST
               </Typography>
-              <Typography
+              {/* <Typography
                 sx={{
                   fontSize: '16px',
                   fontWeight: '400',
@@ -88,8 +88,8 @@ export default function BestItem() {
                   letterSpacing: '0.2px',
                 }}
               >
-                #Dururu #일상 #데스크테리어
-              </Typography>
+               #dururu #일상 #데스크테리어
+              </Typography> */}
             </div>
             <Grid
               container

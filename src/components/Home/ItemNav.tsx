@@ -95,8 +95,8 @@ const IconNav: React.FC = () => {
                     src={subCategory.imagePath}
                     alt={subCategory.name}
                     style={{
-                      width: isSmall ? '126px' : '126px',
-                      height: isSmall ? '126px' : '126px',
+                      width: isSmall ? '124px' : '126px',
+                      height: isSmall ? '124px' : '126px',
                     }}
                   />
                   <div style={{ textAlign: 'center' }}>{subCategory.name}</div>
