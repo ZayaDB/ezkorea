@@ -12,16 +12,32 @@ import {
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import { addCommasToNumber } from '../../hooks/addCommasToNumber';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/config';
+import { setDiscount, setMileage } from '../../redux/slices/checkoutSlice';
 
-/* 할인 적용
+/* 
+  할인 적용
   - 쿠폰 : 쿠폰 적용 시 할인된 가격 표시
   - 포인트 : 1,000P 이상 사용 가능 멘트
 */
+
 export default function ApplyDiscount() {
+  const dispatch = useDispatch();
+
+  const handleMileageDispatch = () => {
+    dispatch(
+      setMileage([
+        {
+          mileage: inputMileage,
+        },
+      ])
+    );
+  };
+
   const [mileage] = useState<number>(1000);
-  const [inputMileage, setInputMileage] = useState<number>();
+
+  const [inputMileage, setInputMileage] = useState<number>(0);
   const [isError, setIsError] = useState<boolean>(false);
 
   const handleMileageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,6 +49,7 @@ export default function ApplyDiscount() {
 
   const applyAllMileage = () => {
     setInputMileage(mileage);
+    handleMileageDispatch();
   };
 
   // 마일리지 입력이 유효한지 검증하는 함수
@@ -43,6 +60,7 @@ export default function ApplyDiscount() {
   // onBlur 이벤트로 유효성 검사를 수행합니다.
   const handleMileageBlur = () => {
     setIsError(inputMileage !== undefined && !isValidMileage(inputMileage));
+    handleMileageDispatch();
   };
 
   return (
@@ -92,10 +110,23 @@ export default function ApplyDiscount() {
 }
 
 function CouponContent() {
+  const dispatch = useDispatch();
+
+  const handleDiscountDispatch = () => {
+    dispatch(
+      setDiscount([
+        {
+          discountChecked: checked,
+        },
+      ])
+    );
+  };
+
   const [checked, setChecked] = useState<boolean>(true);
 
   const handleChange = (event: any) => {
     setChecked(event.target.checked);
+    handleDiscountDispatch();
   };
 
   /* 상품 정보 */
@@ -171,11 +202,11 @@ function CouponContent() {
               <div>
                 {addCommasToNumber(productPrice)} 원/수량 {selectedQuantity}개
               </div>
-              <div>
+              <div className='space-between'>
                 <span>상품 쿠폰</span>
                 <span className=''>
                   {checked
-                    ? `-${productPrice - discountedPrice}원`
+                    ? `-${addCommasToNumber(productPrice - discountedPrice)}원`
                     : '선택 안함'}
                 </span>
               </div>

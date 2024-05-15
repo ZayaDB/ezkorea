@@ -11,12 +11,13 @@ export interface DeliveryInfoType {
   addressDefault: string;
   addressRemaining: string;
   phoneNum: PhoneNum[];
+  message?: string;
 }
 
 export interface PhoneNum {
   numFirst: string;
-  numSecond: string;
-  numThird: string;
+  numSecond: number;
+  numThird: number;
 }
 
 /* 주문 정보 */
@@ -32,10 +33,15 @@ export interface OrderInfo {
 }
 
 export interface Discount {
-  productCoupon?: number;
+  discountChecked: boolean;
+  productCoupon?: boolean;
   productCouponAmount?: number;
   shippingCoupon?: boolean;
+}
+
+export interface Mileage {
   mileage?: number;
+  mileageAll?: boolean;
 }
 
 export interface PaymentMethod {

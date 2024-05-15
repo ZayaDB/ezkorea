@@ -23,11 +23,15 @@ export const addressSlice = createSlice({
       state.fullAddress = fullAddress;
       state.zonecode = zonecode;
     },
+    resetAddress(state) {
+      state.fullAddress = '';
+      state.zonecode = '';
+    },
   },
 });
 
 // Export the action creator
-export const { updateAddressInfo } = addressSlice.actions;
+export const { updateAddressInfo, resetAddress } = addressSlice.actions;
 
 // Export the reducer
 export default addressSlice.reducer;
