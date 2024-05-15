@@ -21,6 +21,8 @@ import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import CommunityResultPage from './pages/CommunityResultPage';
 import Logout from './components/Home/Logout';
+import ProductDetailPage from './pages/ProductDetailPage';
+import CartPage from './pages/CartPage';
 
 const App = () => {
   const ScrollToTop = () => {
@@ -43,7 +45,7 @@ const App = () => {
             <Route path='shop' element={<CategoryPage />} />
             <Route path='/shop/best' element={<BestPage />} />
             <Route path='/shop/sale' element={<SalePage />} />
-            <Route path='/shop/:productId' element={<ProductDetail />} />
+            <Route path='/shop/:productId' element={<ProductDetailPage />} />
             <Route path='/community' element={<Community />} />
             <Route path='/community/post' element={<CommunityPostPage />} />
             <Route path='/community/result' element={<CommunityResultPage />} />
