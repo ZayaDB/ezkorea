@@ -267,6 +267,7 @@ function AddressBook() {
   const handleClose = () => setOpen(false);
 
   const [addressBook, setAddressBook] = useState<boolean>(false);
+  console.log(addressBook);
 
   const handleAddressBook = () => {
     setAddressBook(true);
