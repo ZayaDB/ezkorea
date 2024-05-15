@@ -36,7 +36,7 @@ export default function LeviewCarousel() {
   return (
     <div style={{ width: 'auto' }}>
       <div className='TitleArea'>
-        <Typography sx={{ fontSize: '28px', fontWeight: '600' }}>
+        <Typography sx={{ fontSize: '28px', fontWeight: '700' }}>
           취향으로 채우는 책상
         </Typography>
         <Typography
