@@ -1,4 +1,3 @@
-import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
@@ -72,13 +71,10 @@ const newItemStyle = {
   // opacity: 0.7,
 };
 
-const theme = createTheme(); // 기본 테마 생성
-
 export default function BestItem() {
   return (
     <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
       <div style={{ maxWidth: '1200px' }}>
-        <ThemeProvider theme={theme}>
           <Box sx={{ py: 4, width: 'auto' }}>
             <div className='TitleArea'>
               <Typography sx={{ fontSize: '32px', fontWeight: '700' }}>
@@ -121,7 +117,6 @@ export default function BestItem() {
               ))}
             </Grid>
           </Box>
-        </ThemeProvider>
       </div>
     </div>
   );
