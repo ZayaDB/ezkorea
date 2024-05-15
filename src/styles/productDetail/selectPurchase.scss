@@ -36,22 +36,30 @@ $font-weight-regular: 400;
 // border
 $border: 1px solid lightgray;
 
-// 사이드
-#selectBox {
-  position: relative;
-  width: calc(1200px - (85vh + 8px));
-  height: calc(100vh - 200px);
-  box-sizing: border-box;
-}
 #selectPurchase {
   @include column();
-  width: calc(1200px - (85vh + 8px));
-  height: calc(100vh - 200px);
+  width: 360px;
+  height: 800px;
+  max-width: 360px;
+  // min-width: 360px;
   position: fixed;
   background-color: white;
   // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   border-top: 5px solid black;
   padding: 8px;
+  top: 118px;
+  @media (min-width: 1201px) {
+    @include column();
+    width: 360px;
+    height: 800px;
+    max-width: 360px;
+    // min-width: 360px;
+    position: fixed;
+    background-color: white;
+    border-top: 5px solid black;
+    padding: 8px;
+    top: 118px;
+  }
 }
 
 // 구매 상품 정보
@@ -66,7 +74,11 @@ $border: 1px solid lightgray;
   padding: 0 8px;
 }
 .productBrand {
-  font-size: $font-size-m;
+  font-size: $font-size-l;
+  font-weight: $font-weight-bold;
+  @media (max-width: 768px) {
+    font-size: $font-size-m;
+  }
 }
 #shIcon {
   display: flex;
@@ -86,7 +98,8 @@ $border: 1px solid lightgray;
   margin: 0;
 }
 .productName {
-  font-size: $font-size-l;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
   padding: 0 8px;
   margin-top: 20px;
 }
@@ -105,15 +118,17 @@ $border: 1px solid lightgray;
   text-decoration: line-through;
 }
 #sale {
-  display: flex;
-}
-.discountRate,
-.discountedPrice {
-  font-size: $font-size-l;
-  font-weight: $font-weight-bold;
+  @include row();
 }
 .discountRate {
-  color: gray;
+  font-size: $font-size-l;
+  font-weight: $font-weight-bold;
+  color: $hover-color;
+  margin-right: 8px;
+}
+.discountedPrice {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
 }
 
 // 혜택 & 배송
@@ -136,9 +151,16 @@ $border: 1px solid lightgray;
   @include row();
   font-size: $font-size-s;
 }
-#savingPoint,
-.deliveryPrice {
+#savingPoint {
   font-weight: $font-weight-bold;
+}
+.deliveryPrice {
+  @include row();
+  font-weight: $font-weight-medium;
+}
+.free {
+  font-size: $font-size-m;
+  font-weight: $font-weight-medium;
 }
 .deliveryDetailInfo {
   border: $border;
@@ -174,12 +196,14 @@ $border: 1px solid lightgray;
   @include row();
 }
 #countZone div {
-  margin: 4px;
+  margin: 8px;
 }
-.selectedClose {
-  cursor: pointer;
+#countZone button {
+  border: none;
+  background-color: white;
   color: gray;
   font-weight: $font-weight-bold;
+  font-size: $font-size-l;
 }
 .selectedClose:hover {
   color: black;
@@ -212,61 +236,56 @@ $border: 1px solid lightgray;
   width: 50px;
   height: 50px;
   border: $border;
+  border-radius: 4px;
   justify-content: center;
   align-items: center;
   display: flex;
+  margin-right: 4px;
 }
 .purchaseBtn {
   width: calc(100% - 50px);
   height: 50px;
   border: $border;
+  border-radius: 4px;
   justify-content: center;
   align-items: center;
   display: flex;
   font-size: $font-size-l;
   font-weight: $font-weight-bold;
 }
-
 .cartBtn:hover {
-  background-color: $hover-color;
+  border: 1px solid black;
+}
+.cartBtn:active {
+  border: 1px solid $hover-color;
 }
 .purchaseBtn:hover {
-  background-color: $hover-color;
+  border: 1px solid black;
 }
-
+.purchaseBtn:active {
+  border: 1px solid $hover-color;
+}
 @media (max-width: 768px) {
-  #selectBox {
-    // position: relative;
-    width: 100%;
-    // border: 1px solid black;
-    // height: calc(100vh - 200px);
-  }
-
   #selectPurchase {
     @include column();
     background-color: white;
     border-top: 3px solid black;
     position: static; /* 수정 */
-    width: 100%;
+    width: 480px;
+    max-width: 480px;
+
     margin: 0 auto;
   }
 }
 @media (max-width: 360px) {
-  #selectBox {
-    position: relative;
-    width: 100%;
-    // border: 1px solid black;
-    // height: calc(100vh - 200px);
-  }
-
   #selectPurchase {
-    #selectPurchase {
-      @include column();
-      background-color: white;
-      border-top: 3px solid black;
-      position: static; /* 수정 */
-      width: 100%;
-      margin: 0 auto;
-    }
+    @include column();
+    background-color: white;
+    border-top: 3px solid black;
+    position: static; /* 수정 */
+    width: 360px;
+    max-width: 360px;
+
+    margin: 0 auto;
   }
 }

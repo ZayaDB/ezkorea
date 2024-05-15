@@ -58,6 +58,9 @@ $border: 1px solid lightgray;
   font-size: $font-size-l;
   font-weight: $font-weight-bold;
 }
+.type {
+  color: $hover-color;
+}
 .writingInfo {
   @include row();
 }
@@ -69,6 +72,9 @@ $border: 1px solid lightgray;
 .writingDate {
   margin-left: 8px;
   font-size: $font-size-m;
+}
+.writingUser {
+  font-weight: $font-weight-bold;
 }
 .writingDate {
   color: gray;
