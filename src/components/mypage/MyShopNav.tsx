@@ -26,9 +26,9 @@ function CustomTabPanel(props: TabPanelProps) {
       {...other}
     >
       {value === index && (
-        <div>
+        <Box >
           <Typography>{children}</Typography>
-        </div>
+        </Box>
       )}
     </div>
   );
