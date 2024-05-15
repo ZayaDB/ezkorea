@@ -7,6 +7,7 @@ import '../../styles/mypage/mynav.scss';
 import LikesProduct from './LikesProducts';
 import CartPage from '../../pages/CartPage';
 import RecentViewList from './RecentViewList';
+import OrderDetails from './OrderDetails';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -26,7 +27,7 @@ function CustomTabPanel(props: TabPanelProps) {
       {...other}
     >
       {value === index && (
-        <Box >
+        <Box>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -60,15 +61,7 @@ export default function MyShopNav() {
             onChange={handleChange}
             aria-label='basic tabs example'
           >
-            <Tab
-              label='최근본상품'
-              {...a11yProps(0)}
-              // classes={{
-              //   '& .MuiBox-root': {
-              //     padding: '0px',
-              //   },
-              // }}
-            />
+            <Tab label='최근본상품' {...a11yProps(0)} />
             <Tab label='찜한상품' {...a11yProps(1)} />
             <Tab label='장바구니' {...a11yProps(2)} />
             <Tab label='주문내역' {...a11yProps(3)} />
@@ -84,8 +77,8 @@ export default function MyShopNav() {
         <CustomTabPanel value={value} index={2}>
           <CartPage />
         </CustomTabPanel>
-        <CustomTabPanel value={value} index={2}>
-          가영님거
+        <CustomTabPanel value={value} index={3}>
+          <OrderDetails />
         </CustomTabPanel>
       </div>
     </div>
