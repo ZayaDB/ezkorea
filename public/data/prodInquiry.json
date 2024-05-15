@@ -1,0 +1,106 @@
+[
+  {
+    "inquiry": [
+      {
+        "inUserId": 1,
+        "inUserName": "둘리",
+        "inDate": "2024-05-10",
+        "inUserText": "조명 설정이 어려워요. 도와주세요.",
+        "inquiryType": "others",
+        "answer": "yes",
+        "inBrDate": "2024-05-11",
+        "inBrText": "조명 설정에 관한 도움이 필요하시면 고객센터로 연락주세요."
+      },
+      {
+        "inUserId": 2,
+        "inUserName": "도라에몽",
+        "inDate": "2024-05-09",
+        "inUserText": "조명이 너무 어두워서 상품이 잘 안 보여요.",
+        "inquiryType": "product",
+        "answer": "yet",
+        "inBrDate": "2024-05-10",
+        "inBrText": "조명 설정을 변경하여 상품이 잘 보일 수 있도록 도와드리겠습니다."
+      },
+      {
+        "inUserId": 3,
+        "inUserName": "짱구",
+        "inDate": "2024-05-08",
+        "inUserText": "배송 중 조명이 파손되었어요. 어떻게 해야 하나요?",
+        "inquiryType": "shipping",
+        "answer": "yes",
+        "inBrDate": "2024-05-09",
+        "inBrText": "죄송합니다. 조명 파손으로 인한 불편을 드려 대단히 죄송합니다. 빠른 시일 내에 조명 교체를 진행해드리겠습니다."
+      },
+      {
+        "inUserId": 4,
+        "inUserName": "뽀로로",
+        "inDate": "2024-05-07",
+        "inUserText": "환불을 요청합니다. 조명이 제대로 작동하지 않아요.",
+        "inquiryType": "refund",
+        "answer": "yes",
+        "inBrDate": "2024-05-08",
+        "inBrText": "환불 요청이 접수되었습니다. 조명 불량에 대한 확인 후 처리하겠습니다."
+      },
+      {
+        "inUserId": 5,
+        "inUserName": "크롱",
+        "inDate": "2024-05-06",
+        "inUserText": "제품을 교환하고 싶어요. 조명이 맞지 않아요.",
+        "inquiryType": "exchange",
+        "answer": "yet",
+        "inBrDate": "2024-05-07",
+        "inBrText": "교환 신청이 접수되었습니다. 조명에 관한 상세한 내용을 안내드릴 예정입니다."
+      },
+      {
+        "inUserId": 6,
+        "inUserName": "뚝딱이",
+        "inDate": "2024-05-05",
+        "inUserText": "조명이 켜지지 않아요. 불량인가요?",
+        "inquiryType": "others",
+        "answer": "yes",
+        "inBrDate": "2024-05-06",
+        "inBrText": "죄송합니다. 불량 여부를 확인한 후 조치를 취하겠습니다."
+      },
+      {
+        "inUserId": 7,
+        "inUserName": "포로리",
+        "inDate": "2024-05-04",
+        "inUserText": "반품하려고 합니다. 조명이 기대와 다릅니다.",
+        "inquiryType": "return",
+        "answer": "yes",
+        "inBrDate": "2024-05-05",
+        "inBrText": "반품 신청이 접수되었습니다. 조명에 대한 문제를 확인 후 안내드리겠습니다."
+      },
+      {
+        "inUserId": 8,
+        "inUserName": "에디",
+        "inDate": "2024-05-03",
+        "inUserText": "상품을 받았는데 조명이 작동하지 않아요.",
+        "inquiryType": "product",
+        "answer": "yes",
+        "inBrDate": "2024-05-04",
+        "inBrText": "죄송합니다. 조명 작동에 문제가 있는지 확인하고 조치하겠습니다."
+      },
+      {
+        "inUserId": 9,
+        "inUserName": "로디",
+        "inDate": "2024-05-02",
+        "inUserText": "교환 신청을 하려고 하는데 조명에 대한 안내가 필요합니다.",
+        "inquiryType": "exchange",
+        "answer": "yet",
+        "inBrDate": "2024-05-03",
+        "inBrText": "교환 신청이 접수되었습니다. 조명에 대한 상세한 안내를 준비 중입니다."
+      },
+      {
+        "inUserId": 10,
+        "inUserName": "햇님",
+        "inDate": "2024-05-01",
+        "inUserText": "조명이 너무 밝아요. 조절 방법을 알려주세요.",
+        "inquiryType": "others",
+        "answer": "yes",
+        "inBrDate": "2024-05-02",
+        "inBrText": "조명의 밝기 조절 방법에 대해 안내해드리겠습니다."
+      }
+    ]
+  }
+]

@@ -13,7 +13,7 @@ export interface Review {
 }
 
 export interface Inquiry {
-  inquiry: [];
+  // inquiry: [];
   inUserId: number;
   inUserName: string;
   inDate: string;

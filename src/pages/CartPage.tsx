@@ -95,24 +95,27 @@ export default function CartPage() {
             </div>
 
             <div className='deleteBtn'>x</div>
-            <div className='countBtn'>
-              <ButtonGroup
-                size='small'
-                variant='contained'
-                aria-label='Basic button group'
-              >
-                <Button
-                  onClick={() => handleDecrease()}
-                  disabled={counts === 1}
-                  color='primary'
+            <div className='colorCount'>
+              <div className='selectedColor'></div>
+              <div className='countBtn'>
+                <ButtonGroup
+                  size='small'
+                  variant='contained'
+                  aria-label='Basic button group'
                 >
-                  -
-                </Button>
-                <Button color='primary'>{counts}</Button>
-                <Button onClick={() => handleIncrease()} color='primary'>
-                  +
-                </Button>
-              </ButtonGroup>
+                  <Button
+                    onClick={() => handleDecrease()}
+                    disabled={counts === 1}
+                    color='primary'
+                  >
+                    -
+                  </Button>
+                  <Button color='primary'>{counts}</Button>
+                  <Button onClick={() => handleIncrease()} color='primary'>
+                    +
+                  </Button>
+                </ButtonGroup>
+              </div>
             </div>
             <div className='total'>금액</div>
             <div className='deliveryInfo'>
