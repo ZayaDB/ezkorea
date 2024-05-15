@@ -2,16 +2,16 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Product } from '../../types/productDetail';
 
 export interface ProductState {
-  selectedOption: string;
-  selectedQuantity: number;
+  selectedOption: string[];
+  selectedQuantity: number[];
   selectedProductId: number;
   products: Product[];
 }
 
 const initialState: ProductState = {
-  selectedOption: '화이트',
-  selectedQuantity: 1,
-  selectedProductId: 1 /* 수정 필요 */,
+  selectedOption: [],
+  selectedQuantity: [],
+  selectedProductId: 0 /* 수정 필요 */,
   products: [
     {
       prodId: 3,
@@ -30,22 +30,20 @@ const productSlice = createSlice({
   name: 'product',
   initialState,
   reducers: {
-    setSelectedCategory: (state, action: PayloadAction<string>) => {
+    setSelectedOption: (state, action: PayloadAction<string[]>) => {
       state.selectedOption = action.payload;
     },
-    setSelectedSubCategory: (state, action: PayloadAction<number>) => {
+    setSelectedQuantity: (state, action: PayloadAction<number[]>) => {
       state.selectedQuantity = action.payload;
     },
     setSelectedProductId: (state, action: PayloadAction<number>) => {
-      state.selectedQuantity = action.payload;
+      state.selectedProductId = action.payload;
     },
   },
 });
 
-export const {
-  setSelectedCategory,
-  setSelectedSubCategory,
-  setSelectedProductId,
-} = productSlice.actions;
+export const { setSelectedOption, setSelectedQuantity, setSelectedProductId } =
+  productSlice.actions;
 
 export default productSlice.reducer;
+
