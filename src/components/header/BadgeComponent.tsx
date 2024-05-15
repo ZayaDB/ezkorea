@@ -1,4 +1,4 @@
-import React from 'react';
+
 import Badge from '@mui/material/Badge';
 import IconButton from '@mui/material/IconButton';
 
@@ -22,6 +22,7 @@ export default function BadgeComponent({ badgeContent, children }: BadgeProps) {
       </IconButton>
     );
   }
+  
   return (
     <Badge
       badgeContent={badgeContent}

@@ -1,0 +1,49 @@
+.orderDetail-wrapper {
+  max-width: 1200px;
+  margin: auto;
+  .coupon-container {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 100px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
+    align-items: center;
+    margin: auto;
+    align-content: center;
+    text-align: center;
+    border-radius: 5px;
+
+    .coupon {
+      width: 49%;
+      margin: auto;
+    }
+    .mile {
+      width: 49%;
+      // height: 100%;
+      margin: auto;
+    }
+  }
+  .order-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 100px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
+    align-items: center;
+    margin: auto;
+    align-content: center;
+    text-align: center;
+    border-radius: 5px;
+
+    .li1,
+    .li2,
+    .li3,
+    .li4 {
+      width: 25%;
+      margin: auto;
+    }
+  }
+}

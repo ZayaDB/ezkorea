@@ -36,7 +36,7 @@ export default function Homepage() {
   return (
     <div className='wrapper' style={{ paddingBottom: '30px' }}>
       <div className='TitleArea'>
-        <Typography sx={{ fontSize: '28px', fontWeight: '600' }}>
+        <Typography sx={{ fontSize: '28px', fontWeight: '700' }}>
           MD&apos;s PICK
         </Typography>
         {/* <Typography

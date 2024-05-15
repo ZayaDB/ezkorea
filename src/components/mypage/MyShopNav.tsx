@@ -4,9 +4,10 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import '../../styles/mypage/mynav.scss';
-import Profile from './Profile';
-import ProfileImage from './ProfileImage';
-import MyShopNav from './MyShopNav';
+import LikesProduct from './LikesProducts';
+import CartPage from '../../pages/CartPage';
+import RecentViewList from './RecentViewList';
+import OrderDetails from './OrderDetails';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -26,7 +27,7 @@ function CustomTabPanel(props: TabPanelProps) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3, padding: '0px' }}>
+        <Box>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -41,7 +42,7 @@ function a11yProps(index: number) {
   };
 }
 
-export default function BasicTabs() {
+export default function MyShopNav() {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -49,36 +50,37 @@ export default function BasicTabs() {
   };
 
   return (
-    <Box sx={{ justifyContent: 'center', m: 'auto' }}>
-      <Box sx={{ width: '100%' }}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+    // <Box sx={{ justifyContent: 'center', m: 'auto' }}>
+    <div>
+      <div>
+        {/* <Box sx={{ p: 0, borderBottom: 1, borderColor: 'divider' }}>
+         */}
+        <div>
           <Tabs
             value={value}
             onChange={handleChange}
             aria-label='basic tabs example'
           >
-            <Tab label='프로필' {...a11yProps(0)} sx={{ maxWidth: '300px' }} />
-            <Tab label='나의쇼핑' {...a11yProps(1)} />
-            <Tab label='나의피드' {...a11yProps(2)} />
-            <Tab label='리뷰&문의' {...a11yProps(2)} />
+            <Tab label='최근본상품' {...a11yProps(0)} />
+            <Tab label='찜한상품' {...a11yProps(1)} />
+            <Tab label='장바구니' {...a11yProps(2)} />
+            <Tab label='주문내역' {...a11yProps(3)} />
           </Tabs>
-        </Box>
+        </div>
+        {/* </Box> */}
         <CustomTabPanel value={value} index={0}>
-          <div style={{ maxWidth: '1200px' }}>
-            <ProfileImage />
-            <Profile />
-          </div>
+          <RecentViewList />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
-          <MyShopNav />
+          <LikesProduct />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
-          커뮤니티 피드
+          <CartPage />
         </CustomTabPanel>
-        <CustomTabPanel value={value} index={2}>
-          작성한 리뷰 및 문의관리
+        <CustomTabPanel value={value} index={3}>
+          <OrderDetails />
         </CustomTabPanel>
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 }
