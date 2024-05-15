@@ -2,18 +2,9 @@ import '../../styles/mypage/profile.scss';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
-import { useState, useEffect, ChangeEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Modal from '@mui/material/Modal';
-import Fade from '@mui/material/Fade';
-import Backdrop from '@mui/material/Backdrop';
-import { NavLink } from 'react-router-dom';
-
 const theme = createTheme({
   palette: {
     primary: {
@@ -38,19 +29,19 @@ const theme = createTheme({
   },
 });
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'white',
-  border: 'none',
-  boxShadow: 24,
-  p: 4,
-  textAlign: 'center',
-  borderRadius: '4px',
-};
+// const style = {
+//   position: 'absolute',
+//   top: '50%',
+//   left: '50%',
+//   transform: 'translate(-50%, -50%)',
+//   width: 400,
+//   bgcolor: 'white',
+//   border: 'none',
+//   boxShadow: 24,
+//   p: 4,
+//   textAlign: 'center',
+//   borderRadius: '4px',
+// };
 
 const InputTextField = styled(TextField)({
   '& label': {
@@ -86,12 +77,12 @@ const StyledButton = styled(Button)(() => ({
   },
 }));
 
-const StyledButton2 = styled(Button)(() => ({
-  ':hover': {
-    color: '#5FF531',
-    backgroundColor: 'transparent',
-  },
-}));
+// const StyledButton2 = styled(Button)(() => ({
+//   ':hover': {
+//     color: '#5FF531',
+//     backgroundColor: 'transparent',
+//   },
+// }));
 
 export default function Profile() {
   return (
