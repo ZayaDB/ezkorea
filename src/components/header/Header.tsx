@@ -22,6 +22,11 @@ import CustomLink from './CustomLink';
 import CategoryDropDown from './CategoryDropDown';
 // import Logo from '../../assets/images/logo.png'; // logo 만들면 넣기
 
+import Modal from '@mui/material/Modal';
+import ModalSearch from '../search/ModalSearch';
+import CloseIcon from '@mui/icons-material/Close';
+
+
 interface Section {
   title: string;
   url: string;
@@ -31,6 +36,19 @@ interface HeaderProps {
   title: string;
   sections: Section[];
 }
+
+const modalStyle = {
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  background: 'rgba(255, 255, 255, 0.895)',
+  display: 'flex',
+  justifyContent: 'center',
+  padding: '60px',
+  // alignItems: 'center',
+};
 
 const theme = createTheme({
   palette: {
@@ -61,6 +79,15 @@ export default function Header({ title }: HeaderProps) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isShoppingHovered, setIsShoppingHovered] = useState(false);
   const [toolbarContent, setToolbarContent] = useState('Shop');
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
   const handleShoppingClick = () => {
     setToolbarContent('Shop');
@@ -192,18 +219,38 @@ export default function Header({ title }: HeaderProps) {
           )}
         </Typography>
         <Box>
-
           {/* search(돋보기) icon */}
           {/* mobile(width:600px 이하)부터 생김 */}
           {/* {isMobile && ( */}
           <IconButton
-              type='button'
-              sx={{ p: '2px' }}
-              aria-label='search'
-              disableRipple
+            type='button'
+            sx={{ p: '2px' }}
+            aria-label='search'
+            disableRipple
+            onClick={openModal}
+          >
+            <img src={Search} alt='Logo' style={{ width: '36px' }} />
+          </IconButton>
+          {showModal && (
+            <Modal
+              open={showModal}
+              onClose={closeModal}
+              aria-labelledby='modal-modal-title'
+              aria-describedby='modal-modal-description'
             >
-              <img src={Search} alt='Logo' style={{ width: '36px' }} />
-            </IconButton>
+              <div>
+                <Box sx={modalStyle}>
+                  <IconButton
+                    style={{ position: 'absolute', top: '10px', right: '10px' }}
+                    onClick={closeModal}
+                  >
+                    <CloseIcon />
+                  </IconButton>
+                  <ModalSearch />
+                </Box>
+              </div>
+            </Modal>
+          )}
           {/* )} */}
 
           {/* 사람(로그인) icon dropdown */}
@@ -225,13 +272,13 @@ export default function Header({ title }: HeaderProps) {
           {/* 알림(종) icon */}
           {/* mobile(width:600px 이하)에서 사라짐 */}
           {/* {isMobile ? null : ( */}
-            <BadgeComponent badgeContent={isLoggedIn ? 5 : undefined}>
-              <img
-                src={Notification1}
-                alt='Logo'
-                style={{ width: '24px', padding: 2 }}
-              />
-            </BadgeComponent>
+          <BadgeComponent badgeContent={isLoggedIn ? 5 : undefined}>
+            <img
+              src={Notification1}
+              alt='Logo'
+              style={{ width: '24px', padding: 2 }}
+            />
+          </BadgeComponent>
           {/* )} */}
 
           {/* cart 아이콘 */}

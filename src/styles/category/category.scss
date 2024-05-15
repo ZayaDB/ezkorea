@@ -23,7 +23,6 @@ body {
 
 .category-page {
   margin: 0 auto;
-  // background-color: pink;
   @media (min-width: 1201px) {
     width: 99%;
   }
@@ -36,12 +35,9 @@ body {
 }
 
 .category-content {
-  // width: 97vw;
   margin: auto;
-  // padding-top: 170px;
   display: flex;
   flex-direction: row;
-  // width: 1200px;
   overflow-x: hidden;
   scrollbar-width: none;
   @media (min-width: 1201px) {
@@ -108,7 +104,6 @@ body {
         }
         .category-page {
           margin: 0 auto;
-          // background-color: pink;
           @media (min-width: 1201px) {
             width: 89%;
           }
@@ -121,12 +116,9 @@ body {
         }
 
         .category-content {
-          // width: 97vw;
           margin: auto;
-          // padding-top: 170px;
           display: flex;
           flex-direction: row;
-          // width: 1200px;
           overflow-x: hidden;
           @media (min-width: 1201px) {
             width: 1200px;
