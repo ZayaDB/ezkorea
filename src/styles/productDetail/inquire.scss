@@ -41,22 +41,31 @@ $border: 1px solid lightgray;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin-top: 24px;
 }
-
 #inquireSubTop {
   @include row();
 }
 #inquireSubTop div {
-  margin: 0 5px;
+  margin: 0 8px;
 }
 #writingInquiry span {
   font-size: $font-size-s;
 }
 .inquiryTitle,
 .inquiryTotal {
-  margin: 10px 0;
+  // padding-top: 24px;
+  // padding-bottom: 24px;
   font-size: $font-size-l;
   font-weight: $font-weight-bold;
+}
+
+.inquiryTotal {
+  color: $hover-color;
 }
 .type {
   color: $hover-color;
@@ -81,7 +90,8 @@ $border: 1px solid lightgray;
   font-size: $font-size-s;
 }
 .inquiryItem {
-  margin-bottom: 8px;
+  margin-bottom: 16px;
+  margin: 20px;
 }
 .reviewedContent {
   margin-left: 16px;
