@@ -1,0 +1,124 @@
+@charset "UTF-8";
+.remove-filter {
+  padding-top: 5px;
+}
+
+.element-brand {
+  width: 82%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.element-brand .brand {
+  width: 50%;
+  height: 35px;
+  display: flex;
+  flex-direction: row;
+}
+.element-brand .brand .brand-name {
+  line-height: 35px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.element-brand .brand .brand-name:hover {
+  color: gray;
+}
+
+.color-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  height: 200px;
+  overflow-y: auto; /* 세로 스크롤만 적용 */
+}
+.color-wrap .element-color {
+  width: 40%;
+  display: flex;
+  flex-direction: row;
+  margin: 5px;
+  cursor: pointer;
+}
+.color-wrap .element-color:hover {
+  color: gray;
+}
+.color-wrap .element-color .circle-color {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+}
+.color-wrap .element-color .color-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  line-height: 25px;
+}
+.color-wrap .element-color.white {
+  background-color: white;
+  border: 0.3px solid rgb(218, 216, 216);
+}
+
+@media (max-width: 1070px) {
+  .color-wrap {
+    width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    height: 200px;
+    overflow-y: auto; /* 세로 스크롤만 적용 */
+  }
+  .color-wrap .element-color {
+    width: 40%;
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+    cursor: pointer;
+  }
+  .color-wrap .element-color:hover {
+    color: gray;
+  }
+  .color-wrap .element-color .circle-color {
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+  }
+  .color-wrap .element-color .color-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 12px;
+    line-height: 20px;
+  }
+  .color-wrap .element-color.white {
+    background-color: white;
+    border: 0.3px solid rgb(218, 216, 216);
+  }
+}
+.element-theme {
+  width: 82%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.element-theme .theme {
+  width: 50%;
+  height: 35px;
+  display: flex;
+  flex-direction: row;
+}
+.element-theme .theme .theme-name {
+  line-height: 35px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.element-theme .theme .theme-name:hover {
+  color: gray;
+}/*# sourceMappingURL=sideFilter.css.map */
