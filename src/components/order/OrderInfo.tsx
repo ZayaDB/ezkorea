@@ -127,7 +127,9 @@ export default function OrderInfo() {
             <div className='right-sort'>
               <CloseButton onClick={handleClose} />
             </div>
-            주문 내용에 모두 동의해주세요.
+            <div>
+              {isAllChecked ? '결제 완료' : '주문 내용에 모두 동의해주세요.'}
+            </div>
           </Box>
         </Modal>
 
@@ -137,10 +139,8 @@ export default function OrderInfo() {
           variant='contained'
           type='button'
           onClick={() => {
-            if (!isAllChecked) {
-              setOpenModal(true);
-              return;
-            }
+            setOpenModal(true);
+            return;
           }}
         >
           결제

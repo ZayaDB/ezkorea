@@ -1,9 +1,7 @@
-import * as React from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-// import { useTheme } from '@mui/material/styles';
 import newItem from '../../assets/images/new_item.jpeg';
 import newItem1 from '../../assets/images/new_item1.jpeg';
 import newItem2 from '../../assets/images/new_item2.jpeg';
@@ -76,13 +74,13 @@ const newItemStyle = {
 
 const theme = createTheme(); // 기본 테마 생성
 
-export default function NewItem() {
+export default function BestItem() {
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ py: 4, width: 'auto' }}>
         <div className='TitleArea'>
-          <Typography sx={{ fontSize: '28px', fontWeight: '700' }}>
-            New ITEM
+          <Typography sx={{ fontSize: '32px', fontWeight: '700' }}>
+            BEST
           </Typography>
           <Typography
             sx={{
