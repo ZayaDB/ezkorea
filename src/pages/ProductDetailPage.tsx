@@ -22,7 +22,7 @@ declare module '@mui/material/styles' {
   }
 }
 
-export default function ProductDetail() {
+export default function ProductDetailPage() {
   const theme = createTheme({
     overrides: {
       MuiContainer: {
