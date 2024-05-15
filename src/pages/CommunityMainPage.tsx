@@ -1,17 +1,17 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { Box, Grid, Typography, Button, Divider } from '@mui/material';
 import { Visibility } from '@mui/icons-material';
-import ColorFilter from './../components/community/main/ColorFilter';
+import ColorFilter from '../components/community/main/ColorFilter';
 import ConceptFilter from '../components/community/main/ConceptFilter';
-import SkeletonFeed from './../components/community/main/SkeletonFeed';
+import SkeletonFeed from '../components/community/main/SkeletonFeed';
 import SortSelect from '../components/community/main/SortSelect';
 import './../styles/community/main.scss';
-import { FeedData } from './../types/communityTypes';
+import { FeedData } from '../types/communityTypes';
 import { Link } from 'react-router-dom';
 import LikeButton from '../components/community/main/LikeButton';
 import ProtectedButton from '../components/common/ProtectedButton';
 
-const Community = () => {
+const CommunityMainPage = () => {
   const [likedItems, setLikedItems] = useState<number[]>([]);
   const [filterData, setFilterData] = useState<FeedData[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -278,7 +278,7 @@ const Community = () => {
   );
 };
 
-export default Community;
+export default CommunityMainPage;
 
 const containedButtonStyles = {
   color: '#000000',

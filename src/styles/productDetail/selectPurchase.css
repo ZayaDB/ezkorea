@@ -1,0 +1,262 @@
+@charset "UTF-8";
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+#selectBox {
+  position: relative;
+  width: calc(1200px - (85vh + 8px));
+  height: calc(100vh - 200px);
+  box-sizing: border-box;
+}
+
+#selectPurchase {
+  display: flex;
+  flex-direction: column;
+  width: calc(1200px - (85vh + 8px));
+  height: calc(100vh - 200px);
+  position: fixed;
+  background-color: white;
+  border-top: 5px solid black;
+  padding: 8px;
+}
+
+#purchaseInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 30vh;
+}
+
+#brandShare {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+}
+
+.productBrand {
+  font-size: 16px;
+}
+
+#shIcon {
+  display: flex;
+  justify-content: baseline;
+}
+
+.heartIcon,
+.shareIcon {
+  cursor: pointer;
+  padding: 0 4px;
+  margin: 0;
+}
+
+#heartZone {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.heartTotal {
+  font-size: 11px;
+  margin: 0;
+}
+
+.productName {
+  font-size: 18px;
+  padding: 0 8px;
+  margin-top: 20px;
+}
+
+#priceZone {
+  padding: 0 8px;
+}
+
+#productPS {
+  height: 10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sellingPrice {
+  font-size: 16px;
+  color: gray;
+  text-decoration: line-through;
+}
+
+#sale {
+  display: flex;
+}
+
+.discountRate,
+.discountedPrice {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.discountRate {
+  color: gray;
+}
+
+#savingDelivery {
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin: auto 0;
+}
+
+.subtitle {
+  font-size: 14px;
+  padding: 0 8px;
+}
+
+.delivery {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.saving,
+#deliveryZone {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+#savingPoint,
+.deliveryPrice {
+  font-weight: 700;
+}
+
+.deliveryDetailInfo {
+  border: 1px solid lightgray;
+  background-color: rgb(240, 239, 239);
+  padding: 8px 0;
+  margin-top: 4px;
+  font-size: 14px;
+  text-align: center;
+}
+
+#selectProduct {
+  height: 20vh;
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.options {
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  width: 100%;
+  text-align: left;
+}
+
+#selectedPurchase {
+  display: flex;
+  flex-direction: column;
+  margin: 8px;
+}
+
+#optionBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#countZone {
+  display: flex;
+  align-items: center;
+}
+
+#countZone div {
+  margin: 4px;
+}
+
+.selectedClose {
+  cursor: pointer;
+  color: gray;
+  font-weight: 700;
+}
+
+.selectedClose:hover {
+  color: black;
+  font-weight: 700;
+}
+
+#purchaseZone {
+  height: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+#buttons {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  margin-top: 12px;
+}
+
+.cartBtn {
+  width: 50px;
+  height: 50px;
+  border: 1px solid lightgray;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.purchaseBtn {
+  width: calc(100% - 50px);
+  height: 50px;
+  border: 1px solid lightgray;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.cartBtn:hover {
+  background-color: #5ff531;
+}
+
+.purchaseBtn:hover {
+  background-color: #5ff531;
+}
+
+@media (max-width: 768px) {
+  #selectBox {
+    width: 100%;
+  }
+  #selectPurchase {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-top: 3px solid black;
+    position: static; /* 수정 */
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+@media (max-width: 360px) {
+  #selectBox {
+    position: relative;
+    width: 100%;
+  }
+  #selectPurchase #selectPurchase {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-top: 3px solid black;
+    position: static; /* 수정 */
+    width: 100%;
+    margin: 0 auto;
+  }
+}/*# sourceMappingURL=selectPurchase.css.map */

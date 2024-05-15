@@ -8,7 +8,7 @@ import Login from './pages/Login';
 import BestPage from './pages/BestPage';
 import SalePage from './pages/SalePage';
 import CategoryPage from './pages/CategoryPage';
-import Community from './pages/Community';
+import CommunityMainPage from './pages/CommunityMainPage';
 import OrderPage from './pages/OrderPage';
 import MyPage from './pages/MyPage';
 import NotFound from './pages/NotFoundPage';
@@ -47,7 +47,7 @@ const App = () => {
             <Route path='/shop/best' element={<BestPage />} />
             <Route path='/shop/sale' element={<SalePage />} />
             <Route path='/shop/:productId' element={<ProductDetailPage />} />
-            <Route path='/community' element={<Community />} />
+            <Route path='/community' element={<CommunityMainPage />} />
             <Route path='/community/post' element={<CommunityPostPage />} />
             <Route path='/community/result' element={<CommunityResultPage />} />
             <Route
