@@ -1,5 +1,4 @@
 import Carousel from 'react-bootstrap/Carousel';
-import '../../styles/home/carousel.scss';
 import best1 from '../../assets/images/best1.webp';
 import best2 from '../../assets/images/best2.webp';
 import best4 from '../../assets/images/best4.webp';
@@ -17,18 +16,52 @@ export default function CarouselCompoBest() {
       <div style={{ width: 'auto', margin: 0, padding: 0 }}>
         <Carousel interval={5000}>
           <Carousel.Item>
-            <img className='d-block w-100' src={best1} alt='First slide' />
+            <img
+              style={{
+                height: 'auto',
+                margin: '0 auto',
+                maxHeight: '450px',
+                objectFit: 'cover',
+                filter: 'brightness(60%) contrast(120%) grayscale(40%)',
+              }}
+              className='d-block w-100'
+              src={best1}
+              alt='First slide'
+            />
           </Carousel.Item>
 
           <Carousel.Item>
-            <img className='d-block w-100' src={best2} alt='Second slide' />
+            <img
+              style={{
+                height: 'auto',
+                margin: '0 auto',
+                maxHeight: '450px',
+                objectFit: 'cover',
+                filter: 'brightness(60%) contrast(120%) grayscale(40%)',
+              }}
+              className='d-block w-100'
+              src={best2}
+              alt='Second slide'
+            />
           </Carousel.Item>
 
           <Carousel.Item>
-            <img className='d-block w-100' src={best4} alt='Third slide' />
+            <img
+              style={{
+                height: 'auto',
+                margin: '0 auto',
+                maxHeight: '450px',
+                objectFit: 'cover',
+                filter: 'brightness(60%) contrast(120%) grayscale(40%)',
+              }}
+              className='d-block w-100'
+              src={best4}
+              alt='Third slide'
+            />
           </Carousel.Item>
         </Carousel>
       </div>
     </div>
   );
 }
+

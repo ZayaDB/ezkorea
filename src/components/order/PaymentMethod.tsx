@@ -249,7 +249,7 @@ function GeneralContent() {
         >
           <Tab label='신용/체크카드' {...a11yProps(0)} />
           <Tab label='무통장입금' {...a11yProps(1)} />
-          <Tab label='네이버페이' {...a11yProps(2)} />
+          {/* <Tab label='네이버페이' {...a11yProps(2)} /> */}
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>

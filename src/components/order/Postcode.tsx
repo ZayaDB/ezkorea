@@ -7,6 +7,8 @@ import { useDispatch } from 'react-redux';
 
 import { updateAddressInfo } from '../../redux/slices/addressSlice';
 
+import CloseButton from 'react-bootstrap/CloseButton';
+
 const style = {
   position: 'absolute' as const,
   top: '50%',
@@ -80,9 +82,9 @@ function ModalContent({ handleClose }: { handleClose: () => void }) {
 
   return (
     <>
-      <button type='button' onClick={handleClose} className='postCode_btn'>
-        닫기
-      </button>
+      <div className='right-sort'>
+        <CloseButton onClick={handleClose} />
+      </div>
       <DaumPostcode autoClose onComplete={handlePostCode} />
     </>
   );
