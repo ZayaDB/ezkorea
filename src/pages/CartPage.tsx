@@ -1,13 +1,30 @@
+
 import '../styles/order/cart.scss';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Checkbox from '@mui/material/Checkbox';
 import { useState } from 'react';
+import { RootState } from '../redux/config';
+import { useSelector } from 'react-redux';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 export default function CartPage() {
+
+    const selectOption = useSelector(
+      (state: RootState) => state.product.selectedOption
+    );
+    const selectedQuantity = useSelector(
+      (state: RootState) => state.product.selectedQuantity
+    );
+    const selectedProductId = useSelector(
+      (state: RootState) => state.product.selectedProductId
+    );
+
+    console.log(selectOption, selectedQuantity, selectedProductId);
+
+
   // 체크 박스
 
   // 수량버튼
@@ -104,3 +121,4 @@ export default function CartPage() {
     </Grid>
   );
 }
+
