@@ -72,7 +72,7 @@ export default function Review() {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [sortedReviews, setSortedReviews] = useState<Review[]>([]);
   const [sortBy, setSortBy] = useState<string>('');
-
+  console.log(sortBy);
   // fetch
   useEffect(() => {
     const fetchData = async () => {

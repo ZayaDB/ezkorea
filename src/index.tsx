@@ -2,12 +2,8 @@
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 import { Provider } from 'react-redux';
-import rootReducer from './redux/config/index';
-import { configureStore } from '@reduxjs/toolkit';
-
-const store = configureStore({ reducer: rootReducer });
+import { store } from './redux/config/index';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

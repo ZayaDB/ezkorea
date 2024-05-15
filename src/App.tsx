@@ -5,13 +5,13 @@ import Home from './pages/Home';
 import CommunityPostPage from './pages/CommunityPostPage';
 import CommunityModifyPage from './pages/CommunityModifyPage';
 import Login from './pages/Login';
-import BestProduct from './components/category/BestProduct';
-import SaleProduct from './components/category/SaleProduct';
-import Category from './pages/Category';
+import BestPage from './pages/BestPage';
+import SalePage from './pages/SalePage';
+import CategoryPage from './pages/CategoryPage';
 import Community from './pages/Community';
 import OrderPage from './pages/OrderPage';
 import MyPage from './pages/MyPage';
-import NotFound from './pages/NotFound';
+import NotFound from './pages/NotFoundPage';
 import SignUp from './pages/SignUp';
 import CommunityDetailPage from './pages/CommunityDetailPage';
 import RecentViewList from './components/mypage/RecentViewList';
@@ -19,8 +19,8 @@ import LikesProduct from './components/mypage/LikesProducts';
 import MainLayout from './pages/MainLayout';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
-import CartPage from './pages/CartPage';
-import ProductDetailPage from './pages/ProductDetailPage';
+import CommunityResultPage from './pages/CommunityResultPage';
+import Logout from './components/Home/Logout';
 
 const App = () => {
   const ScrollToTop = () => {
@@ -40,12 +40,13 @@ const App = () => {
         <Routes>
           <Route element={<MainLayout />}>
             <Route path='/' element={<Home />} />
-            <Route path='shop' element={<Category />} />
-            <Route path='/shop/best' element={<BestProduct />} />
-            <Route path='/shop/sale' element={<SaleProduct />} />
-            <Route path='/shop/:productId' element={<ProductDetailPage />} />
+            <Route path='shop' element={<CategoryPage />} />
+            <Route path='/shop/best' element={<BestPage />} />
+            <Route path='/shop/sale' element={<SalePage />} />
+            <Route path='/shop/:productId' element={<ProductDetail />} />
             <Route path='/community' element={<Community />} />
             <Route path='/community/post' element={<CommunityPostPage />} />
+            <Route path='/community/result' element={<CommunityResultPage />} />
             <Route
               path='community/modify/:feedId'
               element={<CommunityModifyPage />}
@@ -63,6 +64,7 @@ const App = () => {
           </Route>
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<SignUp />} />
+          <Route path='/logout' element={<Logout />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
