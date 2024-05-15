@@ -1,0 +1,346 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
+
+// color
+$hover-color: #5ff531;
+
+// font
+$font-size-xxl: 24px;
+$font-size-xl: 22px;
+$font-size-l: 18px;
+$font-size-m: 16px;
+$font-size-s: 14px;
+$font-size-xs: 12px;
+$font-size-xxs: 11px;
+
+$font-weight-bold: 700;
+$font-weight-medium: 500;
+$font-weight-regular: 400;
+
+// custom
+// flex-direction: colummn
+@mixin column {
+  display: flex;
+  flex-direction: column;
+}
+// flex-direction: colummn,center
+@mixin columnCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+// flex-direction: row
+@mixin row {
+  display: flex;
+  align-items: center;
+}
+// border
+$border: 1px solid lightgray;
+
+// 전체 페이지
+* {
+  font-family: 'Pretendard Variable';
+  box-sizing: border-box;
+}
+#cartBox {
+  max-width: 1200px;
+  width: 100%;
+  @include column();
+  margin: 0 auto;
+  text-align: center;
+  @media (min-width: 1201px) {
+    max-width: 1200px;
+    width: 100%;
+    padding-top: 8px;
+    // border: 1px solid black;
+    margin: 0 auto;
+  }
+}
+
+#cartList,
+#beforePay {
+  @include columnCenter();
+  margin-bottom: 10vh;
+}
+
+.cartTitle {
+  @include row();
+  font-size: $font-size-l;
+  font-weight: $font-weight-bold;
+  border-top: 5px solid black;
+  border-bottom: $border;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  height: 10vh;
+}
+
+.titleCheckbox {
+  width: 5%;
+  text-align: center;
+}
+.titleDetail {
+  width: 50%;
+  text-align: center;
+}
+.titleCountBtn {
+  width: 10%;
+  text-align: center;
+}
+.titleTotal {
+  width: 25%;
+  text-align: center;
+}
+.titleDelivery {
+  width: 10%;
+  text-align: center;
+}
+
+.purchaseInfo {
+  @include row();
+  border-bottom: 1px solid black;
+}
+.purchasecheckbox {
+  width: 5%;
+  text-align: center;
+}
+.purchasePD {
+  width: 45%;
+  height: 20vh;
+  @include row();
+  justify-content: center;
+}
+.purchaseProduct {
+  width: 15vh;
+  height: 15vh;
+  margin-right: 10px;
+  background-color: lightgray;
+}
+
+.purchaseDetail {
+  @include columnCenter();
+  width: 25%;
+  align-items: baseline;
+}
+
+.purchaseBrand {
+  font-size: $font-size-s;
+}
+
+.purchaseName {
+  font-weight: $font-weight-bold;
+  font-size: $font-size-l;
+}
+
+.purchaseOriginal {
+  color: lightgray;
+  font-size: $font-size-m;
+}
+.saleZone,
+.salePrice {
+  color: salmon;
+  font-size: $font-size-m;
+}
+.salePrice {
+  margin-left: 5px;
+}
+.saleZone {
+  @include row();
+}
+.deleteBtn {
+  color: lightgray;
+  font-weight: $font-weight-bold;
+  width: 5%;
+}
+.deleteBtn:hover {
+  color: black;
+}
+.countBtn {
+  width: 10%;
+  text-align: center;
+}
+.total {
+  font-weight: $font-weight-bold;
+  font-size: $font-size-l;
+  width: 25%;
+  text-align: center;
+}
+
+.deliveryInfo {
+  @include column();
+  width: 10%;
+  text-align: center;
+}
+
+.deliveryCharge {
+  font-size: $font-size-m;
+  font-weight: $font-weight-bold;
+  text-align: center;
+}
+
+.bpTitle {
+  @include row();
+  font-size: $font-size-l;
+  font-weight: $font-weight-bold;
+  border-top: 5px solid black;
+  border-bottom: $border;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  height: 10vh;
+}
+
+.bpTitleProdTotal {
+  width: 30%;
+  text-align: center;
+}
+.bpTitleDeTotal {
+  width: 40%;
+  text-align: center;
+}
+.bpTitleTotal {
+  width: 30%;
+  text-align: center;
+}
+.bpInfo {
+  @include row();
+  text-align: center;
+  height: 15vh;
+  border-bottom: 1px solid black;
+}
+.bpProdTotal {
+  width: 30%;
+  text-align: center;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-xl;
+}
+.bpplus {
+  width: 10%;
+  text-align: center;
+}
+.bpDeTotal {
+  width: 20%;
+  text-align: center;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-l;
+}
+.bpEqual {
+  width: 10%;
+  text-align: center;
+}
+.bpTotal {
+  width: 30%;
+  text-align: center;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-xl;
+}
+
+.againBtn,
+.goPay {
+  border: none;
+  border-radius: 4px;
+  background-color: black;
+  color: white;
+  padding: 2vh;
+  margin: 1vh;
+}
+.againBtn:hover,
+.goPay:hover {
+  color: $hover-color;
+}
+@media screen and (max-width: 768px) {
+  #cartBox {
+    max-width: 480px;
+    width: 100%;
+    padding-top: 8px;
+    margin: 0 auto;
+  }
+  .purchaseInfo {
+    @include row();
+    border-bottom: 1px solid black;
+  }
+  .purchasecheckbox {
+    width: 5%;
+    text-align: center;
+  }
+  .purchasePD {
+    width: 45%;
+    height: 20vh;
+    @include row();
+    justify-content: center;
+  }
+  .purchaseProduct {
+    width: 10vh;
+    height: 10vh;
+    margin-right: 10px;
+    background-color: lightgray;
+  }
+
+  .purchaseDetail {
+    @include columnCenter();
+    width: 25%;
+    align-items: baseline;
+    font-size: $font-size-s;
+  }
+
+  .purchaseBrand {
+    font-size: $font-size-s;
+  }
+
+  .purchaseName {
+    font-weight: $font-weight-bold;
+    font-size: $font-size-m;
+  }
+
+  .purchaseOriginal {
+    color: lightgray;
+    font-size: $font-size-s;
+  }
+  .saleZone,
+  .salePrice {
+    color: salmon;
+    font-size: $font-size-xs;
+  }
+  .salePrice {
+    margin-left: 5px;
+  }
+  .saleZone {
+    @include row();
+  }
+  .deleteBtn {
+    color: lightgray;
+    font-weight: $font-weight-bold;
+    width: 5%;
+  }
+  .deleteBtn:hover {
+    color: black;
+  }
+  .countBtn {
+    width: 10%;
+    text-align: center;
+  }
+  .total {
+    font-weight: $font-weight-bold;
+    font-size: $font-size-m;
+    width: 25%;
+    text-align: center;
+  }
+
+  .deliveryInfo {
+    @include column();
+    width: 10%;
+    text-align: center;
+    font-size: $font-size-xs;
+  }
+
+  .deliveryCharge {
+    font-size: $font-size-m;
+    font-weight: $font-weight-bold;
+    text-align: center;
+  }
+}
+@media (max-width: 360px) {
+  #cartBox {
+    max-width: 360px;
+    width: 100%;
+    padding-top: 8px;
+    margin: 0 auto;
+  }
+}

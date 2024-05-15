@@ -9,7 +9,6 @@ import BestPage from './pages/BestPage';
 import SalePage from './pages/SalePage';
 import CategoryPage from './pages/CategoryPage';
 import Community from './pages/Community';
-import ProductDetail from './pages/ProductDetail';
 import OrderPage from './pages/OrderPage';
 import MyPage from './pages/MyPage';
 import NotFound from './pages/NotFoundPage';
@@ -22,6 +21,8 @@ import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import CommunityResultPage from './pages/CommunityResultPage';
 import Logout from './components/Home/Logout';
+import ProductDetailPage from './pages/ProductDetailPage';
+import CartPage from './pages/CartPage';
 
 const App = () => {
   const ScrollToTop = () => {
@@ -44,7 +45,7 @@ const App = () => {
             <Route path='shop' element={<CategoryPage />} />
             <Route path='/shop/best' element={<BestPage />} />
             <Route path='/shop/sale' element={<SalePage />} />
-            <Route path='/shop/:productId' element={<ProductDetail />} />
+            <Route path='/shop/:productId' element={<ProductDetailPage />} />
             <Route path='/community' element={<Community />} />
             <Route path='/community/post' element={<CommunityPostPage />} />
             <Route path='/community/result' element={<CommunityResultPage />} />
@@ -52,6 +53,7 @@ const App = () => {
               path='community/modify/:feedId'
               element={<CommunityModifyPage />}
             />
+            <Route path='/cart' element={<CartPage />} />
             <Route path='/order' element={<OrderPage />} />
             <Route path='/my' element={<MyPage />} />
             <Route path='/my/wishlist' element={<LikesProduct />} />
