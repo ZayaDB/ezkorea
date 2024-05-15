@@ -20,7 +20,8 @@ import Grid from '@mui/material/Grid';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../../styles/theme';
 import '../../styles/productDetail/inquire.scss';
-
+import { useState, useEffect } from 'react';
+import { Inquiry } from '../../types/productDetail';
 // // Modal
 // const style = {
 //   position: 'absolute',
@@ -61,6 +62,38 @@ export default function Inquire() {
   // const handleChange = (event: SelectChangeEvent) => {
   //   setColor(event.target.value as string);
   // };
+
+  const [page, setPage] = useState(1);
+  const [inquiryData, setInquiryData] = useState<Inquiry[]>([]);
+  const inquiryPerPage = 5;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/data/prodInquiry.json');
+        const data = await response.json();
+        const inquiry = data[0].inquiry;
+        setInquiryData(inquiry);
+      } catch (error) {
+        console.error('Error fetching review data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  // 페이지네이션
+  const handleChangePage = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
+    setPage(value);
+  };
+  // 현재 페이지에 해당하는 문의 목록 계산
+  const startIndex = (page - 1) * inquiryPerPage;
+  const endIndex = page * inquiryPerPage;
+  const currentPageInquiries = inquiryData.slice(startIndex, endIndex);
+  console.log(currentPageInquiries);
+
   return (
     <ThemeProvider theme={theme}>
       <div>
@@ -165,7 +198,21 @@ export default function Inquire() {
           </Snackbar>
         </div> */}
         <div id='writingInquiry'>
-          <div className='inquiryItem'>
+          {currentPageInquiries.map((inquiry, index) => (
+            <div className='inquiryItem' key={index}>
+              <div>
+                <span>{inquiry.inquiryType} | </span>
+                <span>{inquiry.answer}</span>
+                <div className='writingInfo'>
+                  <div className='type'>Q</div>
+                  <div className='writingUser'>{inquiry.inUserName}</div>
+                  <div className='writingDate'>{inquiry.inDate}</div>
+                </div>
+                <div className='reviewedContent'>{inquiry.inBrText}</div>
+              </div>
+            </div>
+          ))}
+          {/* <div className='inquiryItem'>
             <div>
               <span>배송 | </span>
               <span>답변완료</span>
@@ -193,65 +240,7 @@ export default function Inquire() {
                 불가합니다*
               </div>
             </div>
-          </div>
-          <div className='inquiryItem'>
-            <div>
-              <span>배송 | </span>
-              <span>답변완료</span>
-              <div className='writingInfo'>
-                <div className='type'>Q</div>
-                <div className='writingUser'>작성자</div>
-                <div className='writingDate'>2024.5.8</div>
-              </div>
-              <div className='reviewedContent'>
-                5월 8일에 주문했는데 언제 발송될까요?
-              </div>
-            </div>
-            <div>
-              <div className='writingInfo'>
-                <div className='type'>A</div>
-                <div className='writingUser'>209애비뉴</div>
-                <div className='writingDate'>2024.5.8</div>
-              </div>
-              <div className='reviewedContent'>
-                안녕하세요. 고객님. 가구의 본질에 집중하는 209 애비뉴 입니다.
-                이번주 금~토요일 배송 예정입니다. 주문일 기준 1~3일 내
-                출고되어(주말 및 공휴일 불가) - 수도권은 영업일 기준 약 3~10일,
-                - 경기외곽 및 지방은 영업일 기준 약 5~15일 소요됩니다. *별도
-                지정일 배송은 불가한 점 양해 부탁드립니다* *별도 예약 배송
-                불가합니다*
-              </div>
-            </div>
-          </div>
-          <div className='inquiryItem'>
-            <div>
-              <span>배송 | </span>
-              <span>답변완료</span>
-              <div className='writingInfo'>
-                <div className='type'>Q</div>
-                <div className='writingUser'>작성자</div>
-                <div className='writingDate'>2024.5.8</div>
-              </div>
-              <div className='reviewedContent'>
-                5월 8일에 주문했는데 언제 발송될까요?
-              </div>
-            </div>
-            <div>
-              <div className='writingInfo'>
-                <div className='type'>A</div>
-                <div className='writingUser'>209애비뉴</div>
-                <div className='writingDate'>2024.5.8</div>
-              </div>
-              <div className='reviewedContent'>
-                안녕하세요. 고객님. 가구의 본질에 집중하는 209 애비뉴 입니다.
-                이번주 금~토요일 배송 예정입니다. 주문일 기준 1~3일 내
-                출고되어(주말 및 공휴일 불가) - 수도권은 영업일 기준 약 3~10일,
-                - 경기외곽 및 지방은 영업일 기준 약 5~15일 소요됩니다. *별도
-                지정일 배송은 불가한 점 양해 부탁드립니다* *별도 예약 배송
-                불가합니다*
-              </div>
-            </div>
-          </div>
+          </div> */}
         </div>
         <Grid
           container
@@ -259,7 +248,11 @@ export default function Inquire() {
           justifyContent='center'
           alignItems='center'
         >
-          <Pagination count={10} />
+          <Pagination
+            count={Math.ceil(inquiryData.length / inquiryPerPage)}
+            page={page}
+            onChange={handleChangePage}
+          />
         </Grid>
       </div>
     </ThemeProvider>
