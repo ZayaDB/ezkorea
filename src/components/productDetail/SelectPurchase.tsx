@@ -55,7 +55,8 @@ export default function SelectPurchase() {
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
   const [counts, setCounts] = useState<number[]>([]);
   const dispatch = useDispatch();
-
+  // 로그인 상태를 관리하는 상태 추가
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   // fetch
   useEffect(() => {
     const fetchData = async () => {
@@ -63,8 +64,11 @@ export default function SelectPurchase() {
         const response = await fetch('/data/prodDetail.json');
         const data = await response.json();
         const purchase = data[0];
-
         setSpInfo(purchase);
+
+        // 컴포넌트가 마운트될 때 로그인 상태를 확인하고 상태를 업데이트하는 useEffect 사용
+        // const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+        // setIsLoggedIn(isLoggedIn);
       } catch (error) {
         console.error('Error fetching review data:', error);
       }
