@@ -1,0 +1,64 @@
+@charset "UTF-8";
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+* {
+  font-family: "Pretendard Variable";
+  box-sizing: border-box;
+}
+
+.detailPage {
+  display: flex;
+  justify-content: baseline;
+  max-width: 1200px;
+  width: 100%;
+  padding-top: 8px;
+  margin: 0 auto;
+}
+
+.detailMain {
+  width: 85vh;
+  padding: 0;
+  margin-right: 8px;
+}
+
+.detailSide {
+  width: calc(1200px - (85vh + 8px));
+  height: calc(100vh - 200px);
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 768px) {
+  .detailPage {
+    max-width: 480px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 8px;
+    margin: 0 auto;
+  }
+  .detailMain {
+    width: 100%; /* 80%의 가로 너비를 차지하도록 함 */
+  }
+  .detailSide {
+    width: 480px; /* 가로 너비를 100%로 설정하여 가득 차도록 함 */
+  }
+}
+@media (max-width: 360px) {
+  .detailPage {
+    max-width: 360px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 8px;
+    margin: 0 auto;
+    padding: 0;
+  }
+  .detailMain {
+    width: 100%;
+    padding: 0;
+    margin: 0px;
+  }
+  .detailSide {
+    width: 340px; /* 가로 너비를 100%로 설정하여 가득 차도록 함 */
+  }
+}/*# sourceMappingURL=productDetail.css.map */

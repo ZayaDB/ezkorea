@@ -19,7 +19,6 @@ import {
   CustomTypography,
   ImgButton,
   ProductBox,
-  ProductImage,
 } from '../components/community/detail/StyledComponents';
 import '../styles/community/detail.scss';
 import CommentIcon from '@mui/icons-material/Comment';
@@ -29,12 +28,10 @@ import ShareIcon from '@mui/icons-material/Share';
 import { FeedData, Comment, SelectedProducts } from '../types/communityTypes';
 import koLocale from 'javascript-time-ago/locale/ko';
 import TimeAgo from 'javascript-time-ago';
-import { Swiper, SwiperSlide } from 'swiper/react'; // Swiper와 SwiperSlide 임포트
-import { Navigation, Pagination, Scrollbar } from 'swiper/modules'; // Swiper 모듈 임포트
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
 
 TimeAgo.addLocale(koLocale);
 
@@ -171,15 +168,16 @@ const CommunityDetailPage: React.FC = () => {
           direction='row'
           sx={{ gap: '16px' }}
           width={'100%'}
-          bgcolor={'red'}
+          position={'relative'}
+          className='product-container'
         >
           <Swiper
-            modules={[Navigation, Pagination, Scrollbar]} // 수정된 부분: Swiper 모듈 설정
-            spaceBetween={16}
-            slidesPerView={'auto'}
+            modules={[Navigation]}
+            spaceBetween={20}
+            slidesPerView={6}
+            centeredSlides={false}
+            style={{ marginLeft: 0, width: '100%' }}
             navigation
-            pagination={{ clickable: true }}
-            scrollbar={{ draggable: true }}
           >
             {feed.selectedProducts?.map(
               (
@@ -191,11 +189,8 @@ const CommunityDetailPage: React.FC = () => {
                   style={{ width: '128px' }}
                 >
                   <Box width={128}>
-                    <ProductBox>
-                      <ProductImage
-                        src={product.thumbnail}
-                        alt={product.productName}
-                      />
+                    <ProductBox className='product-img'>
+                      <img src={product.thumbnail} alt={product.productName} />
                     </ProductBox>
                     <ProductInfo variant='body2' gutterBottom>
                       {product.productName}

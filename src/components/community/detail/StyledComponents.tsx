@@ -25,18 +25,28 @@ export const ProductInfo = styled(Typography)`
 export const ProductBox = styled(Box)`
   width: 128px;
   height: 128px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 5px;
+
+  &:hover {
+    border: 1px solid #5ff531;
+    pointer-events: auto;
+  }
+
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
+    transition: transform 0.3s ease-in-out;
+    pointer-events: none;
   }
-`;
 
-export const ProductImage = styled('img')`
-  width: 100%;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 5px;
+  &:hover img {
+    transform: scale(1.1);
+  }
 `;
 
 const outlineButtonStyles = {
@@ -70,7 +80,7 @@ export const CustomTypography = styled(Typography)`
   }
 `;
 
-export const ImgButton = styled(Button)`
+export const ImgButton = styled(Box)`
   margin: 0;
   padding: 0;
   width: 128px;
@@ -80,14 +90,18 @@ export const ImgButton = styled(Button)`
   flex: 0 0 100px;
   display: flex;
   flex-direction: column;
+  border-radius: 5px;
+  outline: 1px solid rgba(0, 0, 0, 0.08);
 
   &:hover {
     outline: 2px solid #5ff531;
+    pointer-events: auto;
   }
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
+    pointer-events: none;
   }
 `;

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 html {
   letter-spacing: -0.3px;
   -webkit-font-smoothing: antialiased;
@@ -12,22 +13,22 @@ html {
 .thumbnail-container {
   display: flex;
   margin-bottom: 20px;
-
-  .main-image {
-    flex: 1;
-    margin-right: 12px;
-    overflow: hidden;
-    width: 720px;
-    height: 720px;
-    pointer-events: none;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-    }
-  }
+}
+.thumbnail-container .main-image {
+  flex: 1;
+  margin-right: 12px;
+  overflow: hidden;
+  width: 720px;
+  height: 720px;
+  pointer-events: none;
+}
+.thumbnail-container .main-image img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
 }
 
 .feed-profile {
@@ -55,7 +56,7 @@ html {
 }
 
 .dot::before {
-  content: '·';
+  content: "·";
   margin: 4px;
 }
 
@@ -75,17 +76,13 @@ html {
 
 .comments-container {
   width: 100%;
-
-  .comment-card {
-    margin-bottom: 10px;
-    width: 100%;
-
-    .reply-list {
-      li {
-        margin-bottom: 5px;
-      }
-    }
-  }
+}
+.comments-container .comment-card {
+  margin-bottom: 10px;
+  width: 100%;
+}
+.comments-container .comment-card .reply-list li {
+  margin-bottom: 5px;
 }
 
 .icon-container {
@@ -101,20 +98,17 @@ html {
   font-weight: 900;
 }
 
-.product-container {
-  :hover {
-    .swiper-button-prev:after,
-    .swiper-button-next:after {
-      display: block;
-    }
-  }
+.product-container :hover .swiper-button-prev:after,
+.product-container :hover .swiper-button-next:after {
+  display: block;
 }
 
 .swiper-button-prev svg,
 .swiper-button-next svg {
   width: 50%;
   height: 100%;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
   transform-origin: center;
 }
 
@@ -124,11 +118,11 @@ html {
   top: var(--swiper-navigation-top-offset, 50%);
   width: calc(var(--swiper-navigation-size) / 44 * 10);
   height: var(--swiper-navigation-size);
-  margin-top: calc(0px - (var(--swiper-navigation-size) / 1));
+  margin-top: calc(0px - var(--swiper-navigation-size) / 1);
   z-index: 10;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #000;
-}
+}/*# sourceMappingURL=detail.css.map */
