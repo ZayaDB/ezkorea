@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import {
   Avatar,
   Button,
@@ -9,21 +9,34 @@ import {
   Card,
   CardContent,
   CardHeader,
+  Container,
+  Box,
 } from '@mui/material';
+import {
+  ProductInfo,
+  ColorCircle,
+  TagButton,
+  CustomTypography,
+  ImgButton,
+  ProductBox,
+} from '../components/community/detail/StyledComponents';
 import '../styles/community/detail.scss';
 import CommentIcon from '@mui/icons-material/Comment';
 import LikeButton from '../components/community/main/LikeButton';
-import ReactTimeAgo from 'react-time-ago'; // react-time-ago 라이브러리를 가져옵니다.
-import TimeAgo from 'javascript-time-ago'; // javascript-time-ago 라이브러리를 가져옵니다.
-import koLocale from 'javascript-time-ago/locale/ko'; // 한국어 언어 파일을 가져옵니다.
-import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
-import { Link } from 'react-router-dom';
+import ReactTimeAgo from 'react-time-ago';
+import ShareIcon from '@mui/icons-material/Share';
+import { FeedData, Comment, SelectedProducts } from '../types/communityTypes';
+import koLocale from 'javascript-time-ago/locale/ko';
+import TimeAgo from 'javascript-time-ago';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
 
-// 한국어 로캘 설정
 TimeAgo.addLocale(koLocale);
 
 const CommunityDetailPage: React.FC = () => {
-  const [feed, setFeed] = useState<any>(null);
+  const [feed, setFeed] = useState<FeedData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState<number>(0);
@@ -31,6 +44,9 @@ const CommunityDetailPage: React.FC = () => {
   const [likes, setLikes] = useState<number>(0);
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const { feedId } = useParams<{ feedId?: string }>();
+  const formatPrice = (price: number): string => {
+    return new Intl.NumberFormat().format(price);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,14 +57,14 @@ const CommunityDetailPage: React.FC = () => {
         }
 
         const response = await fetch('/data/feed.json');
-        const data = await response.json();
+        const data: FeedData[] = await response.json();
         const selectedFeed = data.find(
-          (item: any) => item.feedId === parseInt(feedId)
+          (item: FeedData) => item.feedId === parseInt(feedId)
         );
         if (selectedFeed) {
           setFeed(selectedFeed);
           setLikes(selectedFeed.likes);
-          setIsLiked(selectedFeed.liked);
+          setIsLiked(false); // 수정된 부분: liked 필드가 없으므로 항상 false로 설정
           setIsError(false);
         } else {
           setIsError(true);
@@ -89,69 +105,144 @@ const CommunityDetailPage: React.FC = () => {
   }
 
   return (
-    <Grid
-      container
-      direction='column'
-      alignItems='center'
-      className='community-detail-page'
-      sx={{ border: 'none' }}
-    >
-      <Grid item xs={12} className='card-container' sx={{ border: 'none' }}>
-        <Card variant='outlined'>
-          <div className='feed-profile'>
-            <CardHeader
-              avatar={<Avatar src={feed.profileImage} alt='Profile' />}
-              title={feed.accountName}
-              subheader={
-                <ReactTimeAgo date={new Date(feed.creationDate)} locale='ko' />
-              } // 한국어 형식으로 표시
-            />
-            <Button variant='contained'>
-              <Link
-                to={`/community/modify/${feed.feedId}`}
-                style={{ textDecoration: 'none', color: 'unset' }}
+    <Box className='content-container'>
+      <Grid container direction='column'>
+        <Box className='feed-profile'>
+          <CardHeader
+            avatar={<Avatar src={feed.profileImage} alt='Profile' />}
+            title={feed.accountName}
+            subheader={
+              <ReactTimeAgo date={new Date(feed.creationDate)} locale='ko' />
+            }
+            sx={{ p: 0 }}
+          />
+          <Button
+            variant='contained'
+            sx={{
+              boxShadow: 'none',
+              '&:hover': {
+                boxShadow: 'none',
+              },
+            }}
+            component={Link}
+            to={`/community/modify/${feed.feedId}`}
+          >
+            수정하기
+          </Button>
+        </Box>
+        <Box className='thumbnail-container'>
+          <Box className='main-image'>
+            <img src={feed.images[selectedImageIndex]} alt='Main' />
+          </Box>
+          <Box>
+            {feed.images.map((image: string, index: number) => (
+              <ImgButton
+                key={index}
+                onClick={() => handleThumbnailClick(index)}
               >
-                수정하기
-              </Link>
-            </Button>
-          </div>
-          <CardContent>
-            <div className='thumbnail-container'>
-              <div className='main-image'>
-                <img src={feed.images[selectedImageIndex]} alt='Main' />
-              </div>
-              <div className='thumbnail-button'>
-                {feed.images.map((image: string, index: number) => (
-                  <Button
-                    key={index}
-                    onClick={() => handleThumbnailClick(index)}
-                    sx={{
-                      m: 0,
-                      p: 0,
-                      border: '1px solid 5ff531',
-                      '&:hover': {
-                        outline: '2px solid #5ff531', // 호버 시 보더 적용
-                      },
-                      '&:active': {
-                        outline: '5px solid blue', // 활성화 시 보더 적용
-                      },
-                    }}
-                  >
-                    <img src={image} alt='Thumbnail' />
-                  </Button>
-                ))}
-              </div>
-            </div>
-            <div>
-              <Typography variant='h5' className='feed-title'>
-                {feed.title}
-              </Typography>
-              <Typography className='feed-description'>
-                {feed.description}
-              </Typography>
-            </div>
-          </CardContent>
-          <dl className='icon-container'>
+                <img src={image} alt='Thumbnail' />
+              </ImgButton>
+            ))}
+          </Box>
+        </Box>
+
+        {/* 상품 리스트 */}
+        <Typography
+          variant='body2'
+          sx={{ mb: 1 }}
+          display={'flex'}
+          alignItems={'center'}
+          fontSize={14}
+        >
+          <Typography mr={1} fontWeight={900} color={'#5ff531'}>
+            #
+          </Typography>
+          상품 태그
+          <Typography fontSize={14} fontWeight={700} ml={1}>
+            {feed.selectedProducts ? feed.selectedProducts.length : 0}
+          </Typography>
+          개
+        </Typography>
+        <Grid
+          container
+          direction='row'
+          sx={{ gap: '16px' }}
+          width={'100%'}
+          position={'relative'}
+          className='product-container'
+        >
+          <Swiper
+            modules={[Navigation]}
+            spaceBetween={20}
+            slidesPerView={6}
+            centeredSlides={false}
+            style={{ marginLeft: 0, width: '100%' }}
+            navigation
+          >
+            {feed.selectedProducts?.map(
+              (
+                product: SelectedProducts // 수정된 부분: Product 타입 대신 SelectedProducts 타입 사용
+              ) => (
+                <SwiperSlide
+                  key={product.productName}
+                  tag='section'
+                  style={{ width: '128px' }}
+                >
+                  <Box width={128}>
+                    <ProductBox className='product-img'>
+                      <img src={product.thumbnail} alt={product.productName} />
+                    </ProductBox>
+                    <ProductInfo variant='body2' gutterBottom>
+                      {product.productName}
+                    </ProductInfo>
+                    <ProductInfo fontWeight={700} variant='body2' gutterBottom>
+                      {formatPrice(parseInt(product.price))}원
+                    </ProductInfo>
+                  </Box>
+                </SwiperSlide>
+              )
+            )}
+          </Swiper>
+        </Grid>
+
+        {/* 컨셉 및 컬러 */}
+        <Box className='tags'>
+          <Box>
+            <Typography variant='body2' color='textSecondary' sx={{ mb: 1 }}>
+              Color
+            </Typography>
+            {feed.colors.map((color: string, index: number) => (
+              <TagButton key={index}>
+                <ColorCircle color={color} />
+                {color}
+              </TagButton>
+            ))}
+          </Box>
+          <Box sx={{ pl: '24px' }}>
+            <Typography variant='body2' color='textSecondary' sx={{ mb: 1 }}>
+              Concept
+            </Typography>
+            {feed.concepts.map((concept: string, index: number) => (
+              <TagButton key={index}>{concept}</TagButton>
+            ))}
+          </Box>
+        </Box>
+
+        <Box>
+          <Typography variant='h5' className='feed-title'>
+            {feed.title}
+          </Typography>
+          <Typography className='feed-description'>
+            {feed.description}
+          </Typography>
+        </Box>
+
+        <Box
+          component='section'
+          justifyContent={'space-between'}
+          className='icon-container'
+        >
+          <Box display='flex' alignItems='center'>
             <LikeButton
               feedId={feed.feedId}
               initialLiked={isLiked}
@@ -161,67 +252,27 @@ const CommunityDetailPage: React.FC = () => {
             <Typography>
               <dt className='dot d-data'>좋아요 {likes}</dt>
             </Typography>
-            <CommentIcon sx={{ fontSize: '24px' }} />
-            <Typography>
-              <dt className='dot d-data'>댓글 {feed.commentCount}</dt>
-            </Typography>
-            <ShareOutlinedIcon sx={{ fontSize: '24px' }}></ShareOutlinedIcon>
+            <ShareIcon sx={{ fontSize: '24px' }} />
             <Typography>
               <dt className='dot d-data'>공유하기</dt>
             </Typography>
-          </dl>
-
-          {/* 여기에는 컬러랑 컨셉 */}
-          <div className='concept-color-tags'>
-            <Typography variant='body2' color='textSecondary' gutterBottom>
-              컨셉:
-            </Typography>
-            <div>
-              {feed.concepts.map((concept: string, index: number) => (
-                <span key={index} className='concept-tag'>
-                  {concept}
-                </span>
-              ))}
-            </div>
-            <Typography variant='body2' color='textSecondary' gutterBottom>
-              컬러:
-            </Typography>
-            <div>
-              {feed.colors.map((color: string, index: number) => (
-                <span key={index} className='color-tag'>
-                  {color}
-                </span>
-              ))}
-            </div>
-          </div>
-        </Card>
-      </Grid>
-      {/* 여기에 상품 리스트 */}
-      <Grid container direction='row' spacing={2} className='product-container'>
-        {feed.selectedProducts.map((product: any) => (
-          <Grid item key={product.productId}>
-            <Card variant='outlined' className='product-card'>
-              <CardContent>
-                <img src={product.thumbnail} alt={product.productName} />
-                <Typography variant='h6' gutterBottom>
-                  {product.productName}
-                </Typography>
-                <Typography variant='body1' gutterBottom>
-                  Price: {product.price}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
+          </Box>
+          <CustomTypography variant='body1'>신고하기</CustomTypography>
+        </Box>
       </Grid>
 
-      <Grid item xs={12} className='comments-container'>
-        <Typography variant='h6' gutterBottom>
-          Comments
-        </Typography>
-        {feed.comments.map((comment: any) => (
+      {/* 댓글 */}
+      <Typography letterSpacing={1} mt={3} mb={3}>
+        <CommentIcon sx={{ fontSize: '24px', mr: 1 }} />
+        댓글 {feed.commentCount}
+      </Typography>
+      {feed.comments?.map(
+        (
+          comment: Comment,
+          index: number // 수정된 부분: map 콜백 함수의 인자에 index 추가
+        ) => (
           <Card
-            key={comment.id}
+            key={index} // 수정된 부분: feed.comment.id 대신 index 사용
             variant='outlined'
             style={{ marginBottom: '10px', width: '100%' }}
           >
@@ -233,44 +284,57 @@ const CommunityDetailPage: React.FC = () => {
                   date={new Date(comment.creationDate)}
                   locale='ko'
                 />
-              } // 한국어 형식으로 표시
+              }
             />
             <CardContent>
               <Typography variant='body1' paragraph>
                 {comment.content}
               </Typography>
+
+              {/* 댓글의 답글 표시 */}
               {comment.replies && (
                 <ul>
-                  {comment.replies.map((reply: any) => (
-                    <li key={reply.id}>
-                      <Card variant='outlined' style={{ marginBottom: '5px' }}>
-                        <CardHeader
-                          avatar={
-                            <Avatar src={reply.profileImage} alt='Profile' />
-                          }
-                          title={reply.accountName}
-                          subheader={
-                            <ReactTimeAgo
-                              date={new Date(reply.creationDate)}
-                              locale='ko'
-                            />
-                          } // 한국어 형식으로 표시
-                        />
-                        <CardContent>
-                          <Typography variant='body1' paragraph>
-                            {reply.content}
-                          </Typography>
-                        </CardContent>
-                      </Card>
-                    </li>
-                  ))}
+                  {comment.replies.map(
+                    (
+                      reply: Comment,
+                      replyIndex: number // 수정된 부분: map 콜백 함수의 인자에 replyIndex 추가
+                    ) => (
+                      <li key={replyIndex}>
+                        {' '}
+                        {/* 수정된 부분: reply.id 대신 replyIndex 사용 */}
+                        <Card
+                          variant='outlined'
+                          style={{ marginBottom: '5px' }}
+                        >
+                          <CardHeader
+                            avatar={
+                              <Avatar src={reply.profileImage} alt='Profile' />
+                            }
+                            title={reply.accountName}
+                            subheader={
+                              <ReactTimeAgo
+                                date={new Date(reply.creationDate)}
+                                locale='ko'
+                              />
+                            }
+                          />
+                          <CardContent>
+                            <Typography variant='body1' paragraph>
+                              {reply.content}
+                            </Typography>
+                          </CardContent>
+                        </Card>
+                      </li>
+                    )
+                  )}
                 </ul>
               )}
             </CardContent>
           </Card>
-        ))}
-      </Grid>
-      <Grid item xs={12}>
+        )
+      )}
+      {/* 댓글 작성 */}
+      <Container>
         <TextField
           label='Write a comment...'
           variant='outlined'
@@ -285,8 +349,8 @@ const CommunityDetailPage: React.FC = () => {
         >
           Submit
         </Button>
-      </Grid>
-    </Grid>
+      </Container>
+    </Box>
   );
 };
 

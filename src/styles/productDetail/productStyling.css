@@ -1,0 +1,42 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+#stylingTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 8px;
+}
+
+#stlyingSub {
+  display: flex;
+  align-items: center;
+}
+
+#stylingTitle {
+  margin-right: 8px;
+}
+
+#stylingBox {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.stylingItem {
+  width: 15vw;
+  height: 15vw;
+  background-image: url(https://image.ohou.se/i/video-service-prd-s3-bucket-thumbnail/651ca73023d57f18887e5017/651ca73023d57f18887e5017.0000001.jpg?gif=1&w=360&webp=1);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 4px;
+  border-radius: 5px;
+  cursor: pointer;
+}/*# sourceMappingURL=productStyling.css.map */

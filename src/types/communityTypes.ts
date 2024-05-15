@@ -6,6 +6,7 @@ export interface Comment {
   content: string;
   parentId?: string;
   creationDate: string;
+  replies?: Comment[];
 }
 
 export interface SelectedProducts {

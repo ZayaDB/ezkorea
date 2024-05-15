@@ -1,0 +1,61 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+.point {
+  color: #5ff531;
+}
+
+.gray {
+  color: #4c4c4c;
+}
+
+.lightgray {
+  color: #e5e5e5;
+}
+
+.red {
+  color: red;
+}
+
+.order-info {
+  border: solid 2px black;
+  width: 100%;
+  padding: 30px 45px;
+  font-size: 16px;
+  font-family: "Pretendard Variable";
+  font-weight: 400;
+}
+.order-info .title {
+  font-size: 16px;
+  font-family: "Pretendard Variable";
+  font-weight: 700;
+}
+.order-info .order-summary div {
+  margin-bottom: 10px;
+}
+@media screen and (min-width: 900px) {
+  .order-info {
+    position: sticky;
+    top: 100px;
+    right: 0;
+    width: 50%;
+    height: 50%;
+    margin-left: 30px;
+    padding: 25px 20px;
+  }
+  .order-info .order-summary div {
+    margin-bottom: 5px;
+  }
+  .order-info .line {
+    border-color: #e5e5e5;
+    border-width: 1px;
+  }
+}
+.space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.space-between .total-amount {
+  font-weight: 700;
+  font-size: 25px;
+  display: flex;
+}/*# sourceMappingURL=orderInfo.css.map */
