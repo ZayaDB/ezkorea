@@ -4,7 +4,7 @@
     "subCategories": [
       {
         "name": "ALL",
-        "imagePath": ""
+        "imagePath": "https://i.ibb.co/CmsdBKL/Frame-1043.png"
       },
       {
         "name": "책상",
@@ -12,7 +12,7 @@
       },
       {
         "name": "의자",
-        "imagePath": "https://rareraw.com/web/product/extra/small/202308/04e2fef341b6917c946a9bdd8e91823f.jpg"
+        "imagePath": "https://itgagu.co.kr/data/item/1505809616/7I2464Sk7J287KCR7J2Y7J6QGIF.gif"
       },
       {
         "name": "모니터 스탠드",
@@ -31,7 +31,7 @@
   {
     "name": "전자기기",
     "subCategories": [
-      { "name": "ALL", "imagePath": "" },
+      { "name": "ALL", "imagePath": "https://i.ibb.co/CmsdBKL/Frame-1043.png" },
       {
         "name": "키보드",
         "imagePath": "https://image.ohou.se/i/bucketplace-v2-development/uploads/openapi/20917509/1689294763470.jpg?gif=1&w=1280&h=1280&c=c&webp=1"
@@ -57,7 +57,7 @@
   {
     "name": "조명/인테리어",
     "subCategories": [
-      { "name": "ALL", "imagePath": "" },
+      { "name": "ALL", "imagePath": "https://i.ibb.co/CmsdBKL/Frame-1043.png" },
       {
         "name": "조명",
         "imagePath": "https://bibliotheque.co.kr/web/product/big/202312/ae61136d20b7d6a38d9bee971a083a16.jpeg"
@@ -91,7 +91,7 @@
   {
     "name": "데코/식물",
     "subCategories": [
-      { "name": "ALL", "imagePath": "" },
+      { "name": "ALL", "imagePath": "https://i.ibb.co/CmsdBKL/Frame-1043.png" },
       {
         "name": "디퓨저",
         "imagePath": "https://cdn.crowdpic.net/detail-thumb/thumb_d_284948CC9839086E65AE961B59F43613.png"

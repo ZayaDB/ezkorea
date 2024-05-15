@@ -242,10 +242,10 @@ export default function SelectPurchase() {
               <div className='purChaseTotal'>145,000원</div>
             </div>
             <div id='buttons'>
-              <div className='cartBtn'>
+              <Box className='cartBtn' onClick={handleSubmit}>
                 <AddShoppingCartIcon />
-              </div>
-              <Box className='purchaseBtn' onClick={handleSubmit}>
+              </Box>
+              <Box className='purchaseBtn' >
                 주문하기
               </Box>
             </div>
