@@ -132,24 +132,25 @@ export default function SignIn() {
     setEmailValid(regex.test(inputEmail));
   };
 
-
   const handlePassWord = (e: ChangeEvent<HTMLInputElement>) => {
     const inputPassWord: string = e.target.value;
     setPw(inputPassWord);
     setPwTouched(true);
     setErrorMessage('');
-    const regex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,20}$/;
+    const regex =
+      /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,20}$/;
     setPwValid(regex.test(inputPassWord));
   };
 
   const onClickConfirmButton = () => {
-    const user = userData.find((user) => user.email === email);
+    const user = userData.find(user => user.email === email);
 
     if (emailValid && pwValid) {
       if (user) {
         if (user.password === pw) {
           console.log('success');
           sessionStorage.setItem('isLoggedIn', 'true');
+          sessionStorage.setItem('UserData', JSON.stringify(userData));
           navigate('/');
         } else {
           setErrorMessage('비밀번호가 틀렸습니다.');

@@ -14,7 +14,7 @@ interface CategoryData {
 }
 
 const LinkItem = styled(NavLink)({
-  padding: '8px 12px',
+  padding: '8px',
   textDecoration: 'none',
   whiteSpace: 'nowrap',
   color: '#191919',
@@ -53,36 +53,58 @@ const IconNav: React.FC = () => {
   return (
     <div
       style={{
+        width: '100%',
         display: 'flex',
-        flexDirection: 'row',
-        overflowX: 'scroll',
-        scrollbarWidth: 'none',
+        justifyContent: 'center',
+        marginTop: '5px',
       }}
     >
-      {category.map((cate: CategoryData) =>
-        cate.subCategories
-          .filter(subCategory => subCategory.name !== 'ALL')
-          .map((subCategory, subIndex) => (
-            <LinkItem
-              key={subIndex}
-              to={`/shop?category=${encodeURIComponent(
-                cate.name
-              )}&subCategory=${encodeURIComponent(subCategory.name)}`}
-              color='inherit'
-              onClick={() =>
-                handleSubCategoryClick(cate.name, subCategory.name)
-              }
-            >
-              <img
-                src={subCategory.imagePath}
-                alt=''
-                width='140px'
-                height='140px'
-              />
-              <div style={{ textAlign: 'center' }}>{subCategory.name}</div>
-            </LinkItem>
-          ))
-      )}
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          overflowX: 'scroll',
+          scrollbarWidth: 'none',
+          maxWidth: '1150px',
+        }}
+      >
+        {category.map((cate: CategoryData, cateIndex) =>
+          cate.subCategories
+            .filter(subCategory => subCategory.name !== 'ALL')
+            .map((subCategory, subIndex) => {
+              // 두 번째 카테고리의 첫 번째와 두 번째 아이템 크기 조절
+              const isSmall =
+                cateIndex === 1 && (subIndex === 0 || subIndex === 1);
+              return (
+                <LinkItem
+                  key={subIndex}
+                  to={`/shop?category=${encodeURIComponent(
+                    cate.name
+                  )}&subCategory=${encodeURIComponent(subCategory.name)}`}
+                  color='inherit'
+                  onClick={() =>
+                    handleSubCategoryClick(cate.name, subCategory.name)
+                  }
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                  }}
+                >
+                  <img
+                    src={subCategory.imagePath}
+                    alt={subCategory.name}
+                    style={{
+                      width: isSmall ? '126px' : '126px',
+                      height: isSmall ? '126px' : '126px',
+                    }}
+                  />
+                  <div style={{ textAlign: 'center' }}>{subCategory.name}</div>
+                </LinkItem>
+              );
+            })
+        )}
+      </div>
     </div>
   );
 };

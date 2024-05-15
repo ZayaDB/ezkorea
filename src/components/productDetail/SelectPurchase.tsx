@@ -1,6 +1,5 @@
 import '../../styles/productDetail/selectPurchase.scss';
-import * as React from 'react';
-import Box from '@mui/material/Box';
+import { Box } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -14,7 +13,16 @@ import { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../../styles/theme';
-
+import { useDispatch } from 'react-redux';
+import {
+  setSelectedOption,
+  setSelectedQuantity,
+  setSelectedProductId,
+} from '../../redux/slices/productSlice'; // Redux slice의 액션 import
+import { useNavigate } from 'react-router-dom';
+import { Product } from '../../types/productDetail';
+import { addCommasToNumber } from '../../hooks/addCommasToNumber';
+import ProtectedButton from '../common/ProtectedButton';
 // const useStyles = makeStyle(theme => ({
 //   tablet: {
 //     width: '768px',
@@ -24,23 +32,7 @@ import theme from '../../styles/theme';
 //   },
 // }));
 // const matches = useMediaQuery('(max-width:768px)');
-export interface Product {
-  prodId: number;
-  product_image: string;
-  brand_name: string;
-  product_name: string;
-  regular_price: number;
-  discount_rate: number;
-  discounted_price: number;
-  benefit?: number;
-  commentCount?: number;
-  colorOption?: string[];
-  community_feed?: string;
-  product_info_image?: string;
-  delivery_refund?: string;
-  inquiryTotal?: number;
-  related_products?: string[];
-}
+
 export default function SelectPurchase() {
   // // 드롭다운
   // const [color, setColor] = useState('');
@@ -58,13 +50,17 @@ export default function SelectPurchase() {
   //     setOptions(prevOptions => [...prevOptions, generateOption(color)]);
   //   }
   // };
-  const [spInfo, setSpInfo] = useState<Product | null>();
-  console.log(spInfo);
+  const [spInfo, setSpInfo] = useState<Product>();
+  const navigate = useNavigate();
+  const [selectedColors, setSelectedColors] = useState<string[]>([]);
+  const [counts, setCounts] = useState<number[]>([]);
+  const dispatch = useDispatch();
+
   // fetch
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('/data/productDetail.json');
+        const response = await fetch('/data/prodDetail.json');
         const data = await response.json();
         const purchase = data[0];
 
@@ -76,9 +72,6 @@ export default function SelectPurchase() {
 
     fetchData();
   }, []);
-
-  const [selectedColors, setSelectedColors] = useState<string[]>([]);
-  const [counts, setCounts] = useState<number[]>([]);
 
   const handleChange = (event: SelectChangeEvent<string>) => {
     const selectedColor = event.target.value;
@@ -113,59 +106,74 @@ export default function SelectPurchase() {
     setCounts(counts.filter((_, i) => i !== index));
   };
 
+  const handleSubmit = () => {
+    const selectedProductId = spInfo?.prodId || 0;
+    dispatch(setSelectedOption(selectedColors));
+    dispatch(setSelectedQuantity(counts));
+    dispatch(setSelectedProductId(selectedProductId));
+
+    navigate('/cart');
+  };
+  // 계산기
+  const calculateTotalPrice = (
+    discountedPrice: number,
+    count: number
+  ): number => {
+    return discountedPrice * count;
+  };
+
   return (
     <ThemeProvider theme={theme}>
-      <Grid
-        container
-        direction='row'
-        justifyContent='center'
-        alignItems='center'
-      >
-        <div id='selectBox'>
-          <div id='selectPurchase'>
-            <div id='purchaseInfo'>
-              <div id='brandShare'>
-                <div className='productBrand'>일광전구</div>
-                <div id='shIcon'>
-                  <div className='shareIcon'>
-                    <ShareIcon />
-                  </div>
-                  <div id='heartZone'>
-                    <div className='heartIcon'>
-                      <FavoriteBorderIcon />
-                    </div>
-                    <div className='heartTotal'>28,742</div>
-                  </div>
+      <Grid container justifyContent='center' alignItems='center'>
+        <div id='selectPurchase'>
+          <div id='purchaseInfo'>
+            <div id='brandShare'>
+              <div className='productBrand'>{spInfo?.brand_name}</div>
+              <div id='shIcon'>
+                <div className='shareIcon'>
+                  <ShareIcon />
                 </div>
-              </div>
-              <div className='productName'>
-                제로데스크 에보 테이블 컴퓨터 책상 2Colors
-              </div>
-              <div id='priceZone'>
-                <div className='sellingPrice'>190,000원</div>
-                <div id='sale'>
-                  <div className='discountRate'>23%</div>
-                  <div className='discountedPrice'>145,000원</div>
+                <div id='heartZone'>
+                  <div className='heartIcon'>
+                    <FavoriteBorderIcon />
+                  </div>
+                  <div className='heartTotal'>28,742</div>
                 </div>
               </div>
             </div>
-            <div id='savingDelivery'>
-              <div className='saving'>
-                <div className='subtitle'>혜택</div>
-                <div id='savingPoint'>145P 적립</div>
+            <div className='productName'>{spInfo?.product_name}</div>
+            <div id='priceZone'>
+              <div className='sellingPrice'>
+                {addCommasToNumber(spInfo?.regular_price ?? 0)}
               </div>
-              <div className='delivery'>
-                <div id='deliveryZone'>
-                  <div className='subtitle'>배송</div>
-                  <div className='deliveryPrice'>무료 배송</div>
+              <div id='sale'>
+                <div className='discountRate'>{spInfo?.discount_rate}%</div>
+                <div className='discountedPrice'>
+                  {addCommasToNumber(spInfo?.discounted_price ?? 0)}원
                 </div>
-                <div className='deliveryDetailInfo'>5/17(금) 도착 예정</div>
               </div>
             </div>
-            <div id='selectProduct'>
-              <Box sx={{ maxWidth: 479 }}>
-                <FormControl fullWidth>
-                  <InputLabel id='demo-simple-select-label'>color</InputLabel>
+          </div>
+          <div id='savingDelivery'>
+            <div className='saving'>
+              <div className='subtitle'>혜택</div>
+              <div id='savingPoint'>145P 적립</div>
+            </div>
+            <div className='delivery'>
+              <div id='deliveryZone'>
+                <div className='subtitle'>배송</div>
+                <div className='deliveryPrice'>
+                  <div>50000원 이상 구매시</div>
+                  <div className='free'>무료배송</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id='selectProduct'>
+            <Box sx={{ maxWidth: 479 }}>
+              <FormControl fullWidth>
+                <InputLabel id='demo-simple-select-label'>color</InputLabel>
+                {spInfo && spInfo.colorOption && (
                   <Select
                     labelId='demo-simple-select-label'
                     id='demo-simple-select'
@@ -173,63 +181,80 @@ export default function SelectPurchase() {
                     label='color*'
                     onChange={handleChange}
                   >
-                    <MenuItem value={'White'}>White</MenuItem>
-                    <MenuItem value={'Black'}>Black</MenuItem>
+                    {spInfo.colorOption.map((color, index) => (
+                      <MenuItem key={index} value={color}>
+                        {color}
+                      </MenuItem>
+                    ))}
                   </Select>
-                </FormControl>
-              </Box>
-            </div>
-            <div id='selectedPurchase'>
-              {/* 추가된 선택 옵션들을 렌더링함 */}
-              {selectedColors.map((selectedColor, index) => (
-                <div key={selectedColor}>
-                  <div id='optionBox'>
-                    <div className='selectedColor'>{selectedColor}</div>
-                    <div id='countZone'>
-                      <div className='selectedCount'>
-                        <ButtonGroup
-                          size='small'
-                          variant='contained'
-                          aria-label='Basic button group'
-                        >
-                          <Button
-                            onClick={() => handleIncrease(index)}
-                            color='secondary'
-                          >
-                            +
-                          </Button>
-                          <Button color='secondary'>{counts[index]}</Button>
-                          <Button
-                            onClick={() => handleDecrease(index)}
-                            disabled={counts[index] === 1}
-                            color='secondary'
-                          >
-                            -
-                          </Button>
-                        </ButtonGroup>
-                      </div>
-                      <div className='sellingPrice'>190,000원</div>
-                      <button
-                        className='selectedClose'
-                        onClick={() => onRemove(index)}
+                )}
+              </FormControl>
+            </Box>
+          </div>
+          <div id='selectedPurchase'>
+            {/* 추가된 선택 옵션들을 렌더링함 */}
+            {selectedColors.map((selectedColor, index) => (
+              <div key={selectedColor}>
+                <div id='optionBox'>
+                  <div className='selectedColor'>{selectedColor}</div>
+                  <div id='countZone'>
+                    <div className='selectedCount'>
+                      <ButtonGroup
+                        size='small'
+                        variant='contained'
+                        aria-label='Basic button group'
                       >
-                        x
-                      </button>
+                        <Button
+                          onClick={() => handleIncrease(index)}
+                          color='secondary'
+                        >
+                          +
+                        </Button>
+                        <Button color='secondary'>{counts[index]}</Button>
+                        <Button
+                          onClick={() => handleDecrease(index)}
+                          disabled={counts[index] === 1}
+                          color='secondary'
+                        >
+                          -
+                        </Button>
+                      </ButtonGroup>
                     </div>
+                    <div className='sellingPrice'>
+                      {addCommasToNumber(spInfo?.regular_price ?? 0)}원
+                    </div>
+                    <button
+                      className='selectedClose'
+                      onClick={() => onRemove(index)}
+                    >
+                      x
+                    </button>
                   </div>
                 </div>
-              ))}
-            </div>
-            <div id='purchaseZone'>
-              <div className='PurchaseTitle'>주문금액</div>
-              <div className='purChaseTotal'>145,000원</div>
-            </div>
-            <div id='buttons'>
-              <div className='cartBtn'>
-                <AddShoppingCartIcon />
               </div>
-              <div className='purchaseBtn'>주문하기</div>
+            ))}
+          </div>
+          <div id='purchaseZone'>
+            <div className='PurchaseTitle'>주문금액</div>
+            <div className='purChaseTotal'>
+              {addCommasToNumber(
+                calculateTotalPrice(
+                  spInfo?.discounted_price ?? 0,
+                  counts.reduce((acc, curr) => acc + curr, 0)
+                )
+              )}
+              원
             </div>
+          </div>
+          <div id='buttons'>
+            <div className='cartBtn'>
+              <AddShoppingCartIcon />
+            </div>
+            <Box className='purchaseBtn'>
+              <ProtectedButton redirectTo='/login' onClick={handleSubmit}>
+                주문하기
+              </ProtectedButton>
+            </Box>
           </div>
         </div>
       </Grid>

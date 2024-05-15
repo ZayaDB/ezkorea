@@ -3,35 +3,17 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import Button from '@mui/material/Button';
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
-import TextField from '@mui/material/TextField';
-import Grid from '@mui/material/Grid';
-// import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { useEffect, useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../../styles/theme';
-// import { createTheme, makeStyles } from '@mui/material';
-// const [currentPage, setCurrentPage] = useState(1);
-// const onPageChange = (e: React.ChangeEvent<unknown>, page: number) => {
-//   setCurrentPage(page);
-// };
-
-// interface ProductDetail {
-//   children: React.ReactNode;
-//   page: number;
-//   index: number;
-// }
-// export const theme = createTheme({
-//   palette: {
-//     primary: {
-//       main: '#4AD395',
-//     },
-//   },
-// });
+import Grid from '@mui/material/Grid';
+// import Button from '@mui/material/Button';
+// import Typography from '@mui/material/Typography';
+// import Modal from '@mui/material/Modal';
+// import Snackbar from '@mui/material/Snackbar';
+// import Alert from '@mui/material/Alert';
+// import TextField from '@mui/material/TextField';
+// import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 export interface Review {
   reUserId: number;
@@ -43,102 +25,45 @@ export interface Review {
   contentText: string;
 }
 
-// Pagination
-// const OpenPage = (props: ProductDetail) => {
-//   const { children, page, index } = props;
-//   return (
-//     <div hidden={page !== index}>
-//       {page === index && <Box mt={2}>{children}</Box>}
-//     </div>
-//   );
+// Modal
+// const style = {
+//   position: 'absolute',
+//   top: '50%',
+//   left: '50%',
+//   transform: 'translate(-50%, -50%)',
+//   width: 500,
+//   bgcolor: 'background.paper',
+//   border: '2px solid #000',
+//   boxShadow: 24,
+//   p: 4,
 // };
 
-// Modal
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 500,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
-// file
-export function FileInput() {
-  const inputRef = useRef(null);
-
-  const [selectedFile, setSelectedFile] = useState(null);
-
-  // Handle the change event when a file is selected
-  const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event?.target.files && event.target.files.length > 0) {
-      // setSelectedFile(event.target[0]);
-    }
-  };
-
-  const onChooseFile = () => {
-    // inputRef.current.click();
-  };
-  const removeFile = () => {
-    setSelectedFile(null);
-  };
-
-  return (
-    <div>
-      {/* Hidden file input element */}
-      <input
-        type='file'
-        ref={inputRef}
-        onChange={handleOnChange}
-        style={{ display: 'none' }}
-      />
-
-      {/* Button to trigger the file input dialog */}
-      <button className='fileBtn' onClick={onChooseFile}>
-        <span className='upload'>upload</span>Upload File
-      </button>
-
-      {selectedFile && (
-        <div className='selectedFile'>
-          <p>{selectedFile}</p>
-
-          <button onClick={removeFile}>
-            <span className='upload'>delete</span>
-          </button>
-        </div>
-      )}
-    </div>
-  );
-}
-
 export default function Review() {
+  // Modal
+  // const [open, setOpen] = useState(false);
+  // const handleOpen = () => setOpen(true);
+  // const handleClose = () => setOpen(false);
+
+  // Snackbar
+  // const [openSnack, setOpenSnack] = useState(false);
+  // const snackClick = () => {
+  //   setOpenSnack(true);
+  // };
+  // const snackClose = (
+  //   event?: React.SyntheticEvent | Event,
+  //   reason?: string
+  // ) => {
+  //   if (reason === 'clickaway') {
+  //     return;
+  //   }
+
+  //   setOpenSnack(false);
+  // };
+
   // 리뷰 개수
   const [rvTotal, setRvTotal] = useState();
   // rating
   const value = 3.5;
-
-  // Modal
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  // Snackbar
-  const [openSnack, setOpenSnack] = useState(false);
-  const snackClick = () => {
-    setOpenSnack(true);
-  };
-  const snackClose = (
-    event?: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpenSnack(false);
-  };
   // pagination
   const [page, setPage] = useState(1);
   const [reviewData, setReviewData] = useState<Review[]>([]);
@@ -179,8 +104,7 @@ export default function Review() {
   const endIndex = page * reviewsPerPage;
   const currentReviews = reviewData.slice(startIndex, endIndex);
   console.log(currentReviews);
-  // 소팅
-  // 정렬
+
   // 별점 높은순 정렬
   const sortByHighestRating = () => {
     const sorted = [...reviews].sort((a, b) => b.rating - a.rating);
@@ -227,13 +151,13 @@ export default function Review() {
               <div className='rating'>평점</div>
             </div>
           </div>
-          <div id='writeReview'>
+          {/* <div id='writeReview'>
             <Button onClick={handleOpen}>
               <h6>리뷰쓰기</h6>
             </Button>
-          </div>
+          </div> */}
         </div>
-        <div>
+        {/* <div>
           <Modal
             open={open}
             onClose={handleClose}
@@ -262,7 +186,6 @@ export default function Review() {
                   <div id='file'>
                     <div className='reviewTitle'>사진 첨부(선택)</div>
                     <div>사진을 첨부해주세요.(최대 1장)</div>
-                    <FileInput />
                   </div>
                   <div id='writingReview'>
                     <div className='reviewTitle'>리뷰 작성</div>
@@ -295,7 +218,7 @@ export default function Review() {
               고객님의 소중한 리뷰가 등록되었습니다.
             </Alert>
           </Snackbar>
-        </div>
+        </div> */}
 
         <div id='reviewSorting'>
           <button className='highestRating' onClick={sortByHighestRating}>
@@ -319,7 +242,7 @@ export default function Review() {
                   <Stack spacing={1}>
                     <Rating
                       name='size-small'
-                      defaultValue={item.rating}
+                      value={item.rating}
                       size='small'
                       readOnly
                     />

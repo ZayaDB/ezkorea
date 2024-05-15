@@ -15,7 +15,6 @@ export default function LikesProduct() {
 
   return (
     <div className='likes-page'>
-      <h1> 찜한 상품 </h1>
       <div className='likes-content'>
         {/* 좋아요가 눌려있는 상품들을 순회하면서 ProductItem 컴포넌트를 렌더링 */}
         {likedProducts.map(product => (

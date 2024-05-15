@@ -13,6 +13,7 @@ export default function ProductsStyling() {
         direction='row'
         justifyContent='center'
         alignItems='center'
+        sx={{ maxWidth: 'md' }}
       >
         <div id='productStyling'>
           <div id='stylingTop'>

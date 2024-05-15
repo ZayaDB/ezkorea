@@ -6,6 +6,7 @@ import {
   DeliveryInfoType,
   PhoneNum,
   Discount,
+  Mileage,
   PaymentMethod,
 } from '../../types/checkoutTypes';
 
@@ -16,6 +17,7 @@ export interface CheckoutState {
   deliveryInfoType: DeliveryInfoType[];
   phoneNum: PhoneNum[];
   discount: Discount[];
+  mileage: Mileage[];
   paymentMethod: PaymentMethod[];
 }
 
@@ -25,7 +27,17 @@ const initialState: CheckoutState = {
   orderInfo: [],
   deliveryInfoType: [],
   phoneNum: [],
-  discount: [],
+  discount: [
+    {
+      discountChecked: false,
+      productCoupon: true,
+    },
+  ],
+  mileage: [
+    {
+      mileage: 0,
+    },
+  ],
   paymentMethod: [],
 };
 
@@ -49,6 +61,9 @@ export const CheckouteSlice = createSlice({
     setDiscount: (state, action: PayloadAction<Discount[]>) => {
       state.discount = action.payload;
     },
+    setMileage: (state, action: PayloadAction<Mileage[]>) => {
+      state.mileage = action.payload;
+    },
     setPaymentMethod: (state, action: PayloadAction<PaymentMethod[]>) => {
       state.paymentMethod = action.payload;
     },
@@ -62,6 +77,7 @@ export const {
   setDeliveryInfoType,
   setPhoneNum,
   setDiscount,
+  setMileage,
   setPaymentMethod,
 } = CheckouteSlice.actions;
 

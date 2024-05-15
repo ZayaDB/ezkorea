@@ -1,66 +1,66 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
-import { useState } from 'react';
-// import '../../styles/productDetail/inquire.scss';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Typography from '@mui/material/Typography';
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
-import Container from '@mui/material/Container';
+// import * as React from 'react';
+// import Box from '@mui/material/Box';
+// import Modal from '@mui/material/Modal';
+// import Button from '@mui/material/Button';
+// import ButtonGroup from '@mui/material/ButtonGroup';
+// import { useState } from 'react';
+// import InputLabel from '@mui/material/InputLabel';
+// import MenuItem from '@mui/material/MenuItem';
+// import FormControl from '@mui/material/FormControl';
+// import Select, { SelectChangeEvent } from '@mui/material/Select';
+// import TextField from '@mui/material/TextField';
+// import FormControlLabel from '@mui/material/FormControlLabel';
+// import Checkbox from '@mui/material/Checkbox';
+// import Typography from '@mui/material/Typography';
+// import Snackbar from '@mui/material/Snackbar';
+// import Container from '@mui/material/Container';
+// import Alert from '@mui/material/Alert';
 import Pagination from '@mui/material/Pagination';
 import Grid from '@mui/material/Grid';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../../styles/theme';
+import '../../styles/productDetail/inquire.scss';
 
-// Modal
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 500,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
+// // Modal
+// const style = {
+//   position: 'absolute',
+//   top: '50%',
+//   left: '50%',
+//   transform: 'translate(-50%, -50%)',
+//   width: 500,
+//   bgcolor: 'background.paper',
+//   border: '2px solid #000',
+//   boxShadow: 24,
+//   p: 4,
+// };
 
 export default function Inquire() {
-  // Modal
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  // // Modal
+  // const [open, setOpen] = useState(false);
+  // const handleOpen = () => setOpen(true);
+  // const handleClose = () => setOpen(false);
 
-  // Snackbar
-  const [openSnack, setOpenSnack] = useState(false);
-  const snackClick = () => {
-    setOpenSnack(true);
-  };
-  const snackClose = (
-    event?: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === 'clickaway') {
-      return;
-    }
+  // // Snackbar
+  // const [openSnack, setOpenSnack] = useState(false);
+  // const snackClick = () => {
+  //   setOpenSnack(true);
+  // };
+  // const snackClose = (
+  //   event?: React.SyntheticEvent | Event,
+  //   reason?: string
+  // ) => {
+  //   if (reason === 'clickaway') {
+  //     return;
+  //   }
 
-    setOpenSnack(false);
-  };
+  //   setOpenSnack(false);
+  // };
 
   // 선택
-  const [color, setColor] = React.useState('');
-  const handleChange = (event: SelectChangeEvent) => {
-    setColor(event.target.value as string);
-  };
+  // const [color, setColor] = React.useState('');
+  // const handleChange = (event: SelectChangeEvent) => {
+  //   setColor(event.target.value as string);
+  // };
   return (
     <ThemeProvider theme={theme}>
       <div>
@@ -69,12 +69,12 @@ export default function Inquire() {
             <div className='inquiryTitle'>문의</div>
             <div className='inquiryTotal'>문의 수</div>
           </div>
-          <div>
+          {/* <div>
             <Button onClick={handleOpen}>문의하기</Button>
-          </div>
+          </div> */}
         </div>
         <div>
-          <Modal
+          {/* <Modal
             open={open}
             onClose={handleClose}
             aria-labelledby='modal-modal-title'
@@ -146,9 +146,9 @@ export default function Inquire() {
                 <Button onClick={snackClick}>문의하기</Button>
               </Container>
             </Box>
-          </Modal>
+          </Modal> */}
         </div>
-        <div>
+        {/* <div>
           <Snackbar
             open={openSnack}
             autoHideDuration={6000}
@@ -163,7 +163,7 @@ export default function Inquire() {
               문의가 등록되었습니다.
             </Alert>
           </Snackbar>
-        </div>
+        </div> */}
         <div id='writingInquiry'>
           <div className='inquiryItem'>
             <div>

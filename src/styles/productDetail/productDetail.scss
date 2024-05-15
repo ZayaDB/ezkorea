@@ -45,20 +45,46 @@ $border: 1px solid lightgray;
   display: flex;
   justify-content: baseline;
   max-width: 1200px;
-  width: 100%;
   padding-top: 8px;
   // border: 1px solid black;
   margin: 0 auto;
+  @media (min-width: 1201px) {
+    display: flex;
+    justify-content: baseline;
+    max-width: 1200px;
+    padding-top: 8px;
+    // border: 1px solid black;
+    margin: 0 auto;
+  }
 }
 .detailMain {
-  width: 85vh;
+  width: 70%;
+  max-width: 70%;
   padding: 0;
-  margin-right: 8px;
+  // border: 1px solid black;
+  @media (min-width: 1201px) {
+    width: 70%;
+    max-width: 70%;
+    min-width: 70%;
+    padding: 0;
+    // border: 1px solid black;
+  }
 }
 .detailSide {
-  width: calc(1200px - (85vh + 8px));
-  height: calc(100vh - 200px);
+  width: 360px;
+  min-width: 360px;
+  max-width: 360px;
   @include column();
+  position: relative;
+  // border: 1px solid black;
+  @media (min-width: 1201px) {
+    width: 360px;
+    min-width: 360px;
+    max-width: 360px;
+    @include column();
+    // border: 1px solid black;
+    position: relative;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -71,15 +97,19 @@ $border: 1px solid lightgray;
     margin: 0 auto;
   }
   .detailMain {
-    width: 100%; /* 80%의 가로 너비를 차지하도록 함 */
+    width: 480px; /* 80%의 가로 너비를 차지하도록 함 */
   }
 
   .detailSide {
     width: 480px; /* 가로 너비를 100%로 설정하여 가득 차도록 함 */
+    position: static;
+    margin: 0 auto;
   }
 }
 @media (max-width: 360px) {
   .detailPage {
+    width: 360px;
+    min-width: 360px;
     max-width: 360px;
     display: flex;
     flex-direction: column;
@@ -89,12 +119,14 @@ $border: 1px solid lightgray;
     padding: 0;
   }
   .detailMain {
-    width: 100%;
+    width: 360px;
     padding: 0;
-    margin: 0px;
+    margin: 0;
   }
 
   .detailSide {
-    width: 340px; /* 가로 너비를 100%로 설정하여 가득 차도록 함 */
+    width: 360px; /* 가로 너비를 100%로 설정하여 가득 차도록 함 */
+    position: static;
+    margin: 0 auto;
   }
 }
