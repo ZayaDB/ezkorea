@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../styles/order/orderInfo.scss';
 import CloseButton from 'react-bootstrap/CloseButton';
 import {
@@ -33,9 +33,13 @@ export default function OrderInfo() {
   const discountedPrice = useSelector(
     (state: RootState) => state.product.products[0].discounted_price
   );
-  // const mileage = useSelector(
-  //   (state: RootState) => state.checkout.discount[0].mileage
-  // );
+  const mileage = useSelector(
+    (state: RootState) => state.checkout.mileage[0].mileage
+  );
+
+  const discountChecked = useSelector(
+    (state: RootState) => state.checkout.discount[0].discountChecked
+  );
 
   /* 체크박스 */
   const [isAllChecked, setIsAllChecked] = useState(false);
@@ -46,6 +50,29 @@ export default function OrderInfo() {
     // 인자의 타입 명시
     setIsAllChecked(isChecked);
   };
+
+  const [discount, setDiscount] = useState<number>(0);
+
+  useEffect(() => {
+    if (discountChecked == true) {
+      setDiscount(0);
+    } else setDiscount(productPrice - discountedPrice);
+  }, [discountChecked]);
+
+  const [point, setPoint] = useState(0);
+
+  useEffect(() => {
+    if (mileage) {
+      setPoint(mileage);
+    } else setPoint(0);
+  }, [mileage]);
+
+  const [shipping, setShipping] = useState(5000);
+
+  useEffect(() => {
+    if (productPrice > 50000) setShipping(5000);
+    else setShipping(0);
+  }, [productPrice]);
 
   return (
     <div className='order-info'>
@@ -60,9 +87,7 @@ export default function OrderInfo() {
         <div className='coupon'>
           <div className='red space-between'>
             <span>쿠폰 할인 금액</span>
-            <span>
-              - {addCommasToNumber(productPrice - discountedPrice)} 원
-            </span>
+            <span>- {addCommasToNumber(discount)} 원</span>
           </div>
           {/* <div className='space-between'>
             <span>
@@ -73,23 +98,23 @@ export default function OrderInfo() {
         </div>
         <div className='space-between'>
           <span>마일리지 사용</span>
-          <span>- {productPrice} P</span>
+          <span>- {addCommasToNumber(point)} P</span>
         </div>
         <div className='space-between'>
           <span>배송비</span>
-          <span>+ 5,000 원</span>
+          <span>+ {addCommasToNumber(5000)} 원</span>
         </div>
         <div className='space-between'>
           <span>
             <span className='lightgray'>↳</span>장바구니 쿠폰
           </span>
-          <span>- 5000 원</span>
+          <span>- {addCommasToNumber(shipping)} 원</span>
         </div>
 
         <div className='space-between'>
           <span>총 결제 금액</span>
           <span className='total-amount red'>
-            {addCommasToNumber(discountedPrice)} 원
+            {addCommasToNumber(productPrice - discount - point)} 원
           </span>
         </div>
 

@@ -37,7 +37,11 @@ export interface Discount {
   productCoupon?: boolean;
   productCouponAmount?: number;
   shippingCoupon?: boolean;
+}
+
+export interface Mileage {
   mileage?: number;
+  mileageAll?: boolean;
 }
 
 export interface PaymentMethod {
