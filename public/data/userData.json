@@ -37,7 +37,7 @@
     "myLikedFeeds": [
       {
         "feedId": 2,
-        "image": "",
+        "image": "https://bucketplace-v2-development.s3.amazonaws.com/profileImageUrl/171253915990660377.jpeg",
         "accountName": "creative_mind",
         "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
         "views": 4987,
@@ -45,7 +45,7 @@
       },
       {
         "feedId": 3,
-        "image": "",
+        "image": "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/project/171254527839226047.jpg?w=720",
         "accountName": "design_enthusiast",
         "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
         "views": 4790,

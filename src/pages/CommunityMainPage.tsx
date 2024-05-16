@@ -172,7 +172,7 @@ const CommunityMainPage = () => {
               },
             }}
           >
-            글쓰기
+            피드 작성
           </ProtectedButton>
           <SortSelect sort={sort} setSort={setSort} />
         </div>
