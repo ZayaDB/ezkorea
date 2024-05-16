@@ -33,7 +33,11 @@ $font-weight-regular: 400;
   border-radius: 2px;
   overflow: hidden;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
-
+  @media (min-width: 600px) {
+    .prod-item {
+      width: 23%;
+    }
+  }
   //link요소 먹히는 부분 시작 ~
   .link-to-detail {
     text-decoration: none;
