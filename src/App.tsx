@@ -25,6 +25,7 @@ import ProductDetailPage from './pages/ProductDetailPage';
 import CartPage from './pages/CartPage';
 import ResultPage from './pages/ResultPage';
 import SearchPage from './pages/SearchPage';
+import CommunityLikedPage from './pages/CommunityLikedPage';
 
 const App = () => {
   const ScrollToTop = () => {
@@ -57,6 +58,8 @@ const App = () => {
               path='community/modify/:feedId'
               element={<CommunityModifyPage />}
             />
+            <Route path='/community/liked' element={<CommunityLikedPage />} />
+
             <Route path='/cart' element={<CartPage />} />
             <Route path='/order' element={<OrderPage />} />
             <Route path='/my' element={<MyPage />} />
