@@ -18,7 +18,7 @@ interface ProductItemProps {
 const addCommaNumber = (num?: number): string => {
   // num이 undefined이거나 null인 경우 처리
   if (num === undefined || num === null) {
-    return ''; // 또는 다른 기본값을 반환할 수도 있습니다.
+    return '';
   }
 
   // num이 유효한 숫자인 경우 1000단위 콤마를 추가하여 반환
@@ -29,20 +29,24 @@ const addCommaNumber = (num?: number): string => {
 export default function ProductItem({ prod, rank, disc }: ProductItemProps) {
   const dispatch = useDispatch();
 
-   // useSelector를 통해 isLiked 상태를 가져옵니다.
-   const isLiked = useSelector((state: RootState) => state.category.isLiked[prod.productId] || false);
+  // useSelector를 통해 isLiked 상태가져옴
+  const isLiked = useSelector(
+    (state: RootState) => state.category.isLiked[prod.productId] || false
+  );
 
-   // 좋아요 토글 핸들러
-   const handleLikeToggle = () => {
-     // setIsLiked 액션을 dispatch 하기 전에 현재 상태를 가져옵니다.
-     const updatedIsLiked = !isLiked;
-     dispatch(setIsLiked({ productId: prod.productId, isLiked: updatedIsLiked }));
-   };
+  // 좋아요 토글 핸들러
+  const handleLikeToggle = () => {
+    const updatedIsLiked = !isLiked;
+    dispatch(
+      setIsLiked({ productId: prod.productId, isLiked: updatedIsLiked })
+    );
+  };
 
+  // 세션에 최근 본 상품 넣기
   const inputSession = (product: Products): void => {
     const storedProducts = sessionStorage.getItem('clickedProducts');
     let clickedProducts: Products[] = [];
-
+    // 이미 존재하다면
     if (storedProducts) {
       try {
         const parsedProducts = JSON.parse(storedProducts);
@@ -53,11 +57,11 @@ export default function ProductItem({ prod, rank, disc }: ProductItemProps) {
         console.error('clickedProducts 파싱 중 오류 발생:', error);
       }
     }
-
+    // 하나라도 맞으면 or조건 (some)
     const isAlreadyClicked = clickedProducts.some(
       (prod: Products) => prod.productId === product.productId
     );
-
+    // 한번도 클릭하지 않았으면 세션에 set
     if (!isAlreadyClicked) {
       clickedProducts.push(product);
       sessionStorage.setItem(
