@@ -1,3 +1,4 @@
+@import '../utils/fonts.scss';
 .orderDetail-wrapper {
   max-width: 1200px;
   margin: auto;
@@ -15,21 +16,18 @@
     text-align: center;
     border-radius: 5px;
 
+    .mileage,
     .coupon {
-      width: 49%;
-      margin: auto;
-    }
-    .mile {
       width: 49%;
       // height: 100%;
       margin: auto;
+      display: flex;
+      flex-direction: column;
     }
   }
   .order-container {
     width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
     height: 100px;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
     align-items: center;
@@ -37,13 +35,29 @@
     align-content: center;
     text-align: center;
     border-radius: 5px;
+    .head {
+      @include heading1;
+      padding-top: 10px;
+      padding-bottom: 20px;
+    }
 
-    .li1,
-    .li2,
-    .li3,
-    .li4 {
-      width: 25%;
-      margin: auto;
+    .order-container-head {
+      display: flex;
+      width: 100%;
+
+      align-items: center;
+      .li1 {
+        width: 40%;
+      }
+      .li2,
+      .li3,
+      .li4 {
+        width: 20%;
+        margin: auto;
+      }
     }
   }
+}
+
+.product-container {
 }

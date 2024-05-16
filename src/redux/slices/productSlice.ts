@@ -46,4 +46,3 @@ export const { setSelectedOption, setSelectedQuantity, setSelectedProductId } =
   productSlice.actions;
 
 export default productSlice.reducer;
-
