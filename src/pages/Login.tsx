@@ -94,10 +94,10 @@ const StyledButton2 = styled(Button)(() => ({
 }));
 
 export default function SignIn() {
-  const guest = {
-    email: 'guest@example.com',
-    password: 'Guest@123!!!',
-  };
+  // const guest = {
+  //   email: 'guest@example.com',
+  //   password: 'Guest@123!!!',
+  // };
   const [userData, setUserData] = useState<User[]>([]);
   // const [open, setOpen] = useState(false);
   const [errorModalOpen, setErrorModalOpen] = useState(false);
