@@ -133,6 +133,12 @@ function CouponContent() {
   };
 
   /* 상품 정보 */
+  const selectedOption = useSelector(
+    (state: RootState) => state.product.selectedOption
+  );
+  const selectedQuantity = useSelector(
+    (state: RootState) => state.product.selectedQuantity
+  );
   const productName = useSelector(
     (state: RootState) => state.product.products[0].product_name
   );
@@ -142,24 +148,11 @@ function CouponContent() {
   const productImg = useSelector(
     (state: RootState) => state.product.products[0].product_image
   );
-  // const discountRate = useSelector(
-  //   (state: RootState) => state.product.products[0].discount_rate
-  // );
   const discountedPrice = useSelector(
     (state: RootState) => state.product.products[0].discounted_price
   );
   const productPrice = useSelector(
     (state: RootState) => state.product.products[0].regular_price
-  );
-
-  const selectedOption = useSelector(
-    (state: RootState) => state.product.selectedOption
-  );
-  // const selectedProductId = useSelector(
-  //   (state: RootState) => state.product.selectedProductId
-  // );
-  const selectedQuantity = useSelector(
-    (state: RootState) => state.product.selectedQuantity
   );
 
   /* 쿠폰 */
