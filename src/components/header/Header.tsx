@@ -20,6 +20,7 @@ import IconButtonWithMenu from './IconButtonWithMenu';
 import BadgeComponent from './BadgeComponent';
 import CustomLink from './CustomLink';
 import CategoryDropDown from './CategoryDropDown';
+// import { NavLink } from 'react-router-dom';
 
 interface Section {
   title: string;
@@ -243,9 +244,11 @@ export default function Header({ title, cartBadgeNum }: HeaderProps) {
           {/* )} */}
 
           {/* cart 아이콘 */}
+          <NavLink to='/cart'>
           <BadgeComponent badgeContent={isLoggedIn ? cartBadgeNum : undefined}>
             <img src={Cart1} alt='Cart' style={{ width: '24px' }} />
           </BadgeComponent>
+          </NavLink>
 
           {/* 검색창(input) */}
           {/* mobile(width:600px 이하)에서 사라짐 */}
