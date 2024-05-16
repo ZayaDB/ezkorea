@@ -24,7 +24,6 @@ import CategoryDropDown from './CategoryDropDown';
 interface Section {
   title: string;
   url: string;
-
 }
 
 interface HeaderProps {
@@ -60,9 +59,9 @@ const StyledButton = styled(Button)(() => ({
 export default function Header({ title, cartBadgeNum }: HeaderProps) {
   const isMobile = useMediaQuery('(max-width:619px)');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isGuest, setIsGuest] = useState(false);
   const [isShoppingHovered, setIsShoppingHovered] = useState(false);
   const [toolbarContent, setToolbarContent] = useState('Shop');
-
 
   const navigate = useNavigate();
   const gotoSearch = () => {
@@ -72,6 +71,10 @@ export default function Header({ title, cartBadgeNum }: HeaderProps) {
   useEffect(() => {
     const loggedInStatus = sessionStorage.getItem('isLoggedIn') === 'true';
     setIsLoggedIn(loggedInStatus);
+
+    // const guestStatus =
+    //   sessionStorage.getItem('isGuest') === 'true';
+    //   setIsGuest(guestStatus);
   }, []);
 
   const menuItems = [
