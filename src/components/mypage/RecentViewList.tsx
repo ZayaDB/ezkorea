@@ -9,11 +9,17 @@ const RecentViewList = () => {
 
   return (
     <div className='likes-page'>
-      <div className='likes-content'>
-        {clickedProducts.map(product => (
-          <ProductItem key={product.productId} prod={product} />
-        ))}
-      </div>
+      {clickedProducts.length === 0 ? (
+        <div style={{ textAlign: 'center', margin: '200px' }}>
+          최근 본 상품이 없습니다.
+        </div>
+      ) : (
+        <div className='likes-content'>
+          {clickedProducts.map(product => (
+            <ProductItem key={product.productId} prod={product} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

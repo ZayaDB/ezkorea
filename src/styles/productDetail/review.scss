@@ -94,10 +94,10 @@ $border: 1px solid lightgray;
 
 #reviewSorting {
   display: flex;
-  border-top: $border;
-  border-bottom: $border;
-  padding-top: 4px;
-  padding-bottom: 4px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
 }
 #reviewSorting button {
   border: none;
@@ -140,11 +140,9 @@ $border: 1px solid lightgray;
 .writingdate {
   font-size: $font-size-s;
 }
-.reviewPhoto {
+.reviewPhoto img {
   width: 10vw;
   height: 10vw;
-  background-image: url(https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/165519133254213206.jpeg?w=720);
-  background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   @include row();

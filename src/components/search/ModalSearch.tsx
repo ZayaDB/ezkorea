@@ -1,94 +1,96 @@
-import React, { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, IconButton } from '@mui/material';
+import { Box, IconButton, Input } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
+import { useMediaQuery } from '@mui/material';
 
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  backgroundColor: alpha(theme.palette.common.white, 0),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0),
-  },
-  marginLeft: 0,
-  maxWidth: '600px',
-  height: '70px',
-  display: 'flex',
-  alignItems: 'center',
-  borderBottom: '6px solid black',
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  flexGrow: 1,
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 3),
-    fontSize: '2rem',
-    fontWeight: 'bold',
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '100%',
-    },
-  },
-  '& input::placeholder': {
-    color: '#b7b7b7',
-    fontWeight: 'bold',
-  },
-}));
 interface ModalSearchProps {
-  onSearch: (selectedKeyword: string) => void;
   closeModal: () => void;
 }
 
-const ModalSearch: React.FC<ModalSearchProps> = ({ onSearch, closeModal }) => {
+const ModalSearch: React.FC<ModalSearchProps> = ({ closeModal }) => {
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState('');
+  const [isComposing, setIsComposing] = useState<boolean>(false);
+  const isSmallScreen = useMediaQuery('(max-width:600px)');
+  const inputRef = useRef<HTMLInputElement>(null); // useRef 생성
 
-  const handleSearch = (selectedKeyword: string) => {
-    if (onSearch) {
-      closeModal(); // 모달 닫기
-      navigate(`/result?search=${encodeURIComponent(selectedKeyword)}`);
-      onSearch(selectedKeyword); // 검색어 전달
-    }
+  const handleSearch = (keyword: string) => {
+    closeModal(); // 모달 닫기
+    navigate(`/result?search=${encodeURIComponent(keyword)}`);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      e.preventDefault(); // 기본 폼 제출 동작 방지
+    if (e.key === 'Enter' && !isComposing) {
+      e.preventDefault();
       handleSearch(searchValue);
     }
+  };
+
+  const handleCompositionStart = () => {
+    setIsComposing(true);
+  };
+
+  const handleCompositionEnd = () => {
+    setIsComposing(false);
   };
 
   const handleKeywordHover = (selectedKeyword: string) => {
     setSearchValue(selectedKeyword); // 호버된 검색어를 입력 필드에 설정
   };
 
+  const handleClickSearch = () => {
+    const inputValue = inputRef.current?.value;
+    if (inputValue) {
+      setSearchValue(inputValue);
+      handleSearch(inputValue);
+    }
+  };
+
   return (
     <div style={{ width: '1000px', position: 'relative' }}>
-      <Search>
-        <SearchIconWrapper>
-          <IconButton edge='end' onClick={() => handleSearch(searchValue)}>
-            <SearchIcon fontSize='large' />
-          </IconButton>
-        </SearchIconWrapper>
-        <StyledInputBase
+      <div
+        style={{
+          position: 'relative',
+          marginLeft: 0,
+          maxWidth: '600px',
+          height: '70px',
+          display: 'flex',
+          alignItems: 'center',
+          borderBottom: '6px solid black',
+
+          // padding: isSmallScreen ? '2px' : '1px',
+          // height: '100%',
+        }}
+      >
+        <IconButton onClick={handleClickSearch}>
+          <SearchIcon />
+        </IconButton>
+        <InputBase
           placeholder='Search'
           inputProps={{ 'aria-label': 'search' }}
           value={searchValue}
           onChange={e => setSearchValue(e.target.value)}
           onKeyDown={handleKeyPress}
+          onCompositionStart={handleCompositionStart}
+          onCompositionEnd={handleCompositionEnd}
+          inputRef={inputRef} // ref 연결
+          sx={{
+            width: isSmallScreen ? '80%' : '100%',
+            color: 'inherit',
+            flexGrow: 1,
+            '& .MuiInputBase-input': {
+              fontSize: isSmallScreen ? '1.5rem' : '1.7rem',
+              fontWeight: 'bold',
+            },
+            '& input::placeholder': {
+              color: '#b7b7b7',
+              fontWeight: 'bold',
+            },
+          }}
         />
-      </Search>
+      </div>
 
       <Box
         sx={{
@@ -102,7 +104,8 @@ const ModalSearch: React.FC<ModalSearchProps> = ({ onSearch, closeModal }) => {
           },
         }}
       >
-        <h2>인기검색어</h2>
+        {isSmallScreen ? <h2>인기검색어</h2> : <h3>인기검색어</h3>}
+
         <Box
           onMouseEnter={() => handleKeywordHover('모션데스크')}
           onClick={() => handleSearch('모션데스크')}
@@ -134,16 +137,16 @@ const ModalSearch: React.FC<ModalSearchProps> = ({ onSearch, closeModal }) => {
           조명
         </Box>
         <Box
-          onMouseEnter={() => handleKeywordHover('인기제품')}
-          onClick={() => handleSearch('인기제품')}
+          onMouseEnter={() => handleKeywordHover('키보드')}
+          onClick={() => handleSearch('키보드')}
         >
-          인기제품
+          키보드
         </Box>
         <Box
-          onMouseEnter={() => handleKeywordHover('세일')}
-          onClick={() => handleSearch('세일')}
+          onMouseEnter={() => handleKeywordHover('타공판')}
+          onClick={() => handleSearch('타공판')}
         >
-          세일
+          타공판
         </Box>
         <Box
           onMouseEnter={() => handleKeywordHover('마우스패드')}

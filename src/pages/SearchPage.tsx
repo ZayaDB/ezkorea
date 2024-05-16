@@ -28,12 +28,8 @@ const SearchPage = () => {
     }
   };
 
-  const handleSearchComplete = (searchValue: string) => {
-    if (searchValue) {
-      console.log('검색어:', searchValue);
-      closeModal();
-    }
-  };
+
+
 
   return (
     <div>
@@ -67,7 +63,6 @@ const SearchPage = () => {
             <CloseIcon />
           </IconButton>
           <ModalSearch
-            onSearch={handleSearchComplete}
             closeModal={closeModal}
           />
         </Box>

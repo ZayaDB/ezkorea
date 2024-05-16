@@ -297,7 +297,7 @@ export default function Header({ title, cartBadgeNum }: HeaderProps) {
           {toolbarContent === 'Community' && (
             <>
               <CustomLink to='/community'>커뮤니티 홈</CustomLink>
-              <CustomLink to='/community/likes'>좋아요 한 피드</CustomLink>
+              <CustomLink to='/community/liked'>좋아요한 피드</CustomLink>
             </>
           )}
         </Toolbar>

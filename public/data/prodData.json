@@ -18,7 +18,7 @@
   },
   {
     "productId": 2,
-    "name": "RRW MOTION DESK",
+    "name": "RRW 모션데스크",
     "brand": "rareraw",
     "colors": ["white", "blue", "black"],
     "concepts": ["simple", "unique"],
@@ -52,8 +52,8 @@
   },
   {
     "productId": 4,
-    "name": "For Childeren : Study Room Set",
-    "brand": "RRW KIDS",
+    "name": "KIDS MOTION DESK",
+    "brand": "RRW",
     "colors": ["gray", "pink"],
     "concepts": ["simple", "kitsch"],
     "price": 1264000,

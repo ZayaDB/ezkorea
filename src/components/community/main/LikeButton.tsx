@@ -5,7 +5,7 @@ import { Favorite, FavoriteBorder } from '@mui/icons-material';
 interface LikeButtonProps extends IconButtonProps {
   feedId: number;
   initialLiked: boolean;
-  onLike: (feedId: number) => void;
+  onLike: (feedId: number, liked: boolean) => void;
   iconSize?: string; // 아이콘 크기를 조절할 새로운 프롭스 추가
 }
 
@@ -19,9 +19,10 @@ const LikeButton: React.FC<LikeButtonProps> = ({
   const [liked, setLiked] = useState<boolean>(initialLiked);
 
   const handleLike = useCallback(() => {
-    setLiked(prevLiked => !prevLiked);
-    onLike(feedId);
-  }, [feedId, onLike]);
+    const newLikedState = !liked;
+    setLiked(newLikedState);
+    onLike(feedId, newLikedState);
+  }, [feedId, liked, onLike]);
 
   return (
     <IconButton
