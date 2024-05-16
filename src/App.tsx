@@ -23,7 +23,6 @@ import CommunityResultPage from './pages/CommunityResultPage';
 import Logout from './components/Home/Logout';
 import ProductDetailPage from './pages/ProductDetailPage';
 import CartPage from './pages/CartPage';
-import OrderHistory from './components/mypage/OrderHistory';
 import ResultPage from './pages/ResultPage';
 import SearchPage from './pages/SearchPage';
 
@@ -63,7 +62,6 @@ const App = () => {
             <Route path='/my' element={<MyPage />} />
             <Route path='/my/wishlist' element={<LikesProduct />} />
             <Route path='/my/recentview' element={<RecentViewList />} />
-            <Route path='/my/orderhistory' element={<OrderHistory />} />
             <Route path='*' element={<NotFound />} />
             <Route
               path='/community/detail/:feedId'
