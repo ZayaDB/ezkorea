@@ -1,60 +1,60 @@
 import '../../styles/mypage/profile.scss';
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
+// import TextField from '@mui/material/TextField';
+// import Box from '@mui/material/Box';
+// import Container from '@mui/material/Container';
+// import { createTheme } from '@mui/material/styles';
 import '../../styles/mypage/profile.scss';
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#000000',
-      light: '#e5e5e5',
-    },
-    secondary: {
-      main: '#5FF531',
-      light: '#F5EBFF',
-      contrastText: '#47008F',
-    },
-  },
-  components: {
-    MuiFormHelperText: {
-      styleOverrides: {
-        root: {
-          color: '#D32F2F',
-          // fontWeight: '500',
-        },
-      },
-    },
-  },
-});
+// const theme = createTheme({
+//   palette: {
+//     primary: {
+//       main: '#000000',
+//       light: '#e5e5e5',
+//     },
+//     secondary: {
+//       main: '#5FF531',
+//       light: '#F5EBFF',
+//       contrastText: '#47008F',
+//     },
+//   },
+//   components: {
+//     MuiFormHelperText: {
+//       styleOverrides: {
+//         root: {
+//           color: '#D32F2F',
+//           // fontWeight: '500',
+//         },
+//       },
+//     },
+//   },
+// });
 
-const InputTextField = styled(TextField)({
-  '& label': {
-    // placeholder text color
-    color: '#7f7f7f',
-  },
-  '& label.Mui-focused': {
-    // 해당 input focus 되었을 때 placeholder text color
-    // floatng label을 사용할 때 처리 필요
-    color: '#5FF531',
-  },
-  '& .MuiInput-underline:after': {
-    borderBottomColor: 'yellow',
-  },
-  '& .MuiOutlinedInput-root': {
-    '& fieldset': {
-      borderColor: '#e5e5e5',
-    },
-    '&:hover fieldset': {
-      borderColor: '#c0c0c0',
-    },
-    '&.Mui-focused fieldset': {
-      borderColor: '#000000',
-      borderWidth: '1.8px',
-    },
-  },
-});
+// const InputTextField = styled(TextField)({
+//   '& label': {
+//     // placeholder text color
+//     color: '#7f7f7f',
+//   },
+//   '& label.Mui-focused': {
+//     // 해당 input focus 되었을 때 placeholder text color
+//     // floatng label을 사용할 때 처리 필요
+//     color: '#5FF531',
+//   },
+//   '& .MuiInput-underline:after': {
+//     borderBottomColor: 'yellow',
+//   },
+//   '& .MuiOutlinedInput-root': {
+//     '& fieldset': {
+//       borderColor: '#e5e5e5',
+//     },
+//     '&:hover fieldset': {
+//       borderColor: '#c0c0c0',
+//     },
+//     '&.Mui-focused fieldset': {
+//       borderColor: '#000000',
+//       borderWidth: '1.8px',
+//     },
+//   },
+// });
 
 export default function Profile() {
   return (
