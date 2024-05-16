@@ -66,9 +66,10 @@ const MyLikedFeeds = () => {
         display: 'flex',
         justifyContent: 'center',
         flexDirection: 'column',
+        paddingBottom: '80px',
       }}
     >
-      <Grid container mt={2}>
+      <Grid container mt={2} style={{ justifyContent: 'center' }}>
         {isLoading ? (
           filterData.map((_, index) => (
             <Grid item xs={6} md={3} key={index} className='feed'>
@@ -79,7 +80,12 @@ const MyLikedFeeds = () => {
           <div>Error occurred.</div>
         ) : (
           filterData.map(item => (
-            <Grid item xs={6} md={3} key={item.feedId} className='feed'>
+            <Grid
+              item
+              key={item.feedId}
+              className='feed'
+              style={{ maxWidth: '300px' }}
+            >
               <Box className='feed-container'>
                 <Box className='feed-box'>
                   <Link
