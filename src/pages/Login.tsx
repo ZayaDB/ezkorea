@@ -104,11 +104,11 @@ export default function SignIn() {
   const handleErrorModalClose = () => setErrorModalOpen(false);
   const navigate = useNavigate();
 
-  // const [email, setEmail] = useState<string>('');
-  // const [pw, setPw] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [pw, setPw] = useState<string>('');
   // email, password 초기값으로 guest 정보 넣어놓기
-  const [email, setEmail] = useState<string>(guest.email);
-  const [pw, setPw] = useState<string>(guest.password);
+  // const [email, setEmail] = useState<string>(guest.email);
+  // const [pw, setPw] = useState<string>(guest.password);
 
   const [emailValid, setEmailValid] = useState<boolean>(true);
   const [pwValid, setPwValid] = useState<boolean>(true);
@@ -158,13 +158,14 @@ export default function SignIn() {
   const onClickConfirmButton = () => {
     const user = userData.find(user => user.email === email);
 
-    if (emailValid && pw.trim() !== '') {
-      if (email === guest.email && pw === guest.password) {
-        // console.log('Guest login success');
-        sessionStorage.setItem('isGuest', 'true');
-        // sessionStorage.setItem('UserData', JSON.stringify(userData));
-        navigate('/');
-      } else if (user) {
+    if (emailValid && pwValid) {
+      // if (email === guest.email && pw === guest.password) {
+      //   // console.log('Guest login success');
+      //   sessionStorage.setItem('isGuest', 'true');
+      //   // sessionStorage.setItem('UserData', JSON.stringify(userData));
+      //   navigate('/');
+      // } else if (user) {
+        if (user) {
         if (user.password === pw) {
           sessionStorage.setItem('isLoggedIn', 'true');
           sessionStorage.setItem('UserData', JSON.stringify(userData));
