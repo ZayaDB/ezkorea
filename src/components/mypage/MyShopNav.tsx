@@ -10,6 +10,7 @@ import RecentViewList from './RecentViewList';
 import OrderDetails from './OrderDetails';
 import '../../styles/mypage/mynav.scss';
 import { useMediaQuery } from '@mui/material';
+import { useLocation } from 'react-router-dom';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -43,22 +44,28 @@ function a11yProps(index: number) {
     'aria-controls': `simple-tabpanel-${index}`,
   };
 }
-
 export default function MyShopNav() {
-  const [value, setValue] = React.useState(0);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const initialTab =
+    queryParams.get('tab') === 'wishlist'
+      ? 1
+      : queryParams.get('tab') === 'recentview'
+      ? 0
+      : 0; // 기본값 0으로 설정
+
+  const [value, setValue] = React.useState(initialTab); // 초기 탭 값 설정
+
   const isSmallScreen = useMediaQuery('(max-width:615px)');
   const isMobile = useMediaQuery('(max-width:480px)');
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+    setValue(newValue); // 탭 변경 시 상태 업데이트
   };
 
   return (
-    // <Box sx={{ justifyContent: 'center', m: 'auto' }}>
     <div>
       <div>
-        {/* <Box sx={{ p: 0, borderBottom: 1, borderColor: 'divider' }}>
-         */}
         <div style={{ marginTop: '11px' }}>
           <Tabs
             className='MuiTabs-myshop'
