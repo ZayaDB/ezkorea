@@ -179,7 +179,7 @@ const CommunityMainPage = () => {
       </Grid>
       <Grid container>
         {isLoading ? (
-          [1, 2, 3, 4].map((_, index) => (
+          Array.from({ length: 16 }).map((_, index) => (
             <Grid item xs={6} md={3} key={index} className='feed'>
               <SkeletonFeed />
             </Grid>
