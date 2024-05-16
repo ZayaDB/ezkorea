@@ -39,11 +39,17 @@ const productSlice = createSlice({
     setSelectedProductId: (state, action: PayloadAction<number>) => {
       state.selectedProductId = action.payload;
     },
+    setSelectedProduct: (state, action: PayloadAction<Product[]>) => {
+      state.products = action.payload;
+    },
   },
 });
 
-export const { setSelectedOption, setSelectedQuantity, setSelectedProductId } =
-  productSlice.actions;
+export const {
+  setSelectedOption,
+  setSelectedQuantity,
+  setSelectedProductId,
+  setSelectedProduct,
+} = productSlice.actions;
 
 export default productSlice.reducer;
-

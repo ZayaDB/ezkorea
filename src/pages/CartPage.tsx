@@ -3,12 +3,11 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Checkbox from '@mui/material/Checkbox';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { RootState } from '../redux/config';
 import { useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import FormControlLabel from '@mui/material/FormControlLabel';
-
 
 export default function CartPage() {
   const selectOption = useSelector(
@@ -17,11 +16,26 @@ export default function CartPage() {
   const selectedQuantity = useSelector(
     (state: RootState) => state.product.selectedQuantity
   );
-  const selectedProductId = useSelector(
-    (state: RootState) => state.product.selectedProductId
+
+  const productImg = useSelector(
+    (state: RootState) => state.product.products[0].product_image
   );
 
-  console.log(selectOption, selectedQuantity, selectedProductId);
+  const brandName = useSelector(
+    (state: RootState) => state.product.products[0].brand_name
+  );
+  const productName = useSelector(
+    (state: RootState) => state.product.products[0].product_name
+  );
+  const productPrice = useSelector(
+    (state: RootState) => state.product.products[0].regular_price
+  );
+  const discountRate = useSelector(
+    (state: RootState) => state.product.products[0].discount_rate
+  );
+  const discountPrice = useSelector(
+    (state: RootState) => state.product.products[0].discounted_price
+  );
 
   // 체크 박스
   const [checked, setChecked] = useState([true, false]);
@@ -81,21 +95,23 @@ export default function CartPage() {
           <div className='purchaseInfo'>
             <div className='purchasecheckbox'>{children}</div>
             <div className='purchasePD'>
-              <div className='purchaseProduct'>상품이미지</div>
+              <div className='purchaseProduct'>
+                <img src={productImg} alt='상품정보' />
+              </div>
               <div className='purchaseDetail'>
-                <div className='purchaseBrand'>브랜드</div>
-                <div className='purchaseName'>상품이름</div>
-                <div className='purchaseOriginal'>정상가</div>
+                <div className='purchaseBrand'>{brandName}</div>
+                <div className='purchaseName'>{productName}</div>
+                <div className='purchaseOriginal'>{productPrice}원</div>
                 <div className='saleZone'>
-                  <div className='saleRate'>할인률</div>
-                  <div className='salePrice'>할인가</div>
+                  <div className='saleRate'>{discountRate}%</div>
+                  <div className='salePrice'>{discountPrice}원</div>
                 </div>
               </div>
             </div>
 
             <div className='deleteBtn'>x</div>
             <div className='colorCount'>
-              <div className='selectedColor'></div>
+              <div className='selectedColor'>{selectOption}</div>
               <div className='countBtn'>
                 <ButtonGroup
                   size='small'
@@ -109,7 +125,7 @@ export default function CartPage() {
                   >
                     -
                   </Button>
-                  <Button color='primary'>{counts}</Button>
+                  <Button color='primary'>{selectedQuantity}</Button>
                   <Button onClick={() => handleIncrease()} color='primary'>
                     +
                   </Button>
