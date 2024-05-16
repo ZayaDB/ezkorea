@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import '../../styles/mypage/mynav.scss';
 import '../../styles/mypage/mynav.scss';
 import { useMediaQuery } from '@mui/material';
+import MyComments from '../community/myPage/MyComments';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -86,7 +87,7 @@ export default function MyFeedNav() {
           {/* 작성한 피드 목록 */}
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
-          {/* 작성한 댓글 목록 */}
+          <MyComments />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
           {/* 좋아요한 피드 목록 */}
