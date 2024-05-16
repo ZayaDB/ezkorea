@@ -94,31 +94,26 @@ const StyledButton2 = styled(Button)(() => ({
 }));
 
 export default function SignIn() {
-  // const guest = {
-  //   email: 'guest@example.com',
-  //   password: 'Guest@123!!!',
-  // };
+  const test = {
+    email: 'guest@example.com',
+    password: 'guest@123!!!',
+  };
   const [userData, setUserData] = useState<User[]>([]);
   // const [open, setOpen] = useState(false);
   const [errorModalOpen, setErrorModalOpen] = useState(false);
   const handleErrorModalClose = () => setErrorModalOpen(false);
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState<string>('');
-  const [pw, setPw] = useState<string>('');
+  // const [email, setEmail] = useState<string>('');
+  // const [pw, setPw] = useState<string>('');
   // email, password 초기값으로 guest 정보 넣어놓기
-  // const [email, setEmail] = useState<string>(guest.email);
-  // const [pw, setPw] = useState<string>(guest.password);
+  const [email, setEmail] = useState<string>(test.email);
+  const [pw, setPw] = useState<string>(test.password);
 
   const [emailValid, setEmailValid] = useState<boolean>(true);
   const [pwValid, setPwValid] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [pwTouched, setPwTouched] = useState<boolean>(false);
-
-  // const guest = {
-  //   email: 'guest@example.com',
-  //   password: 'Guest@123!!!',
-  // };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -156,24 +151,20 @@ export default function SignIn() {
   };
 
   const onClickConfirmButton = () => {
-    const user = userData.find(user => user.email === email);
-
-    if (emailValid && pwValid) {
-      // if (email === guest.email && pw === guest.password) {
-      //   // console.log('Guest login success');
-      //   sessionStorage.setItem('isGuest', 'true');
-      //   // sessionStorage.setItem('UserData', JSON.stringify(userData));
-      //   navigate('/');
-      // } else if (user) {
-        if (user) {
-        if (user.password === pw) {
+    if (email === test.email && pw === test.password) {
+      navigate('/');
+      sessionStorage.setItem('isLoggedIn', 'true');
+      sessionStorage.setItem('UserData', JSON.stringify(userData));
+    } else {
+      if (emailValid && pwValid) {
+        if (email === userData[0].email && pw === userData[0].password) {
           sessionStorage.setItem('isLoggedIn', 'true');
           sessionStorage.setItem('UserData', JSON.stringify(userData));
           navigate('/');
+        } else {
+          setErrorMessage('등록되지 않은 회원입니다.');
+          setErrorModalOpen(true);
         }
-      } else {
-        // setErrorMessage('등록되지 않은 회원입니다.');
-        setErrorModalOpen(true);
       }
     }
   };

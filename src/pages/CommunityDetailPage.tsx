@@ -180,14 +180,19 @@ const CommunityDetailPage: React.FC = () => {
             >
               {feed.selectedProducts.map((product: SelectedProducts) => (
                 <SwiperSlide
-                  key={product.productName}
+                  key={product.productId}
                   tag='section'
                   style={{ width: '128px' }}
                 >
                   <Box width={128}>
-                    <ProductBox className='product-img'>
-                      <img src={product.thumbnail} alt={product.productName} />
-                    </ProductBox>
+                    <Link to={`/shop/${product.productId}`}>
+                      <ProductBox className='product-img'>
+                        <img
+                          src={product.thumbnail}
+                          alt={product.productName}
+                        />
+                      </ProductBox>
+                    </Link>
                     <ProductInfo variant='body2' gutterBottom>
                       {product.productName}
                     </ProductInfo>
@@ -201,10 +206,12 @@ const CommunityDetailPage: React.FC = () => {
           ) : (
             feed.selectedProducts &&
             feed.selectedProducts.map((product: SelectedProducts) => (
-              <Box width={128} key={product.productName}>
-                <ProductBox className='product-img'>
-                  <img src={product.thumbnail} alt={product.productName} />
-                </ProductBox>
+              <Box width={128} key={product.productId}>
+                <Link to={`/shop/${product.productId}`}>
+                  <ProductBox className='product-img'>
+                    <img src={product.thumbnail} alt={product.productName} />
+                  </ProductBox>
+                </Link>
                 <ProductInfo variant='body2' gutterBottom>
                   {product.productName}
                 </ProductInfo>
@@ -303,11 +310,11 @@ const CommunityDetailPage: React.FC = () => {
         댓글 {feed.commentCount}
       </Typography>
 
-      {feed.comments?.map((comment: Comment, index: number) => (
+      {feed.comments?.map((comment: Comment) => (
         <Box
           mt={2}
           // pb={2}
-          key={index}
+          key={comment.id}
           style={{
             marginBottom: '10px',
             width: '100%',

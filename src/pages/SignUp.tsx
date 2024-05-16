@@ -7,7 +7,6 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import { useState, useEffect, ChangeEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Backdrop from '@mui/material/Backdrop';
@@ -95,19 +94,31 @@ const StyledButton2 = styled(Button)(() => ({
 
 export default function SignIn() {
   const [userData, setUserData] = useState<User[]>([]);
-  // const [open, setOpen] = useState(false);
-  const [errorModalOpen, setErrorModalOpen] = useState(false);
+
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);
   const handlePhoneModalClose = () => setConfirmModalOpen(false);
-  const handleErrorModalClose = () => setErrorModalOpen(false);
-  const navigate = useNavigate();
 
   const [email, setEmail] = useState<string>('');
-  const [pw, setPw] = useState<string>('');
-  const [emailValid, setEmailValid] = useState<boolean>(true);
-  const [pwValid, setPwValid] = useState<boolean>(true);
-  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [emailValid, setEmailValid] = useState<boolean>(false);
+
+  const [emailCheck, setEmailCheck] = useState<boolean>(false);
+
+  const [pw1, setPw1] = useState<string>('');
+  const [pwValid, setPwValid] = useState<boolean>(false);
+
+  const [pw2, setPw2] = useState<string>('');
+  const [pwCheck, setPwCheck] = useState<boolean>(false);
   const [pwTouched, setPwTouched] = useState<boolean>(false);
+
+  const [phoneNumber, setPhoneNumber] = useState<string>('');
+  const [isPhoneNumberValid, setIsPhoneNumberValid] = useState<boolean>(false);
+  const [phoneNumCheck, setPhoneNumCheck] = useState<boolean>(false);
+
+  const [auth, setAuth] = useState<string>('');
+  const [authCheck, setAuthCheck] = useState<boolean>(false);
+
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [errorModalOpen, setErrorModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -128,15 +139,21 @@ export default function SignIn() {
 
   const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
     const inputEmail: string = e.target.value;
+    const userEmailCheck = userData.find(user => user.email === inputEmail);
+
     setEmail(inputEmail);
     const regex =
       /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
     setEmailValid(regex.test(inputEmail));
+    if (emailValid && !userEmailCheck) {
+      // 이메일 정규식도 통과되고 이미 존재하는 데이터에 없는 이메일이면 회원가입 가능
+      setEmailCheck(true);
+    }
   };
 
   const handlePassWord = (e: ChangeEvent<HTMLInputElement>) => {
     const inputPassWord: string = e.target.value;
-    setPw(inputPassWord);
+    setPw1(inputPassWord);
     setPwTouched(true);
     setErrorMessage('');
     const regex =
@@ -144,46 +161,67 @@ export default function SignIn() {
     setPwValid(regex.test(inputPassWord));
   };
 
-  const onClickConfirmButton = () => {
-    const user = userData.find(user => user.email === email);
-
-    if (emailValid && pwValid) {
-      if (user) {
-        if (user.password === pw) {
-          console.log('success');
-          sessionStorage.setItem('isLoggedIn', 'true');
-          sessionStorage.setItem('UserData', JSON.stringify(userData));
-          navigate('/');
-        } else {
-          setErrorMessage('비밀번호가 틀렸습니다.');
-          setPwValid(false);
-        }
-      } else {
-        setErrorMessage('등록되지 않은 회원입니다.');
-        setErrorModalOpen(true);
-      }
+  const handlePwChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const pwCheck: string = e.target.value;
+    setPw2(pwCheck);
+    if (pw1 === pwCheck && pwValid) {
+      // 비밀번호 정규식을 통과했고 비밀번호 중복 체크까지 완료되면 회원가입 가능
+      setPwCheck(true);
     }
   };
 
-  const [phoneNumber, setPhoneNumber] = useState<string>('');
-const [isPhoneNumberValid, setIsPhoneNumberValid] = useState<boolean>(false);
-
-const handlePhoneNumber = (e: ChangeEvent<HTMLInputElement>) => {
-  const inputPhoneNumber: string = e.target.value;
-  setPhoneNumber(inputPhoneNumber);
-  const regex = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
-  setIsPhoneNumberValid(regex.test(inputPhoneNumber));
-};
+  const handlePhoneNumber = (e: ChangeEvent<HTMLInputElement>) => {
+    const inputPhoneNumber: string = e.target.value;
+    setPhoneNumber(inputPhoneNumber);
+    const regex = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
+    setIsPhoneNumberValid(regex.test(inputPhoneNumber));
+  };
 
   const handlePhoneNumberClick = () => {
     if (isPhoneNumberValid) {
       // 정규식 통과: 모달 열기 또는 다른 작업 수행
       setConfirmModalOpen(true); // 모달 열기
-    } else {
+      setPhoneNumCheck(true);
+    } 
+    // else {
       // 정규식 통과 실패: 에러 메시지 표시 또는 다른 작업 수행
-      console.log('올바른 폰 번호가 아닙니다.');
+      // console.log('올바른 폰 번호가 아닙니다.');
+    // }
+  };
+
+  const handleAuth = (e: ChangeEvent<HTMLInputElement>) => {
+    const auth: string = e.target.value;
+    setAuth(auth);
+    if (auth == '1234') {
+      setAuthCheck(true);
     }
   };
+
+  const onClickConfirmButton = () => {
+    let errorMessage = '';
+
+    if (!authCheck) {
+      errorMessage = '인증을 완료해주세요.\n';
+    }
+    if (!phoneNumCheck) {
+      errorMessage = '전화번호를 다시 입력해주세요.\n';
+    }
+    if (!pwCheck) {
+      errorMessage = '비밀번호를 다시 입력해주세요.\n';
+    }
+    if (!emailCheck) {
+      errorMessage = '이메일을 다시 입력해주세요.\n';
+    }
+    if (errorMessage) {
+      setErrorMessage(errorMessage);
+      setErrorModalOpen(true); // 에러 모달 열기
+    } 
+    // else {
+      // 모든 조건이 충족되면 회원가입 완료 처리
+      // console.log('회원가입 완료');
+    // }
+  };
+  const handleErrorModalClose = () => setErrorModalOpen(false);
 
   return (
     <ThemeProvider theme={theme}>
@@ -250,7 +288,7 @@ const handlePhoneNumber = (e: ChangeEvent<HTMLInputElement>) => {
                   ? errorMessage || '잘못된 비밀번호 형식입니다.'
                   : ''
               }
-              value={pw}
+              value={pw1}
               onChange={handlePassWord}
               error={pwTouched && !pwValid}
             />
@@ -270,14 +308,9 @@ const handlePhoneNumber = (e: ChangeEvent<HTMLInputElement>) => {
                   borderRadius: '2px',
                 },
               }}
-              helperText={
-                pwTouched && !pwValid
-                  ? errorMessage || '잘못된 비밀번호 형식입니다.'
-                  : ''
-              }
-              value={pw}
-              onChange={handlePassWord}
-              error={pwTouched && !pwValid}
+              helperText={pw1 === pw2 ? '' : '비밀번호가 일치하지 않습니다.'}
+              value={pw2}
+              onChange={handlePwChange}
             />
 
             {/* phone number */}
@@ -301,32 +334,51 @@ const handlePhoneNumber = (e: ChangeEvent<HTMLInputElement>) => {
               }
               value={phoneNumber}
               onChange={handlePhoneNumber}
-              // onChange={handleEmail}
             />
-
             {/* 인증하기 버튼 */}
-            <StyledButton
+            {isPhoneNumberValid && (
+              <StyledButton
+                fullWidth
+                variant='contained'
+                sx={{
+                  mt: 3,
+                  mb: 1.7,
+                  fontSize: '16px',
+                  padding: '14px',
+                  borderRadius: '2px',
+                  fontWeight: '800',
+                  backgroundColor: 'primary',
+                  ':hover': {
+                    bgcolor: 'primary',
+                    color: 'secondary',
+                  },
+                }}
+                size='large'
+                onClick={handlePhoneNumberClick}
+                disabled={!isPhoneNumberValid}
+              >
+                인증하기
+              </StyledButton>
+            )}
+
+            {/* 인증번호 검사필드 */}
+            <InputTextField
+              required
+              margin='dense'
               fullWidth
-              variant='contained'
-              sx={{
-                mt: 3,
-                mb: 1.7,
-                fontSize: '16px',
-                padding: '14px',
-                borderRadius: '2px',
-                fontWeight: '800',
-                backgroundColor: 'primary',
-                ':hover': {
-                  bgcolor: 'primary',
-                  color: 'secondary',
+              // id='phone-number'
+              label='인증번호'
+              // name='phoneNumber'
+              // autoComplete='phone-number'
+              InputProps={{
+                style: {
+                  borderRadius: '2px',
                 },
               }}
-              size='large'
-              onClick={handlePhoneNumberClick} 
-              disabled={!isPhoneNumberValid}
-            >
-              인증하기
-            </StyledButton>
+              value={auth}
+              onChange={handleAuth}
+              helperText={auth === '' ? '인증번호를 입력하세요' : ''}
+            />
 
             {/* name */}
             <InputTextField
@@ -374,7 +426,7 @@ const handlePhoneNumber = (e: ChangeEvent<HTMLInputElement>) => {
               회원가입하기
             </StyledButton>
 
-            <Modal
+            {/* <Modal
               aria-labelledby='error-modal-title'
               aria-describedby='error-modal-description'
               open={errorModalOpen}
@@ -399,7 +451,7 @@ const handlePhoneNumber = (e: ChangeEvent<HTMLInputElement>) => {
                   </Typography>
                 </Box>
               </Fade>
-            </Modal>
+            </Modal> */}
 
             <Modal
               aria-labelledby='error-modal-title'
@@ -422,8 +474,20 @@ const handlePhoneNumber = (e: ChangeEvent<HTMLInputElement>) => {
                     component='h2'
                     sx={{ textAlign: 'center', borderRadius: '10px' }}
                   >
-                    등록되지 않은 회원입니다.
+                    {errorMessage}
                   </Typography>
+                  <StyledButton
+                    onClick={handleErrorModalClose}
+                    sx={{
+                      width: '100%',
+                      backgroundColor: 'black',
+                      color: 'white',
+                      fontSize: '18px',
+                      marginTop: '30px',
+                    }}
+                  >
+                    확인
+                  </StyledButton>
                 </Box>
               </Fade>
             </Modal>
@@ -449,7 +513,7 @@ const handlePhoneNumber = (e: ChangeEvent<HTMLInputElement>) => {
                     component='h2'
                     sx={{ textAlign: 'center', borderRadius: '10px' }}
                   >
-                   핸드폰 인증하기
+                    핸드폰 인증하기
                   </Typography>
                   <StyledButton
                     onClick={handlePhoneModalClose}

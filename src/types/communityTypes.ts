@@ -10,6 +10,7 @@ export interface Comment {
 }
 
 export interface SelectedProducts {
+  productId: number;
   productName: string;
   thumbnail: string;
   price: string;

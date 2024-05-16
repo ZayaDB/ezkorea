@@ -9,15 +9,24 @@
     "myFeeds": [
       {
         "feedId": 1,
-        "image": "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/projects/168856428667281853.png?w=720"
+        "image": "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/projects/168856428667281853.png?w=720",
+        "views": 5250,
+        "likes": 742,
+        "commentCount": 2
       },
       {
         "feedId": 4,
-        "image": "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/168164950371720285.jpeg?w=720"
+        "image": "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/168164950371720285.jpeg?w=720",
+        "views": 4500,
+        "likes": 300,
+        "commentCount": 2
       },
       {
         "feedId": 8,
-        "image": "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/161311357069176332.jpg?w=720"
+        "image": "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/161311357069176332.jpg?w=720",
+        "views": 3150,
+        "likes": 500,
+        "commentCount": 0
       }
     ],
     "myComments": [

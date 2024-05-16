@@ -29,6 +29,7 @@ export const ProductBox = styled(Box)`
   position: relative;
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 5px;
+  cursor: pointer;
 
   &:hover {
     border: 1px solid #5ff531;
@@ -92,6 +93,7 @@ export const ImgButton = styled(Box)`
   flex-direction: column;
   border-radius: 5px;
   outline: 1px solid rgba(0, 0, 0, 0.08);
+  cursor: pointer;
 
   &:hover {
     outline: 2px solid #5ff531;
