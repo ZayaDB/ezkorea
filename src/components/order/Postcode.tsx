@@ -27,12 +27,7 @@ export default function Postcode() {
   const handleClose = () => setOpen(false);
   return (
     <>
-      <Button
-        onClick={handleOpen}
-        variant='contained'
-        size='medium'
-        color='secondary'
-      >
+      <Button onClick={handleOpen} variant='contained' size='medium'>
         우편번호 검색
       </Button>
       <Modal
