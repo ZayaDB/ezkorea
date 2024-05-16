@@ -73,10 +73,12 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  pointer-events: none;
 }
 
 .feed-container:hover .feed-img {
   transform: scale(1.1); /* 호버시 이미지 확대 */
+  pointer-events: auto;
 }
 
 .feed-img:not(:hover) {

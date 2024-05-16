@@ -39,7 +39,7 @@ $border: 1px solid lightgray;
 #selectPurchase {
   @include column();
   width: 330px;
-  height: 800px;
+  height: 600px;
   max-width: 330px;
   // min-width: 360px;
   position: fixed;
@@ -51,7 +51,7 @@ $border: 1px solid lightgray;
   @media (min-width: 1201px) {
     @include column();
     width: 330px;
-    height: 800px;
+    height: 600px;
     max-width: 330px;
     // min-width: 360px;
     position: fixed;
