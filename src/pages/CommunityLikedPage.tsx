@@ -7,6 +7,10 @@ import { Link } from 'react-router-dom';
 import './../styles/community/main.scss';
 import LikeButton from '../components/community/main/LikeButton';
 
+interface UserData {
+  myLikedFeeds: IMyLikedFeeds[];
+}
+
 const CommunityLikedPage = () => {
   const [filterData, setFilterData] = useState<IMyLikedFeeds[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -17,16 +21,22 @@ const CommunityLikedPage = () => {
       setIsLoading(true);
       try {
         const response = await fetch('/data/userData.json');
-        const data = await response.json();
-        const loggedInUser = data.find(
-          (user: any) => user.username === '두루루'
-        ); // 현재 로그인된 사용자를 여기서 지정
+        const userData: UserData[] = await response.json();
 
-        if (loggedInUser && loggedInUser.myLikedFeeds) {
-          setFilterData(loggedInUser.myLikedFeeds);
-        } else {
-          setFilterData([]);
-        }
+        // 좋아요한 피드만 가져와서 설정
+        const likedFeeds: IMyLikedFeeds[] = userData
+          .flatMap((user: UserData) => user.myLikedFeeds || [])
+          .map(
+            ({ feedId, image, accountName, profileImage, views, likes }) => ({
+              feedId,
+              image,
+              accountName,
+              profileImage,
+              views,
+              likes,
+            })
+          );
+        setFilterData(likedFeeds);
 
         setIsLoading(false);
         setIsError(false);
