@@ -1,9 +1,10 @@
 import '../../styles/mypage/profile.scss';
-import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
+import '../../styles/mypage/profile.scss';
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -57,47 +58,62 @@ const InputTextField = styled(TextField)({
 
 export default function Profile() {
   return (
-    <ThemeProvider theme={theme}>
-      <Container component='main' maxWidth='xs'>
-        <Box
-          sx={{
-            marginTop: 20,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Box component='form' noValidate sx={{ mt: 1 }}>
-            <InputTextField
-              margin='dense'
-              fullWidth
-              id='email'
-              // label='Email Address'
-              name='email'
-              autoComplete='email'
-              // value={userData[0].email}
-              InputProps={{
-                style: {
-                  borderRadius: '2px',
-                },
-              }}
-            />
-            <InputTextField
-              margin='dense'
-              fullWidth
-              name='password'
-              type='password'
-              id='password'
-              autoComplete='current-password'
-              InputProps={{
-                style: {
-                  borderRadius: '2px',
-                },
-              }}
-            />
+    <div>
+      <div className='profile-container'>
+        <div className='profileimage'>
+          <img
+            src='https://i.pinimg.com/564x/de/0d/ef/de0def59d80f85f8962e9992f429e004.jpg'
+            alt='profile'
+          />
+        </div>
+      </div>
+
+      <ThemeProvider theme={theme}>
+        <Container component='main' maxWidth='xs'>
+          <Box
+            sx={{
+              // marginTop: 20,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <Box>회원정보</Box>
+            <Box>성명</Box>
+            <Box>연락처</Box>
+
+            <Box component='form' noValidate sx={{ mt: 1 }}>
+              <InputTextField
+                margin='dense'
+                fullWidth
+                id='email'
+                // label='Email Address'
+                name='email'
+                autoComplete='email'
+                // value={userData[0].email}
+                InputProps={{
+                  style: {
+                    borderRadius: '2px',
+                  },
+                }}
+              />
+              <InputTextField
+                margin='dense'
+                fullWidth
+                name='password'
+                type='password'
+                id='password'
+                autoComplete='current-password'
+                InputProps={{
+                  style: {
+                    borderRadius: '2px',
+                  },
+                }}
+              />
+            </Box>
           </Box>
-        </Box>
-      </Container>
-    </ThemeProvider>
+        </Container>
+      </ThemeProvider>
+    </div>
   );
 }

@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import '../../styles/mypage/mynav.scss';
 import Profile from './Profile';
-import ProfileImage from './ProfileImage';
 import MyShopNav from './MyShopNav';
 import MyFeedNav from './MyFeedNav';
 import MyReviewNav from './MyReviewNav';
@@ -92,10 +91,7 @@ export default function BasicTabs() {
           </Tabs>
         </Box>
         <CustomTabPanel value={value} index={0}>
-          <div style={{ maxWidth: '1200px' }}>
-            <ProfileImage />
-            <Profile />
-          </div>
+          <Profile />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
           <MyShopNav />

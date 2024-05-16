@@ -4,10 +4,6 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import '../../styles/mypage/mynav.scss';
-import LikesProduct from './LikesProducts';
-import CartPage from '../../pages/CartPage';
-import RecentViewList from './RecentViewList';
-import OrderDetails from './OrderDetails';
 import '../../styles/mypage/mynav.scss';
 import { useMediaQuery } from '@mui/material';
 
@@ -54,11 +50,8 @@ export default function MyReviewNav() {
   };
 
   return (
-    // <Box sx={{ justifyContent: 'center', m: 'auto' }}>
     <div>
       <div>
-        {/* <Box sx={{ p: 0, borderBottom: 1, borderColor: 'divider' }}>
-         */}
         <div style={{ marginTop: '11px' }}>
           <Tabs
             className='MuiTabs-myshop'
