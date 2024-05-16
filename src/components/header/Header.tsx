@@ -20,6 +20,7 @@ import IconButtonWithMenu from './IconButtonWithMenu';
 import BadgeComponent from './BadgeComponent';
 import CustomLink from './CustomLink';
 import CategoryDropDown from './CategoryDropDown';
+import ProtectedButton from '../common/ProtectedButton';
 // import { NavLink } from 'react-router-dom';
 
 interface Section {
@@ -245,9 +246,11 @@ export default function Header({ title, cartBadgeNum }: HeaderProps) {
 
           {/* cart 아이콘 */}
           <NavLink to='/cart'>
-          <BadgeComponent badgeContent={isLoggedIn ? cartBadgeNum : undefined}>
-            <img src={Cart1} alt='Cart' style={{ width: '24px' }} />
-          </BadgeComponent>
+            <BadgeComponent
+              badgeContent={isLoggedIn ? cartBadgeNum : undefined}
+            >
+              <img src={Cart1} alt='Cart' style={{ width: '24px' }} />
+            </BadgeComponent>
           </NavLink>
 
           {/* 검색창(input) */}
@@ -297,7 +300,17 @@ export default function Header({ title, cartBadgeNum }: HeaderProps) {
           {toolbarContent === 'Community' && (
             <>
               <CustomLink to='/community'>커뮤니티 홈</CustomLink>
-              <CustomLink to='/community/liked'>좋아요한 피드</CustomLink>
+              <ProtectedButton
+                sx={{
+                  '&:hover': {
+                    backgroundColor: 'white',
+                    color: '#5FF531',
+                  },
+                }}
+                redirectTo='/community/liked'
+              >
+                좋아요한 피드
+              </ProtectedButton>
             </>
           )}
         </Toolbar>
