@@ -20,11 +20,12 @@ import IconButtonWithMenu from './IconButtonWithMenu';
 import BadgeComponent from './BadgeComponent';
 import CustomLink from './CustomLink';
 import CategoryDropDown from './CategoryDropDown';
+import ProtectedButton from '../common/ProtectedButton';
+// import { NavLink } from 'react-router-dom';
 
 interface Section {
   title: string;
   url: string;
-
 }
 
 interface HeaderProps {
@@ -60,9 +61,9 @@ const StyledButton = styled(Button)(() => ({
 export default function Header({ title, cartBadgeNum }: HeaderProps) {
   const isMobile = useMediaQuery('(max-width:619px)');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isGuest, setIsGuest] = useState(false);
   const [isShoppingHovered, setIsShoppingHovered] = useState(false);
   const [toolbarContent, setToolbarContent] = useState('Shop');
-
 
   const navigate = useNavigate();
   const gotoSearch = () => {
@@ -72,6 +73,10 @@ export default function Header({ title, cartBadgeNum }: HeaderProps) {
   useEffect(() => {
     const loggedInStatus = sessionStorage.getItem('isLoggedIn') === 'true';
     setIsLoggedIn(loggedInStatus);
+
+    // const guestStatus =
+    //   sessionStorage.getItem('isGuest') === 'true';
+    //   setIsGuest(guestStatus);
   }, []);
 
   const menuItems = [
@@ -240,9 +245,13 @@ export default function Header({ title, cartBadgeNum }: HeaderProps) {
           {/* )} */}
 
           {/* cart 아이콘 */}
-          <BadgeComponent badgeContent={isLoggedIn ? cartBadgeNum : undefined}>
-            <img src={Cart1} alt='Cart' style={{ width: '24px' }} />
-          </BadgeComponent>
+          <NavLink to='/cart'>
+            <BadgeComponent
+              badgeContent={isLoggedIn ? cartBadgeNum : undefined}
+            >
+              <img src={Cart1} alt='Cart' style={{ width: '24px' }} />
+            </BadgeComponent>
+          </NavLink>
 
           {/* 검색창(input) */}
           {/* mobile(width:600px 이하)에서 사라짐 */}
@@ -291,7 +300,17 @@ export default function Header({ title, cartBadgeNum }: HeaderProps) {
           {toolbarContent === 'Community' && (
             <>
               <CustomLink to='/community'>커뮤니티 홈</CustomLink>
-              <CustomLink to='/community/likes'>좋아요 한 피드</CustomLink>
+              <ProtectedButton
+                sx={{
+                  '&:hover': {
+                    backgroundColor: 'white',
+                    color: '#5FF531',
+                  },
+                }}
+                redirectTo='/community/liked'
+              >
+                좋아요한 피드
+              </ProtectedButton>
             </>
           )}
         </Toolbar>

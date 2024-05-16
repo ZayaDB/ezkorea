@@ -9,11 +9,9 @@ const SearchPage = () => {
   const [showModal, setShowModal] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
-
   const closeModal = () => {
     setShowModal(false);
   };
-
   const goHistory = () => {
     closeModal();
 
@@ -27,14 +25,6 @@ const SearchPage = () => {
       navigate(-1);
     }
   };
-
-  const handleSearchComplete = (searchValue: string) => {
-    if (searchValue) {
-      console.log('검색어:', searchValue);
-      closeModal();
-    }
-  };
-
   return (
     <div>
       <Modal
@@ -67,7 +57,6 @@ const SearchPage = () => {
             <CloseIcon />
           </IconButton>
           <ModalSearch
-            onSearch={handleSearchComplete}
             closeModal={closeModal}
           />
         </Box>

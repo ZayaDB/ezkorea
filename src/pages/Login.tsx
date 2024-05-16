@@ -49,7 +49,7 @@ const style = {
   boxShadow: 24,
   p: 4,
   textAlign: 'center',
-  borderRadius: '4px',
+  borderRadius: '10px',
 };
 
 const InputTextField = styled(TextField)({
@@ -94,6 +94,10 @@ const StyledButton2 = styled(Button)(() => ({
 }));
 
 export default function SignIn() {
+  // const guest = {
+  //   email: 'guest@example.com',
+  //   password: 'Guest@123!!!',
+  // };
   const [userData, setUserData] = useState<User[]>([]);
   // const [open, setOpen] = useState(false);
   const [errorModalOpen, setErrorModalOpen] = useState(false);
@@ -102,10 +106,19 @@ export default function SignIn() {
 
   const [email, setEmail] = useState<string>('');
   const [pw, setPw] = useState<string>('');
+  // email, password 초기값으로 guest 정보 넣어놓기
+  // const [email, setEmail] = useState<string>(guest.email);
+  // const [pw, setPw] = useState<string>(guest.password);
+
   const [emailValid, setEmailValid] = useState<boolean>(true);
   const [pwValid, setPwValid] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [pwTouched, setPwTouched] = useState<boolean>(false);
+
+  // const guest = {
+  //   email: 'guest@example.com',
+  //   password: 'Guest@123!!!',
+  // };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -146,18 +159,20 @@ export default function SignIn() {
     const user = userData.find(user => user.email === email);
 
     if (emailValid && pwValid) {
-      if (user) {
+      // if (email === guest.email && pw === guest.password) {
+      //   // console.log('Guest login success');
+      //   sessionStorage.setItem('isGuest', 'true');
+      //   // sessionStorage.setItem('UserData', JSON.stringify(userData));
+      //   navigate('/');
+      // } else if (user) {
+        if (user) {
         if (user.password === pw) {
-          console.log('success');
           sessionStorage.setItem('isLoggedIn', 'true');
           sessionStorage.setItem('UserData', JSON.stringify(userData));
           navigate('/');
-        } else {
-          setErrorMessage('비밀번호가 틀렸습니다.');
-          setPwValid(false);
         }
       } else {
-        setErrorMessage('등록되지 않은 회원입니다.');
+        // setErrorMessage('등록되지 않은 회원입니다.');
         setErrorModalOpen(true);
       }
     }
@@ -189,7 +204,7 @@ export default function SignIn() {
               margin='dense'
               fullWidth
               id='email'
-              label='Email Address'
+              label='Email'
               name='email'
               autoComplete='email'
               InputProps={{
@@ -219,27 +234,15 @@ export default function SignIn() {
                   borderRadius: '2px',
                 },
               }}
-              // helperText={
-              //   !pwValid
-              //     ? '잘못된 비밀번호 형식입니다.'
-              //     : pw.length === 0 && '비밀번호를 입력해주세요.'
-              // }
-              // helperText={
-              //   !pwValid && pw.length > 0
-              //     ? errorMessage
-              //       ? errorMessage
-              //       : '잘못된 비밀번호 형식입니다.'
-              //     : pw.length === 0 && '비밀번호를 입력해주세요.'
-              // }
               helperText={
-                pwTouched && !pwValid
+                pwTouched && !pwValid && pw.trim() !== ''
                   ? errorMessage || '잘못된 비밀번호 형식입니다.'
                   : ''
               }
               // error={!pwValid || !!errorMessage}
               value={pw}
               onChange={handlePassWord}
-              error={pwTouched && !pwValid}
+              // error={pwTouched && !pwValid}
             />
             <StyledButton
               fullWidth
@@ -311,10 +314,26 @@ export default function SignIn() {
                     id='error-modal-title'
                     variant='h6'
                     component='h2'
-                    sx={{ textAlign: 'center', borderRadius: '10px' }}
+                    sx={{
+                      textAlign: 'center',
+                      borderRadius: '10px',
+                      padding: '18px 0 8px 0',
+                    }}
                   >
-                    등록되지 않은 회원입니다.
+                    비밀번호가 틀렸습니다 😓
                   </Typography>
+                  <StyledButton
+                    onClick={handleErrorModalClose}
+                    sx={{
+                      width: '100%',
+                      backgroundColor: 'black',
+                      color: 'white',
+                      fontSize: '18px',
+                      marginTop: '30px',
+                    }}
+                  >
+                    확인
+                  </StyledButton>
                 </Box>
               </Fade>
             </Modal>

@@ -51,6 +51,7 @@ export default function LeviewCarousel() {
           나만의 작은 공간, 책상 위에도 취향을 녹여보세요.
         </Typography>
       </div>
+      <div className='mood-container'>
       <Swiper
         className='swiper-container'
         centeredSlides={true} //가운데 정렬
@@ -106,6 +107,7 @@ export default function LeviewCarousel() {
           </SwiperSlide>
         ))}
       </Swiper>
+      </div>
     </div>
   );
 }

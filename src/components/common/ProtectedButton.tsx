@@ -44,7 +44,7 @@ const ProtectedButton: React.FC<ProtectedButtonProps> = ({
 
   return (
     <>
-      <Button onClick={handleAction} sx={sx}>
+      <Button onClick={handleAction} sx={sx} disableRipple>
         {children}
       </Button>
       <Dialog open={open} onClose={handleClose}>

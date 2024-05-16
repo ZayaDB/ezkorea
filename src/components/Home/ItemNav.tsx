@@ -66,15 +66,15 @@ const IconNav: React.FC = () => {
           overflowX: 'scroll',
           scrollbarWidth: 'none',
           maxWidth: '1150px',
+          gap: '10px', // 아이템 간격 조정
         }}
       >
         {category.map((cate: CategoryData, cateIndex) =>
           cate.subCategories
             .filter(subCategory => subCategory.name !== 'ALL')
             .map((subCategory, subIndex) => {
-              // 두 번째 카테고리의 첫 번째와 두 번째 아이템 크기 조절
-              const isSmall =
-                cateIndex === 1 && (subIndex === 0 || subIndex === 1);
+              // 반응형 아이템 크기 조정
+              const isSmall = window.innerWidth <= 768 && (cateIndex === 1 && (subIndex === 0 || subIndex === 1));
               return (
                 <LinkItem
                   key={subIndex}
@@ -95,8 +95,8 @@ const IconNav: React.FC = () => {
                     src={subCategory.imagePath}
                     alt={subCategory.name}
                     style={{
-                      width: isSmall ? '122px' : '120px',
-                      height: isSmall ? '122px' : '120px',
+                      width: isSmall ? '100px' : '120px',
+                      height: isSmall ? '100px' : '120px',
                     }}
                   />
                   <div style={{ textAlign: 'center' }}>{subCategory.name}</div>

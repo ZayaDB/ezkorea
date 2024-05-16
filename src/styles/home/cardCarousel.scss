@@ -17,6 +17,11 @@
 //   justify-content: center;
 // }
 
+.mood-container > .swiper > .swiper-button-prev,
+.mood-container > .swiper > .swiper-button-next {
+  color: #000;
+}
+
 // 반응형
 @media screen and (min-width: 640px) {
   .swiper-container {

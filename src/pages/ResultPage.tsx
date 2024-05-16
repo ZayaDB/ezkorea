@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import ResultProducts from '../components/search/ResultProduct';
-
+import ResultCommunity from '../components/community/search/ResultCommunity';
+import SubTitle from '../components/community/post/SubTitle';
 const ResultPage = () => {
   const queryParams = new URLSearchParams(location.search);
   const search = queryParams.get('search') || ''; // null일 경우 빈 문자열을 할당
@@ -14,9 +15,18 @@ const ResultPage = () => {
   }, [search]);
 
   return (
-    <div>
-      <div> 커뮤니티 키워드 검색 한 결과 관련글 </div>
+    <div
+      style={{
+        maxWidth: '1200px',
+        display: 'flex',
+        flexDirection: 'column',
+        margin: 'auto',
+      }}
+    >
+      <SubTitle text='PRODUCTS' isRequired={false} />
       <ResultProducts keyword={search} />
+      <SubTitle text='FEEDS' isRequired={false} />
+      <ResultCommunity keyword={search} />
     </div>
   );
 };

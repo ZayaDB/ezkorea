@@ -141,10 +141,9 @@ export const CommentButton = styled(Typography)`
   border: none;
   font-size: 14px;
   line-height: 16px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   &:hover {
-    font-weight: 700;
     color: #5ff531;
   }
 `;

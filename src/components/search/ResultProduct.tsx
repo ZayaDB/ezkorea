@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Products } from '../../types/productTypes';
 import { getData } from '../../utils/getData';
 import ProductItem from '../category/ProductItem';
+import { Button } from '@mui/material';
+// import { useNavigate } from 'react-router-dom';
 
 interface ResultProductsProps {
   keyword: string;
@@ -10,7 +12,9 @@ interface ResultProductsProps {
 const ResultProducts: React.FC<ResultProductsProps> = ({ keyword }) => {
   const [filteredProducts, setFilteredProducts] = useState<Products[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [visibleProductsCount, setVisibleProductsCount] = useState<number>(6);
   const prevKeyword = useRef<string | null>(null);
+  // const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,11 +41,17 @@ const ResultProducts: React.FC<ResultProductsProps> = ({ keyword }) => {
       }
     };
 
-    if (keyword && keyword !== prevKeyword.current) {
-      fetchData();
+    if (keyword !== prevKeyword.current) {
       prevKeyword.current = keyword;
+      fetchData();
     }
   }, [keyword]);
+
+  const handleLoadMore = () => {
+    setVisibleProductsCount(prevCount => prevCount + 6);
+  };
+
+  const allProducts = keyword ? filteredProducts : filteredProducts;
 
   return (
     <div>
@@ -49,26 +59,44 @@ const ResultProducts: React.FC<ResultProductsProps> = ({ keyword }) => {
         <div style={{ textAlign: 'center' }}>Loading...</div>
       ) : (
         <div>
-          {filteredProducts.length > 0 ? (
+          {allProducts.length > 0 ? (
             <div className='likes-page'>
-              <div
-                style={{
-                  textAlign: 'center',
-                  fontSize: '13px',
-                  marginBottom: '10px',
-                }}
-              >
-                
-              </div>
               <div className='likes-content'>
-                {filteredProducts.map((product: Products) => (
-                  <ProductItem key={product.productId} prod={product} />
-                ))}
+                {allProducts
+                  .slice(0, visibleProductsCount)
+                  .map((product: Products) => (
+                    <ProductItem key={product.productId} prod={product} />
+                  ))}
               </div>
+              {visibleProductsCount < allProducts.length && (
+                <div style={{ textAlign: 'center', marginBottom: '80px' }}>
+                  <Button
+                    onClick={handleLoadMore}
+                    sx={{
+                      p: 1,
+                      width: '100px',
+                      backgroundColor: 'black',
+                      color: 'white',
+                      '&:hover': {
+                        backgroundColor: 'black',
+                        color: '#5FF531',
+                      },
+                    }}
+                  >
+                    더보기
+                  </Button>
+                </div>
+              )}
             </div>
           ) : (
             <div className='likes-content'>
-              <div style={{ textAlign: 'center' , width:'100%', marginTop:'100px' }}>
+              <div
+                style={{
+                  textAlign: 'center',
+                  width: '100%',
+                  marginTop: '100px',
+                }}
+              >
                 상품 검색 결과가 없습니다.
               </div>
             </div>

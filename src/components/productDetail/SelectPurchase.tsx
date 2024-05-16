@@ -158,6 +158,7 @@ export default function SelectPurchase() {
         ])
       );
     }
+
     navigate('/order');
   };
 
@@ -298,9 +299,7 @@ export default function SelectPurchase() {
               <AddShoppingCartIcon />
             </Box>
             <Box className='purchaseBtn'>
-              <ProtectedButton redirectTo='/order' onClick={handleOrder}>
-                주문하기
-              </ProtectedButton>
+              <Button onClick={handleOrder}>주문하기</Button>
             </Box>
           </div>
         </div>

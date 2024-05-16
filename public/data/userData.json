@@ -5,6 +5,52 @@
     "email": "dururu@gmail.com",
     "phone": "010-1244-1234",
     "address1": "서울 강동구 고덕로 429",
-    "address2": "팍스애비뉴 4~5층"
+    "address2": "팍스애비뉴 4~5층",
+    "myFeeds": [
+      {
+        "feedId": 1,
+        "image": "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/projects/168856428667281853.png?w=720"
+      },
+      {
+        "feedId": 4,
+        "image": "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/168164950371720285.jpeg?w=720"
+      },
+      {
+        "feedId": 8,
+        "image": "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/161311357069176332.jpg?w=720"
+      }
+    ],
+    "myComments": [
+      {
+        "feedId": 1,
+        "image": "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/projects/168856428667281853.png?w=720",
+        "content": "이 거치대는 Adjustable Pro에서 구매했습니다. 매우 튼튼하고 조절이 자유로워 추천드립니다.",
+        "creationDate": "2024-01-17"
+      },
+      {
+        "feedId": 3,
+        "image": "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/project/171254527839226047.jpg?w=720",
+        "content": "키보드 조명이 너무 멋집니다! 소프트웨어 지원이 있나요?",
+        "creationDate": "2024-01-15"
+      }
+    ],
+    "myLikedFeeds": [
+      {
+        "feedId": 2,
+        "image": "https://bucketplace-v2-development.s3.amazonaws.com/profileImageUrl/171253915990660377.jpeg",
+        "accountName": "creative_mind",
+        "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+        "views": 4987,
+        "likes": 524
+      },
+      {
+        "feedId": 3,
+        "image": "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/project/171254527839226047.jpg?w=720",
+        "accountName": "design_enthusiast",
+        "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+        "views": 4790,
+        "likes": 839
+      }
+    ]
   }
 ]
