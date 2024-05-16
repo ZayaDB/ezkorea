@@ -93,7 +93,12 @@ const CommunityLikedPage = () => {
           <div>Error occurred.</div>
         ) : (
           filterData.map(item => (
-            <Grid item xs={6} md={3} key={item.feedId} className='feed'>
+            <Grid
+              item
+              key={item.feedId}
+              className='feed'
+              style={{ maxWidth: '300px' }}
+            >
               <Box className='feed-container'>
                 <Box className='feed-box'>
                   <Link
