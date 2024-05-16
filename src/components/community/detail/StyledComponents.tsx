@@ -1,5 +1,5 @@
 import { styled } from '@mui/material/styles';
-import { Box, Typography, Button, TextField, colors } from '@mui/material';
+import { Box, Typography, Button, TextField } from '@mui/material';
 
 export const ColorCircle = styled(Box)<{ color: string }>(({ color }) => ({
   width: 15,
@@ -133,3 +133,18 @@ export const InputTextField = styled(TextField)({
     },
   },
 });
+
+export const CommentButton = styled(Typography)`
+  color: rgb(130, 140, 148);
+  padding: 0px;
+  background-color: transparent;
+  border: none;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  &:hover {
+    font-weight: 700;
+    color: #5ff531;
+  }
+`;

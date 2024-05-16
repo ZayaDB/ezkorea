@@ -138,7 +138,7 @@ html {
   display: flex;
   gap: 8px;
   height: 40px;
-  margin: 40px 0;
+  margin: 32px 0;
 }
 
 .comment-input-container label {
@@ -151,4 +151,22 @@ html {
 .comment-input input {
   height: 24px;
   padding: 8px;
+}
+
+.comment-box {
+  -webkit-box-align: center;
+  align-items: center;
+  font-size: 16px;
+  line-height: 24px;
+  word-break: break-word;
+  white-space: pre-line;
+}
+
+.comment-info-box {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  line-height: 16px;
+  font-weight: 500;
+  color: rgb(130, 140, 148);
 }

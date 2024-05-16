@@ -5,8 +5,6 @@ import {
   Button,
   Typography,
   Grid,
-  Card,
-  CardContent,
   CardHeader,
   Box,
 } from '@mui/material';
@@ -18,6 +16,7 @@ import {
   ImgButton,
   ProductBox,
   InputTextField,
+  CommentButton,
 } from '../components/community/detail/StyledComponents';
 import '../styles/community/detail.scss';
 import CommentIcon from '@mui/icons-material/Comment';
@@ -31,6 +30,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { Margin } from '@mui/icons-material';
 
 TimeAgo.addLocale(koLocale);
 
@@ -266,10 +266,10 @@ const CommunityDetailPage: React.FC = () => {
             </Typography>
             <ShareIcon sx={{ fontSize: '24px' }} />
             <Typography>
-              <dt className='dot d-data'>공유하기</dt>
+              <dt className='dot d-data'>공유</dt>
             </Typography>
           </Box>
-          <CustomTypography variant='body1'>신고하기</CustomTypography>
+          <CustomTypography variant='body1'>신고</CustomTypography>
         </Box>
       </Grid>
 
@@ -299,77 +299,99 @@ const CommunityDetailPage: React.FC = () => {
       </Box>
 
       {/* 댓글 */}
-      <Typography letterSpacing={1} mb={3}>
+      <Typography letterSpacing={1} mb={1}>
         <CommentIcon sx={{ fontSize: '24px', mr: 1 }} />
         댓글 {feed.commentCount}
       </Typography>
-      {feed.comments?.map(
-        (
-          comment: Comment,
-          index: number // 수정된 부분: map 콜백 함수의 인자에 index 추가
-        ) => (
-          <Card
-            key={index} // 수정된 부분: feed.comment.id 대신 index 사용
-            variant='outlined'
-            style={{ marginBottom: '10px', width: '100%' }}
-          >
-            <CardHeader
-              avatar={<Avatar src={comment.profileImage} alt='Profile' />}
-              title={comment.accountName}
-              subheader={
-                <ReactTimeAgo
-                  date={new Date(comment.creationDate)}
-                  locale='ko'
-                />
-              }
-            />
-            <CardContent>
-              <Typography variant='body1' paragraph>
-                {comment.content}
-              </Typography>
 
-              {/* 댓글의 답글 표시 */}
-              {comment.replies && (
-                <ul>
-                  {comment.replies.map(
-                    (
-                      reply: Comment,
-                      replyIndex: number // 수정된 부분: map 콜백 함수의 인자에 replyIndex 추가
-                    ) => (
-                      <li key={replyIndex}>
-                        {' '}
-                        {/* 수정된 부분: reply.id 대신 replyIndex 사용 */}
-                        <Card
-                          variant='outlined'
-                          style={{ marginBottom: '5px' }}
-                        >
-                          <CardHeader
-                            avatar={
-                              <Avatar src={reply.profileImage} alt='Profile' />
-                            }
-                            title={reply.accountName}
-                            subheader={
-                              <ReactTimeAgo
-                                date={new Date(reply.creationDate)}
-                                locale='ko'
-                              />
-                            }
+      {feed.comments?.map((comment: Comment, index: number) => (
+        <Box
+          mt={2}
+          pb={2}
+          key={index}
+          style={{
+            marginBottom: '10px',
+            width: '100%',
+          }}
+        >
+          <CardHeader
+            avatar={
+              <Avatar
+                src={comment.profileImage}
+                alt='Profile'
+                sx={{ margin: '8px 0' }}
+              />
+            }
+            title={
+              <Typography variant='body1'>{comment.accountName}</Typography>
+            }
+            subheader={
+              <ReactTimeAgo date={new Date(comment.creationDate)} locale='ko' />
+            }
+            sx={{ p: 0 }}
+          />
+          <Box>
+            <Typography
+              className='comment-box'
+              variant='body1'
+              sx={{ padding: '8px 0' }}
+            >
+              {comment.content}
+            </Typography>
+
+            <div className='comment-info-box'>
+              <CommentButton>답글 달기</CommentButton>
+              <dt className='dot'></dt>
+              <CommentButton>신고</CommentButton>
+            </div>
+
+            {/* 댓글의 답글 표시 */}
+            {comment.replies && (
+              <ul style={{ listStyleType: 'none', paddingLeft: '20px' }}>
+                {comment.replies.map((reply: Comment, replyIndex: number) => (
+                  <li key={replyIndex}>
+                    <Box
+                      style={{
+                        backgroundColor: 'rgb(247, 250, 247)',
+                        borderRadius: '5px',
+                        padding: '16px',
+                        marginTop: 24,
+                      }}
+                    >
+                      <CardHeader
+                        avatar={
+                          <Avatar src={reply.profileImage} alt='Profile' />
+                        }
+                        title={
+                          <Typography variant='body1'>
+                            {reply.accountName}
+                          </Typography>
+                        }
+                        subheader={
+                          <ReactTimeAgo
+                            date={new Date(reply.creationDate)}
+                            locale='ko'
                           />
-                          <CardContent>
-                            <Typography variant='body1' paragraph>
-                              {reply.content}
-                            </Typography>
-                          </CardContent>
-                        </Card>
-                      </li>
-                    )
-                  )}
-                </ul>
-              )}
-            </CardContent>
-          </Card>
-        )
-      )}
+                        }
+                      />
+                      <Box>
+                        <Typography variant='body1' sx={{ padding: '8px 0' }}>
+                          {reply.content}
+                        </Typography>
+                      </Box>
+                      <div className='comment-info-box'>
+                        <CommentButton>답글 달기</CommentButton>
+                        <dt className='dot'></dt>
+                        <CommentButton>신고</CommentButton>
+                      </div>
+                    </Box>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </Box>
+        </Box>
+      ))}
     </Box>
   );
 };
