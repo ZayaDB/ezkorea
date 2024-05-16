@@ -61,7 +61,6 @@ const StyledButton = styled(Button)(() => ({
 export default function Header({ title, cartBadgeNum }: HeaderProps) {
   const isMobile = useMediaQuery('(max-width:619px)');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // const [isGuest, setIsGuest] = useState(false);
   const [isShoppingHovered, setIsShoppingHovered] = useState(false);
   const [toolbarContent, setToolbarContent] = useState('Shop');
 
@@ -73,10 +72,6 @@ export default function Header({ title, cartBadgeNum }: HeaderProps) {
   useEffect(() => {
     const loggedInStatus = sessionStorage.getItem('isLoggedIn') === 'true';
     setIsLoggedIn(loggedInStatus);
-
-    // const guestStatus =
-    //   sessionStorage.getItem('isGuest') === 'true';
-    //   setIsGuest(guestStatus);
   }, []);
 
   const menuItems = [
@@ -132,9 +127,10 @@ export default function Header({ title, cartBadgeNum }: HeaderProps) {
             <StyledButton
               onClick={handleShoppingClick}
               sx={{
-                fontWeight: '400',
+                fontWeight: '600',
                 fontSize: '24px',
                 textTransform: 'none',
+                color: '#212529',
               }}
               disableRipple
             >
@@ -206,7 +202,7 @@ export default function Header({ title, cartBadgeNum }: HeaderProps) {
           {/* {isMobile && ( */}
           <IconButton
             type='button'
-            sx={{ p: '2px' }}
+            sx={{ p: '6px' }}
             aria-label='search'
             disableRipple
             onClick={gotoSearch}
@@ -279,7 +275,7 @@ export default function Header({ title, cartBadgeNum }: HeaderProps) {
             zIndex: 'drawer',
           }}
           style={{
-            paddingLeft: '27.8%',
+            paddingLeft: '28.2%',
           }}
         >
           {/* 하위 카테고리 변경: shop > community */}

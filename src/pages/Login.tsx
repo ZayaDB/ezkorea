@@ -187,7 +187,7 @@ export default function SignIn() {
               color='inherit'
               sx={{ fontSize: '40px', fontWeight: '600', pb: '25px' }}
             >
-              Dururu
+              dururu
             </Typography>
           </NavLink>
           <Box component='form' noValidate sx={{ mt: 1 }}>

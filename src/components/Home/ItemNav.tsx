@@ -56,7 +56,9 @@ const IconNav: React.FC = () => {
         width: '100%',
         display: 'flex',
         justifyContent: 'center',
-        marginTop: '18px',
+        marginTop: '10px',
+        fontWeight: '500',
+        fontSize: '15px',
       }}
     >
       <div
@@ -74,7 +76,10 @@ const IconNav: React.FC = () => {
             .filter(subCategory => subCategory.name !== 'ALL')
             .map((subCategory, subIndex) => {
               // 반응형 아이템 크기 조정
-              const isSmall = window.innerWidth <= 768 && (cateIndex === 1 && (subIndex === 0 || subIndex === 1));
+              const isSmall =
+                window.innerWidth <= 768 &&
+                cateIndex === 1 &&
+                (subIndex === 0 || subIndex === 1);
               return (
                 <LinkItem
                   key={subIndex}
@@ -99,7 +104,9 @@ const IconNav: React.FC = () => {
                       height: isSmall ? '100px' : '120px',
                     }}
                   />
-                  <div style={{ textAlign: 'center' }}>{subCategory.name}</div>
+                  <div style={{ textAlign: 'center', paddingTop: '10px' }}>
+                    {subCategory.name}
+                  </div>
                 </LinkItem>
               );
             })

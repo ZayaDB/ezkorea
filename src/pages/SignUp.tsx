@@ -12,6 +12,7 @@ import Fade from '@mui/material/Fade';
 import Backdrop from '@mui/material/Backdrop';
 import { NavLink } from 'react-router-dom';
 import { User } from '../types/userTypes';
+// import { Phone } from '@mui/icons-material';
 
 const theme = createTheme({
   palette: {
@@ -115,7 +116,7 @@ export default function SignIn() {
   const [phoneNumCheck, setPhoneNumCheck] = useState<boolean>(false);
 
   const [auth, setAuth] = useState<string>('');
-  const [authCheck, setAuthCheck] = useState<boolean>(false);
+  const [authCheck, setAuthCheck] = useState<boolean>(true);
 
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [errorModalOpen, setErrorModalOpen] = useState(false);
@@ -178,14 +179,15 @@ export default function SignIn() {
   };
 
   const handlePhoneNumberClick = () => {
+    setAuthCheck(false);
     if (isPhoneNumberValid) {
       // 정규식 통과: 모달 열기 또는 다른 작업 수행
       setConfirmModalOpen(true); // 모달 열기
       setPhoneNumCheck(true);
-    } 
+    }
     // else {
-      // 정규식 통과 실패: 에러 메시지 표시 또는 다른 작업 수행
-      // console.log('올바른 폰 번호가 아닙니다.');
+    // 정규식 통과 실패: 에러 메시지 표시 또는 다른 작업 수행
+    // console.log('올바른 폰 번호가 아닙니다.');
     // }
   };
 
@@ -215,10 +217,10 @@ export default function SignIn() {
     if (errorMessage) {
       setErrorMessage(errorMessage);
       setErrorModalOpen(true); // 에러 모달 열기
-    } 
+    }
     // else {
-      // 모든 조건이 충족되면 회원가입 완료 처리
-      // console.log('회원가입 완료');
+    // 모든 조건이 충족되면 회원가입 완료 처리
+    // console.log('회원가입 완료');
     // }
   };
   const handleErrorModalClose = () => setErrorModalOpen(false);
@@ -229,7 +231,7 @@ export default function SignIn() {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 20,
+            marginTop: 15,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -241,7 +243,7 @@ export default function SignIn() {
               color='inherit'
               sx={{ fontSize: '37px', fontWeight: '600', pb: '25px' }}
             >
-              Welcome to Dururu ☺
+              Welcome to dururu ☺
             </Typography>
           </NavLink>
           <Box component='form' noValidate sx={{ mt: 1 }}>
@@ -328,7 +330,7 @@ export default function SignIn() {
                 },
               }}
               helperText={
-                !emailValid && email.length > 0
+                !isPhoneNumberValid && phoneNumber.length > 0
                   ? '올바른 전화번호 10~11자리를 입력해주세요.'
                   : ''
               }
@@ -366,10 +368,7 @@ export default function SignIn() {
               required
               margin='dense'
               fullWidth
-              // id='phone-number'
               label='인증번호'
-              // name='phoneNumber'
-              // autoComplete='phone-number'
               InputProps={{
                 style: {
                   borderRadius: '2px',
@@ -377,29 +376,7 @@ export default function SignIn() {
               }}
               value={auth}
               onChange={handleAuth}
-              helperText={auth === '' ? '인증번호를 입력하세요' : ''}
-            />
-
-            {/* name */}
-            <InputTextField
-              margin='dense'
-              fullWidth
-              id='email'
-              label='Name'
-              name='email'
-              autoComplete='email'
-              InputProps={{
-                style: {
-                  borderRadius: '2px',
-                },
-              }}
-              helperText={
-                !emailValid && email.length > 0
-                  ? '올바른 이메일 형식이 아닙니다.'
-                  : ''
-              }
-              value={email}
-              onChange={handleEmail}
+              helperText={authCheck ? '' : '인증번호를 입력하세요'}
             />
 
             {/* signUp button */}

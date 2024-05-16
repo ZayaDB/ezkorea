@@ -80,7 +80,7 @@ export default function BestItem() {
   return (
     <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
       <div style={{ maxWidth: '1200px' }}>
-        <Box onClick={gotobest} sx={{ py: 4, width: 'auto' }}>
+        <Box onClick={gotobest} sx={{ padding: '10px 0 30px 0', width: 'auto' }}>
           <div className='TitleArea'>
             <Typography sx={{ fontSize: '30px', fontWeight: '700' }}>
               BEST
