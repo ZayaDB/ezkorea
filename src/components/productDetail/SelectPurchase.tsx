@@ -23,7 +23,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { Product } from '../../types/productDetail';
 import { addCommasToNumber } from '../../hooks/addCommasToNumber';
-import ProtectedButton from '../common/ProtectedButton';
+
 // const useStyles = makeStyle(theme => ({
 //   tablet: {
 //     width: '768px',
@@ -218,7 +218,7 @@ export default function SelectPurchase() {
             </div>
           </div>
           <div id='selectProduct'>
-            <Box sx={{ maxWidth: 479 }}>
+            <Box sx={{ maxWidth: 760 }}>
               <FormControl fullWidth>
                 <InputLabel id='demo-simple-select-label'>color</InputLabel>
                 {spInfo && spInfo.colorOption && (
