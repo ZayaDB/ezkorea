@@ -1,15 +1,16 @@
 import '../styles/order/cart.scss';
 import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
 import Checkbox from '@mui/material/Checkbox';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { RootState } from '../redux/config';
 import { useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import { addCommasToNumber } from '../hooks/addCommasToNumber';
+import { useNavigate } from 'react-router-dom';
 
 export default function CartPage() {
+  const navigate = useNavigate();
   const selectOption = useSelector(
     (state: RootState) => state.product.selectedOption
   );
@@ -51,24 +52,41 @@ export default function CartPage() {
   const children = (
     <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
       <FormControlLabel
-        label='Child 1'
+        label=''
         control={<Checkbox checked={checked[0]} onChange={handleChange2} />}
       />
     </Box>
   );
+  // 계산기
+  const calculateTotalPrice = (
+    discountedPrice: number,
+    count: number
+  ): number => {
+    return discountedPrice * count;
+  };
+  // selectedQuantity의 타입을 명시적으로 지정
+  const totalQuantity: number[] = selectedQuantity;
+  // 각 요소의 타입을 명시적으로 지정하여 reduce 메서드 사용
+  const totalSelectedQuantity: number = totalQuantity.reduce(
+    (acc: number, curr: number) => acc + curr,
+    0
+  );
+  const handleOrder = () => {
+    navigate('/order');
+  };
 
   // 수량버튼
-  const [counts, setCounts] = useState<number>(1);
+  // const [counts, setCounts] = useState<number>(1);
 
-  const handleIncrease = () => {
-    setCounts(counts + 1);
-  };
+  // const handleIncrease = () => {
+  //   setCounts(counts + 1);
+  // };
 
-  const handleDecrease = () => {
-    if (counts > 1) {
-      setCounts(counts - 1);
-    }
-  };
+  // const handleDecrease = () => {
+  //   if (counts > 1) {
+  //     setCounts(counts - 1);
+  //   }
+  // };
 
   return (
     <Grid container direction='row' justifyContent='center' alignItems='center'>
@@ -77,7 +95,7 @@ export default function CartPage() {
           <div className='cartTitle'>
             <div className='titleCheckbox'>
               <FormControlLabel
-                label='Parent'
+                label=''
                 control={
                   <Checkbox
                     checked={checked[0] && checked[1]}
@@ -88,9 +106,10 @@ export default function CartPage() {
               />
             </div>
             <div className='titleDetail'>상품정보</div>
-            <div className='titleCountBtn'>수량</div>
+            <div className='titleCountBtn'>옵션/수량</div>
             <div className='titleTotal'>주문금액</div>
             <div className='titleDelivery'>배송비</div>
+            <div className='titleModify'></div>
           </div>
           <div className='purchaseInfo'>
             <div className='purchasecheckbox'>{children}</div>
@@ -101,42 +120,48 @@ export default function CartPage() {
               <div className='purchaseDetail'>
                 <div className='purchaseBrand'>{brandName}</div>
                 <div className='purchaseName'>{productName}</div>
-                <div className='purchaseOriginal'>{productPrice}원</div>
+                <div className='purchaseOriginal'>
+                  {addCommasToNumber(
+                    calculateTotalPrice(
+                      productPrice ?? 0,
+                      totalSelectedQuantity
+                    )
+                  )}
+                  원
+                </div>
                 <div className='saleZone'>
                   <div className='saleRate'>{discountRate}%</div>
-                  <div className='salePrice'>{discountPrice}원</div>
+                  <div className='salePrice'>
+                    {addCommasToNumber(
+                      calculateTotalPrice(
+                        discountPrice ?? 0,
+                        totalSelectedQuantity
+                      )
+                    )}
+                    원
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className='deleteBtn'>x</div>
             <div className='colorCount'>
               <div className='selectedColor'>{selectOption}</div>
-              <div className='countBtn'>
-                <ButtonGroup
-                  size='small'
-                  variant='contained'
-                  aria-label='Basic button group'
-                >
-                  <Button
-                    onClick={() => handleDecrease()}
-                    disabled={counts === 1}
-                    color='primary'
-                  >
-                    -
-                  </Button>
-                  <Button color='primary'>{selectedQuantity}</Button>
-                  <Button onClick={() => handleIncrease()} color='primary'>
-                    +
-                  </Button>
-                </ButtonGroup>
-              </div>
+              <div className='countBtn'>{totalSelectedQuantity}</div>
             </div>
-            <div className='total'>금액</div>
+            <div className='total'>
+              {addCommasToNumber(
+                calculateTotalPrice(discountPrice ?? 0, totalSelectedQuantity)
+              )}
+              원
+            </div>
             <div className='deliveryInfo'>
               <div className='deliveryCharge'>3500원</div>
               <div>5만원 이상 구매시 무료배송</div>
             </div>
+            {/* <div className='prodModify'>
+              <button>수정하기</button>
+              <button>X</button>
+            </div> */}
           </div>
         </div>
 
@@ -147,16 +172,27 @@ export default function CartPage() {
             <div className='bpTitleTotal'>총 결제금액</div>
           </div>
           <div className='bpInfo'>
-            <div className='bpProdTotal'>총금액</div>
+            <div className='bpProdTotal'>
+              {addCommasToNumber(
+                calculateTotalPrice(discountPrice ?? 0, totalSelectedQuantity)
+              )}
+              원
+            </div>
             <div className='bpplus'>+</div>
-            <div className='bpDeTotal'>총배송비</div>
+            <div className='bpDeTotal'>3500원</div>
             <div className='bpEqual'>=</div>
-            <div className='bpTotal'>총결제금액</div>
+            <div className='bpTotal'>
+              {addCommasToNumber(
+                calculateTotalPrice(discountPrice ?? 0, totalSelectedQuantity)
+              )}
+              원
+            </div>
           </div>
         </div>
         <div id='Btns'>
-          <button className='againBtn'>CONTINUE SHOPPING</button>
-          <button className='goPay'>CHECk OUT</button>
+          <button className='goPay' onClick={handleOrder}>
+            주문하기
+          </button>
         </div>
       </div>
     </Grid>

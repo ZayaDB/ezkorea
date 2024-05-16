@@ -142,6 +142,22 @@ export default function SelectPurchase() {
     dispatch(setSelectedOption(selectedColors));
     dispatch(setSelectedQuantity(counts));
     dispatch(setSelectedProductId(selectedProductId));
+    console.log(selectedProductId);
+    if (spInfo !== undefined) {
+      dispatch(
+        setSelectedProduct([
+          {
+            prodId: spInfo.prodId,
+            product_image: spInfo.product_image,
+            brand_name: spInfo.brand_name,
+            product_name: spInfo.product_name,
+            regular_price: spInfo.regular_price,
+            discount_rate: spInfo.discount_rate,
+            discounted_price: spInfo.discounted_price,
+          },
+        ])
+      );
+    }
     navigate('/order');
   };
 

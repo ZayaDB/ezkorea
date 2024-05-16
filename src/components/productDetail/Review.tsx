@@ -250,7 +250,9 @@ export default function Review() {
                 </div>
               </div>
               <div className='reviewWB'>
-                <div className='reviewPhoto'></div>
+                <div className='reviewPhoto'>
+                  <img src={item.contentPhoto} alt='스타일링샷' />
+                </div>
                 <div className='reviewComments'>{item.contentText}</div>
               </div>
             </div>
