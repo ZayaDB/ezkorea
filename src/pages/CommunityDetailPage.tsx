@@ -114,19 +114,21 @@ const CommunityDetailPage: React.FC = () => {
             }
             sx={{ p: 0 }}
           />
-          <Button
-            variant='contained'
-            sx={{
-              boxShadow: 'none',
-              '&:hover': {
+          {feed.accountName === 'dururu' && (
+            <Button
+              variant='contained'
+              sx={{
                 boxShadow: 'none',
-              },
-            }}
-            component={Link}
-            to={`/community/modify/${feed.feedId}`}
-          >
-            수정하기
-          </Button>
+                '&:hover': {
+                  boxShadow: 'none',
+                },
+              }}
+              component={Link}
+              to={`/community/modify/${feed.feedId}`}
+            >
+              수정하기
+            </Button>
+          )}
         </Box>
         <Box className='thumbnail-container'>
           <Box className='main-image'>
