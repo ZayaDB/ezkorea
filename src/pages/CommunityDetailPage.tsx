@@ -7,6 +7,7 @@ import {
   Grid,
   CardHeader,
   Box,
+  useMediaQuery,
 } from '@mui/material';
 import {
   ProductInfo,
@@ -30,10 +31,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import ContentArea from '../styles/ContentArea';
 
 TimeAgo.addLocale(koLocale);
 
 const CommunityDetailPage: React.FC = () => {
+  const isMobile = useMediaQuery('(max-width: 619px) , (max-width: 1030px)');
   const [feed, setFeed] = useState<FeedData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
@@ -162,7 +165,7 @@ const CommunityDetailPage: React.FC = () => {
   }
 
   return (
-    <Box className='content-container'>
+    <ContentArea sx={{ maxWidth: 1200 }}>
       <Grid container direction='column'>
         <Box className='feed-profile'>
           <CardHeader
@@ -193,7 +196,7 @@ const CommunityDetailPage: React.FC = () => {
           <Box className='main-image'>
             <img src={feed.images[selectedImageIndex]} alt='Main' />
           </Box>
-          <Box>
+          <Box className='thumbnail-wrapper'>
             {feed.images.map((image: string, index: number) => (
               <ImgButton
                 key={index}
@@ -225,8 +228,7 @@ const CommunityDetailPage: React.FC = () => {
         <Grid
           container
           direction='row'
-          sx={{ gap: '16px' }}
-          width={'100%'}
+          sx={{ gap: '16px', width: '100%' }}
           position={'relative'}
           className='product-container'
         >
@@ -234,7 +236,7 @@ const CommunityDetailPage: React.FC = () => {
             <Swiper
               modules={[Navigation]}
               spaceBetween={20}
-              slidesPerView={6}
+              slidesPerView={isMobile ? 4 : 6} // 화면이 619px 이하일 때는 4개, 그 이상일 때는 6개의 슬라이드를 보이도록 설정
               centeredSlides={false}
               style={{ marginLeft: 0, width: '100%' }}
               navigation
@@ -245,7 +247,7 @@ const CommunityDetailPage: React.FC = () => {
                   tag='section'
                   style={{ width: '128px' }}
                 >
-                  <Box width={128}>
+                  <Box minWidth={128} width={128}>
                     <Link to={`/shop/${product.productId}`}>
                       <ProductBox className='product-img'>
                         <img
@@ -488,7 +490,7 @@ const CommunityDetailPage: React.FC = () => {
           </Box>
         </Box>
       ))}
-    </Box>
+    </ContentArea>
   );
 };
 
