@@ -8,6 +8,7 @@ import '../../styles/mypage/mynav.scss';
 import { useMediaQuery } from '@mui/material';
 import MyFeed from '../community/myPage/MyFeed';
 import MyComments from '../community/myPage/MyComments';
+import MyLikedFeeds from '../community/myPage/MyLikedFeeds';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -91,7 +92,7 @@ export default function MyFeedNav() {
           <MyComments />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
-          {/* 좋아요한 피드 목록 */}
+          <MyLikedFeeds />
         </CustomTabPanel>
       </div>
     </div>
