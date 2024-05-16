@@ -12,6 +12,7 @@ import {
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/config';
 import { addCommasToNumber } from '../../hooks/addCommasToNumber';
+import { useNavigate } from 'react-router-dom';
 
 const style = {
   position: 'absolute' as const,
@@ -27,6 +28,7 @@ const style = {
 
 /* 주문정보 */
 export default function OrderInfo() {
+  const navigate = useNavigate();
   const productPrice = useSelector(
     (state: RootState) => state.product.products[0].regular_price
   );
@@ -44,7 +46,10 @@ export default function OrderInfo() {
   /* 체크박스 */
   const [isAllChecked, setIsAllChecked] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const handleClose = () => setOpenModal(false);
+  const handleClose = () => {
+    setOpenModal(false);
+    if (isAllChecked == true) navigate('/');
+  };
 
   const handleCheckAll = (isChecked: boolean) => {
     // 인자의 타입 명시

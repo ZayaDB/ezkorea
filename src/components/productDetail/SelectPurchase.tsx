@@ -158,6 +158,7 @@ export default function SelectPurchase() {
         ])
       );
     }
+
     navigate('/order');
   };
 

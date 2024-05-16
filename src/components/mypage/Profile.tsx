@@ -68,7 +68,7 @@ export default function Profile() {
         </div>
       </div>
 
-      <ThemeProvider theme={theme}>
+      {/* <ThemeProvider theme={theme}>
         <Container component='main' maxWidth='xs'>
           <Box
             sx={{
@@ -113,7 +113,7 @@ export default function Profile() {
             </Box>
           </Box>
         </Container>
-      </ThemeProvider>
+      </ThemeProvider> */}
     </div>
   );
 }
