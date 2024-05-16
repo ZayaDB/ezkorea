@@ -67,13 +67,18 @@ export default function Inquire() {
   const [inquiryData, setInquiryData] = useState<Inquiry[]>([]);
   const inquiryPerPage = 5;
 
+  // 리뷰 개수
+  const [iqTotal, setIqTotal] = useState();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch('/data/prodInquiry.json');
         const data = await response.json();
         const inquiry = data[0].inquiry;
+        const inquiryTo = data[0].inquiryTotal;
         setInquiryData(inquiry);
+        setIqTotal(inquiryTo);
       } catch (error) {
         console.error('Error fetching review data:', error);
       }
@@ -96,11 +101,11 @@ export default function Inquire() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div>
+      <div id='inquiryZone'>
         <div id='inquireTop'>
           <div id='inquireSubTop'>
             <div className='inquiryTitle'>문의</div>
-            <div className='inquiryTotal'>문의 수</div>
+            <div className='inquiryTotal'>{iqTotal}</div>
           </div>
           {/* <div>
             <Button onClick={handleOpen}>문의하기</Button>

@@ -119,6 +119,7 @@ $border: 1px solid lightgray;
 .colorCount {
   width: 10%;
   @include columnCenter();
+  align-items: center;
 }
 .purchaseProduct {
   @media (max-width: 768px) {
@@ -156,7 +157,21 @@ $border: 1px solid lightgray;
     font-size: $font-size-xs;
   }
 }
-
+@media (max-width: 768px) {
+  // .purchaseOriginal,
+  // .saleRate,
+  // .salePrice {
+  //   display: none;
+  // }
+  .purchasePD {
+    @include columnCenter();
+  }
+  .purchaseDetail {
+    @include columnCenter();
+    align-items: baseline;
+    font-size: $font-size-s;
+  }
+}
 .purchaseOriginal {
   color: lightgray;
   font-size: $font-size-m;
@@ -313,7 +328,7 @@ $border: 1px solid lightgray;
 
   .purchaseDetail {
     @include columnCenter();
-    width: 25%;
+
     align-items: baseline;
     font-size: $font-size-s;
   }

@@ -133,7 +133,6 @@ export default function Review() {
         <div id='reviewTop'>
           <div id='reviewBox'>
             <div id='reviewName'>리뷰</div>
-
             <div className='reviewTotal'>{rvTotal}</div>
             <div id='ratingBox'>
               <div className='starTotal'>
@@ -151,12 +150,12 @@ export default function Review() {
               <div className='rating'>평점</div>
             </div>
           </div>
-          {/* <div id='writeReview'>
+        </div>
+        {/* <div id='writeReview'>
             <Button onClick={handleOpen}>
               <h6>리뷰쓰기</h6>
             </Button>
           </div> */}
-        </div>
         {/* <div>
           <Modal
             open={open}
