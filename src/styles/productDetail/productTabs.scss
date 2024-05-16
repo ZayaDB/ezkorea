@@ -49,12 +49,23 @@ $border: 1px solid lightgray;
   margin-bottom: 8px;
   border-top: 1px solid lightgray;
   border-bottom: 1px solid lightgray;
+  position: sticky;
+  top: 64px;
+  background-color: white;
+  @media (max-width: 599px) {
+    top: 56px;
+    border-top: none;
+  }
 }
 #detailNav div {
   font-size: $font-size-l;
   font-weight: $font-weight-bold;
   margin: 8px;
   cursor: pointer;
+  @media (max-width: 480px) {
+    font-size: $font-size-xs;
+    z-index: 1;
+  }
 }
 #detailNav div:hover {
   color: $hover-color;

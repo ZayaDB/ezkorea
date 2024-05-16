@@ -58,8 +58,7 @@ $border: 1px solid lightgray;
 .stylingItem img {
   width: 300px;
   height: 300px;
-  max-width: 300px;
-  max-height: 300px;
+
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -71,78 +70,51 @@ $border: 1px solid lightgray;
   cursor: pointer;
 }
 
-@media (max-width: 1133px) {
+@media (max-width: 1199px) {
   .stylingItem img {
     width: 200px;
     height: 200px;
-    max-width: 200px;
-    max-height: 200px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    @include row();
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 4px;
-    border-radius: 5px;
-    cursor: pointer;
+  }
+}
+@media (min-width: 769px) and (max-width: 897px) {
+  .stylingItem img {
+    width: 160px;
+    height: 160px;
+  }
+}
+@media (min-width: 690px) and (max-width: 768px) {
+  .stylingItem img {
+    width: 240px;
+    height: 240px;
+  }
+}
+@media (min-width: 512px) and (max-width: 689px) {
+  .stylingItem img {
+    width: 200px;
+    height: 200px;
   }
 }
 
-@media (max-width: 843px) {
+@media (min-width: 465px) and (max-width: 511px) {
   .stylingItem img {
-    width: 150px;
-    height: 150px;
-    max-width: 150px;
-    max-height: 150px;
-    background-image: url(https://image.ohou.se/i/video-service-prd-s3-bucket-thumbnail/651ca73023d57f18887e5017/651ca73023d57f18887e5017.0000001.jpg?gif=1&w=360&webp=1);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    @include row();
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 4px;
-    border-radius: 5px;
-    cursor: pointer;
+    width: 200px;
   }
 }
-@media (min-width: 512px) and (max-width: 768px) {
+@media (min-width: 396px) and (max-width: 464px) {
   .stylingItem img {
-    @include column();
-    width: 100x;
-    height: 100px;
-    max-width: 100px;
-    max-height: 100px;
-    background-image: url(https://image.ohou.se/i/video-service-prd-s3-bucket-thumbnail/651ca73023d57f18887e5017/651ca73023d57f18887e5017.0000001.jpg?gif=1&w=360&webp=1);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    @include row();
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 4px;
-    border-radius: 5px;
-    cursor: pointer;
+    width: 160px;
+    height: 160px;
   }
 }
-
-@media (max-width: 360px) {
+@media (max-width: 395px) {
   .stylingItem img {
-    @include column();
-    width: 50px;
-    height: 50px;
-    max-width: 50px;
-    max-height: 50px;
-    background-image: url(https://image.ohou.se/i/video-service-prd-s3-bucket-thumbnail/651ca73023d57f18887e5017/651ca73023d57f18887e5017.0000001.jpg?gif=1&w=360&webp=1);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    @include row();
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 4px;
-    border-radius: 5px;
-    cursor: pointer;
+    width: 140px;
+    height: 140px;
   }
 }
+// @media (max-width: 360px) {
+//   .stylingItem img {
+//     width: 50px;
+//     height: 50px;
+//   }
+// }

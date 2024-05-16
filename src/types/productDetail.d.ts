@@ -28,6 +28,7 @@ export interface Inquiry {
   answer: 'yes' | 'yet';
   inBrDate: string;
   inBrText: string;
+  inquiryTotal: number;
 }
 
 export interface Product {
