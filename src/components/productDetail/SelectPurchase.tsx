@@ -5,7 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import ShareIcon from '@mui/icons-material/Share';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+// import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
@@ -23,6 +23,11 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { Product } from '../../types/productDetail';
 import { addCommasToNumber } from '../../hooks/addCommasToNumber';
+// import { useSelector } from 'react-redux';
+// import { RootState } from '../../redux/config';
+// import { setIsLiked } from '../../redux/slices/categorySlice';
+// import HandleClickHeart from '../category/HandleClickHeart';
+import { FavoriteBorder } from '@mui/icons-material';
 
 // const useStyles = makeStyle(theme => ({
 //   tablet: {
@@ -169,6 +174,17 @@ export default function SelectPurchase() {
   ): number => {
     return discountedPrice * count;
   };
+  // useSelector를 통해 isLiked 상태가져옴
+
+  // const isLiked = useSelector(
+  //   (state: RootState) => state.category.isLiked[spInfo.prodId] || false
+  // );
+
+  // // 좋아요 토글 핸들러
+  // const handleLikeToggle = () => {
+  //   const updatedIsLiked = !isLiked;
+  //   dispatch(setIsLiked({ productId: spInfo.prodId, isLiked: updatedIsLiked }));
+  // };
 
   return (
     <ThemeProvider theme={theme}>
@@ -183,7 +199,12 @@ export default function SelectPurchase() {
                 </div>
                 <div id='heartZone'>
                   <div className='heartIcon'>
-                    <FavoriteBorderIcon />
+                    {/* <HandleClickHeart
+                      productName={spInfo?.product_name}
+                      isLiked={isLiked}
+                      onLikeToggle={handleLikeToggle}
+                    /> */}
+                    <FavoriteBorder />
                   </div>
                   <div className='heartTotal'>28,742</div>
                 </div>
