@@ -50,12 +50,14 @@ export default function SelectPurchase() {
   //     setOptions(prevOptions => [...prevOptions, generateOption(color)]);
   //   }
   // };
+
   const [spInfo, setSpInfo] = useState<Product>();
   const navigate = useNavigate();
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
   const [counts, setCounts] = useState<number[]>([]);
   const dispatch = useDispatch();
-
+  // 로그인 상태를 관리하는 상태 추가
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   // fetch
   useEffect(() => {
     const fetchData = async () => {
@@ -63,8 +65,12 @@ export default function SelectPurchase() {
         const response = await fetch('/data/prodDetail.json');
         const data = await response.json();
         const purchase = data[0];
-
         setSpInfo(purchase);
+       
+
+        // 컴포넌트가 마운트될 때 로그인 상태를 확인하고 상태를 업데이트하는 useEffect 사용
+        // const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+        // setIsLoggedIn(isLoggedIn);
       } catch (error) {
         console.error('Error fetching review data:', error);
       }
@@ -111,9 +117,17 @@ export default function SelectPurchase() {
     dispatch(setSelectedOption(selectedColors));
     dispatch(setSelectedQuantity(counts));
     dispatch(setSelectedProductId(selectedProductId));
-
     navigate('/cart');
   };
+
+  const handleOrder = () => {
+    const selectedProductId = spInfo?.prodId || 0;
+    dispatch(setSelectedOption(selectedColors));
+    dispatch(setSelectedQuantity(counts));
+    dispatch(setSelectedProductId(selectedProductId));
+    navigate('/order');
+  };
+
   // 계산기
   const calculateTotalPrice = (
     discountedPrice: number,
@@ -247,11 +261,11 @@ export default function SelectPurchase() {
             </div>
           </div>
           <div id='buttons'>
-            <div className='cartBtn'>
+            <Box className='cartBtn' onClick={handleSubmit}>
               <AddShoppingCartIcon />
-            </div>
+            </Box>
             <Box className='purchaseBtn'>
-              <ProtectedButton redirectTo='/login' onClick={handleSubmit}>
+              <ProtectedButton redirectTo='/login' onClick={handleOrder}>
                 주문하기
               </ProtectedButton>
             </Box>

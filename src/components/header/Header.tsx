@@ -10,7 +10,7 @@ import {
   Box,
   useMediaQuery,
 } from '@mui/material/';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import '../../styles/home/header.scss';
 import LoginIcon from '../../assets/images/icon_login2.png';
 import Notification1 from '../../assets/images/notification1.png';
@@ -20,16 +20,17 @@ import IconButtonWithMenu from './IconButtonWithMenu';
 import BadgeComponent from './BadgeComponent';
 import CustomLink from './CustomLink';
 import CategoryDropDown from './CategoryDropDown';
-// import Logo from '../../assets/images/logo.png'; // logo 만들면 넣기
 
 interface Section {
   title: string;
   url: string;
+
 }
 
 interface HeaderProps {
   title: string;
   sections: Section[];
+  cartBadgeNum?: number;
 }
 
 const theme = createTheme({
@@ -56,18 +57,16 @@ const StyledButton = styled(Button)(() => ({
   },
 }));
 
-export default function Header({ title }: HeaderProps) {
+export default function Header({ title, cartBadgeNum }: HeaderProps) {
   const isMobile = useMediaQuery('(max-width:619px)');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isShoppingHovered, setIsShoppingHovered] = useState(false);
   const [toolbarContent, setToolbarContent] = useState('Shop');
 
-  const handleShoppingClick = () => {
-    setToolbarContent('Shop');
-  };
 
-  const handleCommunityClick = () => {
-    setToolbarContent('Community');
+  const navigate = useNavigate();
+  const gotoSearch = () => {
+    navigate('/search');
   };
 
   useEffect(() => {
@@ -83,10 +82,15 @@ export default function Header({ title }: HeaderProps) {
   ];
 
   if (isLoggedIn) {
-    // Add logout menu item when user is logged in
     menuItems.push({ title: '로그아웃', path: '/logout' });
   }
 
+  const handleCommunityClick = () => {
+    setToolbarContent('Community');
+  };
+  const handleShoppingClick = () => {
+    setToolbarContent('Shop');
+  };
   return (
     <ThemeProvider theme={theme}>
       {/* 헤더 상단 툴바 & 커스텀 */}
@@ -192,18 +196,19 @@ export default function Header({ title }: HeaderProps) {
           )}
         </Typography>
         <Box>
-
           {/* search(돋보기) icon */}
           {/* mobile(width:600px 이하)부터 생김 */}
           {/* {isMobile && ( */}
           <IconButton
-              type='button'
-              sx={{ p: '2px' }}
-              aria-label='search'
-              disableRipple
-            >
-              <img src={Search} alt='Logo' style={{ width: '36px' }} />
-            </IconButton>
+            type='button'
+            sx={{ p: '2px' }}
+            aria-label='search'
+            disableRipple
+            onClick={gotoSearch}
+          >
+            <img src={Search} alt='Logo' style={{ width: '36px' }} />
+          </IconButton>
+
           {/* )} */}
 
           {/* 사람(로그인) icon dropdown */}
@@ -225,17 +230,17 @@ export default function Header({ title }: HeaderProps) {
           {/* 알림(종) icon */}
           {/* mobile(width:600px 이하)에서 사라짐 */}
           {/* {isMobile ? null : ( */}
-            <BadgeComponent badgeContent={isLoggedIn ? 5 : undefined}>
-              <img
-                src={Notification1}
-                alt='Logo'
-                style={{ width: '24px', padding: 2 }}
-              />
-            </BadgeComponent>
+          <BadgeComponent badgeContent={isLoggedIn ? 1 : undefined}>
+            <img
+              src={Notification1}
+              alt='Logo'
+              style={{ width: '24px', padding: 2 }}
+            />
+          </BadgeComponent>
           {/* )} */}
 
           {/* cart 아이콘 */}
-          <BadgeComponent badgeContent={isLoggedIn ? 5 : undefined}>
+          <BadgeComponent badgeContent={isLoggedIn ? cartBadgeNum : undefined}>
             <img src={Cart1} alt='Cart' style={{ width: '24px' }} />
           </BadgeComponent>
 

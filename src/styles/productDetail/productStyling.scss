@@ -55,7 +55,7 @@ $border: 1px solid lightgray;
   justify-content: center;
   flex-wrap: wrap;
 }
-.stylingItem {
+.stylingItem img {
   width: 300px;
   height: 300px;
   max-width: 300px;
@@ -73,7 +73,7 @@ $border: 1px solid lightgray;
 }
 
 @media (max-width: 1133px) {
-  .stylingItem {
+  .stylingItem img {
     width: 200px;
     height: 200px;
     max-width: 200px;
@@ -92,7 +92,7 @@ $border: 1px solid lightgray;
 }
 
 @media (max-width: 843px) {
-  .stylingItem {
+  .stylingItem img {
     width: 150px;
     height: 150px;
     max-width: 150px;
@@ -110,7 +110,7 @@ $border: 1px solid lightgray;
   }
 }
 @media (min-width: 512px) and (max-width: 768px) {
-  .stylingItem {
+  .stylingItem img {
     @include column();
     width: 100x;
     height: 100px;
@@ -130,7 +130,7 @@ $border: 1px solid lightgray;
 }
 
 @media (max-width: 360px) {
-  .stylingItem {
+  .stylingItem img {
     @include column();
     width: 50px;
     height: 50px;

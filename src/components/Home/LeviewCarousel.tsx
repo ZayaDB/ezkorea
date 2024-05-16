@@ -44,7 +44,7 @@ export default function LeviewCarousel() {
     <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
       <div style={{ maxWidth: '1200px' }}>
         <div className='TitleArea'>
-          <Typography sx={{ fontSize: '28px', fontWeight: '700' }}>
+          <Typography sx={{ fontSize: '30px', fontWeight: '700' }}>
             REVIEW
           </Typography>
           <Typography
@@ -55,7 +55,7 @@ export default function LeviewCarousel() {
               letterSpacing: '0.2px',
             }}
           >
-            나만의 아지트, 개성있게 꾸미기
+            #dururu #일상 #데스크테리어
           </Typography>
         </div>
         <Swiper

@@ -34,10 +34,10 @@ export default function LeviewCarousel() {
   ];
 
   return (
-    <div style={{ width: 'auto' }}>
+    <div style={{ width: 'auto', paddingTop: '20px' }}>
       <div className='TitleArea'>
-        <Typography sx={{ fontSize: '28px', fontWeight: '700' }}>
-          취향으로 채우는 책상
+        <Typography sx={{ fontSize: '30px', fontWeight: '700' }}>
+        DURURU RECOMMEND
         </Typography>
         <Typography
           sx={{
