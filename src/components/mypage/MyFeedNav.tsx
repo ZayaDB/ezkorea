@@ -7,6 +7,7 @@ import '../../styles/mypage/mynav.scss';
 import '../../styles/mypage/mynav.scss';
 import { useMediaQuery } from '@mui/material';
 import MyFeed from '../community/myPage/MyFeed';
+import MyComments from '../community/myPage/MyComments';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -77,9 +78,9 @@ export default function MyFeedNav() {
               },
             }}
           >
-            <Tab label='작성한피드' {...a11yProps(0)} />
-            <Tab label='작성한댓글' {...a11yProps(1)} />
-            <Tab label='좋아요한피드' {...a11yProps(2)} />
+            <Tab label='작성한 피드' {...a11yProps(0)} />
+            <Tab label='작성한 댓글' {...a11yProps(1)} />
+            <Tab label='좋아요한 피드' {...a11yProps(2)} />
           </Tabs>
         </div>
         {/* </Box> */}
@@ -87,7 +88,7 @@ export default function MyFeedNav() {
           <MyFeed />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
-          {/* 작성한 댓글 목록 */}
+          <MyComments />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
           {/* 좋아요한 피드 목록 */}
