@@ -2,10 +2,10 @@ import { styled } from '@mui/material/styles';
 
 const ContentArea = styled('div')(({ theme }) => ({
   width: '100%', // 전체 너비 사용
-  maxWidth: '1200px', // 최대 너비 설정
+  maxWidth: '1488px', // 최대 너비 설정
   margin: 'auto', // 자동 마진으로 중앙 정렬
-  padding: '0 20px', // 일반적인 양 옆 패딩
-  boxSizing: 'border-box', // 패딩과 보더가 너비에 포함되도록 설정
+  // padding: '0 20px', // 일반적인 양 옆 패딩
+  boxSizing: 'border-box', // 패딩과 보더가 너비에 포함 안되도록 설정
   fontSize: theme.typography.body2.fontSize, // 기본 폰트 사이즈
 
   [theme.breakpoints.up('sm')]: {

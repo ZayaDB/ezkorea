@@ -1,6 +1,9 @@
 export interface IMyFeeds {
   feedId: number;
   image: string;
+  views: number;
+  likes: number;
+  commentCount: number;
 }
 
 export interface IMyComments {

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Typography, CardHeader, Box } from '@mui/material';
-import { CommentButton } from '../detail/StyledComponents';
 import '../../../styles/community/main.scss';
 import CommentIcon from '@mui/icons-material/Comment';
 import ReactTimeAgo from 'react-time-ago';
