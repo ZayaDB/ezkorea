@@ -92,7 +92,6 @@ export default function ApplyDiscount() {
               className='mileage-button'
               size='medium'
               variant='contained'
-              color='secondary'
               onClick={applyAllMileage}
             >
               모두 사용

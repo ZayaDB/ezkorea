@@ -4,47 +4,8 @@ import { Box, IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
+import { useMediaQuery } from '@mui/material';
 
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  backgroundColor: alpha(theme.palette.common.white, 0),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0),
-  },
-  marginLeft: 0,
-  maxWidth: '600px',
-  height: '70px',
-  display: 'flex',
-  alignItems: 'center',
-  borderBottom: '6px solid black',
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  flexGrow: 1,
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 3),
-    fontSize: '2rem',
-    fontWeight: 'bold',
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '100%',
-    },
-  },
-  '& input::placeholder': {
-    color: '#b7b7b7',
-    fontWeight: 'bold',
-  },
-}));
 interface ModalSearchProps {
   onSearch: (selectedKeyword: string) => void;
   closeModal: () => void;
@@ -53,6 +14,48 @@ interface ModalSearchProps {
 const ModalSearch: React.FC<ModalSearchProps> = ({ onSearch, closeModal }) => {
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState('');
+  const isSmallScreen = useMediaQuery('(max-width:600px)'); // 미디어 쿼리 설정
+
+  const Search = styled('div')(({ theme }) => ({
+    position: 'relative',
+    backgroundColor: alpha(theme.palette.common.white, 0),
+    '&:hover': {
+      backgroundColor: alpha(theme.palette.common.white, 0),
+    },
+    marginLeft: 0,
+    maxWidth: '600px',
+    height: '70px',
+    display: 'flex',
+    alignItems: 'center',
+    borderBottom: '6px solid black',
+  }));
+
+  const SearchIconWrapper = styled('div')(() => ({
+    padding: isSmallScreen ? '2px' : '1px',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }));
+
+  const StyledInputBase = styled(InputBase)(({ theme }) => ({
+    color: 'inherit',
+    flexGrow: 1,
+    '& .MuiInputBase-input': {
+      padding: isSmallScreen ? '2px' :theme.spacing(1, 1, 1, 3),
+      fontSize: isSmallScreen ? '1.5rem' : '1.7rem',
+      fontWeight: 'bold',
+      transition: theme.transitions.create('width'),
+      width: '100%',
+      [theme.breakpoints.up('sm')]: {
+        width: '100%',
+      },
+    },
+    '& input::placeholder': {
+      color: '#b7b7b7',
+      fontWeight: 'bold',
+    },
+  }));
 
   const handleSearch = (selectedKeyword: string) => {
     if (onSearch) {
@@ -77,8 +80,8 @@ const ModalSearch: React.FC<ModalSearchProps> = ({ onSearch, closeModal }) => {
     <div style={{ width: '1000px', position: 'relative' }}>
       <Search>
         <SearchIconWrapper>
-          <IconButton edge='end' onClick={() => handleSearch(searchValue)}>
-            <SearchIcon fontSize='large' />
+          <IconButton onClick={() => handleSearch(searchValue)}>
+            <SearchIcon />
           </IconButton>
         </SearchIconWrapper>
         <StyledInputBase
@@ -87,6 +90,7 @@ const ModalSearch: React.FC<ModalSearchProps> = ({ onSearch, closeModal }) => {
           value={searchValue}
           onChange={e => setSearchValue(e.target.value)}
           onKeyDown={handleKeyPress}
+          sx={{ width: isSmallScreen ? '80%' : '100%' }}
         />
       </Search>
 
@@ -102,7 +106,8 @@ const ModalSearch: React.FC<ModalSearchProps> = ({ onSearch, closeModal }) => {
           },
         }}
       >
-        <h2>인기검색어</h2>
+        {isSmallScreen ? <h2 >인기검색어</h2> : <h3>인기검색어</h3> }
+       
         <Box
           onMouseEnter={() => handleKeywordHover('모션데스크')}
           onClick={() => handleSearch('모션데스크')}
@@ -134,16 +139,16 @@ const ModalSearch: React.FC<ModalSearchProps> = ({ onSearch, closeModal }) => {
           조명
         </Box>
         <Box
-          onMouseEnter={() => handleKeywordHover('인기제품')}
-          onClick={() => handleSearch('인기제품')}
+          onMouseEnter={() => handleKeywordHover('키보드')}
+          onClick={() => handleSearch('키보드')}
         >
-          인기제품
+          키보드
         </Box>
         <Box
-          onMouseEnter={() => handleKeywordHover('세일')}
-          onClick={() => handleSearch('세일')}
+          onMouseEnter={() => handleKeywordHover('타공판')}
+          onClick={() => handleSearch('타공판')}
         >
-          세일
+          타공판
         </Box>
         <Box
           onMouseEnter={() => handleKeywordHover('마우스패드')}

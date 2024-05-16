@@ -537,10 +537,11 @@ export default function CommunityModifyPage() {
   );
 }
 const ProductBox = styled(Box)({
-  maxWidth: '710px',
+  width: '100%',
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'space-between',
+  alignItems: 'center !important',
 });
 
 const SelectButton = styled(Button)({
