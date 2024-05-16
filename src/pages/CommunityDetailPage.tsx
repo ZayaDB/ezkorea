@@ -30,7 +30,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { Margin } from '@mui/icons-material';
 
 TimeAgo.addLocale(koLocale);
 
@@ -307,7 +306,7 @@ const CommunityDetailPage: React.FC = () => {
       {feed.comments?.map((comment: Comment, index: number) => (
         <Box
           mt={2}
-          pb={2}
+          // pb={2}
           key={index}
           style={{
             marginBottom: '10px',
@@ -373,6 +372,7 @@ const CommunityDetailPage: React.FC = () => {
                             locale='ko'
                           />
                         }
+                        sx={{ p: 0 }}
                       />
                       <Box>
                         <Typography variant='body1' sx={{ padding: '8px 0' }}>
