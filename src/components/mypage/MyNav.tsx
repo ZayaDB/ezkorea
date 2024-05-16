@@ -37,7 +37,6 @@ function CustomTabPanel(props: TabPanelProps) {
   );
 }
 
-
 function a11yProps(index: number) {
   return {
     id: `simple-tab-${index}`,
@@ -45,11 +44,13 @@ function a11yProps(index: number) {
   };
 }
 
-export default function BasicTabs() {
+export default function MyNav() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const initialTab =
-    queryParams.get('tab') === 'feeds'
+    queryParams.get('tab') === 'wishlist'
+      ? 1
+      : queryParams.get('tab') === 'feeds'
       ? 2
       : queryParams.get('tab') === 'comments'
       ? 3
