@@ -60,4 +60,19 @@
 }
 
 .product-container {
+  margin-top: 20px;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+#option {
+  margin-right: 5px;
+}
+
+.regular-price {
+  text-decoration: line-through red;
+  margin-right: 2px;
 }
