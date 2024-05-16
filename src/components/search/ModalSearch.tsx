@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, IconButton, Input } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import { useMediaQuery } from '@mui/material';
@@ -32,10 +32,10 @@ const ModalSearch: React.FC<ModalSearchProps> = ({ closeModal }) => {
   };
 
   const handleClickSearch = () => {
-    const inputValue = inputRef.current?.value; 
+    const inputValue = inputRef.current?.value;
     if (inputValue) {
-      setSearchValue(inputValue); 
-      handleSearch(inputValue); 
+      setSearchValue(inputValue);
+      handleSearch(inputValue);
     }
   };
 
@@ -50,9 +50,6 @@ const ModalSearch: React.FC<ModalSearchProps> = ({ closeModal }) => {
           display: 'flex',
           alignItems: 'center',
           borderBottom: '6px solid black',
-
-          // padding: isSmallScreen ? '2px' : '1px',
-          // height: '100%',
         }}
       >
         <IconButton onClick={handleClickSearch}>
@@ -64,7 +61,7 @@ const ModalSearch: React.FC<ModalSearchProps> = ({ closeModal }) => {
           value={searchValue}
           onChange={e => setSearchValue(e.target.value)}
           onKeyDown={handleKeyPress}
-          inputRef={inputRef} // ref 연결
+          inputRef={inputRef}
           sx={{
             width: isSmallScreen ? '80%' : '100%',
             color: 'inherit',
@@ -72,7 +69,6 @@ const ModalSearch: React.FC<ModalSearchProps> = ({ closeModal }) => {
             '& .MuiInputBase-input': {
               fontSize: isSmallScreen ? '1.5rem' : '1.7rem',
               fontWeight: 'bold',
-
             },
             '& input::placeholder': {
               color: '#b7b7b7',
