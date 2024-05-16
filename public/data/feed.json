@@ -925,5 +925,41 @@
       }
     ],
     "creationDate": "2024-04-30"
+  },
+  {
+    "feedId": 21,
+    "accountName": "workspace_artist",
+    "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+    "images": [
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/project/170775106566426238.jpg?w=720"
+    ],
+    "title": "창의적 아틀리에 셋업",
+    "description": "창의적인 작업을 위한 아틀리에 스타일의 셋업입니다.",
+    "selectedProducts": [],
+    "concepts": ["unique"],
+    "colors": ["pink"],
+    "views": 0,
+    "likes": 0,
+    "commentCount": 0,
+    "comments": [],
+    "creationDate": "2024-04-05"
+  },
+  {
+    "feedId": 22,
+    "accountName": "workspace_artist",
+    "profileImage": "https://image.ohou.se/i/bucketplace-v2-development/uploads/users/profile_images/1714491414_kakao_3460826610.jpg?w=72&h=72&c=c",
+    "images": [
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/project/170775106566426238.jpg?w=720"
+    ],
+    "title": "창의적 아틀리에 셋업",
+    "description": "창의적인 작업을 위한 아틀리에 스타일의 셋업입니다.",
+    "selectedProducts": [],
+    "concepts": ["unique"],
+    "colors": ["pink"],
+    "views": 0,
+    "likes": 0,
+    "commentCount": 0,
+    "comments": [],
+    "creationDate": "2024-04-05"
   }
 ]
