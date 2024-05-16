@@ -12,6 +12,7 @@ interface ModalSearchProps {
 const ModalSearch: React.FC<ModalSearchProps> = ({ closeModal }) => {
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState('');
+  const [isComposing, setIsComposing] = useState<boolean>(false);
   const isSmallScreen = useMediaQuery('(max-width:600px)');
   const inputRef = useRef<HTMLInputElement>(null); // useRef 생성
 
@@ -21,10 +22,18 @@ const ModalSearch: React.FC<ModalSearchProps> = ({ closeModal }) => {
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      e.preventDefault(); // 기본 폼 제출 동작 방지
+    if (e.key === 'Enter' && !isComposing) {
+      e.preventDefault();
       handleSearch(searchValue);
     }
+  };
+
+  const handleCompositionStart = () => {
+    setIsComposing(true);
+  };
+
+  const handleCompositionEnd = () => {
+    setIsComposing(false);
   };
 
   const handleKeywordHover = (selectedKeyword: string) => {
@@ -32,10 +41,10 @@ const ModalSearch: React.FC<ModalSearchProps> = ({ closeModal }) => {
   };
 
   const handleClickSearch = () => {
-    const inputValue = inputRef.current?.value; 
+    const inputValue = inputRef.current?.value;
     if (inputValue) {
-      setSearchValue(inputValue); 
-      handleSearch(inputValue); 
+      setSearchValue(inputValue);
+      handleSearch(inputValue);
     }
   };
 
@@ -64,6 +73,8 @@ const ModalSearch: React.FC<ModalSearchProps> = ({ closeModal }) => {
           value={searchValue}
           onChange={e => setSearchValue(e.target.value)}
           onKeyDown={handleKeyPress}
+          onCompositionStart={handleCompositionStart}
+          onCompositionEnd={handleCompositionEnd}
           inputRef={inputRef} // ref 연결
           sx={{
             width: isSmallScreen ? '80%' : '100%',
@@ -72,7 +83,6 @@ const ModalSearch: React.FC<ModalSearchProps> = ({ closeModal }) => {
             '& .MuiInputBase-input': {
               fontSize: isSmallScreen ? '1.5rem' : '1.7rem',
               fontWeight: 'bold',
-
             },
             '& input::placeholder': {
               color: '#b7b7b7',
