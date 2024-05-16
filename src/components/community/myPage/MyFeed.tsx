@@ -48,10 +48,10 @@ export default function MyFeed() {
                 marginBottom: '1px',
                 overflow: 'hidden',
                 width: '250px',
-                height: '100%',
+                height: '250px',
                 justifyContent: 'center',
-                transition: 'border-color 0.5s ease',
                 cursor: 'pointer',
+                transition: 'border-color 0.5s ease',
                 boxShadow: '0px 2px 6px rgba(0, 0, 0, 0.08)',
                 '&:hover': { outline: '2px solid #5ff531' },
                 boxSizing: 'border-box',
@@ -63,8 +63,8 @@ export default function MyFeed() {
                   position: 'relative',
                   display: 'inline-block',
                   overflow: 'hidden',
-                  width: '250px',
-                  height: '250px',
+                  width: '100%',
+                  height: '100%',
                   '&:hover img': {
                     transform: 'scale(1.1)',
                   },
@@ -77,7 +77,6 @@ export default function MyFeed() {
                   sx={{
                     width: '100%',
                     height: '100%',
-                    borderRadius: '5px 0',
                     objectFit: 'cover',
                     transition: 'transform 0.3s ease-in-out',
                   }}
