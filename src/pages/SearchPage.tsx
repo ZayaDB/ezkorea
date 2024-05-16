@@ -9,11 +9,9 @@ const SearchPage = () => {
   const [showModal, setShowModal] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
-
   const closeModal = () => {
     setShowModal(false);
   };
-
   const goHistory = () => {
     closeModal();
 
@@ -27,10 +25,6 @@ const SearchPage = () => {
       navigate(-1);
     }
   };
-
-
-
-
   return (
     <div>
       <Modal

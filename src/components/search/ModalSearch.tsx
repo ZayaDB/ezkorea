@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, IconButton, Input } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import { useMediaQuery } from '@mui/material';
@@ -59,9 +59,6 @@ const ModalSearch: React.FC<ModalSearchProps> = ({ closeModal }) => {
           display: 'flex',
           alignItems: 'center',
           borderBottom: '6px solid black',
-
-          // padding: isSmallScreen ? '2px' : '1px',
-          // height: '100%',
         }}
       >
         <IconButton onClick={handleClickSearch}>
@@ -76,6 +73,7 @@ const ModalSearch: React.FC<ModalSearchProps> = ({ closeModal }) => {
           onCompositionStart={handleCompositionStart}
           onCompositionEnd={handleCompositionEnd}
           inputRef={inputRef} // ref 연결
+
           sx={{
             width: isSmallScreen ? '80%' : '100%',
             color: 'inherit',
