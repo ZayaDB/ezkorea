@@ -29,7 +29,7 @@ const ResultCommunity: React.FC<ResultCommunityProps> = ({ keyword }) => {
   }, [keyword, data]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div style={{ textAlign: 'center' }}>로딩 중 입니다...</div>;
   }
 
   if (error) {
@@ -128,7 +128,13 @@ const ResultCommunity: React.FC<ResultCommunityProps> = ({ keyword }) => {
             </Grid>
           ))
         ) : (
-          <p> &quot{keyword}&quot 와 일치하는 값이 없습니다.</p>
+          <div className='likes-content'>
+            <div
+              style={{ textAlign: 'center', width: '100%', marginTop: '100px' }}
+            >
+              피드 검색 결과가 없습니다.
+            </div>
+          </div>
         )}
       </Grid>
     </Box>
