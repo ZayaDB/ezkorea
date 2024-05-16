@@ -23,9 +23,9 @@ const ResultPage = () => {
         margin: 'auto',
       }}
     >
-      <SubTitle text='제품' isRequired={false} />
+      <SubTitle text='PRODUCTS' isRequired={false} />
       <ResultProducts keyword={search} />
-      <SubTitle text='커뮤니티' isRequired={false} />
+      <SubTitle text='FEEDS' isRequired={false} />
       <ResultCommunity keyword={search} />
     </div>
   );
