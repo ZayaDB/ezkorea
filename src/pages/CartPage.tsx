@@ -9,7 +9,6 @@ import { useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
-// const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 export default function CartPage() {
   const selectOption = useSelector(
@@ -95,24 +94,27 @@ export default function CartPage() {
             </div>
 
             <div className='deleteBtn'>x</div>
-            <div className='countBtn'>
-              <ButtonGroup
-                size='small'
-                variant='contained'
-                aria-label='Basic button group'
-              >
-                <Button
-                  onClick={() => handleDecrease()}
-                  disabled={counts === 1}
-                  color='primary'
+            <div className='colorCount'>
+              <div className='selectedColor'></div>
+              <div className='countBtn'>
+                <ButtonGroup
+                  size='small'
+                  variant='contained'
+                  aria-label='Basic button group'
                 >
-                  -
-                </Button>
-                <Button color='primary'>{counts}</Button>
-                <Button onClick={() => handleIncrease()} color='primary'>
-                  +
-                </Button>
-              </ButtonGroup>
+                  <Button
+                    onClick={() => handleDecrease()}
+                    disabled={counts === 1}
+                    color='primary'
+                  >
+                    -
+                  </Button>
+                  <Button color='primary'>{counts}</Button>
+                  <Button onClick={() => handleIncrease()} color='primary'>
+                    +
+                  </Button>
+                </ButtonGroup>
+              </div>
             </div>
             <div className='total'>금액</div>
             <div className='deliveryInfo'>

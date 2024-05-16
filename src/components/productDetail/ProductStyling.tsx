@@ -1,11 +1,30 @@
 import '../../styles/productDetail/productStyling.scss';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Grid from '@mui/material/Grid';
+import { useEffect, useState } from 'react';
+import { IFeedPreview } from '../../types/communityTypes';
 // const onPageChange = (e: React.ChangeEvent<unknown>, page: number) => {
 //   setCurrentPage(page);
 // };
 // const LAST_
 export default function ProductsStyling() {
+  const [pdStyling, setPdStyling] = useState<IFeedPreview[]>([]);
+  // fetch
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/data/feedPreview.json');
+        const data = await response.json();
+
+        setPdStyling(data);
+      } catch (error) {
+        console.error('Error fetching review data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <>
       <Grid
@@ -28,14 +47,12 @@ export default function ProductsStyling() {
             </div>
           </div>
           <div id='stylingBox'>
-            <div className='stylingItem'></div>
-            <div className='stylingItem'></div>
-            <div className='stylingItem'></div>
-            <div className='stylingItem'></div>
+            {pdStyling.map((item, index) => (
+              <div className='stylingItem' key={index}>
+                <img src={item.image} alt={`Product ${index + 1}`} />
+              </div>
+            ))}
           </div>
-        </div>
-        <div>
-          <img src='' alt='' />
         </div>
       </Grid>
     </>

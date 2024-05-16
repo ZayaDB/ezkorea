@@ -1,5 +1,3 @@
-//BestPage.tsx
-
 
 import BestProduct from '../components/category/BestProduct';
 import CarouselCompoBest from '../components/category/CarouselCompoBest';
