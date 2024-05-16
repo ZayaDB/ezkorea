@@ -9,6 +9,7 @@ import MyShopNav from './MyShopNav';
 import MyFeedNav from './MyFeedNav';
 import MyReviewNav from './MyReviewNav';
 import { useMediaQuery } from '@mui/material';
+import { useLocation } from 'react-router-dom';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -45,7 +46,17 @@ function a11yProps(index: number) {
 }
 
 export default function BasicTabs() {
-  const [value, setValue] = React.useState(0);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const initialTab =
+    queryParams.get('tab') === 'feeds'
+      ? 2
+      : queryParams.get('tab') === 'comments'
+      ? 3
+      : queryParams.get('tab') === 'likes'
+      ? 4
+      : 0;
+  const [value, setValue] = React.useState<number>(initialTab);
   const isSmallScreen = useMediaQuery('(max-width:615px)');
   const isMobile = useMediaQuery('(max-width:480px)');
 

@@ -61,6 +61,7 @@ export default function CommunityModifyPage() {
   const [formData, setFormData] = useState<IFormInput | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [imageUrl, setImageUrl] = useState<string[]>([]);
+
   const { files, handleFileChange, handleRemoveFile, setFiles } =
     useFileHandler();
   const {
