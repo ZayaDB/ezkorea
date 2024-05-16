@@ -18,6 +18,7 @@ import {
   setSelectedOption,
   setSelectedQuantity,
   setSelectedProductId,
+  setSelectedProduct,
 } from '../../redux/slices/productSlice'; // Redux slice의 액션 import
 import { useNavigate } from 'react-router-dom';
 import { Product } from '../../types/productDetail';
@@ -66,7 +67,6 @@ export default function SelectPurchase() {
         const data = await response.json();
         const purchase = data[0];
         setSpInfo(purchase);
-       
 
         // 컴포넌트가 마운트될 때 로그인 상태를 확인하고 상태를 업데이트하는 useEffect 사용
         // const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
@@ -117,6 +117,23 @@ export default function SelectPurchase() {
     dispatch(setSelectedOption(selectedColors));
     dispatch(setSelectedQuantity(counts));
     dispatch(setSelectedProductId(selectedProductId));
+    console.log(selectedProductId);
+    if (spInfo !== undefined) {
+      dispatch(
+        setSelectedProduct([
+          {
+            prodId: spInfo.prodId,
+            product_image: spInfo.product_image,
+            brand_name: spInfo.brand_name,
+            product_name: spInfo.product_name,
+            regular_price: spInfo.regular_price,
+            discount_rate: spInfo.discount_rate,
+            discounted_price: spInfo.discounted_price,
+          },
+        ])
+      );
+    }
+
     navigate('/cart');
   };
 
@@ -265,7 +282,7 @@ export default function SelectPurchase() {
               <AddShoppingCartIcon />
             </Box>
             <Box className='purchaseBtn'>
-              <ProtectedButton redirectTo='/login' onClick={handleOrder}>
+              <ProtectedButton redirectTo='/order' onClick={handleOrder}>
                 주문하기
               </ProtectedButton>
             </Box>
