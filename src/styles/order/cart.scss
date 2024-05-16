@@ -136,9 +136,9 @@ $border: 1px solid lightgray;
 }
 
 .purchaseDetail {
-  @include columnCenter();
-  // width: 25%;
+  @include column();
   align-items: baseline;
+  // width: 25%;
   // border: 1px solid black;
 }
 

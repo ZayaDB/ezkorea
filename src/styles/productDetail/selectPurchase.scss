@@ -39,7 +39,7 @@ $border: 1px solid lightgray;
 #selectPurchase {
   @include column();
   width: 330px;
-  height: 800px;
+  height: 80vh;
   max-width: 330px;
   // min-width: 360px;
   position: fixed;
