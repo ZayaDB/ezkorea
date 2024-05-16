@@ -54,6 +54,12 @@ $border: 1px solid lightgray;
     // border: 1px solid black;
     margin: 0 auto;
   }
+  @media (max-width: 768px) {
+    width: 480px;
+  }
+  @media (max-width: 360px) {
+    width: 360px;
+  }
 }
 
 #cartList,
@@ -78,7 +84,7 @@ $border: 1px solid lightgray;
   text-align: center;
 }
 .titleDetail {
-  width: 50%;
+  width: 40%;
   text-align: center;
 }
 .titleCountBtn {
@@ -86,14 +92,16 @@ $border: 1px solid lightgray;
   text-align: center;
 }
 .titleTotal {
-  width: 25%;
+  width: 20%;
   text-align: center;
 }
 .titleDelivery {
-  width: 10%;
+  width: 15%;
   text-align: center;
 }
-
+.titleModify {
+  width: 10%;
+}
 .purchaseInfo {
   @include row();
   border-bottom: 1px solid black;
@@ -103,36 +111,58 @@ $border: 1px solid lightgray;
   text-align: center;
 }
 .purchasePD {
-  width: 45%;
+  width: 40%;
   height: 20vh;
   @include row();
-  justify-content: center;
+  justify-content: baseline;
+}
+.colorCount {
+  width: 10%;
+  @include columnCenter();
 }
 .purchaseProduct {
-  width: 15vh;
-  height: 15vh;
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+.purchaseProduct img {
+  width: 100px;
+  height: 100px;
   margin-right: 10px;
   background-color: lightgray;
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .purchaseDetail {
   @include columnCenter();
-  width: 25%;
+  // width: 25%;
   align-items: baseline;
+  // border: 1px solid black;
 }
 
 .purchaseBrand {
   font-size: $font-size-s;
+  @media (max-width: 768px) {
+    font-size: $font-size-xxs;
+  }
 }
 
 .purchaseName {
   font-weight: $font-weight-bold;
   font-size: $font-size-l;
+  @media (max-width: 768px) {
+    font-size: $font-size-xs;
+  }
 }
 
 .purchaseOriginal {
   color: lightgray;
   font-size: $font-size-m;
+  @media (max-width: 768px) {
+    font-size: $font-size-xxs;
+  }
 }
 .saleZone,
 .salePrice {
@@ -145,28 +175,17 @@ $border: 1px solid lightgray;
 .saleZone {
   @include row();
 }
-.deleteBtn {
-  color: lightgray;
-  font-weight: $font-weight-bold;
-  width: 5%;
-}
-.deleteBtn:hover {
-  color: black;
-}
-.countBtn {
-  width: 10%;
-  text-align: center;
-}
+
 .total {
   font-weight: $font-weight-bold;
   font-size: $font-size-l;
-  width: 25%;
+  width: 20%;
   text-align: center;
 }
 
 .deliveryInfo {
   @include column();
-  width: 10%;
+  width: 15%;
   text-align: center;
 }
 
@@ -175,7 +194,27 @@ $border: 1px solid lightgray;
   font-weight: $font-weight-bold;
   text-align: center;
 }
-
+.prodModify {
+  width: 10%;
+  @include columnCenter();
+}
+.prodModify button {
+  border: none;
+  background-color: white;
+  color: gray;
+  font-weight: $font-weight-bold;
+}
+.prodModify button:hover {
+  color: black;
+}
+.deleteBtn {
+  color: lightgray;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-m;
+}
+.deleteBtn:hover {
+  color: black;
+}
 .bpTitle {
   @include row();
   font-size: $font-size-l;
@@ -254,7 +293,6 @@ $border: 1px solid lightgray;
   }
   .purchaseInfo {
     @include row();
-    border-bottom: 1px solid black;
   }
   .purchasecheckbox {
     width: 5%;

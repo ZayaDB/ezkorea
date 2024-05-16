@@ -277,12 +277,7 @@ function AddressBook() {
 
   return (
     <div className='addressbook-container'>
-      <Button
-        onClick={handleOpen}
-        variant='contained'
-        size='medium'
-        color='secondary'
-      >
+      <Button onClick={handleOpen} variant='contained' size='medium'>
         주소록
       </Button>
       <Modal open={open} onClose={handleClose}>
