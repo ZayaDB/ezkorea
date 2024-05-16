@@ -38,10 +38,14 @@ const CommunityDetailPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState<number>(0);
-  const [commentInput, setCommentInput] = useState<string>('');
   const [likes, setLikes] = useState<number>(0);
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const { feedId } = useParams<{ feedId?: string }>();
+
+  const [commentInput, setCommentInput] = useState<string>('');
+  const [replyInput, setReplyInput] = useState<{ [key: string]: string }>({});
+  const [replyingTo, setReplyingTo] = useState<string | null>(null);
+  const [comments, setComments] = useState<Comment[]>([]);
   const formatPrice = (price: number): string => {
     return new Intl.NumberFormat().format(price);
   };
@@ -61,6 +65,7 @@ const CommunityDetailPage: React.FC = () => {
         );
         if (selectedFeed) {
           setFeed(selectedFeed);
+          setComments(selectedFeed.comments || []);
           setLikes(selectedFeed.likes);
           setIsLiked(false); // 수정된 부분: liked 필드가 없으므로 항상 false로 설정
           setIsError(false);
@@ -84,9 +89,63 @@ const CommunityDetailPage: React.FC = () => {
     setCommentInput(e.target.value);
   };
 
+  const handleReplyInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    commentId: string
+  ) => {
+    setReplyInput(prev => ({
+      ...prev,
+      [commentId]: e.target.value,
+    }));
+  };
+
   const handleCommentSubmit = () => {
-    console.log('Submitted comment:', commentInput);
+    if (commentInput.trim() === '') return;
+    const newComment: Comment = {
+      id: new Date().toISOString(),
+      profileImage:
+        'https://i.pinimg.com/564x/de/0d/ef/de0def59d80f85f8962e9992f429e004.jpg',
+      accountName: 'dururu',
+      content: commentInput,
+      creationDate: new Date().toISOString(),
+      replies: [],
+    };
+    setComments(prev => [...prev, newComment]);
     setCommentInput('');
+  };
+
+  const handleReplySubmit = (commentId: string) => {
+    if (!replyInput[commentId] || replyInput[commentId].trim() === '') return;
+    const newReply: Comment = {
+      id: new Date().toISOString(),
+      profileImage:
+        'https://i.pinimg.com/564x/de/0d/ef/de0def59d80f85f8962e9992f429e004.jpg',
+      accountName: 'dururu',
+      content: replyInput[commentId],
+      creationDate: new Date().toISOString(),
+      replies: [],
+    };
+    setComments(prev =>
+      prev.map(comment =>
+        comment.id === commentId
+          ? {
+              ...comment,
+              replies: comment.replies
+                ? [...comment.replies, newReply]
+                : [newReply],
+            }
+          : comment
+      )
+    );
+    setReplyInput(prev => ({
+      ...prev,
+      [commentId]: '',
+    }));
+    setReplyingTo(null);
+  };
+
+  const handleReplyClick = (commentId: string) => {
+    setReplyingTo(commentId);
   };
 
   const handleLike = useCallback(() => {
@@ -312,7 +371,7 @@ const CommunityDetailPage: React.FC = () => {
         댓글 {feed.commentCount}
       </Typography>
 
-      {feed.comments?.map((comment: Comment) => (
+      {comments.map((comment: Comment) => (
         <Box
           mt={2}
           // pb={2}
@@ -348,7 +407,9 @@ const CommunityDetailPage: React.FC = () => {
             </Typography>
 
             <div className='comment-info-box'>
-              <CommentButton>답글 달기</CommentButton>
+              <CommentButton onClick={() => handleReplyClick(comment.id)}>
+                답글 달기
+              </CommentButton>
               <dt className='dot'></dt>
               <CommentButton>신고</CommentButton>
             </div>
@@ -389,14 +450,40 @@ const CommunityDetailPage: React.FC = () => {
                         </Typography>
                       </Box>
                       <div className='comment-info-box'>
-                        <CommentButton>답글 달기</CommentButton>
-                        <dt className='dot'></dt>
                         <CommentButton>신고</CommentButton>
                       </div>
                     </Box>
                   </li>
                 ))}
               </ul>
+            )}
+            {replyingTo === comment.id && (
+              <Box
+                className='comment-input-container'
+                sx={{ paddingLeft: '20px' }}
+              >
+                <InputTextField
+                  label='대댓글을 입력하세요'
+                  fullWidth
+                  value={replyInput[comment.id] || ''}
+                  onChange={e => handleReplyInputChange(e, comment.id)}
+                  className='comment-input'
+                  variant='outlined'
+                />
+                <Button
+                  onClick={() => handleReplySubmit(comment.id)}
+                  variant='contained'
+                  color='primary'
+                  sx={{
+                    boxShadow: 'none',
+                    '&:hover': {
+                      boxShadow: 'none',
+                    },
+                  }}
+                >
+                  입력
+                </Button>
+              </Box>
             )}
           </Box>
         </Box>
