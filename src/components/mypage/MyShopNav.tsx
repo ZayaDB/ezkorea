@@ -8,6 +8,8 @@ import LikesProduct from './LikesProducts';
 import CartPage from '../../pages/CartPage';
 import RecentViewList from './RecentViewList';
 import OrderDetails from './OrderDetails';
+import '../../styles/mypage/mynav.scss';
+import { useMediaQuery } from '@mui/material';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -44,6 +46,8 @@ function a11yProps(index: number) {
 
 export default function MyShopNav() {
   const [value, setValue] = React.useState(0);
+  const isSmallScreen = useMediaQuery('(max-width:615px)');
+  const isMobile = useMediaQuery('(max-width:480px)');
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -55,11 +59,26 @@ export default function MyShopNav() {
       <div>
         {/* <Box sx={{ p: 0, borderBottom: 1, borderColor: 'divider' }}>
          */}
-        <div>
+        <div style={{ marginTop: '11px' }}>
           <Tabs
+            className='MuiTabs-myshop'
+            centered
             value={value}
             onChange={handleChange}
             aria-label='basic tabs example'
+            sx={{
+              '& .MuiTab-root': {
+                color: 'black',
+                fontSize: isMobile ? '13px' : isSmallScreen ? '13px' : '14px',
+                m: isMobile ? 0 : isSmallScreen ? '3px' : '6px',
+                p: isMobile ? 0 : isSmallScreen ? '4px' : '6px',
+                minWidth: isMobile ? '70px' : '80px',
+                '&.Mui-selected': {
+                  color: '#5ff531',
+                  fontWeight: 'bold',
+                },
+              },
+            }}
           >
             <Tab label='최근본상품' {...a11yProps(0)} />
             <Tab label='찜한상품' {...a11yProps(1)} />

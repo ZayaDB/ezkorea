@@ -4,10 +4,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import '../../styles/mypage/mynav.scss';
-import Profile from './Profile';
-import MyShopNav from './MyShopNav';
-import MyFeedNav from './MyFeedNav';
-import MyReviewNav from './MyReviewNav';
+import '../../styles/mypage/mynav.scss';
 import { useMediaQuery } from '@mui/material';
 
 interface TabPanelProps {
@@ -28,7 +25,7 @@ function CustomTabPanel(props: TabPanelProps) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3, padding: '0px' }}>
+        <Box>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -43,7 +40,7 @@ function a11yProps(index: number) {
   };
 }
 
-export default function BasicTabs() {
+export default function MyFeedNav() {
   const [value, setValue] = React.useState(0);
   const isSmallScreen = useMediaQuery('(max-width:615px)');
   const isMobile = useMediaQuery('(max-width:480px)');
@@ -53,19 +50,14 @@ export default function BasicTabs() {
   };
 
   return (
-    <Box sx={{ justifyContent: 'center', m: 'auto' }}>
-      <Box sx={{ width: '100%' }}>
-        <Box
-          sx={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderBottom: 1,
-            borderColor: 'divider',
-
-            // width: '100%',
-          }}
-        >
+    // <Box sx={{ justifyContent: 'center', m: 'auto' }}>
+    <div>
+      <div>
+        {/* <Box sx={{ p: 0, borderBottom: 1, borderColor: 'divider' }}>
+         */}
+        <div style={{ marginTop: '11px' }}>
           <Tabs
+            className='MuiTabs-myshop'
             centered
             value={value}
             onChange={handleChange}
@@ -73,7 +65,7 @@ export default function BasicTabs() {
             sx={{
               '& .MuiTab-root': {
                 color: 'black',
-                fontSize: isMobile ? '15px' : isSmallScreen ? '17px' : '17px',
+                fontSize: isMobile ? '13px' : isSmallScreen ? '13px' : '14px',
                 m: isMobile ? 0 : isSmallScreen ? '3px' : '6px',
                 p: isMobile ? 0 : isSmallScreen ? '4px' : '6px',
                 minWidth: isMobile ? '70px' : '80px',
@@ -84,25 +76,22 @@ export default function BasicTabs() {
               },
             }}
           >
-            <Tab label='프로필' {...a11yProps(0)} />
-            <Tab label='나의쇼핑' {...a11yProps(1)} />
-            <Tab label='나의피드' {...a11yProps(2)} />
-            <Tab label='리뷰&문의' {...a11yProps(3)} />
+            <Tab label='작성한피드' {...a11yProps(0)} />
+            <Tab label='작성한댓글' {...a11yProps(1)} />
+            <Tab label='좋아요한피드' {...a11yProps(2)} />
           </Tabs>
-        </Box>
+        </div>
+        {/* </Box> */}
         <CustomTabPanel value={value} index={0}>
-          <Profile />
+          {/* 작성한 피드 목록 */}
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
-          <MyShopNav />
+          {/* 작성한 댓글 목록 */}
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
-          <MyFeedNav />
+          {/* 좋아요한 피드 목록 */}
         </CustomTabPanel>
-        <CustomTabPanel value={value} index={3}>
-          <MyReviewNav />
-        </CustomTabPanel>
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 }
