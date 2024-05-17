@@ -86,6 +86,8 @@ export const ImgButton = styled(Box)`
   padding: 0;
   width: 128px;
   height: 128px;
+  min-width: 128px;
+  min-height: 128px;
   overflow: hidden;
   margin-bottom: 10px;
   flex: 0 0 100px;

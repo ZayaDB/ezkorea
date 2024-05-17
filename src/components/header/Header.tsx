@@ -76,9 +76,9 @@ export default function Header({ title, cartBadgeNum }: HeaderProps) {
 
   const menuItems = [
     { title: '마이페이지', path: isLoggedIn ? '/my' : '/login' },
-    { title: '찜한 상품', path: '/my/wishlist' },
-    { title: '최근 본 상품', path: '/my/recentview' },
-    { title: '작성한 피드', path: '/saved-feed' },
+    { title: '찜한 상품', path: '/my?tab=wishlist' },
+    { title: '최근 본 상품', path: '/my?tab=recentview' },
+    { title: '작성한 피드', path: isLoggedIn ? '/my?tab=feeds' : '/login' },
   ];
 
   if (isLoggedIn) {

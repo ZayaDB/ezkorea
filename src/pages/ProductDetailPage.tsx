@@ -122,7 +122,17 @@ export default function ProductDetailPage() {
             </Container>
           )
         ) : (
-          <h1>존재하지 않는 상품입니다.</h1>
+          <div
+            style={{
+              width: '100%',
+              textAlign: 'center',
+              margin: 'auto',
+              marginTop: '200px',
+              marginBottom: '200px',
+            }}
+          >
+            존재하지 않는 상품입니다.
+          </div>
         )}
       </ThemeProvider>
     </div>

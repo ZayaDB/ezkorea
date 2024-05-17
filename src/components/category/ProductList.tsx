@@ -341,7 +341,7 @@ const ProductList = () => {
       </div>
 
       {!isMobile && (
-        <div style={{ marginLeft: '40%' }}>
+        <div style={{ marginLeft: '38.9%' }}>
           <Pagination
             count={Math.ceil(filteredProducts.length / itemsPerPage)}
             page={currentPage}

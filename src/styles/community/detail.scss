@@ -3,22 +3,17 @@ html {
   -webkit-font-smoothing: antialiased;
 }
 
-.content-container {
-  max-width: 880px;
-  width: 100%;
-  margin: 0 auto;
-}
-
 .thumbnail-container {
   display: flex;
   margin-bottom: 20px;
+  width: 100%;
 
   .main-image {
-    flex: 1;
     margin-right: 12px;
     overflow: hidden;
-    width: 720px;
-    height: 720px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 720px;
     pointer-events: none;
 
     img {
@@ -30,11 +25,28 @@ html {
   }
 }
 
+@media (max-width: 619px) {
+  .thumbnail-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .thumbnail-wrapper {
+    display: flex;
+    // flex-wrap: nowrap;
+    flex-grow: 1;
+    margin-top: 20px; /* 메인 이미지와 간격을 조절 */
+    margin-right: 16px;
+    gap: 16px;
+    justify-content: center;
+  }
+}
+
 .feed-profile {
   display: flex;
   justify-content: space-between;
   height: 64px;
   padding: 12px 0;
+  width: 100%;
 }
 
 .feed-title {
@@ -43,6 +55,12 @@ html {
   overflow: hidden; /* 넘치는 부분은 숨기기 */
   text-overflow: ellipsis; /* 생략 부호 추가 */
   padding: 40px 0;
+}
+
+@media (max-width: 768px) {
+  .feed-title {
+    padding: 20px 0; // 작은 화면에서의 여백
+  }
 }
 
 .feed-description {
@@ -92,6 +110,12 @@ html {
   display: flex;
   align-items: center;
   padding: 40px 0;
+}
+
+@media (max-width: 768px) {
+  .icon-container {
+    padding: 10px 0; // 작은 화면에서의 여백
+  }
 }
 
 .product-container > .swiper > .swiper-button-prev:after,

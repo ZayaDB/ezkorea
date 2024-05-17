@@ -73,7 +73,6 @@ const ModalSearch: React.FC<ModalSearchProps> = ({ closeModal }) => {
           onCompositionStart={handleCompositionStart}
           onCompositionEnd={handleCompositionEnd}
           inputRef={inputRef} // ref 연결
-
           sx={{
             width: isSmallScreen ? '80%' : '100%',
             color: 'inherit',

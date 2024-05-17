@@ -52,7 +52,7 @@ const SnackbarContent = styled('div')(({ theme }) => ({
 }));
 
 interface HandleClickHeartProps {
-  productName: string;
+  productName?: string;
   isLiked: boolean;
   onLikeToggle: () => void;
 }
@@ -84,9 +84,9 @@ const StyledCheckbox = styled(BlackCheckbox)(({ theme }) => ({
   },
 }));
 
-const ThinHeartBorder = styled(FavoriteBorder)({
-  strokeWidth: '0.00001px',
-});
+// const ThinHeartBorder = styled(FavoriteBorder)({
+//   strokeWidth: '0.00001px',
+// });
 
 export default function HandleClickHeart({
   productName,
@@ -109,6 +109,7 @@ export default function HandleClickHeart({
 
     setOpen(false);
   };
+  console.log(exited);
 
   const handleClick = () => {
     onLikeToggle();
@@ -127,12 +128,16 @@ export default function HandleClickHeart({
     <React.Fragment>
       <StyledCheckbox
         {...label}
-        icon={<ThinHeartBorder />}
+        icon={<FavoriteBorder />}
         checkedIcon={<Favorite />}
         checked={isLiked}
         onClick={handleClick}
       />
-      <StyledSnackbar autoHideDuration={3000} open={open} exited={exited}>
+      <StyledSnackbar
+        autoHideDuration={3000}
+        open={open}
+        onClose={() => setOpen(false)}
+      >
         <Transition
           timeout={{ enter: 400, exit: 400 }}
           in={open}
