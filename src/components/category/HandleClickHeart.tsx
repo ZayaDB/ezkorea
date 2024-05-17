@@ -192,7 +192,7 @@ const StyledSnackbar = styled(Snackbar)`
   position: fixed;
   z-index: 5500;
   display: flex;
-  bottom: 16px;
+  bottom: 70px;
   right: 16px;
   max-width: 560px;
   min-width: 300px;
@@ -201,7 +201,7 @@ const StyledSnackbar = styled(Snackbar)`
 const positioningStyles = {
   entering: 'translateX(0)',
   entered: 'translateX(0)',
-  exiting: 'translateX(500px)',
-  exited: 'translateX(500px)',
+  exiting: 'translateX(300px)',
+  exited: 'translateX(300px)',
   unmounted: 'translateX(500px)',
 };

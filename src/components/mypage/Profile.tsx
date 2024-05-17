@@ -1,9 +1,19 @@
+import { Button } from '@mui/material';
 import '../../styles/mypage/profile.scss';
 // import TextField from '@mui/material/TextField';
 // import Box from '@mui/material/Box';
 // import Container from '@mui/material/Container';
 // import { createTheme } from '@mui/material/styles';
 import '../../styles/mypage/profile.scss';
+import { styled } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+
+const StyledButton = styled(Button)(() => ({
+  ':hover': {
+    color: '#5FF531',
+    backgroundColor: '#000000',
+  },
+}));
 
 // const theme = createTheme({
 //   palette: {
@@ -57,6 +67,11 @@ import '../../styles/mypage/profile.scss';
 // });
 
 export default function Profile() {
+  const navigate = useNavigate();
+  const logout = () => {
+    sessionStorage.clear();
+    navigate('/');
+  };
   return (
     <div>
       <div className='profile-container'>
@@ -67,7 +82,21 @@ export default function Profile() {
           />
         </div>
       </div>
+      <div style={{ width: '100%', textAlign: 'center' }}>
+        <StyledButton
+          onClick={logout}
+          sx={{
+            width: '80%',
 
+            backgroundColor: 'black',
+            color: 'white',
+            fontSize: '18px',
+            marginTop: '300px',
+          }}
+        >
+          로그아웃
+        </StyledButton>
+      </div>
       {/* <ThemeProvider theme={theme}>
         <Container component='main' maxWidth='xs'>
           <Box

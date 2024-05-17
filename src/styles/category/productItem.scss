@@ -327,6 +327,7 @@ $font-weight-regular: 400;
     }
     .color-heart-box {
       padding-left: 10px;
+      align-items: center;
       padding-bottom: 2px;
       padding-top: 0;
       .color-wrapper {
@@ -416,14 +417,16 @@ $font-weight-regular: 400;
         display: flex;
         flex-direction: row;
         padding-top: 9px;
+        align-items: center;
 
         @for $i from 1 through 6 {
           .color-circle:nth-child(#{$i}) {
             border-radius: 100%;
             width: 6px;
-            height: 6px;
+            height: 7px;
             margin: 1px;
-            line-height: 50px;
+            line-height: 60px;
+
           }
         }
       }
