@@ -32,6 +32,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import ContentArea from '../styles/ContentArea';
 
 // 한국어 로캘 설정
 TimeAgo.addLocale(koLocale);
@@ -88,7 +89,7 @@ const CommunityResultPage: React.FC = () => {
   }
 
   return (
-    <Box className='content-container'>
+    <ContentArea sx={{ maxWidth: 1200 }}>
       <Grid container direction='column'>
         <Box className='feed-profile'>
           <CardHeader
@@ -376,7 +377,7 @@ const CommunityResultPage: React.FC = () => {
           </Box>
         </Box>
       ))}
-    </Box>
+    </ContentArea>
   );
 };
 
