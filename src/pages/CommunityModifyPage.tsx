@@ -203,7 +203,9 @@ export default function CommunityModifyPage() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box display='flex' flexDirection='column'>
           <SubTitle text='사진' isRequired={true}></SubTitle>
-          <Box display='flex' flexDirection='row'>
+          <div
+            style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}
+          >
             <input
               type='file'
               multiple
@@ -218,7 +220,13 @@ export default function CommunityModifyPage() {
                 width='130px'
               />
             </Button>
-            <Box display='flex' flexDirection='row' flexWrap='wrap'>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+              }}
+            >
               {imageUrl.map((url, index) => {
                 return (
                   <div
@@ -301,8 +309,8 @@ export default function CommunityModifyPage() {
                   </div>
                 );
               })}
-            </Box>
-          </Box>
+            </div>
+          </div>
           <Typography
             sx={{
               fontSize: theme.typography.body2.fontSize,
