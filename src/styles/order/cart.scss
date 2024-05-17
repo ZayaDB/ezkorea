@@ -62,12 +62,13 @@ $border: 1px solid lightgray;
   }
 }
 
-#cartList,
-#beforePay {
+#cartList {
   @include columnCenter();
   margin-bottom: 10vh;
 }
-
+#beforePay {
+  margin-bottom: 5vh;
+}
 .cartTitle {
   @include row();
   font-size: $font-size-l;
