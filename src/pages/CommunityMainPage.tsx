@@ -151,6 +151,7 @@ const CommunityMainPage = () => {
               height: '32px',
               borderRadius: '16px',
               fontWeight: 600,
+              marginTop: 1,
               ...outlineButtonStyles,
               '@media (max-width: 768px)': {
                 marginTop: 2,
@@ -169,6 +170,7 @@ const CommunityMainPage = () => {
               height: '32px',
               borderRadius: '16px',
               fontWeight: 700,
+              marginTop: 1,
               ...containedButtonStyles,
               '&:hover': {
                 ...containedButtonStyles['&:hover'], // 기존의 호버 스타일을 가져오고
