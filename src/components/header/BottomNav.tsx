@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
@@ -7,7 +7,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ArticleIcon from '@mui/icons-material/Article';
 
 export default function LabelBottomNavigation() {
-  const [value, setValue] = React.useState('recents');
+  const [value, setValue] = useState('recents');
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
@@ -23,7 +23,11 @@ export default function LabelBottomNavigation() {
         window.location.href = '/community';
         break;
       case 'mypage':
-        window.location.href = '/my';
+        if (sessionStorage.getItem('isLoggedIn') === null) {
+          window.location.href = '/login';
+        } else {
+          window.location.href = '/my';
+        }
         break;
       default:
         break;
