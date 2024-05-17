@@ -1,19 +1,21 @@
 import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Card, CardMedia, Typography } from '@mui/material';
-// import Review1 from '../../assets/images/review_white.webp';
 import Review2 from '../../assets/images/review_white2.webp';
-// import Review3 from '../../assets/images/review_white3.webp';
 import Review4 from '../../assets/images/review_white4.webp';
-// import Review5 from '../../assets/images/review_white5.webp';
 import Review6 from '../../assets/images/review_white6.webp';
 import '../../styles/home/cardCarousel.scss';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import { useNavigate } from 'react-router-dom';
 
 export default function LeviewCarousel() {
+  const navigate = useNavigate();
+  const gotoLeview = () => {
+    navigate('/shop/4');
+  };
   const slides = [
     {
       id: 2,
@@ -36,7 +38,10 @@ export default function LeviewCarousel() {
   return (
     <div style={{ width: 'auto', padding: '8px 0 30px 0' }}>
       <div className='TitleArea'>
-        <Typography sx={{ fontSize: '30px', fontWeight: '700' }}>
+        <Typography
+          sx={{ fontSize: '30px', fontWeight: '700' }}
+          onClick={gotoLeview}
+        >
           REVIEW
         </Typography>
         <Typography
@@ -46,12 +51,14 @@ export default function LeviewCarousel() {
             letterSpacing: '0.2px',
             color: '#999999',
           }}
+          onClick={gotoLeview}
         >
           #dururu #일상 #데스크테리어
         </Typography>
       </div>
       <div className='mood-container'>
         <Swiper
+          onClick={gotoLeview}
           className='swiper-container'
           centeredSlides={true} //가운데 정렬
           slidesPerView={3} //한 슬라이드에 보여줄 갯수

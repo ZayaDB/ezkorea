@@ -1,11 +1,9 @@
 import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Card, CardMedia, Typography } from '@mui/material';
-// import Review1 from '../../assets/images/review_white.webp';
+import { useNavigate } from 'react-router-dom';
 import Review2 from '../../assets/images/review_white2.webp';
-// import Review3 from '../../assets/images/review_white3.webp';
 import Review4 from '../../assets/images/review_white4.webp';
-// import Review5 from '../../assets/images/review_white5.webp';
 import Review6 from '../../assets/images/review_white6.webp';
 import Review7 from '../../assets/images/review_white7.webp';
 import '../../styles/home/cardCarousel.scss';
@@ -15,6 +13,11 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 export default function MoodCarousel() {
+  const navigate = useNavigate();
+  const gotoCommunity = () => {
+    navigate('/community');
+  };
+
   const slides = [
     {
       id: 0,
@@ -39,7 +42,10 @@ export default function MoodCarousel() {
   return (
     <div style={{ width: 'auto', padding: '22px 0 18px 0' }}>
       <div className='TitleArea'>
-        <Typography sx={{ fontSize: '30px', fontWeight: '700' }}>
+        <Typography
+          sx={{ fontSize: '30px', fontWeight: '700' }}
+          onClick={gotoCommunity}
+        >
           DURURU RECOMMEND
         </Typography>
         <Typography
@@ -49,6 +55,7 @@ export default function MoodCarousel() {
             color: '#999999',
             letterSpacing: '0.2px',
           }}
+          onClick={gotoCommunity}
         >
           {/* 두루루에서 만날 수 있는 다양한 무드의 데스크테리어 */}
           나만의 작은 공간, 책상 위에도 취향을 녹여보세요.
@@ -56,6 +63,7 @@ export default function MoodCarousel() {
       </div>
       <div className='mood-container'>
         <Swiper
+          onClick={gotoCommunity}
           className='swiper-container'
           centeredSlides={true} //가운데 정렬
           slidesPerView={3} //한 슬라이드에 보여줄 갯수
