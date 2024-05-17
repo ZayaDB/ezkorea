@@ -3,6 +3,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Grid from '@mui/material/Grid';
 import { useEffect, useState } from 'react';
 import { IFeedPreview } from '../../types/communityTypes';
+import { Link } from 'react-router-dom';
 // const onPageChange = (e: React.ChangeEvent<unknown>, page: number) => {
 //   setCurrentPage(page);
 // };
@@ -48,9 +49,11 @@ export default function ProductsStyling() {
           </div>
           <div id='stylingBox'>
             {pdStyling.map((item, index) => (
-              <div className='stylingItem' key={index}>
-                <img src={item.image} alt={`Product ${index + 1}`} />
-              </div>
+              <Link to={`/community/detail/${item.feedId}`} key={index}>
+                <div className='stylingItem' key={index}>
+                  <img src={item.image} alt={`Product ${index + 1}`} />
+                </div>
+              </Link>
             ))}
           </div>
         </div>

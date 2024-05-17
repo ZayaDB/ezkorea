@@ -38,19 +38,18 @@ $border: 1px solid lightgray;
 
 #selectPurchase {
   @include column();
-
-  height: 600px;
+  height: 80vh;
   // min-width: 360px;
   position: fixed;
   background-color: white;
   // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   border-top: 5px solid black;
-
   top: 118px;
+  max-height: 600px;
   @media (min-width: 1201px) {
     @include column();
     width: 330px;
-    height: 600px;
+    height: 80vh;
 
     // min-width: 360px;
     position: fixed;
@@ -58,6 +57,7 @@ $border: 1px solid lightgray;
     border-top: 5px solid black;
     padding: 8px;
     top: 118px;
+    max-height: 600px;
   }
   @media (min-width: 769px) and (max-width: 1200px) {
     @include column();
@@ -67,6 +67,7 @@ $border: 1px solid lightgray;
     position: static; /* 수정 */
     margin: 0 auto;
     padding: 8px;
+    max-height: 600px;
   }
 }
 @media (max-width: 768px) {
@@ -111,10 +112,10 @@ $border: 1px solid lightgray;
 #heartZone {
   @include columnCenter();
 }
-.heartTotal {
-  font-size: $font-size-xxs;
-  margin: 0;
-}
+// .heartTotal {
+//   font-size: $font-size-xxs;
+//   margin: 0;
+// }
 .productName {
   font-size: $font-size-xl;
   font-weight: $font-weight-bold;

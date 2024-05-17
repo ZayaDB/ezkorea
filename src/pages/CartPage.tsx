@@ -156,7 +156,7 @@ export default function CartPage() {
             </div>
             <div className='deliveryInfo'>
               <div className='deliveryCharge'>3500원</div>
-              <div>5만원 이상 구매시 무료배송</div>
+              <div className='deliveryContent'>5만원 이상 구매시 무료배송</div>
             </div>
             {/* <div className='prodModify'>
               <button>수정하기</button>

@@ -36,6 +36,9 @@ $font-weight-regular: 400;
 // border
 $border: 1px solid lightgray;
 
+#productStyling {
+  margin-bottom: 20px;
+}
 #stylingTop {
   @include row();
   justify-content: space-between;
