@@ -77,6 +77,9 @@ $border: 1px solid lightgray;
   padding-top: 16px;
   padding-bottom: 16px;
   height: 10vh;
+  @media (max-width: 480px) {
+    font-size: $font-size-m;
+  }
 }
 
 .titleCheckbox {
@@ -84,15 +87,18 @@ $border: 1px solid lightgray;
   text-align: center;
 }
 .titleDetail {
-  width: 40%;
+  width: 45%;
   text-align: center;
+  @media (max-width: 768px) {
+    width: 40%;
+  }
 }
 .titleCountBtn {
   width: 10%;
   text-align: center;
 }
 .titleTotal {
-  width: 20%;
+  width: 25%;
   text-align: center;
 }
 .titleDelivery {
@@ -135,7 +141,10 @@ $border: 1px solid lightgray;
     display: none;
   }
 }
-
+.titleModify,
+.prodModify {
+  display: none;
+}
 .purchaseDetail {
   @include column();
   align-items: baseline;
@@ -168,8 +177,16 @@ $border: 1px solid lightgray;
   }
   .purchaseDetail {
     @include columnCenter();
-    align-items: baseline;
+    align-items: center;
     font-size: $font-size-s;
+    width: 60%;
+  }
+  .saleZone,
+  .salePrice {
+    color: salmon;
+  }
+  .saleZone {
+    @include columnCenter();
   }
 }
 .purchaseOriginal {
@@ -179,11 +196,7 @@ $border: 1px solid lightgray;
     font-size: $font-size-xxs;
   }
 }
-.saleZone,
-.salePrice {
-  color: salmon;
-  font-size: $font-size-m;
-}
+
 .salePrice {
   margin-left: 5px;
 }
@@ -194,20 +207,39 @@ $border: 1px solid lightgray;
 .total {
   font-weight: $font-weight-bold;
   font-size: $font-size-l;
-  width: 20%;
+  width: 25%;
   text-align: center;
+  @media (max-width: 480px) {
+    font-size: $font-size-s;
+    width: 25%;
+  }
 }
 
 .deliveryInfo {
   @include column();
   width: 15%;
   text-align: center;
+  @media (min-width: 768px) {
+    font-size: $font-size-s;
+    width: 15%;
+  }
 }
 
 .deliveryCharge {
   font-size: $font-size-m;
   font-weight: $font-weight-bold;
   text-align: center;
+  @media (max-width: 480px) {
+    font-size: $font-size-s;
+  }
+}
+.deliveryContent {
+  @media (max-width: 480px) {
+    font-size: $font-size-s;
+  }
+  @media (min-width: 481px) {
+    font-size: $font-size-m;
+  }
 }
 .prodModify {
   width: 10%;
@@ -239,6 +271,9 @@ $border: 1px solid lightgray;
   padding-top: 16px;
   padding-bottom: 16px;
   height: 10vh;
+  @media (max-width: 480px) {
+    font-size: $font-size-m;
+  }
 }
 
 .bpTitleProdTotal {
@@ -285,7 +320,13 @@ $border: 1px solid lightgray;
   font-weight: $font-weight-bold;
   font-size: $font-size-xl;
 }
-
+.bpProdTotal,
+.bpDeTotal,
+.bpTotal {
+  @media (max-width: 768px) {
+    font-size: $font-size-m;
+  }
+}
 .againBtn,
 .goPay {
   border: none;
@@ -299,9 +340,8 @@ $border: 1px solid lightgray;
 .goPay:hover {
   color: $hover-color;
 }
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 768px) {
   #cartBox {
-    max-width: 480px;
     width: 100%;
     padding-top: 8px;
     margin: 0 auto;
@@ -322,7 +362,7 @@ $border: 1px solid lightgray;
   .purchaseProduct {
     width: 10vh;
     height: 10vh;
-    margin-right: 10px;
+    margin-right: 20px;
     background-color: lightgray;
   }
 
@@ -378,7 +418,7 @@ $border: 1px solid lightgray;
 
   .deliveryInfo {
     @include column();
-    width: 10%;
+    width: 15%;
     text-align: center;
     font-size: $font-size-xs;
   }

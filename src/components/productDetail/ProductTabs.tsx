@@ -56,10 +56,10 @@ export default function ProductTabs() {
             상품정보
           </div>
           <div onClick={onContent2Click} role='none'>
-            리뷰
+            배송/환불
           </div>
           <div onClick={onContent3Click} role='none'>
-            배송/환불
+            리뷰
           </div>
           <div onClick={onContent4Click} role='none'>
             문의하기
@@ -72,9 +72,9 @@ export default function ProductTabs() {
         </div>
         <div ref={content2Ref}>
           <DeliveryInfo />
-          <div ref={content3Ref}>
-            <Review />
-          </div>
+        </div>
+        <div ref={content3Ref}>
+          <Review />
         </div>
         <div ref={content4Ref}>
           <Inquire />

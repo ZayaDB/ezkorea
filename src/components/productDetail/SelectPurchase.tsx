@@ -185,7 +185,7 @@ export default function SelectPurchase() {
                   <div className='heartIcon'>
                     <FavoriteBorderIcon />
                   </div>
-                  <div className='heartTotal'>28,742</div>
+                  {/* <div className='heartTotal'>28,742</div> */}
                 </div>
               </div>
             </div>
@@ -253,18 +253,18 @@ export default function SelectPurchase() {
                         aria-label='Basic button group'
                       >
                         <Button
-                          onClick={() => handleIncrease(index)}
-                          color='secondary'
-                        >
-                          +
-                        </Button>
-                        <Button color='secondary'>{counts[index]}</Button>
-                        <Button
                           onClick={() => handleDecrease(index)}
                           disabled={counts[index] === 1}
                           color='secondary'
                         >
                           -
+                        </Button>
+                        <Button color='secondary'>{counts[index]}</Button>
+                        <Button
+                          onClick={() => handleIncrease(index)}
+                          color='secondary'
+                        >
+                          +
                         </Button>
                       </ButtonGroup>
                     </div>
