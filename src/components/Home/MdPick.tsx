@@ -2,6 +2,7 @@ import { useState } from 'react';
 import '../../styles/home/mdspick.scss';
 import { Typography } from '@mui/material';
 import '../../styles/home/cardCarousel.scss';
+import { NavLink } from 'react-router-dom';
 
 import newItem from '../../assets/images/new_item.jpeg';
 import newItem1 from '../../assets/images/new_item1.jpeg';
@@ -50,6 +51,7 @@ export default function Homepage() {
         </Typography> */}
       </div>
       <div className='slide_container'>
+        <NavLink to='/shop/4'>
         <ul
           className='slide_wrapper'
           onMouseEnter={onStop}
@@ -82,6 +84,7 @@ export default function Homepage() {
             ))}
           </div>
         </ul>
+        </NavLink>
       </div>
     </div>
   );
