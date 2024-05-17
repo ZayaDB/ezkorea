@@ -118,7 +118,6 @@ export default function SelectPurchase() {
   };
 
   const handleSubmit = () => {
-  
     const selectedProductId = spInfo?.prodId || 0;
     dispatch(setSelectedOption(selectedColors));
     dispatch(setSelectedQuantity(counts));
@@ -145,8 +144,9 @@ export default function SelectPurchase() {
 
   const handleOrder = () => {
     if (sessionStorage.getItem('isLoggedIn') === null) {
+      sessionStorage.setItem('prevUrl', `/shop/${spInfo?.prodId}`);
       window.location.href = '/login';
-      return ;
+      return;
     }
 
     const selectedProductId = spInfo?.prodId || 0;
