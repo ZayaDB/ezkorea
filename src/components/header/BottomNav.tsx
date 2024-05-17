@@ -1,14 +1,13 @@
-import * as React from 'react';
+import { useState } from 'react';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-// import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
-import WidgetsIcon from '@mui/icons-material/Widgets';
-import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
-import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+import HomeIcon from '@mui/icons-material/Home';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ArticleIcon from '@mui/icons-material/Article';
 
 export default function LabelBottomNavigation() {
-  const [value, setValue] = React.useState('recents');
+  const [value, setValue] = useState('recents');
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
@@ -24,7 +23,11 @@ export default function LabelBottomNavigation() {
         window.location.href = '/community';
         break;
       case 'mypage':
-        window.location.href = '/my';
+        if (sessionStorage.getItem('isLoggedIn') === null) {
+          window.location.href = '/login';
+        } else {
+          window.location.href = '/my';
+        }
         break;
       default:
         break;
@@ -37,6 +40,7 @@ export default function LabelBottomNavigation() {
         width: '100vw',
         position: 'fixed',
         bottom: '0',
+        padding: '32px 0',
         zIndex: '9000',
         fontSize: 'small',
         '& .Mui-selected': {
@@ -56,34 +60,28 @@ export default function LabelBottomNavigation() {
       onChange={handleChange}
     >
       <BottomNavigationAction
+        sx={{ fontSize: '10px', color: '#2c2c2c' }}
         label='Home'
         value='home'
-        icon={<WidgetsIcon style={{ fill: '#000000', fontSize: '26px' }} />}
+        icon={<HomeIcon sx={{ fill: '#212529', fontSize: '28px' }} />}
       />
       <BottomNavigationAction
+        sx={{ fontSize: '10px', color: '#2c2c2c' }}
         label='Shop'
         value='shop'
-        icon={
-          <ShoppingBagOutlinedIcon
-            style={{ fill: '#000000', fontSize: '26px' }}
-          />
-        }
+        icon={<ShoppingBagIcon style={{ fill: '#212529', fontSize: '25px' }} />}
       />
       <BottomNavigationAction
+        sx={{ fontSize: '10px', color: '#2c2c2c' }}
         label='Community'
         value='community'
-        icon={
-          <ArticleOutlinedIcon style={{ fill: '#000000', fontSize: '26px' }} />
-        }
+        icon={<ArticleIcon style={{ fill: '#212529', fontSize: '24px' }} />}
       />
       <BottomNavigationAction
+        sx={{ fontSize: '10px', color: '#2c2c2c' }}
         label='Mypage'
         value='mypage'
-        icon={
-          <FavoriteBorderOutlinedIcon
-            style={{ fill: '#000000', fontSize: '26px' }}
-          />
-        }
+        icon={<FavoriteIcon sx={{ fill: '#212529', fontSize: '24px' }} />}
       />
     </BottomNavigation>
   );

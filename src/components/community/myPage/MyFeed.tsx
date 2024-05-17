@@ -29,7 +29,8 @@ export default function MyFeed() {
           flexDirection: 'row',
           flexWrap: 'wrap',
           justifyContent: 'center',
-          paddingBottom: '20px',
+          paddingBottom: '80px',
+          marginTop: '16px',
           gap: '20px',
         }}
       >
@@ -47,8 +48,8 @@ export default function MyFeed() {
                 borderRadius: '8px',
                 marginBottom: '1px',
                 overflow: 'hidden',
-                width: '250px',
-                height: '250px',
+                width: '280px',
+                height: '280px',
                 justifyContent: 'center',
                 cursor: 'pointer',
                 transition: 'border-color 0.5s ease',

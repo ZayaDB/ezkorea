@@ -61,6 +61,7 @@ export default function CommunityModifyPage() {
   const [formData, setFormData] = useState<IFormInput | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [imageUrl, setImageUrl] = useState<string[]>([]);
+
   const { files, handleFileChange, handleRemoveFile, setFiles } =
     useFileHandler();
   const {
@@ -202,7 +203,9 @@ export default function CommunityModifyPage() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box display='flex' flexDirection='column'>
           <SubTitle text='사진' isRequired={true}></SubTitle>
-          <Box display='flex' flexDirection='row'>
+          <div
+            style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}
+          >
             <input
               type='file'
               multiple
@@ -217,7 +220,13 @@ export default function CommunityModifyPage() {
                 width='130px'
               />
             </Button>
-            <Box display='flex' flexDirection='row' flexWrap='wrap'>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+              }}
+            >
               {imageUrl.map((url, index) => {
                 return (
                   <div
@@ -300,8 +309,8 @@ export default function CommunityModifyPage() {
                   </div>
                 );
               })}
-            </Box>
-          </Box>
+            </div>
+          </div>
           <Typography
             sx={{
               fontSize: theme.typography.body2.fontSize,
@@ -551,6 +560,7 @@ const SelectButton = styled(Button)({
   height: '32px',
   borderRadius: '16px',
   marginRight: '8px',
+  marginBottom: '8px',
 });
 
 // Color 표시 원 스타일 정의

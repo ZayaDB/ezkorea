@@ -95,7 +95,7 @@ const StyledButton2 = styled(Button)(() => ({
 
 export default function SignIn() {
   const test = {
-    email: 'guest@example.com',
+    email: 'dururu@gmail.com',
     password: 'guest@123!!!',
   };
   const [userData, setUserData] = useState<User[]>([]);
@@ -151,19 +151,25 @@ export default function SignIn() {
   };
 
   const onClickConfirmButton = () => {
-    if (email === test.email && pw === test.password) {
-      navigate('/');
-      sessionStorage.setItem('isLoggedIn', 'true');
-      sessionStorage.setItem('UserData', JSON.stringify(userData));
+    const prevUrl = sessionStorage.getItem('prevUrl');
+    if (prevUrl) {
+      navigate(prevUrl);
+      sessionStorage.setItem('prevUrl', '');
     } else {
-      if (emailValid && pwValid) {
-        if (email === userData[0].email && pw === userData[0].password) {
-          sessionStorage.setItem('isLoggedIn', 'true');
-          sessionStorage.setItem('UserData', JSON.stringify(userData));
-          navigate('/');
-        } else {
-          setErrorMessage('등록되지 않은 회원입니다.');
-          setErrorModalOpen(true);
+      if (email === test.email && pw === test.password) {
+        navigate('/');
+        sessionStorage.setItem('isLoggedIn', 'true');
+        sessionStorage.setItem('UserData', JSON.stringify(userData));
+      } else {
+        if (emailValid && pwValid) {
+          if (email === userData[0].email && pw === userData[0].password) {
+            sessionStorage.setItem('isLoggedIn', 'true');
+            sessionStorage.setItem('UserData', JSON.stringify(userData));
+            navigate('/');
+          } else {
+            setErrorMessage('등록되지 않은 회원입니다.');
+            setErrorModalOpen(true);
+          }
         }
       }
     }
@@ -187,7 +193,7 @@ export default function SignIn() {
               color='inherit'
               sx={{ fontSize: '40px', fontWeight: '600', pb: '25px' }}
             >
-              Dururu
+              dururu
             </Typography>
           </NavLink>
           <Box component='form' noValidate sx={{ mt: 1 }}>

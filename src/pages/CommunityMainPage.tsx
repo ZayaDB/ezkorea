@@ -10,6 +10,7 @@ import { FeedData } from '../types/communityTypes';
 import { Link } from 'react-router-dom';
 import LikeButton from '../components/community/main/LikeButton';
 import ProtectedButton from '../components/common/ProtectedButton';
+import ContentArea from '../styles/ContentArea';
 
 const CommunityMainPage = () => {
   const [likedItems, setLikedItems] = useState<number[]>([]);
@@ -128,7 +129,7 @@ const CommunityMainPage = () => {
   }, []);
 
   return (
-    <div className='wrap'>
+    <ContentArea>
       <Grid container className='button-wrap'>
         <div className='filter-container'>
           <ColorFilter
@@ -144,13 +145,18 @@ const CommunityMainPage = () => {
               handleResetFilters();
             }}
             sx={{
-              width: '96px',
+              minWidth: '96px',
               padding: '0 12px',
               fontSize: '14px',
               height: '32px',
               borderRadius: '16px',
               fontWeight: 600,
+              marginTop: 1,
               ...outlineButtonStyles,
+              '@media (max-width: 768px)': {
+                marginTop: 2,
+                marginBottom: 2,
+              },
             }}
           >
             초기화
@@ -158,12 +164,13 @@ const CommunityMainPage = () => {
           <ProtectedButton
             redirectTo='/community/post'
             sx={{
-              width: '96px',
+              minWidth: '96px',
               padding: '0 12px',
               fontSize: '14px',
               height: '32px',
               borderRadius: '16px',
               fontWeight: 700,
+              marginTop: 1,
               ...containedButtonStyles,
               '&:hover': {
                 ...containedButtonStyles['&:hover'], // 기존의 호버 스타일을 가져오고
@@ -179,7 +186,7 @@ const CommunityMainPage = () => {
       </Grid>
       <Grid container>
         {isLoading ? (
-          [1, 2, 3, 4].map((_, index) => (
+          Array.from({ length: 16 }).map((_, index) => (
             <Grid item xs={6} md={3} key={index} className='feed'>
               <SkeletonFeed />
             </Grid>
@@ -274,7 +281,7 @@ const CommunityMainPage = () => {
           ))
         )}
       </Grid>
-    </div>
+    </ContentArea>
   );
 };
 

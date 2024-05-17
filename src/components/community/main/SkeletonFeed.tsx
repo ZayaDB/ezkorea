@@ -3,9 +3,14 @@ import { Skeleton } from '@mui/material';
 
 const SkeletonFeed = () => {
   return (
-    <div className='feed-skeleton'>
+    <div>
       <div className='feed-box'>
-        <Skeleton variant='rectangular' width={280} height={280} />
+        <Skeleton
+          variant='rectangular'
+          width={280}
+          height={280}
+          sx={{ borderRadius: '8px' }}
+        />
       </div>
     </div>
   );

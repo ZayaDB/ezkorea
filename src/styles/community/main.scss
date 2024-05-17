@@ -2,17 +2,48 @@
 .concept-filter button {
   margin-right: 8px;
 }
+@media (max-width: 619px) {
+  .filter-container {
+    flex-wrap: wrap; // 아이템이 넘치면 줄 바꿈
+    justify-content: center; // 중앙 정렬
+    margin: 0 auto;
+  }
 
+  .color-filter button,
+  .concept-filter button {
+    margin: 8px 4px; // 버튼 간격 조정
+  }
+}
 .filter-container {
   display: flex;
   max-width: 1200px;
   width: 100%;
   justify-content: space-between;
   align-items: flex-end;
+  flex-wrap: wrap; // 아이템이 넘치면 줄 바꿈
+
+  @media (max-width: 768px) {
+    & > * {
+      width: 100%; // 추가: 아이템 너비를 100%로 변경하여 한 줄에 하나씩 표시
+      margin-top: 16px;
+    }
+  }
+
+  @media (max-width: 619px) {
+    padding-left: 0; // 반응형에서는 패딩값을 0으로 설정
+  }
 }
 
 .concept-filter {
   padding-left: 20px;
+
+  @media (max-width: 1159px) {
+    padding-left: 0; // 반응형에서는 패딩값을 0으로 설정
+  }
+
+  @media (max-width: 619px) {
+    padding: 0;
+  }
 }
 
 .filter-title {
@@ -20,32 +51,22 @@
   font-size: 14px;
 }
 
-.wrap {
-  width: 100%;
+.button-wrap {
   max-width: 1200px;
-  display: flex;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  flex-direction: column;
+  padding: 0 10px 20px 10px;
 }
 
 .feed {
   display: flex;
-  justify-content: space-evenly;
-  width: 100%;
-  // max-width: 1200px;
+  justify-content: space-between;
+  min-width: 280px;
+  min-height: 280px;
   padding-bottom: 20px;
 }
 /* 마지막 아이템의 패딩 제거 */
 .feed > *:last-child {
   margin: 0 10px;
   padding-bottom: 0;
-}
-
-.button-wrap {
-  max-width: 1200px;
-  padding: 0 10px 20px 10px;
 }
 
 .feed-container {

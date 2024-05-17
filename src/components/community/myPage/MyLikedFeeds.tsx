@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Grid, Typography, Divider } from '@mui/material';
 import { Visibility } from '@mui/icons-material';
-import SkeletonFeed from '../components/community/main/SkeletonFeed';
-import { IMyLikedFeeds } from '../types/userTypes';
+import SkeletonFeed from '../main/SkeletonFeed';
+import { IMyLikedFeeds } from '../../../types/userTypes';
 import { Link } from 'react-router-dom';
-import './../styles/community/main.scss';
-import LikeButton from '../components/community/main/LikeButton';
-import ContentArea from '../styles/ContentArea';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import '../../../styles/community/main.scss';
+import LikeButton from '../main/LikeButton';
+import ContentArea from '../../../styles/ContentArea';
 
 interface UserData {
   myLikedFeeds: IMyLikedFeeds[];
 }
 
-const CommunityLikedPage = () => {
+const MyLikedFeeds = () => {
   const [filterData, setFilterData] = useState<IMyLikedFeeds[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError, setIsError] = useState<boolean>(false);
@@ -61,28 +60,16 @@ const CommunityLikedPage = () => {
     );
   };
 
-  const likedCount = filterData.length;
-
   return (
     <ContentArea
       sx={{
         display: 'flex',
         justifyContent: 'center',
         flexDirection: 'column',
-        marginTop: '20px',
+        paddingBottom: '80px',
       }}
     >
-      <Typography display={'flex'} alignItems={'center'} fontWeight={500}>
-        <FavoriteIcon
-          sx={{ color: '#ff0000', marginRight: '8px', fontSize: '24px' }}
-        />
-        좋아요한 피드
-        <Typography fontSize={'16px'} fontWeight={600} ml={1}>
-          {likedCount}
-        </Typography>
-        개
-      </Typography>
-      <Grid container mt={2}>
+      <Grid container mt={2} style={{ justifyContent: 'center' }}>
         {isLoading ? (
           filterData.map((_, index) => (
             <Grid item xs={6} md={3} key={index} className='feed'>
@@ -188,4 +175,4 @@ const CommunityLikedPage = () => {
   );
 };
 
-export default CommunityLikedPage;
+export default MyLikedFeeds;

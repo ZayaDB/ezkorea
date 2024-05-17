@@ -8,6 +8,8 @@ import '../../styles/mypage/mynav.scss';
 import { useMediaQuery } from '@mui/material';
 import MyFeed from '../community/myPage/MyFeed';
 import MyComments from '../community/myPage/MyComments';
+import MyLikedFeeds from '../community/myPage/MyLikedFeeds';
+import { useLocation } from 'react-router-dom';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -43,7 +45,18 @@ function a11yProps(index: number) {
 }
 
 export default function MyFeedNav() {
-  const [value, setValue] = React.useState(0);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const initialTab =
+    queryParams.get('tab') === 'feeds'
+      ? 0
+      : queryParams.get('tab') === 'comments'
+      ? 1
+      : queryParams.get('tab') === 'likes'
+      ? 2
+      : 0;
+
+  const [value, setValue] = React.useState<number>(initialTab);
   const isSmallScreen = useMediaQuery('(max-width:615px)');
   const isMobile = useMediaQuery('(max-width:480px)');
 
@@ -91,7 +104,7 @@ export default function MyFeedNav() {
           <MyComments />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
-          {/* 좋아요한 피드 목록 */}
+          <MyLikedFeeds />
         </CustomTabPanel>
       </div>
     </div>
