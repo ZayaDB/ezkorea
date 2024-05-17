@@ -170,14 +170,14 @@ function CommunityPostPage() {
       <form onSubmit={handleSubmit(onSubmit)} style={{ paddingBottom: '50px' }}>
         <Box display='flex' flexDirection='column'>
           <SubTitle text='사진' isRequired={true}></SubTitle>
-          <Box
-            sx={{
+          <div
+            style={{
               display: 'flex',
               flexDirection: 'row',
               flexWrap: 'wrap',
               justifyContent: 'flex-start',
-              gap: 2,
-              marginBottom: '16px',
+              gap: '16px',
+              margin: '8px',
             }}
           >
             <input
@@ -198,13 +198,13 @@ function CommunityPostPage() {
                 width='150px'
               />
             </Button>
-            <Box
-              sx={{
+            <div
+              style={{
                 display: 'flex',
                 flexDirection: 'row',
                 flexWrap: 'wrap',
                 justifyContent: 'flex-start',
-                gap: 2,
+                gap: '16px',
               }}
             >
               {files.map((file, index) => {
@@ -248,8 +248,8 @@ function CommunityPostPage() {
                   </Box>
                 );
               })}
-            </Box>
-          </Box>
+            </div>
+          </div>
 
           <Typography
             sx={{
