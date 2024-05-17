@@ -38,19 +38,17 @@ $border: 1px solid lightgray;
 
 #selectPurchase {
   @include column();
-
-  height: 600px;
+  height: 80vh;
   // min-width: 360px;
   position: fixed;
   background-color: white;
   // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   border-top: 5px solid black;
-
   top: 118px;
   @media (min-width: 1201px) {
     @include column();
     width: 330px;
-    height: 600px;
+    height: 80vh;
 
     // min-width: 360px;
     position: fixed;
@@ -111,10 +109,10 @@ $border: 1px solid lightgray;
 #heartZone {
   @include columnCenter();
 }
-.heartTotal {
-  font-size: $font-size-xxs;
-  margin: 0;
-}
+// .heartTotal {
+//   font-size: $font-size-xxs;
+//   margin: 0;
+// }
 .productName {
   font-size: $font-size-xl;
   font-weight: $font-weight-bold;
