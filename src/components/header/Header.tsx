@@ -214,7 +214,7 @@ export default function Header({ title, cartBadgeNum }: HeaderProps) {
 
           {/* 사람(로그인) icon dropdown */}
           {/* mobile(width:600px 이하)에서 사라짐 */}
-          {isMobile ? null : (
+          {/* {isMobile ? null : ( */}
             <IconButtonWithMenu
               icon={
                 <img
@@ -226,7 +226,7 @@ export default function Header({ title, cartBadgeNum }: HeaderProps) {
               // menuItems={['마이페이지', '찜한 상품', '저장한 피드', '로그아웃']}
               menuItems={menuItems}
             />
-          )}
+          {/* )} */}
 
           {/* 알림(종) icon */}
           {/* mobile(width:600px 이하)에서 사라짐 */}
