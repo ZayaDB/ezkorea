@@ -560,6 +560,7 @@ const SelectButton = styled(Button)({
   height: '32px',
   borderRadius: '16px',
   marginRight: '8px',
+  marginBottom: '8px',
 });
 
 // Color 표시 원 스타일 정의
