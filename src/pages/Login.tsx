@@ -95,7 +95,7 @@ const StyledButton2 = styled(Button)(() => ({
 
 export default function SignIn() {
   const test = {
-    email: 'guest@example.com',
+    email: 'dururu@gmail.com',
     password: 'guest@123!!!',
   };
   const [userData, setUserData] = useState<User[]>([]);
@@ -187,7 +187,7 @@ export default function SignIn() {
               color='inherit'
               sx={{ fontSize: '40px', fontWeight: '600', pb: '25px' }}
             >
-              Dururu
+              dururu
             </Typography>
           </NavLink>
           <Box component='form' noValidate sx={{ mt: 1 }}>
