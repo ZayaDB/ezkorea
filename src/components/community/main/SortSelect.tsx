@@ -17,7 +17,7 @@ const SortSelect = ({ sort, setSort }: SortSelectProps) => {
   const isMobile = useMediaQuery('(max-width:768px)');
 
   return (
-    <Box>
+    <Box sx={{ marginTop: 1 }}>
       <FormControl
         sx={{
           minWidth: isMobile ? 40 : 80,
