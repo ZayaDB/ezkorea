@@ -423,10 +423,9 @@ $font-weight-regular: 400;
           .color-circle:nth-child(#{$i}) {
             border-radius: 100%;
             width: 6px;
-            height: 7px;
+            height: 6px;
             margin: 1px;
             line-height: 60px;
-
           }
         }
       }
