@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import ContentArea from '../styles/ContentArea';
 import theme from '../styles/theme';
-import styled from '@emotion/styled';
+
 import {
   Box,
   Typography,
@@ -14,7 +14,9 @@ import {
   TextField,
   ListItem,
   List,
+  styled,
 } from '@mui/material';
+
 import { useFileHandler } from '../hooks/community/useFileHandler';
 import { useSelectionHandler } from '../hooks/community/useSelectionHandler';
 import { useProductHandler } from '../hooks/community/useProductHandler';
@@ -367,20 +369,22 @@ function CommunityPostPage() {
 
           <Box>
             <SubTitle text='컬러 선택' isRequired={true} />
-            {['black', 'white', 'wood', 'pink'].map(color => (
-              <SelectButton
-                key={color}
-                onClick={() => toggleColor(color)}
-                sx={{
-                  ...(selectedColors.includes(color)
-                    ? containedButtonStyles
-                    : outlineButtonStyles),
-                }}
-              >
-                <ColorCircle color={color} />
-                {color}
-              </SelectButton>
-            ))}
+            <ResponsiveContainer>
+              {['black', 'white', 'wood', 'pink'].map(color => (
+                <SelectButton
+                  key={color}
+                  onClick={() => toggleColor(color)}
+                  sx={{
+                    ...(selectedColors.includes(color)
+                      ? containedButtonStyles
+                      : outlineButtonStyles),
+                  }}
+                >
+                  <ColorCircle color={color} />
+                  {color}
+                </SelectButton>
+              ))}
+            </ResponsiveContainer>
             {errors.submissionColors && (
               <ErrorMsg color='error'>
                 {errors.submissionColors.message}
@@ -388,21 +392,23 @@ function CommunityPostPage() {
             )}
           </Box>
 
-          <SubTitle text='컨셉 선택' isRequired={true}></SubTitle>
           <Box>
-            {['antique', 'gaming', 'simple', 'unique'].map(concept => (
-              <SelectButton
-                key={concept}
-                onClick={() => toggleConcept(concept)}
-                sx={{
-                  ...(selectedConcepts.includes(concept)
-                    ? containedButtonStyles
-                    : outlineButtonStyles),
-                }}
-              >
-                {concept}
-              </SelectButton>
-            ))}
+            <SubTitle text='컨셉 선택' isRequired={true}></SubTitle>
+            <ResponsiveContainer>
+              {['antique', 'gaming', 'simple', 'unique'].map(concept => (
+                <SelectButton
+                  key={concept}
+                  onClick={() => toggleConcept(concept)}
+                  sx={{
+                    ...(selectedConcepts.includes(concept)
+                      ? containedButtonStyles
+                      : outlineButtonStyles),
+                  }}
+                >
+                  {concept}
+                </SelectButton>
+              ))}
+            </ResponsiveContainer>
             {errors.submissionConcepts && (
               <ErrorMsg color='error'>
                 {errors.submissionConcepts.message}
@@ -497,8 +503,18 @@ const ProductBox = styled(Box)({
   alignItems: 'center !important',
 });
 
+const ResponsiveContainer = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  maxWidth: '500px',
+  flexWrap: 'wrap',
+  justifyContent: 'flex-start',
+  [theme.breakpoints.down(492)]: {
+    maxWidth: '300px',
+  },
+}));
+
 const SelectButton = styled(Button)({
-  width: 96,
+  width: '96px',
   padding: '0 12px',
   fontSize: '14px',
   height: '32px',
@@ -520,11 +536,11 @@ const ColorCircle = styled(Box)<{ color: string }>(({ color }) => ({
 const containedButtonStyles = {
   color: '#000000',
   border: '1px solid #5FF531',
-  backgroundColor: '#5FF531', // 클릭 효과와 호버 효과를 일관성 있게 만들기 위해 변경
+  backgroundColor: '#5FF531',
 
   '&:hover': {
     color: '#000000',
-    backgroundColor: '#B7FF8B', // 클릭 효과와 호버 효과를 일관성 있게 만들기 위해 변경
+    backgroundColor: '#B7FF8B',
     border: '1px solid #5FF531',
   },
 };
