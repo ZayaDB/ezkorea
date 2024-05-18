@@ -38,7 +38,15 @@ const ResultCommunity: React.FC<ResultCommunityProps> = ({ keyword }) => {
 
   return (
     <Box>
-      <Grid container>
+      <Grid
+        container
+        sx={{
+          justifyContent: 'flex-start',
+          '@media (max-width: 500px)': {
+            justifyContent: 'center',
+          },
+        }}
+      >
         {resultFeed.length > 0 ? (
           resultFeed.map(item => (
             <Grid item xs={6} md={3} key={item.feedId} className='feed'>

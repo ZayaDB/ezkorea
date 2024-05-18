@@ -21,6 +21,7 @@ const ResultPage = () => {
         display: 'flex',
         flexDirection: 'column',
         margin: 'auto',
+        padding: '0 20px 60px',
       }}
     >
       <SubTitle text='PRODUCTS' isRequired={false} />
