@@ -170,7 +170,6 @@ function CouponContent() {
 
   const [showModal, setShowModal] = useState<boolean>(false);
 
-  // const handleOpen = () => setShowModal(true);
   const handleClose = () => setShowModal(false);
 
   return (

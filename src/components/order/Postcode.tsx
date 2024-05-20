@@ -48,8 +48,6 @@ function ModalContent({ handleClose }: { handleClose: () => void }) {
   const dispatch = useDispatch();
 
   const handlePostCode = (data: any) => {
-    console.log('------data', data);
-
     let fullAddress = data.address;
     let extraAddress = '';
 
@@ -63,13 +61,9 @@ function ModalContent({ handleClose }: { handleClose: () => void }) {
       }
       fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
     }
-    // console.log(data); /* 모든 데이터 */
-    console.log(fullAddress); /* 주소 */
-    console.log(data.zonecode); /* 우편번호 */
 
     if (data !== undefined) {
       dispatch(updateAddressInfo({ fullAddress, zonecode: data.zonecode }));
-      // console.log('dispatch');
     }
 
     handleClose();
