@@ -75,19 +75,6 @@ export default function CartPage() {
     navigate('/order');
   };
 
-  // 수량버튼
-  // const [counts, setCounts] = useState<number>(1);
-
-  // const handleIncrease = () => {
-  //   setCounts(counts + 1);
-  // };
-
-  // const handleDecrease = () => {
-  //   if (counts > 1) {
-  //     setCounts(counts - 1);
-  //   }
-  // };
-
   return (
     <Grid container direction='row' justifyContent='center' alignItems='center'>
       <div id='cartBox'>
@@ -158,10 +145,6 @@ export default function CartPage() {
               <div className='deliveryCharge'>3500원</div>
               <div className='deliveryContent'>5만원 이상 구매시 무료배송</div>
             </div>
-            {/* <div className='prodModify'>
-              <button>수정하기</button>
-              <button>X</button>
-            </div> */}
           </div>
         </div>
 

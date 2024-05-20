@@ -46,49 +46,40 @@ $border: 1px solid lightgray;
   justify-content: baseline;
   max-width: 1200px;
   padding-top: 8px;
-  // border: 1px solid black;
   margin: 0 auto;
   @media (min-width: 1201px) {
     display: flex;
     justify-content: baseline;
     max-width: 1200px;
     padding-top: 8px;
-    // border: 1px solid black;
     margin: 0 auto;
   }
 }
 .detailMain {
   width: 100%;
   padding: 0;
-  // border: 1px solid black;
   @media (min-width: 1201px) {
     width: 70%;
     max-width: 70%;
     min-width: 70%;
     padding: 0;
-    // border: 1px solid black;
   }
 }
 .detailSide {
   width: 100%;
-  // min-width: 100%;
-  // max-width: 100%;
   @include column();
   position: relative;
-  // border: 1px solid black;
   @media (min-width: 1201px) {
     width: 360px;
     min-width: 360px;
     max-width: 360px;
     @include column();
-    // border: 1px solid black;
     position: relative;
   }
 }
 
 @media screen and (max-width: 768px) {
   .detailPage {
-    // max-width: 480px;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -104,8 +95,6 @@ $border: 1px solid lightgray;
 @media (max-width: 360px) {
   .detailPage {
     width: 360px;
-    // min-width: 360px;
-    // max-width: 360px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -120,7 +109,6 @@ $border: 1px solid lightgray;
   }
 
   .detailSide {
-    /* 가로 너비를 100%로 설정하여 가득 차도록 함 */
     position: static;
     margin: 0 auto;
   }

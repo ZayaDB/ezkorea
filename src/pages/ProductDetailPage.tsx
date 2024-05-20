@@ -1,7 +1,6 @@
 import '../styles/productDetail/productDetail.scss';
 import SelectPurchase from '../components/productDetail/SelectPurchase';
 import ProductTabs from '../components/productDetail/ProductTabs';
-import SimilarProducts from '../components/productDetail/SimilarProducts';
 import ProductCarousel from '../components/productDetail/ProductCarousel';
 import { Container } from '@mui/material';
 import { useMediaQuery } from '@mui/material';
@@ -70,24 +69,6 @@ export default function ProductDetailPage() {
 
   return (
     <div className='App'>
-      {/* {validProduct ? (
-        <Container>
-          <div className='detailPage'>
-            <div className='detailMain'>
-              <ProductCarousel />
-              <div className='contents'>
-                <ProductTabs />
-                <SimilarProducts />
-              </div>
-            </div>
-            <div className='detailSide'>
-              <SelectPurchase />
-            </div>
-          </div>
-        </Container>
-      ) : (
-        <h1>존재하지 않는 상품입니다.</h1>
-      )} */}
       <ThemeProvider theme={theme}>
         {validProduct ? (
           isTablet ? (
@@ -100,7 +81,6 @@ export default function ProductDetailPage() {
                   </div>
                   <div className='contents'>
                     <ProductTabs />
-                    <SimilarProducts />
                   </div>
                 </div>
               </div>
@@ -112,7 +92,6 @@ export default function ProductDetailPage() {
                   <ProductCarousel />
                   <div className='contents'>
                     <ProductTabs />
-                    <SimilarProducts />
                   </div>
                 </div>
                 <div className='detailSide'>
