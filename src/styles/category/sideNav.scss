@@ -26,7 +26,7 @@ $font-weight-regular: 400;
     cursor: pointer;
   }
   .nav.active {
-    color: #5ff531; // 활성화된 카테고리의 텍스트 색상
+    color: #5ff531; 
   }
   .furniture-box,
   .electronics-box,
@@ -102,7 +102,6 @@ $font-weight-regular: 400;
     justify-content: center;
 
     .nav-box {
-      // text-align: center;
       width: 25%;
       .nav {
         display: flex;
@@ -148,7 +147,6 @@ $font-weight-regular: 400;
     justify-content: center;
 
     .nav-box {
-      // text-align: center;
       width: 25%;
       .nav {
         display: flex;
@@ -171,7 +169,6 @@ $font-weight-regular: 400;
     justify-content: center;
 
     .nav-box {
-      // text-align: center;
       width: 25%;
       .nav {
         display: flex;

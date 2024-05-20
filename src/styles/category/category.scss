@@ -94,7 +94,7 @@ body {
       .prod-name {
         font-size: $font-size-xs;
         text-decoration: none;
-        white-space: nowrap; // 넘칠 경우 줄 바꿈 방지$tablet: 768px;
+        white-space: nowrap; 
 
         * {
           scroll-behavior: smooth;
@@ -174,9 +174,9 @@ body {
               .prod-name {
                 font-size: $font-size-xs;
                 text-decoration: none;
-                white-space: nowrap; // 넘칠 경우 줄 바꿈 방지
+                white-space: nowrap;
                 overflow: hidden;
-                text-overflow: ellipsis; // 넘칠 경우 ...으로 표시
+                text-overflow: ellipsis; 
               }
             }
           }
@@ -188,7 +188,6 @@ body {
             flex-direction: column;
           }
           .sideNavigation {
-            // display: none;
             height: 30%;
             width: 100%;
           }
@@ -199,7 +198,7 @@ body {
         }
 
         overflow: hidden;
-        text-overflow: ellipsis; // 넘칠 경우 ...으로 표시
+        text-overflow: ellipsis; 
       }
     }
   }

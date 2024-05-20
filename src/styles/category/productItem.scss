@@ -48,7 +48,7 @@ $font-weight-regular: 400;
 
     .prod-img {
       width: 100%;
-      height: 259px; // 이미지의 높이를 고정값으로 설정
+      height: 259px;
       overflow: hidden;
       position: relative;
       img {
@@ -63,11 +63,8 @@ $font-weight-regular: 400;
         left: 0;
         color: #ffffff;
         background-color: rgba(46, 46, 46, 0.8);
-        // color: #000000;
-        // background-color: rgba(237, 237, 237, 0.8);
         padding: 12px 20px;
-        // border-radius: 4px;
-        z-index: 1; /* 이미지 위에 겹치도록 z-index 설정 */
+        z-index: 1; 
       }
     }
 
@@ -78,21 +75,21 @@ $font-weight-regular: 400;
 
       .prod-brand {
         font-size: $font-size-xs;
-        height: 20px; // 브랜드명 최대 높이 설정
+        height: 20px; 
         margin-bottom: 3px;
         margin-top: 2px;
-        white-space: nowrap; // 넘칠 경우 줄 바꿈 방지
+        white-space: nowrap; 
         overflow: hidden;
-        text-overflow: ellipsis; // 넘칠 경우 ...으로 표시
+        text-overflow: ellipsis; 
       }
 
       .prod-name {
         font-size: $font-size-s;
         margin-bottom: 10px;
-        line-height: 20px; // 상품명 최대 높이 설정
-        white-space: nowrap; // 넘칠 경우 줄 바꿈 방지
+        line-height: 20px;
+        white-space: nowrap; 
         overflow: hidden;
-        text-overflow: ellipsis; // 넘칠 경우 ...으로 표시
+        text-overflow: ellipsis; 
       }
 
       .prod-discount {
@@ -128,8 +125,7 @@ $font-weight-regular: 400;
       }
     }
   }
-  // Link요소 안먹힘, Heart때문에
-  //color, heart아이콘 부분
+
   .color-heart-box {
     display: flex;
     flex-direction: row;
@@ -185,7 +181,7 @@ $font-weight-regular: 400;
     }
   }
 }
-// 반응형 미디어 쿼리
+
 @media (max-width: 768px) {
   .prod-item {
     width: 48%;
@@ -211,7 +207,6 @@ $font-weight-regular: 400;
       width: 7px;
       height: 7px;
       margin: 1px;
-      // line-height: 50px;
     }
   }
 
@@ -222,7 +217,6 @@ $font-weight-regular: 400;
 
   .prod-brand {
     font-size: $font-size-xxs;
-    // height: 10%;
     margin-bottom: 3px;
     margin-top: 2px;
   }
@@ -265,7 +259,6 @@ $font-weight-regular: 400;
   }
 }
 
-// 반응형 미디어 쿼리
 @media (max-width: 460px) {
   .prod-item {
     width: 48%;
@@ -284,8 +277,6 @@ $font-weight-regular: 400;
             border-radius: 100%;
             width: 7px;
             height: 7px;
-            // margin: 1px;
-            // line-height: 50px;
           }
         }
 
@@ -297,7 +288,6 @@ $font-weight-regular: 400;
         .prod-brand {
           padding-bottom: 2px;
           font-size: 10px;
-          // height: 10%;
           margin-bottom: 1px;
           margin-top: 1px;
         }
@@ -349,12 +339,10 @@ $font-weight-regular: 400;
   }
 }
 
-// 반응형 미디어 쿼리
 @media (max-width: 420px) {
   .prod-item {
     width: 48%;
     height: calc(90% - 10px);
-    // margin: 3px;
     margin-bottom: 10px;
 
     .link-to-detail {
@@ -368,8 +356,6 @@ $font-weight-regular: 400;
             border-radius: 100%;
             width: 7px;
             height: 7px;
-            // margin: 1px;
-            // line-height: 50px;
           }
         }
 
@@ -381,7 +367,6 @@ $font-weight-regular: 400;
         .prod-brand {
           padding-bottom: 2px;
           font-size: 10px;
-          // height: 10%;
           margin-bottom: 1px;
           margin-top: 1px;
         }
