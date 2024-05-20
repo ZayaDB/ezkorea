@@ -197,7 +197,11 @@ export default function SelectPurchase() {
                   <Select
                     labelId='demo-simple-select-label'
                     id='demo-simple-select'
-                    value=''
+                    value={
+                      selectedColors.length > 0
+                        ? selectedColors[selectedColors.length - 1]
+                        : ''
+                    }
                     label='color*'
                     onChange={handleChange}
                   >
