@@ -172,6 +172,42 @@ npm start
 <br>
 
 
+### 📁 폴더 구조
+
+```sh
+📦dururu
+ ┣ 📂src
+ ┃ ┣ 📂assets
+ ┃ ┃ ┗ 📂img
+ ┃ ┣ 📂components
+ ┃ ┃ ┣ 📂category
+ ┃ ┃ ┣ 📂common
+ ┃ ┃ ┣ 📂community
+ ┃ ┃ ┣ 📂header
+ ┃ ┃ ┣ 📂Home
+ ┃ ┃ ┣ 📂mypage order
+ ┃ ┃ ┣ 📂order
+ ┃ ┃ ┣ 📂productDetail
+ ┃ ┃ ┗ 📂search
+ ┃ ┣ 📂hooks
+ ┃ ┣ 📂pages
+ ┃ ┣ 📂redux
+ ┃ ┣ 📂styles
+ ┃ ┣ 📂types
+ ┃ ┣ 📂utils
+ ┃ ┣ 📂App.css
+ ┃ ┣ 📂App.tsx
+ ┃ ┗ 📂index.tsx
+ ┣ 📂.eslintrc.json
+ ┣ 📜.prettierrc
+ ┣ 📜package-lock.json
+ ┣ 📜package.json
+ ┣ 📜README.md
+ ┗ 📜tsconfig.json
+```
+
+<br>
+
 ## 🏷️ License
 
 해당 사이트 제작에 사용한 모든 이미지의 저작권은 소유자에게 있으며, 학습용으로 사용했음을 알립니다.
