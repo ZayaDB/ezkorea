@@ -1,46 +1,103 @@
-# Getting Started with Create React App
+# *dururu*
+ ![desk_1](https://github.com/Jy0042/dururu/assets/104992286/2b4863b2-b01a-4746-a90f-767846ca46c4)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**dururu는 데스크테리어 상품을 판매하고 구매자간 소통이 가능한 커뮤니티 기능을 포함한 온라인 쇼핑 플랫폼입니다.**
+ <br>
+ <br>
+ <br>
 
-## Available Scripts
+## 배포 주소
+https://duruduru.netlify.app/
+<br>
+<br>
 
-In the project directory, you can run:
+## 기술 스택
+**• Frontend** 
+ <br>
 
-### `npm start`
+<div>
+  <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white"> 
+  <img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=git&logoColor=white">
+  <img src="https://img.shields.io/badge/Typescript-3178c6?style=for-the-badge&logo=git&logoColor=white">
+  <img src="https://img.shields.io/badge/MUI-007FFF?style=for-the-badge&logo=bootstrap&logoColor=white">
+  <img src="https://img.shields.io/badge/Swiper-6332F6?style=for-the-badge&logo=bootstrap&logoColor=white">
+  <img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white">
+</div>
+  <br>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+**• Design**
+ <br>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<div>
+  <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=bootstrap&logoColor=white">
+  <img src="https://img.shields.io/badge/adobephotoshop-31A8FF?style=for-the-badge&logo=bootstrap&logoColor=white">
+</div>
+  <br>
+  
+**• Development Tool**
+<br>
 
-### `npm test`
+<div>
+ <img src="https://img.shields.io/badge/Visualstudiocode-5C2D91?style=for-the-badge&logo=bootstrap&logoColor=white">
+</div>
+<br>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**• Version Control**
+<br>
 
-### `npm run build`
+<div>
+  <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+  <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
+</div>
+<br>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**• Scrum**
+<br>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<div>
+  <img src="https://img.shields.io/badge/slack-4A154B?style=for-the-badge&logo=bootstrap&logoColor=white">
+  <img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=github&logoColor=white">
+  <img src="https://img.shields.io/badge/kakaotalk-FFCD00?style=for-the-badge&logo=bootstrap&logoColor=white">
+  <br>
+</div>
+<br>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**( + Gather )**
+<div>
+  <img width="414" alt="스크린샷 2024-05-20 오후 12 20 29" src="https://github.com/Jy0042/dururu/assets/104992286/1dfdfc98-fbfd-4a9a-a9d1-8243b4b26317">
+</div>
+<br>
+<br>
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 설치 방법
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+프로젝트를 개발하기 위해 다음 단계를 따라주세요 ☺︎
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### 1. 이 프로젝트를 클론 합니다.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```sh
+git clone https://github.com/Jy0042/dururu.git
+```
 
-## Learn More
+### 2. 프로젝트 디렉토리로 이동합니다.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```sh
+cd dururu
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 3. VSCode를 실행합니다.
+
+```sh
+code .
+```
+
+### 4. npm 설치 후 실행합니다.
+
+```sh
+npm install
+```
+
+```sh
+npm install
+```
