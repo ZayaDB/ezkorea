@@ -17,7 +17,7 @@ const ModalSearch: React.FC<ModalSearchProps> = ({ closeModal }) => {
   const inputRef = useRef<HTMLInputElement>(null); // useRef 생성
 
   const handleSearch = (keyword: string) => {
-    closeModal(); // 모달 닫기
+    closeModal(); 
     navigate(`/result?search=${encodeURIComponent(keyword)}`);
   };
 

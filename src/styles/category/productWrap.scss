@@ -100,9 +100,7 @@ $font-weight-regular: 400;
     padding-bottom: 100px;
   }
 
-  // flex-wrap: wrap;
   .select-filtered-data {
-    // padding-left: 20px;
     padding-right: 20px;
     padding-top: 3px;
     padding-bottom: 3px;
@@ -134,15 +132,12 @@ $font-weight-regular: 400;
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
-            // margin-left: 30px;
             font-size: $font-size-xs;
 
             cursor: pointer;
 
             .el-cate2 {
               border-radius: 30px;
-              // background-color: rgb(246, 246, 246);
-              // overflow: hidden;
 
               &:hover {
                 background-color: rgb(215, 215, 215);
@@ -162,8 +157,6 @@ $font-weight-regular: 400;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-            // width: 15%;
-            // background-color: antiquewhite;
             .filterBtn {
               margin-right: 5px;
             }
@@ -197,8 +190,6 @@ $font-weight-regular: 400;
           .category-2 {
             .el-cate2 {
               border-radius: 30px;
-              // background-color: rgb(246, 246, 246);
-              // overflow: hidden;
 
               &:hover {
                 background-color: rgb(215, 215, 215);
@@ -232,9 +223,6 @@ $font-weight-regular: 400;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    // .betstProds {
-    //   // width: calc(33.3% - 10px);
-    // }
   }
 }
 
