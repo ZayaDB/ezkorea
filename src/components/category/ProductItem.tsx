@@ -108,7 +108,7 @@ export default function ProductItem({ prod, rank, disc }: ProductItemProps) {
               {prod.discount !== 0 ? (
                 <div className='prod-discount'>{prod.discount}%</div>
               ) : (
-                <div style={{ color: 'white' }}>;;;</div>
+                <div style={{ color: 'white' }}></div>
               )}
             </div>
           ) : (
@@ -116,7 +116,7 @@ export default function ProductItem({ prod, rank, disc }: ProductItemProps) {
               {prod.discount !== 0 ? (
                 <div className='prod-discount-sale'>{prod.discount}%</div>
               ) : (
-                <div style={{ color: 'white' }}>;;;</div>
+                <div style={{ color: 'white' }}></div>
               )}
             </div>
           )}

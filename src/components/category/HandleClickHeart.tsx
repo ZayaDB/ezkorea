@@ -7,7 +7,6 @@ import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
 
-// Define styled component for SnackbarContent
 const SnackbarContent = styled('div')(({ theme }) => ({
   display: 'flex',
   gap: '8px',

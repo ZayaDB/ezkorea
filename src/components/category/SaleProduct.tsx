@@ -6,7 +6,7 @@ import { Products } from '../../types/productTypes';
 import '../../styles/category/likes.scss';
 
 export default function SaleProduct() {
-  const [prodData, setProdData] = useState<Products[]>([]); // Specify the type as Products[]
+  const [prodData, setProdData] = useState<Products[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
