@@ -74,39 +74,40 @@ https://duruduru.netlify.app/
 | [@jiaero](https://github.com/jiaero) | [@jy0042](https://github.com/Jy0042) | [@leeraquel](https://github.com/leeraquel) | [@eun1230](https://github.com/eun1230) | [@JIN-415](https://github.com/JIN-415) | [@meenie49](https://github.com/meenie49) |
 <br>
 
-
-## ⚙️ Before Started
-
-프로젝트를 개발하기 위해 다음 단계를 따라주세요 ☺︎
-
-### 1. 이 프로젝트를 클론 합니다.
+### 📁 폴더 구조
 
 ```sh
-git clone https://github.com/Jy0042/dururu.git
+📦dururu
+ ┣ 📂src
+ ┃ ┣ 📂assets
+ ┃ ┃ ┗ 📂img
+ ┃ ┣ 📂components
+ ┃ ┃ ┣ 📂category
+ ┃ ┃ ┣ 📂common
+ ┃ ┃ ┣ 📂community
+ ┃ ┃ ┣ 📂header
+ ┃ ┃ ┣ 📂Home
+ ┃ ┃ ┣ 📂mypage order
+ ┃ ┃ ┣ 📂order
+ ┃ ┃ ┣ 📂productDetail
+ ┃ ┃ ┗ 📂search
+ ┃ ┣ 📂hooks
+ ┃ ┣ 📂pages
+ ┃ ┣ 📂redux
+ ┃ ┣ 📂styles
+ ┃ ┣ 📂types
+ ┃ ┣ 📂utils
+ ┃ ┣ 📂App.css
+ ┃ ┣ 📂App.tsx
+ ┃ ┗ 📂index.tsx
+ ┣ 📂.eslintrc.json
+ ┣ 📜.prettierrc
+ ┣ 📜package-lock.json
+ ┣ 📜package.json
+ ┣ 📜README.md
+ ┗ 📜tsconfig.json
 ```
 
-### 2. 프로젝트 디렉토리로 이동합니다.
-
-```sh
-cd dururu
-```
-
-### 3. VSCode를 실행합니다.
-
-```sh
-code .
-```
-
-### 4. npm 설치 후 실행합니다.
-
-```sh
-npm install
-```
-
-```sh
-npm start
-```
-<br>
 
 ## 🕹️ Page Features
 
@@ -172,39 +173,38 @@ npm start
 <br>
 
 
-### 📁 폴더 구조
+## ⚙️ Before Started
+
+프로젝트를 개발하기 위해 다음 단계를 따라주세요 ☺︎
+
+### 1. 이 프로젝트를 클론 합니다.
 
 ```sh
-📦dururu
- ┣ 📂src
- ┃ ┣ 📂assets
- ┃ ┃ ┗ 📂img
- ┃ ┣ 📂components
- ┃ ┃ ┣ 📂category
- ┃ ┃ ┣ 📂common
- ┃ ┃ ┣ 📂community
- ┃ ┃ ┣ 📂header
- ┃ ┃ ┣ 📂Home
- ┃ ┃ ┣ 📂mypage order
- ┃ ┃ ┣ 📂order
- ┃ ┃ ┣ 📂productDetail
- ┃ ┃ ┗ 📂search
- ┃ ┣ 📂hooks
- ┃ ┣ 📂pages
- ┃ ┣ 📂redux
- ┃ ┣ 📂styles
- ┃ ┣ 📂types
- ┃ ┣ 📂utils
- ┃ ┣ 📂App.css
- ┃ ┣ 📂App.tsx
- ┃ ┗ 📂index.tsx
- ┣ 📂.eslintrc.json
- ┣ 📜.prettierrc
- ┣ 📜package-lock.json
- ┣ 📜package.json
- ┣ 📜README.md
- ┗ 📜tsconfig.json
+git clone https://github.com/Jy0042/dururu.git
 ```
+
+### 2. 프로젝트 디렉토리로 이동합니다.
+
+```sh
+cd dururu
+```
+
+### 3. VSCode를 실행합니다.
+
+```sh
+code .
+```
+
+### 4. npm 설치 후 실행합니다.
+
+```sh
+npm install
+```
+
+```sh
+npm start
+```
+
 
 <br>
 
