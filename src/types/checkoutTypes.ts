@@ -22,14 +22,15 @@ export interface PhoneNum {
 
 /* 주문 정보 */
 export interface OrderInfo {
-  orderDate: string;
-  orderNum: string;
-  productImg: string;
-  brand: string;
-  productName: string;
-  option: string;
-  productPrice: number;
-  quantity: number;
+  orderDate?: string;
+  orderNum?: string;
+  productImg?: string;
+  brand?: string;
+  productName?: string;
+  option?: string;
+  productPrice?: number;
+  quantity?: number;
+  orderStatus: boolean;
 }
 
 export interface Discount {
