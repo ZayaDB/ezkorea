@@ -26,6 +26,7 @@ $font-weight-regular: 400;
 
 .prod-item {
   width: 32%;
+
   height: calc(100% - 10px);
   margin: 3px;
   margin-bottom: 20px;
@@ -63,7 +64,7 @@ $font-weight-regular: 400;
         color: #ffffff;
         background-color: rgba(46, 46, 46, 0.8);
         padding: 12px 20px;
-        z-index: 1; 
+        z-index: 1;
       }
     }
 
@@ -74,21 +75,21 @@ $font-weight-regular: 400;
 
       .prod-brand {
         font-size: $font-size-xs;
-        height: 20px; 
+        height: 20px;
         margin-bottom: 3px;
         margin-top: 2px;
-        white-space: nowrap; 
+        white-space: nowrap;
         overflow: hidden;
-        text-overflow: ellipsis; 
+        text-overflow: ellipsis;
       }
 
       .prod-name {
         font-size: $font-size-s;
         margin-bottom: 10px;
         line-height: 20px;
-        white-space: nowrap; 
+        white-space: nowrap;
         overflow: hidden;
-        text-overflow: ellipsis; 
+        text-overflow: ellipsis;
       }
 
       .prod-discount {
