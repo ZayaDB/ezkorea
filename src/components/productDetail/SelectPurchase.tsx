@@ -5,7 +5,6 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import ShareIcon from '@mui/icons-material/Share';
-// import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
@@ -23,47 +22,15 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { Product } from '../../types/productDetail';
 import { addCommasToNumber } from '../../hooks/addCommasToNumber';
-// import { useSelector } from 'react-redux';
-// import { RootState } from '../../redux/config';
-// import { setIsLiked } from '../../redux/slices/categorySlice';
-// import HandleClickHeart from '../category/HandleClickHeart';
 import { FavoriteBorder } from '@mui/icons-material';
 
-// const useStyles = makeStyle(theme => ({
-//   tablet: {
-//     width: '768px',
-//   },
-//   mobile: {
-//     width: '375px',
-//   },
-// }));
-// const matches = useMediaQuery('(max-width:768px)');
-
 export default function SelectPurchase() {
-  // // 드롭다운
-  // const [color, setColor] = useState('');
-  // const handleChange = (event: SelectChangeEvent) => {
-  //   setColor(event.target.value as string);
-  // };
-  // // 드롭다운 선택하면 요소 보이게
-  // const [options, setOptions] = useState<JSX.Element[]>([]);
-  // const [selectedColors, setSelectedColors] = useState<string[]>([]);
-
-  // const handleAddOption = (color: string) => {
-  //   // 이미 선택된 색상인지 확인
-  //   if (!selectedColors.includes(color)) {
-  //     setSelectedColors([...selectedColors, color]);
-  //     setOptions(prevOptions => [...prevOptions, generateOption(color)]);
-  //   }
-  // };
-
   const [spInfo, setSpInfo] = useState<Product>();
   const navigate = useNavigate();
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
   const [counts, setCounts] = useState<number[]>([]);
   const dispatch = useDispatch();
-  // 로그인 상태를 관리하는 상태 추가
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   // fetch
   useEffect(() => {
     const fetchData = async () => {
@@ -72,10 +39,6 @@ export default function SelectPurchase() {
         const data = await response.json();
         const purchase = data[0];
         setSpInfo(purchase);
-
-        // 컴포넌트가 마운트될 때 로그인 상태를 확인하고 상태를 업데이트하는 useEffect 사용
-        // const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
-        // setIsLoggedIn(isLoggedIn);
       } catch (error) {
         console.error('Error fetching review data:', error);
       }
@@ -180,18 +143,6 @@ export default function SelectPurchase() {
   ): number => {
     return discountedPrice * count;
   };
-  // useSelector를 통해 isLiked 상태가져옴
-
-  // const isLiked = useSelector(
-  //   (state: RootState) => state.category.isLiked[spInfo.prodId] || false
-  // );
-
-  // // 좋아요 토글 핸들러
-  // const handleLikeToggle = () => {
-  //   const updatedIsLiked = !isLiked;
-  //   dispatch(setIsLiked({ productId: spInfo.prodId, isLiked: updatedIsLiked }));
-  // };
-
   return (
     <ThemeProvider theme={theme}>
       <Grid container justifyContent='center' alignItems='center'>
@@ -205,14 +156,8 @@ export default function SelectPurchase() {
                 </div>
                 <div id='heartZone'>
                   <div className='heartIcon'>
-                    {/* <HandleClickHeart
-                      productName={spInfo?.product_name}
-                      isLiked={isLiked}
-                      onLikeToggle={handleLikeToggle}
-                    /> */}
                     <FavoriteBorder />
                   </div>
-                  {/* <div className='heartTotal'>28,742</div> */}
                 </div>
               </div>
             </div>
@@ -252,7 +197,11 @@ export default function SelectPurchase() {
                   <Select
                     labelId='demo-simple-select-label'
                     id='demo-simple-select'
-                    value=''
+                    value={
+                      selectedColors.length > 0
+                        ? selectedColors[selectedColors.length - 1]
+                        : ''
+                    }
                     label='color*'
                     onChange={handleChange}
                   >

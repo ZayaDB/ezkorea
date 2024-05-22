@@ -7,13 +7,6 @@ import { useEffect, useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../../styles/theme';
 import Grid from '@mui/material/Grid';
-// import Button from '@mui/material/Button';
-// import Typography from '@mui/material/Typography';
-// import Modal from '@mui/material/Modal';
-// import Snackbar from '@mui/material/Snackbar';
-// import Alert from '@mui/material/Alert';
-// import TextField from '@mui/material/TextField';
-// import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 export interface Review {
   reUserId: number;
@@ -25,41 +18,7 @@ export interface Review {
   contentText: string;
 }
 
-// Modal
-// const style = {
-//   position: 'absolute',
-//   top: '50%',
-//   left: '50%',
-//   transform: 'translate(-50%, -50%)',
-//   width: 500,
-//   bgcolor: 'background.paper',
-//   border: '2px solid #000',
-//   boxShadow: 24,
-//   p: 4,
-// };
-
 export default function Review() {
-  // Modal
-  // const [open, setOpen] = useState(false);
-  // const handleOpen = () => setOpen(true);
-  // const handleClose = () => setOpen(false);
-
-  // Snackbar
-  // const [openSnack, setOpenSnack] = useState(false);
-  // const snackClick = () => {
-  //   setOpenSnack(true);
-  // };
-  // const snackClose = (
-  //   event?: React.SyntheticEvent | Event,
-  //   reason?: string
-  // ) => {
-  //   if (reason === 'clickaway') {
-  //     return;
-  //   }
-
-  //   setOpenSnack(false);
-  // };
-
   // 리뷰 개수
   const [rvTotal, setRvTotal] = useState();
   // rating
@@ -151,74 +110,6 @@ export default function Review() {
             </div>
           </div>
         </div>
-        {/* <div id='writeReview'>
-            <Button onClick={handleOpen}>
-              <h6>리뷰쓰기</h6>
-            </Button>
-          </div> */}
-        {/* <div>
-          <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby='modal-modal-title'
-            aria-describedby='modal-modal-description'
-          >
-            <Box sx={style}>
-              <Typography id='modal-modal-title' variant='h6' component='h2'>
-                리뷰 쓰기
-              </Typography>
-              <div>포토리뷰 250P, 일반리뷰 100P</div>
-              <Typography id='modal-modal-description' sx={{ mt: 2 }}>
-                <div id='reviewProduct'>
-                  <div className='productPhoto'></div>
-                  <div id='productBN'>
-                    <div className='productBrand'></div>
-                    <div className='productName'></div>
-                  </div>
-                  <div className='reviewTitle'>별점 평가</div>
-                  <div id='ratingZone'>
-                    <div>만족도</div>
-                    <div className='ratingInput'>
-                      <Rating name='size-large' defaultValue={2} size='large' />
-                    </div>
-                  </div>
-                  <div id='file'>
-                    <div className='reviewTitle'>사진 첨부(선택)</div>
-                    <div>사진을 첨부해주세요.(최대 1장)</div>
-                  </div>
-                  <div id='writingReview'>
-                    <div className='reviewTitle'>리뷰 작성</div>
-                    <TextField
-                      sx={{ width: 400 }}
-                      id='outlined-multiline-static'
-                      multiline
-                      rows={4}
-                      defaultValue='Default Value'
-                    />
-                  </div>
-                </div>
-              </Typography>
-              <Button onClick={snackClick}>리뷰 등록하기</Button>
-            </Box>
-          </Modal>
-        </div>
-        <div>
-          <Snackbar
-            open={openSnack}
-            autoHideDuration={6000}
-            onClose={snackClose}
-          >
-            <Alert
-              onClose={snackClose}
-              severity='success'
-              variant='filled'
-              sx={{ width: '100%' }}
-            >
-              고객님의 소중한 리뷰가 등록되었습니다.
-            </Alert>
-          </Snackbar>
-        </div> */}
-
         <div id='reviewSorting'>
           <button className='highestRating' onClick={sortByHighestRating}>
             별점 높은순

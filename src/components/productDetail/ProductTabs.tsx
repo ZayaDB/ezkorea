@@ -6,15 +6,6 @@ import ProductsStyling from './ProductStyling';
 import { useLocation } from 'react-router-dom';
 import ProductInfo, { DeliveryInfo } from './ProductInfo';
 
-// import React, { useRef, useState } from 'react';
-
-// const styling = useRef();
-// const info = useRef();
-// const review = useRef();
-// const sellerInfo = useRef();
-// const deliveryRefund = useRef();
-// const inquire = useRef();
-// const similar = useRef();
 interface ScrollToTopProps {
   children: React.ReactNode;
 }

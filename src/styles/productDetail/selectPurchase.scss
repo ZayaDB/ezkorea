@@ -39,10 +39,8 @@ $border: 1px solid lightgray;
 #selectPurchase {
   @include column();
   height: 80vh;
-  // min-width: 360px;
   position: fixed;
   background-color: white;
-  // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   border-top: 5px solid black;
   top: 118px;
   max-height: 600px;
@@ -50,8 +48,6 @@ $border: 1px solid lightgray;
     @include column();
     width: 330px;
     height: 80vh;
-
-    // min-width: 360px;
     position: fixed;
     background-color: white;
     border-top: 5px solid black;
@@ -74,7 +70,6 @@ $border: 1px solid lightgray;
   #selectPurchase {
     @include column();
     background-color: white;
-    // border-top: 3px solid black;
     position: static; /* 수정 */
     width: 100%;
     margin: 0 auto;
@@ -112,10 +107,7 @@ $border: 1px solid lightgray;
 #heartZone {
   @include columnCenter();
 }
-// .heartTotal {
-//   font-size: $font-size-xxs;
-//   margin: 0;
-// }
+
 .productName {
   font-size: $font-size-xl;
   font-weight: $font-weight-bold;
@@ -155,7 +147,6 @@ $border: 1px solid lightgray;
   height: 20vh;
   @include column();
   justify-content: space-evenly;
-  // border-top: $border;
   margin: auto 0;
 }
 .subtitle {
@@ -192,7 +183,6 @@ $border: 1px solid lightgray;
 
 #selectProduct {
   height: 20vh;
-  // border-top: $border;
   padding-top: 12px;
   @include column();
 }
@@ -233,13 +223,9 @@ $border: 1px solid lightgray;
   @include row();
   justify-content: space-between;
   padding: 0 8px;
-  // border-top: $border;
   font-size: $font-size-l;
   font-weight: $font-weight-bold;
 }
-// #selectedPurchase {
-//   display: none;
-// }
 
 // 버튼
 #buttons {

@@ -3,18 +3,17 @@ import { Products } from '../../types/productTypes';
 import { getData } from '../../utils/getData';
 import ProductItem from '../category/ProductItem';
 import { Button } from '@mui/material';
-// import { useNavigate } from 'react-router-dom';
 
 interface ResultProductsProps {
   keyword: string;
 }
 
 const ResultProducts: React.FC<ResultProductsProps> = ({ keyword }) => {
+
   const [filteredProducts, setFilteredProducts] = useState<Products[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [visibleProductsCount, setVisibleProductsCount] = useState<number>(6);
   const prevKeyword = useRef<string | null>(null);
-  // const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
