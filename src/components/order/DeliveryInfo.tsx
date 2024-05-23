@@ -265,7 +265,7 @@ function AddressBook() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [addressBook, setAddressBook] = useState<boolean>(false);
 
   const handleAddressBook = () => {
