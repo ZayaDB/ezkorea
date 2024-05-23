@@ -24,7 +24,6 @@ const PriceFilter = () => {
     // 선택된 가격 범위를 함께 업데이트하여 Redux store에 저장
     dispatch(setFilters({ ...selectedFilters, prices: newPrice }));
 
-    console.log('설정된 가격 범위:', newPrice);
   };
 
   const marks = [
