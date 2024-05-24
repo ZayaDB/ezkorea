@@ -38,6 +38,7 @@ export default function OrderDetails() {
 
 function Products() {
   const [orderNum, setOrderNum] = useState<string>('');
+  //eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [orderDate, setOrderDate] = useState<string>('');
   const [paymentStatus, setPaymentStatus] = useState<boolean>(false);
 
