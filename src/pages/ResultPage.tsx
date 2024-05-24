@@ -16,7 +16,6 @@ const ResultPage = () => {
         padding: '0 5px 60px',
       }}
     >
-
       <SubTitle text={`PRODUCTS / ${search}`} isRequired={false} />
       <ResultProducts keyword={search} />
       <SubTitle text={`FEEDS / ${search}`} isRequired={false} />
