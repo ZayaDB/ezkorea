@@ -11,19 +11,8 @@ export interface ProductState {
 const initialState: ProductState = {
   selectedOption: [],
   selectedQuantity: [],
-  selectedProductId: 0 /* 수정 필요 */,
-  products: [
-    {
-      prodId: 3,
-      product_image:
-        'https://img.29cm.co.kr/item/202307/11ee2c37d76ecbf5bdfadf5067f409c4.jpg?width=700',
-      brand_name: '일광전구',
-      product_name: 'SNOWMAN15 Portable Stand 3Colors',
-      regular_price: 110000,
-      discount_rate: 12,
-      discounted_price: 96800,
-    },
-  ],
+  selectedProductId: 0,
+  products: [],
 };
 
 const productSlice = createSlice({
@@ -42,6 +31,9 @@ const productSlice = createSlice({
     setSelectedProduct: (state, action: PayloadAction<Product[]>) => {
       state.products = action.payload;
     },
+    initializeState: (state, action: PayloadAction<ProductState>) => {
+      state = action.payload;
+    },
   },
 });
 
@@ -50,6 +42,7 @@ export const {
   setSelectedQuantity,
   setSelectedProductId,
   setSelectedProduct,
+  initializeState,
 } = productSlice.actions;
 
 export default productSlice.reducer;

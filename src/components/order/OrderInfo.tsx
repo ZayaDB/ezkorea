@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/config';
 import { addCommasToNumber } from '../../hooks/addCommasToNumber';
 import { useNavigate } from 'react-router-dom';
+import getOrderNumber from '../../hooks/shop/order/getOrderNumber';
 
 const style = {
   position: 'absolute' as const,
@@ -78,6 +79,31 @@ export default function OrderInfo() {
     if (productPrice > 50000) setShipping(5000);
     else setShipping(0);
   }, [productPrice]);
+
+  const [orderNum, setOrderNum] = useState<string>('');
+  const [paymentStatus, setPaymentStatus] = useState<boolean>(false);
+  const [orderDate, setOderDate] = useState<string>('');
+
+  const handleCheckoutButtonClick = () => {
+    const [newOrderNum, newOrderDate] = getOrderNumber();
+
+    if (isAllChecked == true) {
+      setPaymentStatus(true);
+      setOderDate(newOrderDate);
+      setOrderNum(newOrderNum);
+    }
+  };
+
+  useEffect(() => {
+    // orderConfirm 객체 생성
+    const orderConfirm = {
+      orderNumber: orderNum,
+      paymentStatus: paymentStatus,
+    };
+
+    // 객체를 문자열로 변환하여 localStorage에 저장
+    localStorage.setItem('orderConfirm', JSON.stringify(orderConfirm));
+  }, [orderNum, paymentStatus, orderDate]);
 
   return (
     <div className='order-info'>
@@ -145,6 +171,7 @@ export default function OrderInfo() {
           type='button'
           onClick={() => {
             setOpenModal(true);
+            handleCheckoutButtonClick();
             return;
           }}
         >

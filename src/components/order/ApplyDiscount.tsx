@@ -181,34 +181,39 @@ function CouponContent() {
         label={checked ? '최대 할인이 적용됐어요' : '최대 할인을 적용하세요'}
       />
 
-      <div>
-        <Card sx={{ maxWidth: '100%' }}>
-          <Box sx={{ display: 'flex' }}>
-            <CardMedia
-              component='img'
-              alt='상품 이미지'
-              height='200'
-              image={productImg}
-            />
-            <CardContent sx={{ width: '150%' }}>
-              <div>{brandName}</div>
-              <div>{productName}</div>
-              <div>옵션 : {selectedOption}</div>
-              <div>
-                {addCommasToNumber(productPrice)} 원/수량 {selectedQuantity}개
-              </div>
-              <div className='space-between'>
-                <span>상품 쿠폰</span>
-                <span className=''>
-                  {checked
-                    ? `-${addCommasToNumber(productPrice - discountedPrice)}원`
-                    : '선택 안함'}
-                </span>
-              </div>
-            </CardContent>
-          </Box>
-        </Card>
-      </div>
+      {selectedOption.map((option, index) => (
+        <div key={index} className='product-content'>
+          <Card sx={{ maxWidth: '100%' }}>
+            <Box sx={{ display: 'flex' }}>
+              <CardMedia
+                component='img'
+                alt='상품 이미지'
+                height='200'
+                image={productImg}
+              />
+              <CardContent sx={{ width: '150%' }}>
+                <div>{brandName}</div>
+                <div>{productName}</div>
+                <div>옵션 : {option}</div>
+                <div>
+                  {addCommasToNumber(productPrice)} 원/수량{' '}
+                  {selectedQuantity[index]}개
+                </div>
+                <div className='space-between product-coupon'>
+                  <span>상품 쿠폰</span>
+                  <span className=''>
+                    {checked
+                      ? `-${addCommasToNumber(
+                          productPrice - discountedPrice
+                        )}원`
+                      : '선택 안함'}
+                  </span>
+                </div>
+              </CardContent>
+            </Box>
+          </Card>
+        </div>
+      ))}
 
       {/* <Button
         className='mileage-button'
@@ -237,27 +242,29 @@ function CouponContent() {
                 }
               />
               {/* 상품 */}
-              <Card sx={{ maxWidth: '100%' }}>
-                <Box sx={{ display: 'flex' }}>
-                  <CardContent sx={{ width: '150%' }}>
-                    <div>{brandName}</div>
-                    <div>{productName}</div>
-                    <div>옵션 : {selectedOption}</div>
-                    <div>
-                      {addCommasToNumber(productPrice)} 원/수량{' '}
-                      {selectedQuantity}개
-                    </div>
-                    <div>
-                      <span>상품 쿠폰</span>
-                      <span>
-                        {checked
-                          ? `-${productPrice - discountedPrice}원`
-                          : '사용 가능한 쿠폰 없음'}
-                      </span>
-                    </div>
-                  </CardContent>
-                </Box>
-              </Card>
+              {selectedOption.map((option, index) => (
+                <Card sx={{ maxWidth: '100%' }} key={index}>
+                  <Box sx={{ display: 'flex' }}>
+                    <CardContent sx={{ width: '150%' }}>
+                      <div>{brandName}</div>
+                      <div>{productName}</div>
+                      <div>옵션 : {option}</div>
+                      <div>
+                        {addCommasToNumber(productPrice)} 원/수량{' '}
+                        {selectedQuantity}개
+                      </div>
+                      <div>
+                        <span>상품 쿠폰</span>
+                        <span>
+                          {checked
+                            ? `-${productPrice - discountedPrice}원`
+                            : '사용 가능한 쿠폰 없음'}
+                        </span>
+                      </div>
+                    </CardContent>
+                  </Box>
+                </Card>
+              ))}
             </Box>
           </Modal>
         </>
