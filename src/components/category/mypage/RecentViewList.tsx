@@ -1,6 +1,6 @@
-import { Products } from '../../types/productTypes';
-import ProductItem from '../category/ProductItem';
-import '../../styles/category/likes.scss';
+import { Products } from '../../../types/productTypes';
+import ProductItem from '../product/ProductItem';
+import '../../../styles/category/likes.scss';
 
 const RecentViewList = () => {
   const clickedProducts: Products[] = JSON.parse(

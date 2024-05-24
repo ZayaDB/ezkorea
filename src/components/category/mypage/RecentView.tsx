@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/config';
-import { Products } from '../../types/productTypes';
-import ProductItem from '../category/ProductItem';
-import '../../styles/category/likes.scss';
+import { RootState } from '../../../redux/config';
+import { Products } from '../../../types/productTypes';
+import ProductItem from '../product/ProductItem';
+import '../../../styles/category/likes.scss';
 
 export default function RecentView() {
   const products = useSelector((state: RootState) => state.category.products);

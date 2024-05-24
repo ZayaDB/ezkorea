@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
 import { Box } from '@mui/system';
-import { CategoryData } from '../../types/productTypes';
-import '../../styles/category/sideNav.scss';
+import { CategoryData } from '../../../types/productTypes';
+import '../../../styles/category/sideNav.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux/config';
+import { RootState } from '../../../redux/config';
 import {
   setSelectedCategory,
   setSelectedSubCategory,
-} from '../../redux/slices/categorySlice';
+} from '../../../redux/slices/categorySlice';
 import { useMediaQuery } from '@mui/material';
-import FilterCompo from './FilterCompo';
+import FilterCompo from '../filters/FilterCompo';
 
 const categoryMapping: { [key: string]: string } = {
-  '가구': 'furniture',
-  '전자기기': 'electronics',
+  가구: 'furniture',
+  전자기기: 'electronics',
   '조명/인테리어': 'lighting-interior',
   '데코/식물': 'deco-plant',
 };

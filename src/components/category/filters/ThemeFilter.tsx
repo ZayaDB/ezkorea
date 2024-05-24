@@ -2,16 +2,18 @@ import { useState } from 'react';
 import { Box, styled } from '@mui/system';
 import Checkbox from '@mui/material/Checkbox';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux/config';
-import { setFilters } from '../../redux/slices/categorySlice';
-import '../../styles/category/sideFilter.scss';
+import { RootState } from '../../../redux/config';
+import { setFilters } from '../../../redux/slices/categorySlice';
+import '../../../styles/category/sideFilter.scss';
 
 const ThemeFilter = () => {
   const themes: string[] = ['gaming', 'simple', 'unique', 'antique', 'kitsch'];
 
   const [checkedThemes, setCheckedThemes] = useState<string[]>([]);
   const dispatch = useDispatch();
-  const selectedFilters = useSelector((state: RootState) => state.category.selectedFilters);
+  const selectedFilters = useSelector(
+    (state: RootState) => state.category.selectedFilters
+  );
 
   const handleLabelClick = (theme: string) => {
     const newCheckedThemes = [...checkedThemes];

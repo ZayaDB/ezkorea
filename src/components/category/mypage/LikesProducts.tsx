@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import ProductItem from '../category/ProductItem';
+import ProductItem from '../product/ProductItem';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/config';
-import { Products } from '../../types/productTypes';
-import '../../styles/category/likes.scss';
-import { getData } from '../../utils/getData';
+import { RootState } from '../../../redux/config';
+import { Products } from '../../../types/productTypes';
+import '../../../styles/category/likes.scss';
+import { getData } from '../../../utils/getData';
 
 const LikesProduct = () => {
   const [filteredProducts, setFilteredProducts] = useState<Products[]>([]);

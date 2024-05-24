@@ -1,9 +1,9 @@
 //CarouselCompoSale.tsx
 import Carousel from 'react-bootstrap/Carousel';
-import sale1 from '../../assets/images/sale1.webp';
-import sale2 from '../../assets/images/sale2.webp';
-import sale3 from '../../assets/images/sale3.webp';
-import '../../styles/category/likes.scss';
+import sale1 from '../../../assets/images/sale1.webp';
+import sale2 from '../../../assets/images/sale2.webp';
+import sale3 from '../../../assets/images/sale3.webp';
+import '../../../styles/category/likes.scss';
 
 export default function CarouselCompoSale() {
   return (

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import ResultProducts from '../components/search/ResultProduct';
+import ResultProducts from '../components/category/search/ResultProduct';
 import ResultCommunity from '../components/community/search/ResultCommunity';
 import SubTitle from '../components/community/post/SubTitle';
 const ResultPage = () => {
