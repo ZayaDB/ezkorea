@@ -7,7 +7,15 @@ import { setFilters } from '../../../redux/slices/categorySlice';
 import '../../../styles/category/sideFilter.scss';
 
 const ThemeFilter = () => {
-  const themes: string[] = ['gaming', 'simple', 'unique', 'antique', 'kitsch'];
+  const themes: string[] = [
+    'gaming',
+    'simple',
+    'unique',
+    'antique',
+    'kitsch',
+    'cute',
+    'modern',
+  ];
 
   const [checkedThemes, setCheckedThemes] = useState<string[]>([]);
   const dispatch = useDispatch();
