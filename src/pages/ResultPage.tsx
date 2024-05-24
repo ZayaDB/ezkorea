@@ -6,7 +6,6 @@ const ResultPage = () => {
   const queryParams = new URLSearchParams(location.search);
   const search = queryParams.get('search') || ''; // null일 경우 빈 문자열을 할당
 
-
   return (
     <div
       style={{
@@ -17,9 +16,10 @@ const ResultPage = () => {
         padding: '0 5px 60px',
       }}
     >
-      <SubTitle text='PRODUCTS' isRequired={false} />
+
+      <SubTitle text={`PRODUCTS / ${search}`} isRequired={false} />
       <ResultProducts keyword={search} />
-      <SubTitle text='FEEDS' isRequired={false} />
+      <SubTitle text={`FEEDS / ${search}`} isRequired={false} />
       <ResultCommunity keyword={search} />
     </div>
   );
