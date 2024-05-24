@@ -1,9 +1,9 @@
-import ProductItem from './ProductItem';
-import useSort from '../../hooks/shop/useSort';
+import ProductItem from '../product/ProductItem';
+import useSort from '../../../hooks/shop/useSort';
 import { useEffect, useState } from 'react';
-import { getData } from '../../utils/getData';
-import { Products } from '../../types/productTypes';
-import '../../styles/category/likes.scss';
+import { getData } from '../../../utils/getData';
+import { Products } from '../../../types/productTypes';
+import '../../../styles/category/likes.scss';
 
 export default function BestProduct() {
   const [prodData, setProdData] = useState<Products[]>([]);

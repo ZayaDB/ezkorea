@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Checkbox from '@mui/material/Checkbox';
 import { Box, styled } from '@mui/system';
-import { RootState } from '../../redux/config';
-import { setFilters } from '../../redux/slices/categorySlice';
-import '../../styles/category/sideFilter.scss';
+import { RootState } from '../../../redux/config';
+import { setFilters } from '../../../redux/slices/categorySlice';
+import '../../../styles/category/sideFilter.scss';
 
 const BrandFilter = () => {
   const dispatch = useDispatch();

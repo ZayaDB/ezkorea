@@ -1,8 +1,8 @@
 import Carousel from 'react-bootstrap/Carousel';
-import best1 from '../../assets/images/best1.webp';
-import best2 from '../../assets/images/best2.webp';
-import best4 from '../../assets/images/best4.webp';
-import '../../styles/category/likes.scss';
+import best1 from '../../../assets/images/best1.webp';
+import best2 from '../../../assets/images/best2.webp';
+import best4 from '../../../assets/images/best4.webp';
+import '../../../styles/category/likes.scss';
 
 export default function CarouselCompoBest() {
   return (

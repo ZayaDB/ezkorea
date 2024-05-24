@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+
 import { useState } from 'react';
 import { Box, Button } from '@mui/material';
 import BrandFilter from './BrandFilter';
@@ -6,13 +6,16 @@ import PriceFilter from './PriceFilter';
 import ColorFilter from './ColorFilter';
 import ThemeFilter from './ThemeFilter';
 import { useDispatch } from 'react-redux';
-import { clearFilters, setRendering } from '../../redux/slices/categorySlice';
-import '../../styles/category/sideFilter.scss';
+import {
+  clearFilters,
+  setRendering,
+} from '../../../redux/slices/categorySlice';
+import '../../../styles/category/sideFilter.scss';
 interface FilterCompoProps {
   onApplyFilters: () => void; // onApplyFilters 함수의 타입 정의
 }
 
-const FilterCompo: FC<FilterCompoProps> = ({ onApplyFilters }) => {
+const FilterCompo = ({ onApplyFilters }:FilterCompoProps) => {
   const dispatch = useDispatch();
   const [brandFilterOpen, setBrandFilterOpen] = useState(false);
   const [priceFilterOpen, setPriceFilterOpen] = useState(false);
