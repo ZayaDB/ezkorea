@@ -12,8 +12,6 @@ const FilterChips = () => {
     (state: RootState) => state.category.selectedFilters
   );
 
-  console.log(selectedFilters);
-
   const renderFilterChips = () => {
     const chips: JSX.Element[] = [];
     let chipIndex = 1;
@@ -22,7 +20,6 @@ const FilterChips = () => {
       filterType: string | number | number[] | unknown | unknown[],
       value: string | number | number[]
     ) => {
-      console.log(value);
       dispatch(removeSelectedFilter({ filterType, value }));
     };
 

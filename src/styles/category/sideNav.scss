@@ -28,10 +28,7 @@ $font-weight-regular: 400;
   .nav.active {
     color: #5ff531; 
   }
-  .furniture-box,
-  .electronics-box,
-  .lighting-interior-box,
-  .deco-plant-box {
+  .filters-boxs {
     font-size: $font-size-m;
     margin: 5px;
     margin-bottom: 17px;
@@ -114,10 +111,7 @@ $font-weight-regular: 400;
     }
   }
 
-  .furniture-box,
-  .electronics-box,
-  .lighting-interior-box,
-  .deco-plant-box {
+.filters-boxs{
     display: none;
     width: 100%;
   }

@@ -11,12 +11,6 @@ import {
 import { useMediaQuery } from '@mui/material';
 import FilterCompo from '../filters/FilterCompo';
 
-const categoryMapping: { [key: string]: string } = {
-  가구: 'furniture',
-  전자기기: 'electronics',
-  '조명/인테리어': 'lighting-interior',
-  '데코/식물': 'deco-plant',
-};
 
 export default function SideNav() {
   const [activeCategory, setActiveCategory] = useState<string>('가구');
@@ -63,7 +57,7 @@ export default function SideNav() {
       {categoryData.map((category: CategoryData) => (
         <Box key={category.name} className='nav-box'>
           <Box
-            className={`nav ${categoryMapping[category.name]} ${
+            className={`nav ${
               activeCategory === category.name ? 'active' : ''
             }`}
             onClick={() => handleCategoryClick(category.name)}
@@ -75,7 +69,7 @@ export default function SideNav() {
 
           {activeCategory === category.name &&
             category.subCategories.length > 0 && (
-              <Box className={`${categoryMapping[category.name]}-box`}>
+              <Box className={'filters-boxs'}>
                 <hr
                   style={{
                     border: 0,
