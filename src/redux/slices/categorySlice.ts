@@ -52,7 +52,10 @@ const categorySlice = createSlice({
     },
     removeSelectedFilter: (
       state,
-      action: PayloadAction<{ filterType: string; value: string | number }>
+      action: PayloadAction<{
+        filterType: string | number | number[] | unknown | unknown[];
+        value: string | number | number[];
+      }>
     ) => {
       const { filterType, value } = action.payload;
       switch (filterType) {
@@ -62,9 +65,7 @@ const categorySlice = createSlice({
           );
           break;
         case 'prices':
-          state.selectedFilters.prices = state.selectedFilters.prices.filter(
-            price => price !== value
-          );
+          state.selectedFilters.prices = [];
           break;
         case 'colors':
           state.selectedFilters.colors = state.selectedFilters.colors.filter(
