@@ -6,10 +6,11 @@ import { removeSelectedFilter } from '../../redux/slices/categorySlice';
 import CloseIcon from '@mui/icons-material/Close';
 
 const FilterChips = () => {
+  const dispatch = useDispatch();
+
   const selectedFilters = useSelector(
     (state: RootState) => state.category.selectedFilters
   );
-  const dispatch = useDispatch();
 
   const renderFilterChips = () => {
     const chips: JSX.Element[] = [];
@@ -24,20 +25,33 @@ const FilterChips = () => {
         const value = selectedFilters[key as keyof Filters];
 
         if (Array.isArray(value)) {
-          value.forEach(item => {
-            // 각 요소의 타입에 따라 칩 생성
-            if (typeof item === 'number') {
-              // 숫자인 경우 가격 범위 표시
+          const firstValue = Number(value[0]);
+          const secondValue = Number(value[1]);
 
-              const formattedValue = formatPriceWithComma(item);
+          if (!isNaN(firstValue) && !isNaN(secondValue)) {
+            if (firstValue !== secondValue) {
+              const label = `${formatPriceWithComma(
+                firstValue
+              )} ~ ${formatPriceWithComma(secondValue)}`;
+
               chips.push(
                 <Chip
                   key={`chip-${chipIndex++}`}
-                  label={formattedValue}
-                  onDelete={() => onRemoveFilter(key as string, item)}
+                  label={label}
+                  onDelete={() =>
+                    onRemoveFilter(
+                      key as string,
+                      Number([firstValue, secondValue])
+                    )
+                  }
                   deleteIcon={
                     <IconButton
-                      onClick={() => onRemoveFilter(key as string, item)}
+                      onClick={() =>
+                        onRemoveFilter(
+                          key as string,
+                          Number([firstValue, secondValue])
+                        )
+                      }
                     >
                       <CloseIcon
                         sx={{
@@ -57,15 +71,21 @@ const FilterChips = () => {
                 />
               );
             } else {
-              // 문자열인 경우
+              // 두 숫자가 동일하면 해당 값을 출력
+              const label = formatPriceWithComma(firstValue);
+
               chips.push(
                 <Chip
                   key={`chip-${chipIndex++}`}
-                  label={String(item)}
-                  onDelete={() => onRemoveFilter(key as string, String(item))}
+                  label={label}
+                  onDelete={() =>
+                    onRemoveFilter(key as string, Number([firstValue]))
+                  }
                   deleteIcon={
                     <IconButton
-                      onClick={() => onRemoveFilter(key as string, item)}
+                      onClick={() =>
+                        onRemoveFilter(key as string, Number([firstValue]))
+                      }
                     >
                       <CloseIcon
                         sx={{
@@ -85,10 +105,7 @@ const FilterChips = () => {
                 />
               );
             }
-          });
-        } else {
-          // 배열이 아닌 경우 (단일 값)
-          return ;
+          }
         }
       }
     }

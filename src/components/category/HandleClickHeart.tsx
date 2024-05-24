@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState, useRef } from 'react';
 import { Transition } from 'react-transition-group';
 import { styled } from '@mui/system';
 import CloseIcon from '@mui/icons-material/Close';
@@ -92,9 +92,10 @@ export default function HandleClickHeart({
   isLiked,
   onLikeToggle,
 }: HandleClickHeartProps) {
-  const [open, setOpen] = React.useState(false);
-  const [exited, setExited] = React.useState(true);
-  const nodeRef = React.useRef(null);
+  const [open, setOpen] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [exited, setExited] = useState(true);
+  const nodeRef = useRef(null);
 
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
@@ -108,7 +109,6 @@ export default function HandleClickHeart({
 
     setOpen(false);
   };
-  console.log(exited);
 
   const handleClick = () => {
     onLikeToggle();
@@ -124,7 +124,7 @@ export default function HandleClickHeart({
   };
 
   return (
-    <React.Fragment>
+    <>
       <StyledCheckbox
         {...label}
         icon={<FavoriteBorder />}
@@ -170,7 +170,7 @@ export default function HandleClickHeart({
           )}
         </Transition>
       </StyledSnackbar>
-    </React.Fragment>
+    </>
   );
 }
 

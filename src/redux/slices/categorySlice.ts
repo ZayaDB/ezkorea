@@ -90,28 +90,6 @@ const categorySlice = createSlice({
     setFilters: (state, action: PayloadAction<Filters>) => {
       state.selectedFilters = action.payload;
     },
-    addFilter: (
-      state,
-      action: PayloadAction<{ filterType: string; value: string | number }>
-    ) => {
-      const { filterType, value } = action.payload;
-      switch (filterType) {
-        case 'brands':
-          state.selectedFilters.brands.push(value as string);
-          break;
-        case 'prices':
-          state.selectedFilters.prices.push(value as number);
-          break;
-        case 'colors':
-          state.selectedFilters.colors.push(value as string);
-          break;
-        case 'themes':
-          state.selectedFilters.themes.push(value as string);
-          break;
-        default:
-          break;
-      }
-    },
     setRendering: (state, action: PayloadAction<boolean>) => {
       state.renderingStart = action.payload;
     },
@@ -127,7 +105,6 @@ export const {
   removeSelectedFilter,
   setIsLiked,
   setFilters,
-  addFilter,
   setRendering, // setRendering 액션 추가
 } = categorySlice.actions;
 
