@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Box } from '@mui/system';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFilters } from '../../redux/slices/categorySlice';
-import { RootState } from '../../redux/config';
-import { Products } from '../../types/productTypes';
+import { setFilters } from '../../../redux/slices/categorySlice';
+import { RootState } from '../../../redux/config';
+import { Products } from '../../../types/productTypes';
 
 const ColorFilter = () => {
   const dispatch = useDispatch();

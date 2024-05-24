@@ -3,6 +3,7 @@ import '../../styles/mypage/order.scss';
 import { RootState } from '../../redux/config';
 import { Box, Card, CardContent, CardMedia } from '@mui/material';
 import { addCommasToNumber } from '../../hooks/addCommasToNumber';
+import { useEffect, useState } from 'react';
 
 export default function OrderDetails() {
   const mileage = useSelector(
@@ -36,6 +37,34 @@ export default function OrderDetails() {
 }
 
 function Products() {
+  const [orderNum, setOrderNum] = useState<string>('');
+  const [orderDate, setOrderDate] = useState<string>('');
+  const [paymentStatus, setPaymentStatus] = useState<boolean>(false);
+
+  useEffect(() => {
+    // localStorage에서 값 가져오기
+    const storedOrderNum = localStorage.getItem('orderNumber');
+    const storedOrderDate = localStorage.getItem('orderDate');
+    const storedPaymentStatus = localStorage.getItem('paymentStatus');
+
+    if (paymentStatus === true) {
+      // 가져온 값이 null이 아닌 경우에만 상태 업데이트
+      if (storedOrderNum !== null) {
+        setOrderNum(storedOrderNum);
+      }
+      if (storedOrderDate !== null) {
+        setOrderDate(storedOrderDate);
+      }
+      if (storedPaymentStatus !== null) {
+        setPaymentStatus(storedPaymentStatus === 'true'); // 문자열을 boolean으로 변환
+      }
+    } else {
+      setOrderNum('');
+      setOrderDate('');
+      setPaymentStatus(false);
+    }
+  }, []);
+
   const selectOption = useSelector(
     (state: RootState) => state.product.selectedOption
   );
@@ -94,6 +123,7 @@ function Products() {
                 height='200'
                 image={productImg}
               />
+              {orderNum}
               <CardContent sx={{ width: '60%' }}>
                 <div>{brandName}</div>
                 <div>{productName}</div>

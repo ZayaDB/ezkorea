@@ -1,19 +1,10 @@
 $color-point: #5ff531;
-$color-black: #191919;
 $color-gray: #4c4c4c;
+$black: #191919;
 
 $tablet: 768px;
 $mobile: 360px;
 
-$red: red;
-$orange: orange;
-$yellow: yellow;
-$green: green;
-$white: white;
-$black: black;
-
-$font-size-xxl: 24px;
-$font-size-xl: 22px;
 $font-size-l: 18px;
 $font-size-m: 16px;
 $font-size-s: 14px;
@@ -26,10 +17,10 @@ $font-weight-regular: 400;
 
 .prod-item {
   width: 32%;
+
   height: calc(100% - 10px);
   margin: 3px;
   margin-bottom: 20px;
-  cursor: pointer;
   border-radius: 2px;
   overflow: hidden;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
@@ -64,7 +55,7 @@ $font-weight-regular: 400;
         color: #ffffff;
         background-color: rgba(46, 46, 46, 0.8);
         padding: 12px 20px;
-        z-index: 1; 
+        z-index: 1;
       }
     }
 
@@ -75,21 +66,21 @@ $font-weight-regular: 400;
 
       .prod-brand {
         font-size: $font-size-xs;
-        height: 20px; 
+        height: 20px;
         margin-bottom: 3px;
         margin-top: 2px;
-        white-space: nowrap; 
+        white-space: nowrap;
         overflow: hidden;
-        text-overflow: ellipsis; 
+        text-overflow: ellipsis;
       }
 
       .prod-name {
         font-size: $font-size-s;
         margin-bottom: 10px;
         line-height: 20px;
-        white-space: nowrap; 
+        white-space: nowrap;
         overflow: hidden;
-        text-overflow: ellipsis; 
+        text-overflow: ellipsis;
       }
 
       .prod-discount {

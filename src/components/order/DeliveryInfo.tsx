@@ -265,7 +265,7 @@ function AddressBook() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [addressBook, setAddressBook] = useState<boolean>(false);
 
   const handleAddressBook = () => {
@@ -299,7 +299,7 @@ function AddressBook() {
               <Button>선택</Button>
             </div>
             <div>010-2333-2222</div>
-            <div>(05237)서울 강동구 고덕로 429 5층 제2강의실</div>
+            <div>{addressBook}</div>
           </div>
         </Box>
       </Modal>

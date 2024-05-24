@@ -2,8 +2,8 @@ import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFilters } from '../../redux/slices/categorySlice';
-import { RootState } from '../../redux/config';
+import { setFilters } from '../../../redux/slices/categorySlice';
+import { RootState } from '../../../redux/config';
 
 // 숫자를 천 단위로 쉼표로 구분하여 포맷하는 함수
 const formatPriceWithComma = (price: number): string => {
@@ -23,7 +23,6 @@ const PriceFilter = () => {
 
     // 선택된 가격 범위를 함께 업데이트하여 Redux store에 저장
     dispatch(setFilters({ ...selectedFilters, prices: newPrice }));
-
   };
 
   const marks = [

@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../../styles/category/productItem.scss';
+import '../../../styles/category/productItem.scss';
 import HandleClickHeart from './HandleClickHeart';
 import { Box } from '@mui/material';
-import { Products } from '../../types/productTypes';
-import prod_review from '../../assets/images/prod_review.png';
+import { Products } from '../../../types/productTypes';
+import prod_review from '../../../assets/images/prod_review.png';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux/config';
-import { setIsLiked } from '../../redux/slices/categorySlice';
+import { RootState } from '../../../redux/config';
+import { setIsLiked } from '../../../redux/slices/categorySlice';
 
 interface ProductItemProps {
   prod: Products;

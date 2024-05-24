@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import ProductList from '../components/category/ProductList';
-import SideNav from '../components/category/SideNav';
+import ProductList from '../components/category/product/ProductList';
+import SideNav from '../components/category/product/SideNav';
 import '../styles/category/category.scss';
 import { getData } from '../utils/getData';
 import { setCategoryData, setProducts } from '../redux/slices/categorySlice';

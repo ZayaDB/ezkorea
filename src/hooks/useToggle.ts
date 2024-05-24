@@ -1,4 +1,4 @@
-import { useState, Dispatch, SetStateAction } from 'react';
+import { useState, } from 'react';
 
 // 토글 기능을 관리하는 사용자 정의 훅
 export default function useToggle(

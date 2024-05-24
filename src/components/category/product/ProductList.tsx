@@ -10,19 +10,19 @@ import {
 } from '@mui/material';
 import Pagination from '@mui/material/Pagination';
 import ProductItem from './ProductItem';
-import '../../styles/category/productWrap.scss';
+import '../../../styles/category/productWrap.scss';
 import { useMediaQuery } from '@mui/material';
-import FilterCompo from './FilterCompo';
+import FilterCompo from '../filters/FilterCompo';
 import { useDispatch, useSelector } from 'react-redux';
-import getSelectedValue from '../../utils/getSelectedValue';
+import getSelectedValue from '../../../utils/getSelectedValue';
 import {
   setSelectedCategory,
   setSelectedSubCategory,
-} from '../../redux/slices/categorySlice';
-import useSort from '../../hooks/shop/useSort';
-import { SortOption, SubCategory } from '../../types/productTypes';
-import { RootState } from '../../redux/config';
-import FilterChips from './FilterChips';
+} from '../../../redux/slices/categorySlice';
+import useSort from '../../../hooks/shop/useSort';
+import { SortOption, SubCategory } from '../../../types/productTypes';
+import { RootState } from '../../../redux/config';
+import FilterChips from '../filters/FilterChips';
 
 const ProductList = () => {
   const dispatch = useDispatch();

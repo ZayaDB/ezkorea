@@ -1,5 +1,5 @@
-import CarouselCompoSale from '../components/category/CarouselCompoSale';
-import SaleProduct from '../components/category/SaleProduct';
+import CarouselCompoSale from '../components/category/best_sale/CarouselCompoSale';
+import SaleProduct from '../components/category/best_sale/SaleProduct';
 
 export default function SalePage() {
   return (
@@ -9,4 +9,3 @@ export default function SalePage() {
     </div>
   );
 }
-
