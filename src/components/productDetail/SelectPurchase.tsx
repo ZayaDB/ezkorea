@@ -12,7 +12,7 @@ import { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../../styles/theme';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   setSelectedOption,
   setSelectedQuantity,
@@ -22,7 +22,10 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { Product } from '../../types/productDetail';
 import { addCommasToNumber } from '../../hooks/addCommasToNumber';
-import { FavoriteBorder } from '@mui/icons-material';
+import HandleClickHeart from '../category/product/HandleClickHeart';
+import { RootState } from '../../redux/config';
+import { setIsLiked } from '../../redux/slices/categorySlice';
+import { Products } from '../../types/productTypes';
 
 export default function SelectPurchase() {
   const [spInfo, setSpInfo] = useState<Product>();
@@ -31,14 +34,22 @@ export default function SelectPurchase() {
   const [counts, setCounts] = useState<number[]>([]);
   const dispatch = useDispatch();
 
+  // useSelector를 통해 isLiked 상태가져옴
+  const products = useSelector((state: RootState) => state.category.products);
+  const [prod, setProd] = useState<Products>(products[3]);
+
   // fetch
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch('/data/prodDetail.json');
+        const getProdData = await fetch('/data/prodData.json');
+        const prod = await getProdData.json();
+        console.log('prod', prod[3]);
         const data = await response.json();
         const purchase = data[0];
         setSpInfo(purchase);
+        setProd(prod[3]);
       } catch (error) {
         console.error('Error fetching review data:', error);
       }
@@ -143,6 +154,20 @@ export default function SelectPurchase() {
   ): number => {
     return discountedPrice * count;
   };
+
+  // useSelector를 통해 isLiked 상태가져옴
+  const isLiked = useSelector(
+    (state: RootState) => state.category.isLiked[prod.productId] || false
+  );
+
+  // 좋아요 토글 핸들러
+  const handleLikeToggle = () => {
+    const updatedIsLiked = !isLiked;
+    dispatch(
+      setIsLiked({ productId: prod.productId, isLiked: updatedIsLiked })
+    );
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Grid container justifyContent='center' alignItems='center'>
@@ -156,7 +181,11 @@ export default function SelectPurchase() {
                 </div>
                 <div id='heartZone'>
                   <div className='heartIcon'>
-                    <FavoriteBorder />
+                    <HandleClickHeart
+                      productName={prod.name}
+                      isLiked={isLiked}
+                      onLikeToggle={handleLikeToggle}
+                    />
                   </div>
                 </div>
               </div>
