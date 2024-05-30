@@ -37,6 +37,7 @@ export default function ProductDetailPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [validProduct, setValidProduct] = useState(false);
   const { productId } = useParams();
+  // console.log('aa', productId);
 
   useEffect(() => {
     const numProductId = Number(productId);
@@ -51,6 +52,7 @@ export default function ProductDetailPage() {
 
         if (Number(foundProduct.prodId) === numProductId) {
           setValidProduct(true);
+
         } else {
           setValidProduct(false);
         }
@@ -63,6 +65,7 @@ export default function ProductDetailPage() {
 
     fetchData();
   }, [productId]);
+
   if (isLoading) {
     return <h1>로딩 중...</h1>;
   }

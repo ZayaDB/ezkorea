@@ -88,6 +88,7 @@ const categorySlice = createSlice({
       const { productId, isLiked } = action.payload;
       state.isLiked[productId] = isLiked;
     },
+    
     setFilters: (state, action: PayloadAction<Filters>) => {
       state.selectedFilters = action.payload;
     },
