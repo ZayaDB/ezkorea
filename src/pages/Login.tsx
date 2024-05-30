@@ -155,7 +155,6 @@ export default function SignIn() {
       const prevUrl = sessionStorage.getItem('prevUrl');
       if (prevUrl) {
         navigate(prevUrl);
-        sessionStorage.setItem('prevUrl', '');
       } else {
         navigate('/');
       }

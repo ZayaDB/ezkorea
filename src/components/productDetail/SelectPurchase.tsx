@@ -34,9 +34,7 @@ export default function SelectPurchase() {
   const [counts, setCounts] = useState<number[]>([]);
   const dispatch = useDispatch();
 
-  // useSelector를 통해 isLiked 상태가져옴
-  const products = useSelector((state: RootState) => state.category.products);
-  const [prod, setProd] = useState<Products>(products[3]);
+  const [prod, setProd] = useState<Products>();
 
   // fetch
   useEffect(() => {
@@ -44,12 +42,14 @@ export default function SelectPurchase() {
       try {
         const response = await fetch('/data/prodDetail.json');
         const getProdData = await fetch('/data/prodData.json');
-        const prod = await getProdData.json();
-        console.log('prod', prod[3]);
+        const getProd = await getProdData.json();
         const data = await response.json();
+        const prod = getProd[3];
+        console.log('aa', prod.productId);
+
         const purchase = data[0];
         setSpInfo(purchase);
-        setProd(prod[3]);
+        setProd(prod);
       } catch (error) {
         console.error('Error fetching review data:', error);
       }
@@ -121,6 +121,8 @@ export default function SelectPurchase() {
       sessionStorage.setItem('prevUrl', `/shop/${spInfo?.prodId}`);
       window.location.href = '/login';
       return;
+    } else {
+      sessionStorage.setItem('prevUrl', '');
     }
 
     const selectedProductId = spInfo?.prodId || 0;
@@ -157,15 +159,13 @@ export default function SelectPurchase() {
 
   // useSelector를 통해 isLiked 상태가져옴
   const isLiked = useSelector(
-    (state: RootState) => state.category.isLiked[prod.productId] || false
+    (state: RootState) => (prod ? state.category.isLiked[prod.productId] : false)
   );
 
   // 좋아요 토글 핸들러
   const handleLikeToggle = () => {
     const updatedIsLiked = !isLiked;
-    dispatch(
-      setIsLiked({ productId: prod.productId, isLiked: updatedIsLiked })
-    );
+    dispatch(setIsLiked({ productId: 3, isLiked: updatedIsLiked }));
   };
 
   return (
@@ -182,7 +182,7 @@ export default function SelectPurchase() {
                 <div id='heartZone'>
                   <div className='heartIcon'>
                     <HandleClickHeart
-                      productName={prod.name}
+                      productName={'aa'}
                       isLiked={isLiked}
                       onLikeToggle={handleLikeToggle}
                     />
