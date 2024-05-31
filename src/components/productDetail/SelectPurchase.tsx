@@ -34,9 +34,33 @@ export default function SelectPurchase() {
   const [counts, setCounts] = useState<number[]>([]);
   const dispatch = useDispatch();
 
-  const [prod, setProd] = useState<Products>();
+  // const [prod, setProd] = useState<Products>();
   // const [newLiked, setNewLiked] = useState<boolean>(false);
+  const defaultProduct: Products = {
+    productId: 4,
+    name: '', // 이름 설정
+    brand: '', // 브랜드 설정
+    colors: [], // 색상 설정
+    concepts: [], // 컨셉 설정
+    price: 0, // 가격 설정
+    discount: 0, // 할인 설정
+    prevPrice: 0, // 이전 가격 설정
+    category1: '', // 카테고리 1 설정
+    category2: '', // 카테고리 2 설정
+    heart: false, // 하트 설정
+    thumbnail: '', // 썸네일 설정
+    hoverImage: '', // 호버 이미지 설정
+    views: 0, // 조회수 설정
+    commentCount: 0, // 댓글 수 설정
+    themes: [], // 테마 설정
+  };
 
+  const [prod, setProd] = useState<Products>(defaultProduct);
+
+  const rdxLiked = useSelector(
+    (state: RootState) => state.category.isLiked[prod.productId]
+  );
+  console.log('리덕스 하트상태', rdxLiked);
 
   // fetch
   useEffect(() => {
@@ -50,9 +74,6 @@ export default function SelectPurchase() {
         const purchase = data[0];
         setSpInfo(purchase);
         setProd(prod);
-        // const getIsLiked = isLiked[prod.productId];
-        // console.log('하트상태', getIsLiked);
-        // setNewLiked(getIsLiked);
       } catch (error) {
         console.error('Error fetching review data:', error);
       }
@@ -158,18 +179,11 @@ export default function SelectPurchase() {
   ): number => {
     return discountedPrice * count;
   };
-    // useSelector를 통해 isLiked 상태가져옴
-    const isLiked = useSelector(
-      (state: RootState) => state.category.isLiked[3] || false
-    );
-  
 
   // 좋아요 토글 핸들러
   const handleLikeToggle = () => {
-    const updatedIsLiked = !isLiked;
-    dispatch(
-      setIsLiked({ productId: 3, isLiked: updatedIsLiked })
-    );
+    const updatedIsLiked = !rdxLiked;
+    dispatch(setIsLiked({ productId: 4, isLiked: updatedIsLiked }));
   };
 
   return (
@@ -188,7 +202,7 @@ export default function SelectPurchase() {
                     <div className='heartIcon'>
                       <HandleClickHeart
                         productName={spInfo?.product_name}
-                        isLiked={isLiked}
+                        isLiked={rdxLiked}
                         onLikeToggle={handleLikeToggle}
                       />
                     </div>
