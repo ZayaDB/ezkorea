@@ -83,7 +83,7 @@ export default function ProductItem({ prod, rank, disc }: ProductItemProps) {
 
   return (
     <Box className='prod-item' role='button' onClick={() => inputSession(prod)}>
-      <Link to={`/shop/${prod.productId}`} className='link-to-detail'>
+      <Link to={'/shop/4'} className='link-to-detail'>
         {/* 상품이미지 */}
 
         <div
