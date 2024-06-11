@@ -184,7 +184,7 @@ const CommunityMainPage = () => {
           <SortSelect sort={sort} setSort={setSort} />
         </div>
       </Grid>
-      <Grid container>
+      <Grid container className='feed-grid'>
         {isLoading ? (
           Array.from({ length: 16 }).map((_, index) => (
             <Grid item xs={6} md={3} key={index} className='feed'>
@@ -195,7 +195,15 @@ const CommunityMainPage = () => {
           <div>Error occurred.</div>
         ) : (
           filterData.map(item => (
-            <Grid item xs={6} md={3} key={item.feedId} className='feed'>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={3}
+              lg={4}
+              key={item.feedId}
+              className='feed'
+            >
               <Box className='feed-container'>
                 <Box className='feed-box'>
                   <Link

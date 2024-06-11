@@ -8,6 +8,7 @@ import {
   Theme,
 } from '@mui/material';
 import { grey } from '@mui/material/colors';
+import { useNavigate } from 'react-router-dom';
 
 // props로 받을 애들 타입 선언, onClick 이벤트는 옵셔널
 interface ProtectedButtonProps {
@@ -25,6 +26,7 @@ const ProtectedButton: React.FC<ProtectedButtonProps> = ({
   sx,
 }) => {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -35,7 +37,7 @@ const ProtectedButton: React.FC<ProtectedButtonProps> = ({
     const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
     if (isLoggedIn) {
       onClick?.();
-      window.location.href = redirectTo;
+      navigate(redirectTo);
       // 로그인 값 false면 모달 띄움
     } else {
       handleOpen();
@@ -57,7 +59,7 @@ const ProtectedButton: React.FC<ProtectedButtonProps> = ({
             sx={{ color: 'black' }}
             onClick={() => {
               handleClose();
-              window.location.href = '/login';
+              navigate('/login');
             }}
           >
             로그인
