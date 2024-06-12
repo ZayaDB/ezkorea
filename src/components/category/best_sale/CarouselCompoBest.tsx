@@ -11,7 +11,7 @@ export default function CarouselCompoBest() {
       <span className='best-desc'>
         똑같은 일상을 좀 더 특별하게,
         <br />
-        다양한 제품으로 감각적인 데스크를 완성해보세요
+        다양한 제품으로 감각적인 데스크를 완성해보세요.
       </span>
       <div style={{ width: 'auto', margin: 0, padding: 0 }}>
         <Carousel interval={5000}>

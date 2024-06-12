@@ -11,21 +11,31 @@ import {
 import { useMediaQuery } from '@mui/material';
 import FilterCompo from '../filters/FilterCompo';
 
+import { useLocation } from 'react-router-dom';
 
 export default function SideNav() {
   const [activeCategory, setActiveCategory] = useState<string>('가구');
   const dispatch = useDispatch();
   const isMobile = useMediaQuery('(max-width:768px)');
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const categoryName = queryParams.get('category');
+  const subCategoryName = queryParams.get('subCategory');
 
   const categoryData = useSelector(
     (state: RootState) => state.category.categoryData
   );
 
   useEffect(() => {
-    // 페이지 로드시 초기값 설정
-    dispatch(setSelectedCategory('가구'));
-    dispatch(setSelectedSubCategory('ALL'));
-  }, [dispatch]);
+    if (categoryName && subCategoryName) {
+      setActiveCategory(categoryName);
+      dispatch(setSelectedCategory(categoryName));
+      dispatch(setSelectedSubCategory(subCategoryName));
+    } else {
+      dispatch(setSelectedCategory('가구'));
+      dispatch(setSelectedSubCategory('ALL'));
+    }
+  }, [dispatch, location.search]);
 
   const handleCategoryClick = (categoryName: string) => {
     if (activeCategory === categoryName) {
