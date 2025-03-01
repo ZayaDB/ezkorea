@@ -200,7 +200,7 @@ const CommunityMainPage = () => {
               xs={12}
               sm={6}
               md={3}
-              lg={4}
+              lg={3}
               key={item.feedId}
               className='feed'
             >
