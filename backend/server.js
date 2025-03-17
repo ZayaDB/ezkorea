@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// ✅ MongoDB 연결 설정 (불필요한 옵션 제거)
+// ✅ MongoDB 연결
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("✅ MongoDB Connected"))
@@ -23,14 +23,12 @@ const UserSchema = new mongoose.Schema(
     password: { type: String, required: true },
   },
   { collection: "users" }
-); // ✅ 컬렉션 이름 명확하게 지정
-
+);
 const User = mongoose.model("User", UserSchema);
 
 // ✅ 회원가입 API
 app.post("/api/register", async (req, res) => {
   const { username, email, password } = req.body;
-  console.log("🔍 회원가입 요청 데이터:", req.body); // ✅ 요청 데이터 확인
 
   if (!username || !email || !password) {
     return res.status(400).json({ message: "All fields are required" });
@@ -61,7 +59,39 @@ app.post("/api/login", async (req, res) => {
     expiresIn: "1h",
   });
 
-  res.json({ message: "Login successful", token });
+  // ✅ 로그인 후 사용자 정보와 토큰 함께 반환
+  res.json({
+    message: "Login successful",
+    token,
+    user: { username: user.username, email: user.email },
+  });
+});
+
+// ✅ 인증 미들웨어 추가
+const authMiddleware = (req, res, next) => {
+  const token = req.headers.authorization?.split(" ")[1];
+  if (!token) return res.status(401).json({ message: "Unauthorized" });
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded;
+    next();
+  } catch (error) {
+    return res.status(401).json({ message: "Invalid token" });
+  }
+};
+
+// ✅ 로그인한 사용자 정보 조회 API 추가! (이게 없어서 404 오류가 났던 거임)
+app.get("/api/user", authMiddleware, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password"); // 비밀번호 제외
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    res.json(user);
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    res.status(500).json({ message: "Server error" });
+  }
 });
 
 // ✅ 서버 실행
