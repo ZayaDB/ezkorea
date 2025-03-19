@@ -69,7 +69,7 @@ const CategoryDropDown: React.FC = () => {
             style={{
               display: 'flex',
               flexDirection: 'row',
-              width: '600px',
+              width: '1200px',
               padding: '15px 12px',
             }}
           >

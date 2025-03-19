@@ -41,8 +41,11 @@ function Copyright() {
   return (
     <Typography variant='body2' color='text.secondary' mt={1}>
       {'Copyright © '}
-      <Link href='https://mui.com/' sx={{ fontWeight: '500', color: 'rgba(0, 0, 0, 0.6)' }}>
-        dururu&nbsp;
+      <Link
+        href='https://mui.com/'
+        sx={{ fontWeight: '500', color: 'rgba(0, 0, 0, 0.6)' }}
+      >
+        EZKorea&nbsp;
       </Link>
       {new Date().getFullYear()}
     </Typography>
@@ -81,8 +84,10 @@ export default function Footer() {
           >
             <Box sx={{ width: { xs: '100%', sm: '60%' } }}>
               {/* <Box sx={{ ml: '-15px' }}> */}
-              <Typography sx={{ fontSize: '26px', fontWeight: '600', color: '#212529' }}>
-                dururu
+              <Typography
+                sx={{ fontSize: '26px', fontWeight: '600', color: '#212529' }}
+              >
+                EZKorea
               </Typography>
               {/* <img
                 // src={

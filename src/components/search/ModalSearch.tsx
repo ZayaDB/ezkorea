@@ -13,11 +13,11 @@ const ModalSearch: React.FC<ModalSearchProps> = ({ closeModal }) => {
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState('');
   const [isComposing, setIsComposing] = useState<boolean>(false);
-  const isSmallScreen = useMediaQuery('(max-width:600px)');
+  const isSmallScreen = useMediaQuery('(max-width:800px)');
   const inputRef = useRef<HTMLInputElement>(null); // useRef 생성
 
   const handleSearch = (keyword: string) => {
-    closeModal(); 
+    closeModal();
     navigate(`/result?search=${encodeURIComponent(keyword)}`);
   };
 

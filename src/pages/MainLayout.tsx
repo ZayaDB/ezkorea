@@ -9,9 +9,9 @@ import { RootState } from '../redux/config';
 export default function MainLayout() {
   const sections = [
     // { title: '쇼핑홈', url: '/' },
-    { title: '카테고리', url: '/shop' },
-    { title: '베스트', url: '/shop/best' },
-    { title: '세일', url: '/shop/sale' },
+    { title: 'Category', url: '/shop' },
+    { title: 'Best', url: '/shop/best' },
+    { title: 'Mentors', url: '/shop/sale' },
   ];
 
   const isMobile = useMediaQuery('(max-width:619px)');
@@ -21,7 +21,7 @@ export default function MainLayout() {
   const cartBadgeNum = selectedOption.length;
   return (
     <>
-      <Header title='dururu' sections={sections} cartBadgeNum={cartBadgeNum} />
+      <Header title='EZKorea' sections={sections} cartBadgeNum={cartBadgeNum} />
       <Outlet />
       {isMobile ? null : <Footer />}
       {isMobile && <BottomNav />}

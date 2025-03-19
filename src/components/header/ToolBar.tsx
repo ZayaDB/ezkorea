@@ -17,12 +17,12 @@ const ToolBar: React.FC = () => {
         onMouseLeave={() => setIsShoppingHovered(false)}
       >
         <CustomLink to='/shop' hoverColor='#5FF531'>
-          카테고리
+          Category
         </CustomLink>
         {isShoppingHovered && <CategoryDropDown />}
       </div>
-      <CustomLink to='/shop/best'>베스트</CustomLink>
-      <CustomLink to='/shop/sale'>세일</CustomLink>
+      <CustomLink to='/shop/best'>Best</CustomLink>
+      <CustomLink to='/shop/sale'>Mentors</CustomLink>
     </Toolbar>
   );
 };

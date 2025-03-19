@@ -18,25 +18,21 @@ export default function CartPage() {
     (state: RootState) => state.product.selectedQuantity
   );
 
-  const productImg = useSelector(
-    (state: RootState) => state.product.products[0].product_image
+  const products = useSelector(
+    (state: RootState) => state.product.products || []
   );
-
-  const brandName = useSelector(
-    (state: RootState) => state.product.products[0].brand_name
-  );
-  const productName = useSelector(
-    (state: RootState) => state.product.products[0].product_name
-  );
-  const productPrice = useSelector(
-    (state: RootState) => state.product.products[0].regular_price
-  );
-  const discountRate = useSelector(
-    (state: RootState) => state.product.products[0].discount_rate
-  );
-  const discountPrice = useSelector(
-    (state: RootState) => state.product.products[0].discounted_price
-  );
+  const productImg =
+    products.length > 0 ? products[0].product_image : 'default_image.jpg';
+  const brandName =
+    products.length > 0 ? products[0].brand_name : '브랜드 없음';
+  const productName =
+    products.length > 0 ? products[0].product_name : '상품 없음';
+  const productPrice = products.length > 0 ? products[0].regular_price : 0;
+  const discountRate = products.length > 0 ? products[0].discount_rate : 0;
+  const discountPrice = products.length > 0 ? products[0].discounted_price : 0;
+  if (!products || products.length === 0) {
+    return <p>장바구니가 비어 있습니다.</p>;
+  }
 
   // 체크 박스
   const [checked, setChecked] = useState([true, false]);

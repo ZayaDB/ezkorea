@@ -6,11 +6,9 @@ import '../../styles/home/carousel.scss';
 import { useMediaQuery } from '@mui/material';
 
 export default function MainSlide() {
-
   const isMiniMobile = useMediaQuery('(max-width: 406px)');
   const isMobile = useMediaQuery('(max-width: 619px)');
   const isTablet = useMediaQuery('(max-width: 768px)');
-
 
   const captionLineHeight = isMobile ? '10px' : isTablet ? '16px' : '30px';
   const captionFontSize = isMobile ? '12px' : isTablet ? '16px' : '18px';
@@ -34,25 +32,25 @@ export default function MainSlide() {
               }}
             />
             {!isMiniMobile && (
-            <Carousel.Caption
-              style={{
-                lineHeight: captionLineHeight,
-                marginBottom: '40px',
-                textAlign: 'left',
-              }}
-            >
-              <p
+              <Carousel.Caption
                 style={{
-                  fontWeight: '500',
-                  fontSize: titleFontSize,
+                  lineHeight: captionLineHeight,
+                  marginBottom: '40px',
+                  textAlign: 'left',
                 }}
               >
-                2024 DURURU MONTH
-              </p>
-              <p style={{ fontSize: captionFontSize }}>
-              두루루가 제안하는 데스크 테리어와 함께 해보세요.
-              </p>
-            </Carousel.Caption>
+                <p
+                  style={{
+                    fontWeight: '500',
+                    fontSize: titleFontSize,
+                  }}
+                >
+                  2025 EZKorea MONTH
+                </p>
+                <p style={{ fontSize: captionFontSize }}>
+                  EZKorea таньд санал болгож байна
+                </p>
+              </Carousel.Caption>
             )}
           </Carousel.Item>
           <Carousel.Item>
@@ -69,19 +67,21 @@ export default function MainSlide() {
               }}
             />
             {!isMiniMobile && (
-            <Carousel.Caption
-              style={{
-                lineHeight: captionLineHeight,
-                marginBottom: '40px',
-                textAlign: 'left',
-                // fontSize: captionFontSize,
-              }}
-            >
-              <p style={{ fontSize: titleFontSize, fontWeight: '500' }}>
-              SPECIAL STYLE, DURURU
-              </p>
-              <p style={{fontSize: captionFontSize,}}>두루루만의 특별한 제품들을 자세히 들여다 보세요.</p>
-            </Carousel.Caption>
+              <Carousel.Caption
+                style={{
+                  lineHeight: captionLineHeight,
+                  marginBottom: '40px',
+                  textAlign: 'left',
+                  // fontSize: captionFontSize,
+                }}
+              >
+                <p style={{ fontSize: titleFontSize, fontWeight: '500' }}>
+                  SPECIAL STYLE, DURURU
+                </p>
+                <p style={{ fontSize: captionFontSize }}>
+                  두루루만의 특별한 제품들을 자세히 들여다 보세요.
+                </p>
+              </Carousel.Caption>
             )}
           </Carousel.Item>
           <Carousel.Item>
@@ -98,19 +98,21 @@ export default function MainSlide() {
               }}
             />
             {!isMiniMobile && (
-            <Carousel.Caption
-              style={{
-                lineHeight: captionLineHeight,
-                marginBottom: '40px',
-                textAlign: 'left',
-                
-              }}
-            >
-              <p style={{ fontSize: titleFontSize, fontWeight: '500' }}>
-              ATTENTION DURURU
-              </p>
-              <p style={{fontSize: captionFontSize,}}>시선이 머무는 유니크한 데스크 테리어, 나만의 책상을 만들어 볼까요 ? </p>
-            </Carousel.Caption>
+              <Carousel.Caption
+                style={{
+                  lineHeight: captionLineHeight,
+                  marginBottom: '40px',
+                  textAlign: 'left',
+                }}
+              >
+                <p style={{ fontSize: titleFontSize, fontWeight: '500' }}>
+                  ATTENTION DURURU
+                </p>
+                <p style={{ fontSize: captionFontSize }}>
+                  시선이 머무는 유니크한 데스크 테리어, 나만의 책상을 만들어
+                  볼까요 ?{' '}
+                </p>
+              </Carousel.Caption>
             )}
           </Carousel.Item>
         </Carousel>

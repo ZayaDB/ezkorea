@@ -243,7 +243,7 @@ export default function SignIn() {
               color='inherit'
               sx={{ fontSize: '37px', fontWeight: '600', pb: '25px' }}
             >
-              Welcome to dururu ☺
+              Welcome to EZK ☺
             </Typography>
           </NavLink>
           <Box component='form' noValidate sx={{ mt: 1 }}>

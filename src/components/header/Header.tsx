@@ -141,7 +141,7 @@ export default function Header({ title, cartBadgeNum }: HeaderProps) {
             <IconButton disableRipple sx={{ padding: 0 }}>
               <img
                 src={Logo}
-                alt='Dururu'
+            
                 style={{ width: '76px', padding: '0' }}
               />
             </IconButton>
@@ -166,7 +166,7 @@ export default function Header({ title, cartBadgeNum }: HeaderProps) {
                 disableRipple
                 onClick={handleShoppingClick} // 쇼핑 클릭 시 툴바 보이기
               >
-                쇼핑
+                Freelancers
               </Button>
             </NavLink>
           )}
@@ -191,7 +191,7 @@ export default function Header({ title, cartBadgeNum }: HeaderProps) {
                 disableRipple
                 onClick={handleCommunityClick} // 커뮤니티 클릭 시 툴바 숨기기
               >
-                커뮤니티
+                Community
               </Button>
             </NavLink>
           )}
@@ -215,17 +215,17 @@ export default function Header({ title, cartBadgeNum }: HeaderProps) {
           {/* 사람(로그인) icon dropdown */}
           {/* mobile(width:600px 이하)에서 사라짐 */}
           {/* {isMobile ? null : ( */}
-            <IconButtonWithMenu
-              icon={
-                <img
-                  src={LoginIcon}
-                  alt='Login'
-                  style={{ width: '20px', marginRight: '4px' }}
-                />
-              }
-              // menuItems={['마이페이지', '찜한 상품', '저장한 피드', '로그아웃']}
-              menuItems={menuItems}
-            />
+          <IconButtonWithMenu
+            icon={
+              <img
+                src={LoginIcon}
+                alt='Login'
+                style={{ width: '20px', marginRight: '4px' }}
+              />
+            }
+            // menuItems={['마이페이지', '찜한 상품', '저장한 피드', '로그아웃']}
+            menuItems={menuItems}
+          />
           {/* )} */}
 
           {/* 알림(종) icon */}
@@ -286,11 +286,11 @@ export default function Header({ title, cartBadgeNum }: HeaderProps) {
                 onMouseEnter={() => setIsShoppingHovered(true)}
                 onMouseLeave={() => setIsShoppingHovered(false)}
               >
-                <CustomLink to='/shop'>카테고리</CustomLink>
+                <CustomLink to='/shop'>Category</CustomLink>
                 {isShoppingHovered && <CategoryDropDown />}
               </div>
-              <CustomLink to='/shop/best'>베스트</CustomLink>
-              <CustomLink to='/shop/sale'>세일</CustomLink>
+              <CustomLink to='/shop/best'>Best</CustomLink>
+              <CustomLink to='/shop/sale'>Mentors</CustomLink>
             </>
           )}
           {toolbarContent === 'Community' && (

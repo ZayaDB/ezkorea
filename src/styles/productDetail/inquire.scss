@@ -138,13 +138,13 @@ $border: 1px solid lightgray;
 }
 
 .fileBtn:hover {
-  border: 2px solid #5ff531;
+  border: 2px solid #f5d831;
 }
 
 .fileBtn span {
   width: 50px;
   height: 50px;
-  color: #5ff531;
+  color: #f5d831;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -173,7 +173,7 @@ $border: 1px solid lightgray;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #5ff531;
+  color: #f5d831;
   background-color: transparent;
   border: none;
   border-radius: 20px;
@@ -182,5 +182,5 @@ $border: 1px solid lightgray;
 }
 
 .selectedFile button:hover {
-  border: 2px solid #5ff531;
+  border: 2px solid #f5d831;
 }
